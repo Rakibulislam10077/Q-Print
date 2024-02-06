@@ -1,14 +1,14 @@
-import { Platform, StyleSheet } from "react-native";
-import { Color, Font } from "../../constants/GlobalStyle";
+import { Platform, StyleSheet } from 'react-native';
+import { Color, Font } from '../../constants/GlobalStyle';
 
 export const profileStyle = StyleSheet.create({
   headerContainer: {
     height: 70,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingLeft: 20,
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 10,
   },
   headerTitle: {
     fontSize: Font.Font_X,
@@ -16,9 +16,9 @@ export const profileStyle = StyleSheet.create({
     color: Color.C_white,
   },
   profileCon: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   userImg: {
     width: 90,
@@ -32,13 +32,13 @@ export const profileStyle = StyleSheet.create({
     height: 85,
     width: 85,
     borderRadius: 50,
-    resizeMode: "contain",
+    resizeMode: 'contain',
   },
   userName: {
     fontSize: Font.Font_X,
-    fontWeight: "600",
+    fontWeight: '600',
     color: Color.C_white,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 10,
   },
   bodyCon: {
@@ -51,15 +51,15 @@ export const profileStyle = StyleSheet.create({
     marginTop: 30,
   },
   routeItemCon: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     height: 40,
     marginBottom: 5,
   },
   iconAndTitleCon: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
     fontSize: Font.Font_L,
@@ -71,14 +71,14 @@ export const profileStyle = StyleSheet.create({
   modal: {
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     // height: Platform.OS === 'ios' ? 400 : 380,
     paddingHorizontal: 50,
     paddingTop: 30,
   },
   cameraModal: {
     height: 140,
-    width: "75%",
+    width: '75%',
     backgroundColor: Color.C_white,
     borderRadius: 10,
     // alignItems: "center",
@@ -86,28 +86,28 @@ export const profileStyle = StyleSheet.create({
     padding: 20,
   },
   cameraModalContentCon: {
-    flexDirection: "row",
-    alignSelf: "center",
+    flexDirection: 'row',
+    alignSelf: 'center',
   },
   iconCon: {
     width: 70,
     height: 60,
-    backgroundColor: "rgba(0,0,0,0.1)",
+    backgroundColor: 'rgba(0,0,0,0.1)',
     borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 15,
   },
   ProfileModalTitle: {
     fontSize: 20,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 20,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   profileModalLabel: {
     fontSize: 14,
-    color: "rgba(0,0,0,0.8)",
-    alignSelf: "center",
+    color: 'rgba(0,0,0,0.8)',
+    alignSelf: 'center',
     marginTop: 5,
   },
 });

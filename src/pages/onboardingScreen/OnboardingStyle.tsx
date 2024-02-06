@@ -1,7 +1,9 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 import { Color, Font } from "../../constants/GlobalStyle";
 
-const DWidth = Dimensions.get("window").width;
+const { width, height } = Dimensions.get("window");
+
+console.log(height);
 
 export const onboardingStyle = StyleSheet.create({
   container: {
@@ -19,7 +21,7 @@ export const onboardingStyle = StyleSheet.create({
     // backgroundColor: "red",
   },
   gradientImage: {
-    width: DWidth,
+    width: width,
     // height: 270,
   },
   leftLogoAndTitleCon: {
@@ -40,19 +42,21 @@ export const onboardingStyle = StyleSheet.create({
     marginTop: 15,
   },
   lottieStyle: {
-    width: DWidth === 300 ? 350 : 300,
-    height: 350,
+    // width: DWidth === 350 ? 350 : 300,
+    width: width,
+    height: width / 1.2,
     alignSelf: "center",
     // marginTop: 20,
+    resizeMode: "cover",
   },
   lottieSecondIndexStyle: {
-    marginTop: 10,
-    width: 350,
-    height: 350,
+    marginTop: 30,
+    width: width,
+    height: width / 1.2,
     alignSelf: "center",
   },
   titleAndDescCon: {
-    // marginTop: 50,
+    marginTop: 40,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
@@ -90,7 +94,7 @@ export const onboardingStyle = StyleSheet.create({
     width: "70%",
     borderRadius: 8,
     alignSelf: "center",
-    marginTop: 70,
+    marginTop: height > 550 ? 70 : 50,
   },
   actionLayer: {
     width: "100%",

@@ -60,7 +60,7 @@ const onboardingItem: IOnboarding[] = [
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const navigation: any = useNavigation();
-
+  const screenWidth = Dimensions.get("window").width;
 
   return (
     <View style={onboardingStyle.container}>
@@ -77,7 +77,6 @@ const Onboarding = () => {
         data={onboardingItem}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item, index }) => {
-
           return (
             <View key={index.toString()} style={onboardingStyle.flatCon}>
               <Image style={onboardingStyle.gradientImage} source={item.bg} />
@@ -125,7 +124,7 @@ const Onboarding = () => {
               <View
                 style={[
                   index === 1
-                    ? [onboardingStyle.titleAndDescCon, { marginTop: 90 }]
+                    ? [onboardingStyle.titleAndDescCon, { marginTop: 40 }]
                     : onboardingStyle.titleAndDescCon,
                 ]}
               >

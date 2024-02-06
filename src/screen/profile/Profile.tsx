@@ -1,12 +1,5 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Platform,
-  ScrollView,
-  Image,
-} from "react-native";
-import React, { useState } from "react";
+import { View, Text, TouchableOpacity, Platform, ScrollView, Image } from 'react-native';
+import React, { useState } from 'react';
 import {
   CameraIcon,
   EditIcon,
@@ -24,17 +17,17 @@ import {
   StartIcon,
   TermsAndConditionIcon,
   WhiteBackArrow,
-} from "../../constants/allSvg/AllSvg";
-import { LinearGradient } from "expo-linear-gradient";
-import { profileStyle } from "./ProfileStyle";
-import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
-import { Badge, Divider } from "react-native-paper";
-import Modal from "react-native-modal";
-import RatingComponents from "../../components/modalComponents/ratingCom/RatingComponents";
-import { logFunc } from "../../utils/log";
-import LogoutComponents from "../../components/modalComponents/logoCom/LogoutComponents";
-import * as ImagePicker from "expo-image-picker";
+} from '../../constants/allSvg/AllSvg';
+import { LinearGradient } from 'expo-linear-gradient';
+import { profileStyle } from './ProfileStyle';
+import { StatusBar } from 'expo-status-bar';
+import { useNavigation } from '@react-navigation/native';
+import { Badge, Divider } from 'react-native-paper';
+import Modal from 'react-native-modal';
+import RatingComponents from '../../components/modalComponents/ratingCom/RatingComponents';
+import { logFunc } from '../../utils/log';
+import LogoutComponents from '../../components/modalComponents/logoCom/LogoutComponents';
+import * as ImagePicker from 'expo-image-picker';
 const Profile = () => {
   const navigation: any = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -75,7 +68,7 @@ const Profile = () => {
         await saveImage(result.assets[0].uri);
       }
     } catch (error: any) {
-      alert("Error Uploading image" + error.message);
+      alert('Error Uploading image' + error.message);
     }
   };
 
@@ -93,7 +86,7 @@ const Profile = () => {
         await saveImage(result.assets[0].uri);
       }
     } catch (error: any) {
-      alert("Error Uploading image" + error.message);
+      alert('Error Uploading image' + error.message);
     }
   };
 
@@ -112,22 +105,23 @@ const Profile = () => {
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        colors={["#C83B62", "#7F35CD"]}
-        style={{ flex: 1, paddingTop: Platform.OS === "ios" ? 30 : 30 }}
+        colors={['#C83B62', '#7F35CD']}
+        style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 30 : 30 }}
       >
+        {/* =================================== */}
         {/* header section */}
+        {/* =================================== */}
         <View style={profileStyle.headerContainer}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <WhiteBackArrow />
           </TouchableOpacity>
           <Text style={profileStyle.headerTitle}>My Profile</Text>
         </View>
+        {/* =================================== */}
         {/* profile section */}
+        {/* =================================== */}
         <View style={profileStyle.profileCon}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => navigation.navigate("EditProfile")}
-          >
+          <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('EditProfile')}>
             <EditIcon />
           </TouchableOpacity>
           <View style={profileStyle.userImg}>
@@ -143,25 +137,27 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
         <Text style={profileStyle.userName}>Mohammad Shahin</Text>
+        {/* =================================== */}
         {/* body section */}
+        {/* =================================== */}
         <View style={profileStyle.bodyCon}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("OrderAndPrinterDesignPage")}
+              onPress={() => navigation.navigate('OrderAndPrinterDesignPage')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
               <View style={profileStyle.iconAndTitleCon}>
                 <PrivacyIcon />
-                <Text style={profileStyle.title}>
-                  Order for Printing design
-                </Text>
+                <Text style={profileStyle.title}>Order for Printing design</Text>
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* =================================== */}
             {/* ================ end here ================== */}
+            {/* =================================== */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("OrderHistory")}
+              onPress={() => navigation.navigate('OrderHistory')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -171,9 +167,11 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("Review")}
+              onPress={() => navigation.navigate('Review')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -184,9 +182,11 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("NotificationPage")}
+              onPress={() => navigation.navigate('NotificationPage')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -196,9 +196,11 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("Favorite")}
+              onPress={() => navigation.navigate('Favorite')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -209,7 +211,9 @@ const Profile = () => {
               <GoArrow />
             </TouchableOpacity>
             <Divider />
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
@@ -221,7 +225,9 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
               onPress={() => ShareModal()}
               activeOpacity={0.7}
@@ -234,9 +240,11 @@ const Profile = () => {
               <GoArrow />
             </TouchableOpacity>
             <Divider />
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("TermsAndCond")}
+              onPress={() => navigation.navigate('TermsAndCond')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -246,9 +254,11 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("PrivacyPolicy")}
+              onPress={() => navigation.navigate('PrivacyPolicy')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -258,9 +268,11 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("FAQ")}
+              onPress={() => navigation.navigate('FAQ')}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -271,7 +283,9 @@ const Profile = () => {
               <GoArrow />
             </TouchableOpacity>
             <Divider />
+            {/* =================================== */}
             {/* ============ end here =========== */}
+            {/* =================================== */}
             <TouchableOpacity
               onPress={() => LogoutModal()}
               activeOpacity={0.7}
@@ -297,7 +311,7 @@ const Profile = () => {
         animationInTiming={100}
         animationOutTiming={100}
         isVisible={isModalVisible}
-        style={{ justifyContent: "flex-end", margin: 0 }}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
         backdropTransitionInTiming={100}
         backdropTransitionOutTiming={100}
       >
@@ -305,7 +319,7 @@ const Profile = () => {
           {modalIndex === 0 ? (
             <RatingComponents />
           ) : modalIndex === 1 ? (
-            <View style={{ backgroundColor: "#fff", height: 400 }}>
+            <View style={{ backgroundColor: '#fff', height: 400 }}>
               <Text>logout</Text>
             </View>
           ) : (
@@ -324,7 +338,7 @@ const Profile = () => {
         animationInTiming={100}
         animationOutTiming={100}
         isVisible={isCameraModalOpen}
-        style={{ justifyContent: "center", margin: 0, alignItems: "center" }}
+        style={{ justifyContent: 'center', margin: 0, alignItems: 'center' }}
         backdropTransitionInTiming={100}
         backdropTransitionOutTiming={100}
       >
