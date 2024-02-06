@@ -7,18 +7,18 @@ import {
   FlatList,
   StyleSheet,
   TouchableWithoutFeedback,
-} from "react-native";
-import React, { useEffect, useState, useRef } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
+} from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 import {
   CartBag,
   CartIcon,
   FavIcon,
   Goback,
   InActiveIndicator,
-} from "../../constants/allSvg/AllSvg";
-import { useNavigation } from "@react-navigation/native";
+} from '../../constants/allSvg/AllSvg';
+import { useNavigation } from '@react-navigation/native';
 import Animated, {
   FadeInDown,
   FadeInLeft,
@@ -27,15 +27,15 @@ import Animated, {
   useSharedValue,
   withSpring,
   useAnimatedScrollHandler,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
-import { productDetailsStyle } from "./ProductDetailsStyle";
+import { productDetailsStyle } from './ProductDetailsStyle';
 // import SkeletonInProductDetails from "../../components/allSkeleton/SkeletonInProductDetails";
-import ProductSpec from "../../components/productSpec/ProductSpec";
-import ProductDesc from "../../components/productDesc/ProductDesc";
-import ProductReviews from "../../components/productReviews/ProductReviews";
-import { LinearGradient } from "expo-linear-gradient";
-import { Color } from "../../constants/GlobalStyle";
+import ProductSpec from '../../components/productSpec/ProductSpec';
+import ProductDesc from '../../components/productDesc/ProductDesc';
+import ProductReviews from '../../components/productReviews/ProductReviews';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Color } from '../../constants/GlobalStyle';
 
 const HEADER_HEIGHT = 200;
 const ProductDetails = (props: any) => {
@@ -95,7 +95,7 @@ const ProductDetails = (props: any) => {
     setQuantity(value);
   };
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView
       // style={{ flex: 1 }}
       // ref={scrollViewRef}
@@ -120,10 +120,7 @@ const ProductDetails = (props: any) => {
                 </TouchableOpacity>
               </Animated.View>
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={productDetailsStyle.navAndFav}
-                >
+                <TouchableOpacity activeOpacity={0.7} style={productDetailsStyle.navAndFav}>
                   <FavIcon />
                 </TouchableOpacity>
               </Animated.View>
@@ -141,9 +138,9 @@ const ProductDetails = (props: any) => {
               source={item?.item?.img}
               style={[
                 {
-                  width: "90%",
+                  width: '90%',
                   height: 280,
-                  alignSelf: "center",
+                  alignSelf: 'center',
                   // position: "absolute",
                   // top: 0,
                   // left: 0,
@@ -171,7 +168,7 @@ const ProductDetails = (props: any) => {
             <LinearGradient
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
-              colors={["rgba(200, 59, 98, 0.15)", "rgba(127, 53, 205, 0.15)"]}
+              colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
               style={productDetailsStyle.discountTextCon}
             >
               <Text style={productDetailsStyle.discountPercent}>30% OFF</Text>
@@ -182,8 +179,7 @@ const ProductDetails = (props: any) => {
             numberOfLines={2}
             style={productDetailsStyle.title}
           >
-            {item?.title} Brother HL-L3270CDW Single Function Color Laser
-            Printer
+            {item?.title} Brother HL-L3270CDW Single Function Color Laser Printer
           </Animated.Text>
           <Animated.View
             entering={FadeInDown.delay(50).duration(500)}
@@ -192,7 +188,7 @@ const ProductDetails = (props: any) => {
             <View style={productDetailsStyle.brandLogoContainer}>
               <Image
                 style={productDetailsStyle.brandLogo}
-                source={require("../../../assets/image/adidas.png")}
+                source={require('../../../assets/image/adidas.png')}
               />
             </View>
             <Text style={productDetailsStyle.brandName}>Brother</Text>
@@ -205,18 +201,10 @@ const ProductDetails = (props: any) => {
             =================================
              */}
           <View style={productDetailsStyle.colorIndicatorCon}>
-            <TouchableOpacity
-              style={productDetailsStyle.colorIndicator}
-            ></TouchableOpacity>
-            <TouchableOpacity
-              style={productDetailsStyle.colorIndicator}
-            ></TouchableOpacity>
-            <TouchableOpacity
-              style={productDetailsStyle.colorIndicator}
-            ></TouchableOpacity>
-            <TouchableOpacity
-              style={productDetailsStyle.colorIndicator}
-            ></TouchableOpacity>
+            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
+            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
+            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
+            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
           </View>
           <Animated.View
             entering={FadeInDown.delay(50).duration(500)}
@@ -230,15 +218,14 @@ const ProductDetails = (props: any) => {
             </Text>
             {/* offer QAR */}
             <Text style={productDetailsStyle.discountedPrice}>
-              1560{" "}
-              <Text style={productDetailsStyle.discountedCurrency}>QAR</Text>
+              1560 <Text style={productDetailsStyle.discountedCurrency}>QAR</Text>
             </Text>
             {/* quantity Container */}
             <View style={productDetailsStyle.quantityCon}>
               <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
-                colors={["rgba(200, 59, 98, 0.15)", "rgba(127, 53, 205, 0.15)"]}
+                colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
                 style={productDetailsStyle.increaseDecreaseButton}
               >
                 <TouchableOpacity
@@ -252,7 +239,7 @@ const ProductDetails = (props: any) => {
               <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
-                colors={["rgba(200, 59, 98, 0.15)", "rgba(127, 53, 205, 0.15)"]}
+                colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
                 style={productDetailsStyle.increaseDecreaseButton}
               >
                 <TouchableOpacity
@@ -266,32 +253,6 @@ const ProductDetails = (props: any) => {
           </Animated.View>
         </View>
         {/* view more information container */}
-        <View style={productDetailsStyle.highLightedInfo}>
-          {/* ========================= */}
-          {highLightedInfo.map((i) => {
-            return (
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={productDetailsStyle.highLightedInfoItem}
-              >
-                <View style={productDetailsStyle.highLightedInfoItemLogoCon}>
-                  <Image
-                    style={productDetailsStyle.highLightedInfoItemLogo}
-                    source={require("../../../assets/image/lock.jpeg")}
-                  />
-                </View>
-                <View style={{ backgroundColor: "white" }}>
-                  <Text style={productDetailsStyle.highLightedInfoItemName}>
-                    Processor
-                  </Text>
-                  <Text style={productDetailsStyle.highLightedInfoItemSpec}>
-                    800MHz
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
         <View style={{ marginBottom: 200, flex: 1 }}>
           {isViewMore && (
             <Animated.View entering={FadeInRight.delay(100).duration(500)}>
@@ -305,11 +266,7 @@ const ProductDetails = (props: any) => {
                   onPress={() => setIndex(0)}
                 >
                   <Text
-                    style={[
-                      index === 0
-                        ? { color: Color.C_main }
-                        : { color: Color.C_H_black },
-                    ]}
+                    style={[index === 0 ? { color: Color.C_main } : { color: Color.C_H_black }]}
                   >
                     Specification
                   </Text>
@@ -323,11 +280,7 @@ const ProductDetails = (props: any) => {
                   onPress={() => setIndex(1)}
                 >
                   <Text
-                    style={[
-                      index === 1
-                        ? { color: Color.C_main }
-                        : { color: Color.C_H_black },
-                    ]}
+                    style={[index === 1 ? { color: Color.C_main } : { color: Color.C_H_black }]}
                   >
                     Description
                   </Text>
@@ -341,12 +294,8 @@ const ProductDetails = (props: any) => {
                   onPress={() => setIndex(2)}
                 >
                   <Text
-                    style={[
-                      index === 2
-                        ? { color: Color.C_main }
-                        : { color: Color.C_H_black },
-                    ]}
-                  >{`Reviews ${index === 2 ? "" : "(0)"}`}</Text>
+                    style={[index === 2 ? { color: Color.C_main } : { color: Color.C_H_black }]}
+                  >{`Reviews ${index === 2 ? '' : '(0)'}`}</Text>
                 </TouchableOpacity>
               </View>
               {index === 0 ? (
@@ -373,7 +322,7 @@ const ProductDetails = (props: any) => {
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            colors={["rgba(200, 59, 98, 0.80)", "rgba(127, 53, 205, 0.80)"]}
+            colors={['rgba(200, 59, 98, 0.80)', 'rgba(127, 53, 205, 0.80)']}
             style={productDetailsStyle.linearButton}
           >
             <TouchableOpacity style={productDetailsStyle.buyButton}>
@@ -382,7 +331,7 @@ const ProductDetails = (props: any) => {
           </LinearGradient>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("MyCart")}
+            onPress={() => navigation.navigate('MyCart')}
             style={productDetailsStyle.cartButton}
           >
             <CartBag />
@@ -399,6 +348,6 @@ export default ProductDetails;
 const styles = StyleSheet.create({
   header: {
     height: HEADER_HEIGHT,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
 });
