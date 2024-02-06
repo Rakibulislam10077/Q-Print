@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react';
 import AddToCart from '../../components/addToCart/AddToCart';
 import { BackArrow } from '../../constants/allSvg/AllSvg';
 import { myCartStyle } from './MyCartStyle';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Animated, {
   Easing,
@@ -23,40 +22,49 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { commonHeaderStyle } from '../../components/common/commonHeader/CommonHeaderStyle';
-// import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { Color } from '../../constants/GlobalStyle';
+import LottieView from 'lottie-react-native';
 
 const MyCart = () => {
   const navigation: any = useNavigation();
-  const [currentAmount, setCurrentAmount] = useState(0);
+  // =====================================
+  // State variables to track current and target amounts
+  // =====================================
+  const [currentAmount, setCurrentAmount] = useState(9000);
   const targetAmount = 10000;
-
+  // =====================================
+  // Effect to initialize progress animation when currentAmount changes
+  // =====================================
   useEffect(() => {
+    // =====================================
+    // Ensure the progress animation starts from 0 when currentAmount is initially set to 0
+    // =====================================
     if (currentAmount === 0) {
       animatedProgress.value = withTiming(0, { duration: 1000 }); // Initialize progress to 0 when currentAmount is 0
     }
   }, [currentAmount]);
-
+  // =====================================
+  // Calculate the percentage progress towards the target amount
+  // =====================================
   const percentageProgress =
     currentAmount === 0 ? 0 : Math.round((currentAmount / targetAmount) * 100);
-
+  // =====================================
+  // Shared value for animated progress
+  // =====================================
   const animatedProgress = useSharedValue(0); // Moved initialization here
-
+  // =====================================
+  // Animated style for the progress bar
+  // =====================================
   const progressStyle = useAnimatedStyle(() => {
     return {
       width: `${animatedProgress.value * 100}%`,
-      height: 15,
-      backgroundColor: '#6C63FF',
-      borderRadius: 10,
+      height: 5,
+      backgroundColor: Color.C_main,
+      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10,
+      position: 'relative',
     };
   });
-
-  // const percentageGap = Math.round(((targetAmount - currentAmount) / targetAmount) * 100);
-
-  // const increaseProgress = () => {
-  //   if (progress < 1) {
-
-  //   }
-  // };
 
   useEffect(() => {
     if (currentAmount < targetAmount) {
@@ -65,13 +73,11 @@ const MyCart = () => {
     }
   }, []);
 
-  // const resetProgress = () => {
-  //   setProgress(0);
-  // };
-
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      {/* // ===================================== */}
       {/* cart container */}
+      {/* // ===================================== */}
       <View style={commonHeaderStyle.container}>
         <View style={commonHeaderStyle.titleCon}>
           <TouchableOpacity
@@ -91,30 +97,64 @@ const MyCart = () => {
           return <AddToCart />;
         }}
       />
+      {/* ====================================== */}
+      {/* // This component renders the total price, progress bar, free shipping information, */}
+      {/* // and a button to proceed to checkout. */}
+      {/* ====================================== */}
       <View style={myCartStyle.totalPriceAndProgressCon}>
+        {/* ====================================== */}
+        {/* Display the grand total */}
+        {/* ====================================== */}
         <View style={myCartStyle.grandTotalCon}>
           <Text>Grand Total</Text>
           <Text>
             1855 <Text>QAR</Text>
           </Text>
         </View>
-        <View>
-          {/* <ProgressBar
-            style={{ height: 20, borderRadius: 10 }}
-            progress={progress}
-            color={MD3Colors.error50}
-          /> */}
-          <Animated.View style={progressStyle} />
-          <Text>{percentageProgress}%</Text>
+        {/* ====================================== */}
+        {/* Display the progress bar */}
+        {/* ====================================== */}
+        <View style={{ position: 'relative' }}>
+          <View
+            style={{
+              width: '100%',
+              height: 5,
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: Color.C_border,
+            }}
+          >
+            <Animated.View style={progressStyle}>
+              <View
+                style={{
+                  position: 'absolute',
+                  right: -22,
+                  borderRadius: 15,
+                  width: 24,
+                  height: 24,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderWidth: 2,
+                  top: -10,
+                  borderColor: Color.C_main,
+                }}
+              >
+                <Text style={{ fontSize: 14 }}>{percentageProgress}</Text>
+              </View>
+            </Animated.View>
+          </View>
         </View>
-        {/* <View style={{ flexDirection: 'row' }}>
-          <Button title="Increase Progress" onPress={increaseProgress} />
-          <Button title="Reset Progress" onPress={resetProgress} />
-        </View> */}
+
+        {/* ====================================== */}
+        {/* Display information about free shipping */}
+        {/* ====================================== */}
         <Text style={myCartStyle.freeShippingText}>
           Spend <Text style={{ color: '#C83B62', fontWeight: '600' }}> 3000 </Text>
           more to reach <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
         </Text>
+        {/* ====================================== */}
+        {/* Display the button to proceed to checkout */}
+        {/* ====================================== */}
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
@@ -130,22 +170,19 @@ const MyCart = () => {
           </TouchableOpacity>
         </LinearGradient>
       </View>
+      {/* Display the congratulation lottie */}
+      {currentAmount === targetAmount && (
+        <View style={myCartStyle.lottieConStyle}>
+          <LottieView
+            autoPlay
+            source={require('../../../assets/image/cong3.json')}
+            style={myCartStyle.lottieStyle}
+          />
+        </View>
+      )}
       <StatusBar style="dark" />
     </View>
   );
 };
 
 export default MyCart;
-
-const styles = StyleSheet.create({
-  progressBarContainer: {
-    width: '100%',
-    height: 20,
-    backgroundColor: '#ccc',
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  progressBar: {
-    height: '100%',
-  },
-});
