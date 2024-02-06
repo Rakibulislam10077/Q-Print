@@ -1,41 +1,42 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { paperTypeStyle } from "./PaperTypeStyle";
-import { LinearGradient } from "expo-linear-gradient";
-import { Color } from "../../../constants/GlobalStyle";
-import { Divider } from "react-native-paper";
-import { Upload } from "../../../constants/allSvg/AllSvg";
+import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { paperTypeStyle } from './PaperTypeStyle';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Color } from '../../../constants/GlobalStyle';
+import { Divider } from 'react-native-paper';
+import { Upload } from '../../../constants/allSvg/AllSvg';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const paperType = [
   {
-    type: "Inkjet printer paper",
+    type: 'Inkjet printer paper',
   },
   {
-    type: "Laser Printer paper",
+    type: 'Laser Printer paper',
   },
   {
-    type: "Matte paper",
+    type: 'Matte paper',
   },
   {
-    type: "Glossy paper",
+    type: 'Glossy paper',
   },
   {
-    type: "Card stock paper",
+    type: 'Card stock paper',
   },
   {
-    type: "Bond & Label paper",
+    type: 'Bond & Label paper',
   },
 ];
 
 const PrintingMode = [
   {
-    mode: "RGB",
+    mode: 'RGB',
   },
   {
-    mode: "Black & White",
+    mode: 'Black & White',
   },
   {
-    mode: "More Version",
+    mode: 'More Version',
   },
 ];
 
@@ -52,18 +53,14 @@ const PaperTypeComponent = () => {
   };
 
   return (
-    <View style={paperTypeStyle.container}>
+    <Animated.View entering={FadeInDown.delay(50).duration(550)} style={paperTypeStyle.container}>
       <Text style={paperTypeStyle.title}>What type of paper do you need?</Text>
       {/* all paper type container */}
       <View style={paperTypeStyle.paperTypeCon}>
         {paperType.map((i, index) => {
           return (
             <LinearGradient
-              colors={
-                currentIndex === index
-                  ? ["#C83B62", "#7F35CD"]
-                  : ["#fff", "#fff"]
-              }
+              colors={currentIndex === index ? ['#C83B62', '#7F35CD'] : ['#fff', '#fff']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={[paperTypeStyle.typeItem]}
@@ -78,10 +75,7 @@ const PaperTypeComponent = () => {
                   style={[
                     paperTypeStyle.paperTypeText,
                     {
-                      color:
-                        currentIndex === index
-                          ? Color.C_white
-                          : "rgba(0,0,0,0.7)",
+                      color: currentIndex === index ? Color.C_white : 'rgba(0,0,0,0.7)',
                     },
                   ]}
                 >
@@ -100,11 +94,7 @@ const PaperTypeComponent = () => {
           {PrintingMode.map((i, index) => {
             return (
               <LinearGradient
-                colors={
-                  currentIndexInPrint === index
-                    ? ["#C83B62", "#7F35CD"]
-                    : ["#fff", "#fff"]
-                }
+                colors={currentIndexInPrint === index ? ['#C83B62', '#7F35CD'] : ['#fff', '#fff']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={paperTypeStyle.mode}
@@ -118,10 +108,7 @@ const PaperTypeComponent = () => {
                     style={[
                       paperTypeStyle.modeItemText,
                       {
-                        color:
-                          currentIndexInPrint === index
-                            ? Color.C_white
-                            : "rgba(0,0,0,0.7)",
+                        color: currentIndexInPrint === index ? Color.C_white : 'rgba(0,0,0,0.7)',
                       },
                     ]}
                   >
@@ -137,15 +124,12 @@ const PaperTypeComponent = () => {
       {/* attachment container */}
       <View>
         <Text style={paperTypeStyle.attachmentText}>Attachment</Text>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={paperTypeStyle.uploadButton}
-        >
+        <TouchableOpacity activeOpacity={0.7} style={paperTypeStyle.uploadButton}>
           <Upload />
           <Text style={paperTypeStyle.uploadButtonText}>Upload file</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

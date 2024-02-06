@@ -1,33 +1,19 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-  Alert,
-  Platform,
-} from "react-native";
-import React, { useState } from "react";
-import { TextInput } from "react-native-gesture-handler";
-import {
-  CartBag,
-  CartIcon,
-  Goback,
-  Magnify,
-  ThreeLine,
-} from "../../constants/allSvg/AllSvg";
-import { searchStyle } from "./SearchStyle";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
-import { Color } from "../../constants/GlobalStyle";
-import Cart from "../../components/card/allCart/Cart";
-import BrandInGlobalSearch from "../../components/globalSearchCom/brand/BrandInGlobalSearch";
+import { View, Text, TouchableOpacity, FlatList, ScrollView, Alert, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { TextInput } from 'react-native-gesture-handler';
+import { CartBag, CartIcon, Goback, Magnify, ThreeLine } from '../../constants/allSvg/AllSvg';
+import { searchStyle } from './SearchStyle';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
+import { useNavigation } from '@react-navigation/native';
+import { Color } from '../../constants/GlobalStyle';
+import Cart from '../../components/card/allCart/Cart';
+import BrandInGlobalSearch from '../../components/globalSearchCom/brand/BrandInGlobalSearch';
 
 const Search = () => {
   const navigation: any = useNavigation();
   const [dummyText, setDummyText] = useState<boolean>(true);
-  const [input, setInput] = useState<string>("");
+  const [input, setInput] = useState<string>('');
   const [skeleton, setSkeleton] = useState(false);
   const handleEndEditing = () => {
     const trimmedInput = input.trim();
@@ -74,7 +60,7 @@ const Search = () => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          onPress={() => navigation.navigate("MyCart")}
+          onPress={() => navigation.navigate('MyCart')}
           activeOpacity={0.7}
           style={searchStyle.AddToCartContainer}
         >
@@ -87,9 +73,7 @@ const Search = () => {
       {dummyText ? (
         // this is dummy container
         <View style={searchStyle.dummyTextCont}>
-          <Text style={searchStyle.dummyOne}>
-            Type your words to find best product for you
-          </Text>
+          <Text style={searchStyle.dummyOne}>Type your words to find best product for you</Text>
           <Text style={searchStyle.dummyTwo}>e.g : Epson printer</Text>
         </View>
       ) : (
@@ -107,10 +91,10 @@ const Search = () => {
             <View
               style={{
                 marginTop: 20,
-                flexDirection: "row",
-                flexWrap: "wrap",
-                width: "100%",
-                justifyContent: "space-between",
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                width: '100%',
+                justifyContent: 'space-between',
                 paddingHorizontal: 20,
               }}
             >
@@ -121,7 +105,7 @@ const Search = () => {
           </View>
         </ScrollView>
       )}
-      <StatusBar backgroundColor="#ffffff" style="dark" />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 };

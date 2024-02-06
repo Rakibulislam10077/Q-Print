@@ -5,31 +5,72 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-} from "react-native";
-import React from "react";
-import AddToCart from "../../components/addToCart/AddToCart";
-import { BackArrow } from "../../constants/allSvg/AllSvg";
-import { myCartStyle } from "./MyCartStyle";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+  Button,
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import AddToCart from '../../components/addToCart/AddToCart';
+import { BackArrow } from '../../constants/allSvg/AllSvg';
+import { myCartStyle } from './MyCartStyle';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 import Animated, {
   Easing,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from "react-native-reanimated";
-import { MD3Colors, ProgressBar } from "react-native-paper";
-import { StatusBar } from "expo-status-bar";
-import { LinearGradient } from "expo-linear-gradient";
-import CommonHeader from "../../components/common/commonHeader/CommonHeader";
-import { commonHeaderStyle } from "../../components/common/commonHeader/CommonHeaderStyle";
+} from 'react-native-reanimated';
+import { StatusBar } from 'expo-status-bar';
+import { LinearGradient } from 'expo-linear-gradient';
+import CommonHeader from '../../components/common/commonHeader/CommonHeader';
+import { commonHeaderStyle } from '../../components/common/commonHeader/CommonHeaderStyle';
+// import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-const progress = 0.1;
-const width = 200;
 const MyCart = () => {
   const navigation: any = useNavigation();
+  const [currentAmount, setCurrentAmount] = useState(0);
+  const targetAmount = 10000;
+
+  useEffect(() => {
+    if (currentAmount === 0) {
+      animatedProgress.value = withTiming(0, { duration: 1000 }); // Initialize progress to 0 when currentAmount is 0
+    }
+  }, [currentAmount]);
+
+  const percentageProgress =
+    currentAmount === 0 ? 0 : Math.round((currentAmount / targetAmount) * 100);
+
+  const animatedProgress = useSharedValue(0); // Moved initialization here
+
+  const progressStyle = useAnimatedStyle(() => {
+    return {
+      width: `${animatedProgress.value * 100}%`,
+      height: 15,
+      backgroundColor: '#6C63FF',
+      borderRadius: 10,
+    };
+  });
+
+  // const percentageGap = Math.round(((targetAmount - currentAmount) / targetAmount) * 100);
+
+  // const increaseProgress = () => {
+  //   if (progress < 1) {
+
+  //   }
+  // };
+
+  useEffect(() => {
+    if (currentAmount < targetAmount) {
+      setCurrentAmount(currentAmount + 100); // Increase by 100 for demonstration purposes
+      animatedProgress.value = withTiming((currentAmount + 100) / targetAmount, { duration: 1000 });
+    }
+  }, []);
+
+  // const resetProgress = () => {
+  //   setProgress(0);
+  // };
+
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* cart container */}
       <View style={commonHeaderStyle.container}>
         <View style={commonHeaderStyle.titleCon}>
@@ -58,26 +99,31 @@ const MyCart = () => {
           </Text>
         </View>
         <View>
-          <ProgressBar
+          {/* <ProgressBar
             style={{ height: 20, borderRadius: 10 }}
             progress={progress}
             color={MD3Colors.error50}
-          />
+          /> */}
+          <Animated.View style={progressStyle} />
+          <Text>{percentageProgress}%</Text>
         </View>
+        {/* <View style={{ flexDirection: 'row' }}>
+          <Button title="Increase Progress" onPress={increaseProgress} />
+          <Button title="Reset Progress" onPress={resetProgress} />
+        </View> */}
         <Text style={myCartStyle.freeShippingText}>
-          Spend{" "}
-          <Text style={{ color: "#C83B62", fontWeight: "600" }}> 3000 </Text>
-          more to reach <Text style={{ color: "#000" }}>FREE SHIPPING!</Text>
+          Spend <Text style={{ color: '#C83B62', fontWeight: '600' }}> 3000 </Text>
+          more to reach <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
         </Text>
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          colors={["#C83B62", "#7F35CD"]}
+          colors={['#C83B62', '#7F35CD']}
           style={myCartStyle.linearContainer}
         >
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("Summery")}
+            onPress={() => navigation.navigate('Summery')}
             style={myCartStyle.proceedButton}
           >
             <Text style={myCartStyle.proceedText}>Proceed to Checkout</Text>
@@ -90,3 +136,16 @@ const MyCart = () => {
 };
 
 export default MyCart;
+
+const styles = StyleSheet.create({
+  progressBarContainer: {
+    width: '100%',
+    height: 20,
+    backgroundColor: '#ccc',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  progressBar: {
+    height: '100%',
+  },
+});

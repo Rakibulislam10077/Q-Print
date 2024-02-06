@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
-import { orderAndPrinterDesignStyle } from "../../../pages/custom_order/CustomOrderStyle";
-import { paperSizeStyle } from "./PaperSizeStyle";
-import { Color } from "../../../constants/GlobalStyle";
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { orderAndPrinterDesignStyle } from '../../../pages/custom_order/CustomOrderStyle';
+import { paperSizeStyle } from './PaperSizeStyle';
+import { Color } from '../../../constants/GlobalStyle';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const paperBoxSize = [
   {
@@ -22,7 +23,7 @@ const PrintingPaperSizeComponent = () => {
   };
 
   return (
-    <View style={paperSizeStyle.container}>
+    <Animated.View entering={FadeInDown.delay(50).duration(550)} style={paperSizeStyle.container}>
       <Text style={paperSizeStyle.title}>Printing Paper size (Free)</Text>
       {/* paper size container */}
       <View style={paperSizeStyle.paperSizeCon}>
@@ -36,8 +37,7 @@ const PrintingPaperSizeComponent = () => {
                 paperSizeStyle.sizeBox1,
                 { flex: index === 0 ? 1 : index === 1 ? 0.7 : 1.3 },
                 {
-                  borderColor:
-                    currentIndex === index ? Color.C_main : Color.C_border,
+                  borderColor: currentIndex === index ? Color.C_main : Color.C_border,
                 },
               ]}
             >
@@ -64,7 +64,7 @@ const PrintingPaperSizeComponent = () => {
           </View>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

@@ -1,38 +1,41 @@
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import CommonHeader from "../../components/common/commonHeader/CommonHeader";
-import { favoriteStyle } from "./FavoriteStyle";
-import FavoriteCart from "../../components/favoriteCartComponents/FavoriteCart";
-import { Font } from "../../constants/GlobalStyle";
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import CommonHeader from '../../components/common/commonHeader/CommonHeader';
+import { favoriteStyle } from './FavoriteStyle';
+import FavoriteCart from '../../components/favoriteCartComponents/FavoriteCart';
+import { Font } from '../../constants/GlobalStyle';
+import { StatusBar } from 'expo-status-bar';
 
 const logodata = [
   {
     id: 1,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 2,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 3,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 4,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 5,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
 ];
 
 const Favorite = () => {
   return (
     <View style={favoriteStyle.container}>
+      {/* ===================== */}
       {/* header section */}
+      {/* ==================== */}
       <CommonHeader title="My Favorite" />
       {/* body section */}
       <View style={favoriteStyle.bodyContainer}>
@@ -50,6 +53,7 @@ const Favorite = () => {
           }
         />
       </View>
+      <StatusBar style="dark" />
     </View>
   );
 };
