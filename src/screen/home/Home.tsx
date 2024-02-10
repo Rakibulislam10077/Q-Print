@@ -1,15 +1,11 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import HomePage from "../../pages/homePage/HomePage";
-import type { StatusBarStyle } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { View, Text } from 'react-native';
+import React from 'react';
+import HomePage from '../../pages/homePage/HomePage';
 
 const Home = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
+    <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <HomePage />
-      <StatusBar style="dark" backgroundColor={"white"} />
     </View>
   );
 };

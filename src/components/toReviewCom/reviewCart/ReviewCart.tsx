@@ -1,11 +1,11 @@
-import { View, Text, Image, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
-import { reviewCartStyle } from "./ReviewCartStyle";
-import { Divider } from "react-native-paper";
-import { LinearGradient } from "expo-linear-gradient";
-import Modal from "react-native-modal";
-import { RatingStar } from "../../../constants/allSvg/AllSvg";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { reviewCartStyle } from './ReviewCartStyle';
+import { Divider } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
+import Modal from 'react-native-modal';
+import { RatingStar } from '../../../constants/allSvg/AllSvg';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const ReviewCart = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>();
@@ -14,10 +14,7 @@ const ReviewCart = () => {
     setIsModalVisible(!isModalVisible);
   };
   return (
-    <Animated.View
-      entering={FadeInDown.delay(50).duration(500)}
-      style={reviewCartStyle.container}
-    >
+    <Animated.View entering={FadeInDown.delay(50).duration(500)} style={reviewCartStyle.container}>
       <Text style={reviewCartStyle.processDate}>Purchased on 12 Jul 2023</Text>
       <Divider style={reviewCartStyle.dividerStyle} />
       <View style={reviewCartStyle.imgAndTitleCon}>
@@ -38,7 +35,7 @@ const ReviewCart = () => {
             <LinearGradient
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              colors={["#C83B62", "#7F35CD"]}
+              colors={['#C83B62', '#7F35CD']}
               style={reviewCartStyle.linearButton}
             >
               <TouchableOpacity
@@ -56,14 +53,8 @@ const ReviewCart = () => {
         onBackButtonPress={() => setIsModalVisible(false)}
         swipeDirection="down"
         onSwipeComplete={() => toggleModal()}
-        animationIn="bounceInUp"
-        animationOut="bounceOutDown"
-        animationInTiming={100}
-        animationOutTiming={100}
         isVisible={isModalVisible}
-        style={{ justifyContent: "flex-end", margin: 0 }}
-        backdropTransitionInTiming={100}
-        backdropTransitionOutTiming={100}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
       >
         <View style={reviewCartStyle.modalContainer}>
           <View style={reviewCartStyle.modalIndicator}></View>
@@ -73,7 +64,7 @@ const ReviewCart = () => {
               <RatingStar />
             </View>
             <Text style={reviewCartStyle.dummyText}>
-              Please share your opinion about {"\n"} the product
+              Please share your opinion about {'\n'} the product
             </Text>
 
             <View style={reviewCartStyle.textInputCon}>
@@ -84,13 +75,10 @@ const ReviewCart = () => {
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
-            colors={["#C83B62", "#7F35CD"]}
+            colors={['#C83B62', '#7F35CD']}
             style={reviewCartStyle.modalLinear}
           >
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={reviewCartStyle.linearActionLayer}
-            >
+            <TouchableOpacity activeOpacity={0.7} style={reviewCartStyle.linearActionLayer}>
               <Text style={reviewCartStyle.ModalButtonText}>Submit Review</Text>
             </TouchableOpacity>
           </LinearGradient>

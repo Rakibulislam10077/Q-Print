@@ -306,14 +306,8 @@ const Profile = () => {
         onBackButtonPress={() => setIsModalVisible(false)}
         swipeDirection="down"
         onSwipeComplete={() => toggleModal()}
-        animationIn="bounceInUp"
-        animationOut="bounceOutDown"
-        animationInTiming={100}
-        animationOutTiming={100}
         isVisible={isModalVisible}
         style={{ justifyContent: 'flex-end', margin: 0 }}
-        backdropTransitionInTiming={100}
-        backdropTransitionOutTiming={100}
       >
         <View style={profileStyle.modal}>
           {modalIndex === 0 ? (
@@ -333,14 +327,8 @@ const Profile = () => {
         onBackButtonPress={() => setIsCameraModalOpen(false)}
         swipeDirection="down"
         onSwipeComplete={() => toggleModal()}
-        animationIn="fadeIn"
-        animationOut="fadeOut"
-        animationInTiming={100}
-        animationOutTiming={100}
         isVisible={isCameraModalOpen}
         style={{ justifyContent: 'center', margin: 0, alignItems: 'center' }}
-        backdropTransitionInTiming={100}
-        backdropTransitionOutTiming={100}
       >
         <View style={profileStyle.cameraModal}>
           <Text style={profileStyle.ProfileModalTitle}>Profile Photo</Text>

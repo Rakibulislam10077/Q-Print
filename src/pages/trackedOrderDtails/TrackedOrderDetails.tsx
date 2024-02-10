@@ -1,15 +1,35 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import CommonHeader from "../../components/common/commonHeader/CommonHeader";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { trackedOrderDetailsStyle } from "./TrackedOrderDtailsSytle";
-import CustomerDetailsContainer from "../../components/trackedOrderDtailsCom/customerDetailsContainer/CustomerDetailsContainer";
-import OrderStepContainer from "../../components/trackedOrderDtailsCom/orderStepContainer/OrderStepContainer";
-import ProductContainer from "../../components/trackedOrderDtailsCom/productContainer/ProductContainer";
-import SummeryContainer from "../../components/trackedOrderDtailsCom/summaryContainer/SummeryContainer";
-import { LinearGradient } from "expo-linear-gradient";
-import { orderStepContainerStyle } from "../../components/trackedOrderDtailsCom/orderStepContainer/OrderStepStyle";
-import Animated, { FadeInRight } from "react-native-reanimated";
+/**
+ * TrackedOrderDetails Component:
+ * This component represents the screen for tracking an order's details.
+ * It includes sections for customer details, order steps, product information,
+ * and a summary of the order. Users can also cancel the order.
+ *
+ * State:
+ * - isStepChange: A state variable to control the change in order steps.
+ *
+ * Navigation:
+ * None
+ *
+ * Usage Example:
+ * ```jsx
+ * import TrackedOrderDetails from './TrackedOrderDetails';
+ * <TrackedOrderDetails />
+ * ```
+ */
+
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import CommonHeader from '../../components/common/commonHeader/CommonHeader';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { trackedOrderDetailsStyle } from './TrackedOrderDtailsSytle';
+import CustomerDetailsContainer from '../../components/trackedOrderDtailsCom/customerDetailsContainer/CustomerDetailsContainer';
+import OrderStepContainer from '../../components/trackedOrderDtailsCom/orderStepContainer/OrderStepContainer';
+import ProductContainer from '../../components/trackedOrderDtailsCom/productContainer/ProductContainer';
+import SummeryContainer from '../../components/trackedOrderDtailsCom/summaryContainer/SummeryContainer';
+import { LinearGradient } from 'expo-linear-gradient';
+import { orderStepContainerStyle } from '../../components/trackedOrderDtailsCom/orderStepContainer/OrderStepStyle';
+import Animated, { FadeInDown, FadeInRight } from 'react-native-reanimated';
+import { StatusBar } from 'expo-status-bar';
 
 const TrackedOrderDetails = () => {
   const [isStepChange, setIsStepChange] = useState<number>(0);
@@ -19,15 +39,26 @@ const TrackedOrderDetails = () => {
   };
 
   return (
-    <View style={trackedOrderDetailsStyle.container}>
+    <Animated.View
+      entering={FadeInDown.delay(50).duration(500)}
+      style={trackedOrderDetailsStyle.container}
+    >
+      {/* ======================== */}
       {/* header section */}
+      {/* ======================== */}
       <CommonHeader title="Track Your Order" />
+      {/* ======================== */}
       {/* body section */}
+      {/* ======================== */}
       <ScrollView>
         <View style={{ marginBottom: 100 }}>
+          {/* ======================== */}
           {/* customer details */}
+          {/* ======================== */}
           <CustomerDetailsContainer />
+          {/* ======================== */}
           {/* order step container */}
+          {/* ======================== */}
           <View>
             {isStepChange === 1 ? (
               <Animated.View
@@ -40,27 +71,44 @@ const TrackedOrderDetails = () => {
               <OrderStepContainer />
             )}
           </View>
+          {/* ======================== */}
           {/* product container */}
+          {/* ======================== */}
           <ProductContainer />
+          {/* ======================== */}
           {/* summary container */}
+          {/* ======================== */}
           <SummeryContainer />
         </View>
       </ScrollView>
+      {/* ======================== */}
+      {/* linear button  */}
+      {/* ======================== */}
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        colors={["#C83B62", "#7F35CD"]}
+        colors={['#C83B62', '#7F35CD']}
         style={trackedOrderDetailsStyle.button}
       >
+        {/* =========================== */}
+        {/* action layer  */}
+        {/* =========================== */}
         <TouchableOpacity
           onPress={() => handleButton()}
           activeOpacity={0.7}
           style={trackedOrderDetailsStyle.buttonActionLayer}
         >
+          {/* ===================== */}
+          {/* button text */}
+          {/* ===================== */}
           <Text style={trackedOrderDetailsStyle.buttonText}>Cancel Order</Text>
         </TouchableOpacity>
       </LinearGradient>
-    </View>
+      {/* ======================= */}
+      {/* expo status bar */}
+      {/* ======================= */}
+      <StatusBar style="dark" />
+    </Animated.View>
   );
 };
 

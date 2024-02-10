@@ -1,9 +1,7 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
-import { Color, Font } from "../../constants/GlobalStyle";
+import { Dimensions, Platform, StyleSheet } from 'react-native';
+import { Color, Font } from '../../constants/GlobalStyle';
 
-const { width, height } = Dimensions.get("window");
-
-console.log(height);
+const { width } = Dimensions.get('window');
 
 export const onboardingStyle = StyleSheet.create({
   container: {
@@ -16,7 +14,7 @@ export const onboardingStyle = StyleSheet.create({
 
   flatCon: {
     flex: 1,
-    width: "100%",
+    width: '100%',
     backgroundColor: Color.C_white,
     // backgroundColor: "red",
   },
@@ -25,15 +23,15 @@ export const onboardingStyle = StyleSheet.create({
     // height: 270,
   },
   leftLogoAndTitleCon: {
-    position: "absolute",
+    position: 'absolute',
     left: 50,
-    top: Platform.OS === "ios" ? 70 : 50,
+    top: Platform.OS === 'ios' ? 60 : 60,
   },
   centerLogoAndTitleCon: {
-    position: "absolute",
-    top: 100,
-    alignSelf: "center",
-    alignItems: "center",
+    position: 'absolute',
+    top: 90,
+    alignSelf: 'center',
+    alignItems: 'center',
   },
   topDesc: {
     color: Color.C_white,
@@ -43,46 +41,48 @@ export const onboardingStyle = StyleSheet.create({
   },
   lottieStyle: {
     // width: DWidth === 350 ? 350 : 300,
-    width: width,
-    height: width / 1.2,
-    alignSelf: "center",
+    width: width <= 400 ? width / 1.5 : width,
+    height: width <= 400 ? width / 1.5 : width,
+    alignSelf: 'center',
     // marginTop: 20,
-    resizeMode: "cover",
+    resizeMode: 'cover',
+    // backgroundColor: 'red',
   },
   lottieSecondIndexStyle: {
     marginTop: 30,
-    width: width,
-    height: width / 1.2,
-    alignSelf: "center",
+    width: width <= 400 ? width / 1.5 : width,
+    height: width <= 400 ? width / 1.7 : width,
+    alignSelf: 'center',
   },
   titleAndDescCon: {
-    marginTop: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    width: "100%",
+    marginTop: width <= 400 ? 10 : 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: '100%',
   },
   title: {
     fontSize: 24,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   desc: {
     width: 350,
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 20,
-    color: "rgba(0,0,0,0.7)",
+    color: 'rgba(0,0,0,0.7)',
     lineHeight: 22,
+    alignSelf: 'center',
   },
   paginationCon: {
     // position: "absolute",
     // bottom: 80,
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 20,
-    alignItems: "center",
+    alignItems: 'center',
     height: 40,
   },
   activePaginationIndicator: {
-    backgroundColor: "#7F35CD",
+    backgroundColor: '#7F35CD',
     opacity: 0.1,
     width: 10,
     height: 10,
@@ -91,20 +91,21 @@ export const onboardingStyle = StyleSheet.create({
   },
   linearButton: {
     height: 50,
-    width: "70%",
+    width: '70%',
     borderRadius: 8,
-    alignSelf: "center",
-    marginTop: height > 550 ? 70 : 50,
+    alignSelf: 'center',
+    marginTop: 'auto',
+    marginBottom: 20,
   },
   actionLayer: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
     fontSize: Font.Font_L,
     color: Color.C_white,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });

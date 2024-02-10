@@ -1,11 +1,11 @@
-import { View, Text, Image, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
-import { Divider } from "react-native-paper";
-import { historyStyle } from "./HistoryCartStyle";
-import { LinearGradient } from "expo-linear-gradient";
-import { RatingStar } from "../../../constants/allSvg/AllSvg";
-import Modal from "react-native-modal";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { Divider } from 'react-native-paper';
+import { historyStyle } from './HistoryCartStyle';
+import { LinearGradient } from 'expo-linear-gradient';
+import { RatingStar } from '../../../constants/allSvg/AllSvg';
+import Modal from 'react-native-modal';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 const HistoryCart = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>();
 
@@ -14,10 +14,7 @@ const HistoryCart = () => {
   };
 
   return (
-    <Animated.View
-      entering={FadeInDown.delay(50).duration(500)}
-      style={historyStyle.container}
-    >
+    <Animated.View entering={FadeInDown.delay(50).duration(500)} style={historyStyle.container}>
       <Text style={historyStyle.processDate}>Purchased on 12 Jul 2023</Text>
       <Divider style={historyStyle.dividerStyle} />
       <View style={historyStyle.imgAndTitleCon}>
@@ -25,9 +22,7 @@ const HistoryCart = () => {
           <Image source={{}} />
         </View>
         <View style={historyStyle.titleAndStoreCon}>
-          <Text style={historyStyle.title}>
-            HP DeskJet Ink Advantage 4175 All-in-One Printer
-          </Text>
+          <Text style={historyStyle.title}>HP DeskJet Ink Advantage 4175 All-in-One Printer</Text>
           <View style={historyStyle.brandAndReviewCon}>
             <View style={historyStyle.brandAndBrandNameCon}>
               <View style={historyStyle.brandCon}>
@@ -61,14 +56,8 @@ const HistoryCart = () => {
         onBackButtonPress={() => setIsModalVisible(false)}
         swipeDirection="down"
         onSwipeComplete={() => toggleModal()}
-        animationIn="bounceInUp"
-        animationOut="bounceOutDown"
-        animationInTiming={100}
-        animationOutTiming={100}
         isVisible={isModalVisible}
-        style={{ justifyContent: "flex-end", margin: 0 }}
-        backdropTransitionInTiming={100}
-        backdropTransitionOutTiming={100}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
       >
         <View style={historyStyle.modalContainer}>
           <View style={historyStyle.modalIndicator}></View>
@@ -78,7 +67,7 @@ const HistoryCart = () => {
               <RatingStar />
             </View>
             <Text style={historyStyle.dummyText}>
-              Please share your opinion about {"\n"} the product
+              Please share your opinion about {'\n'} the product
             </Text>
 
             <View style={historyStyle.textInputCon}>
@@ -89,13 +78,10 @@ const HistoryCart = () => {
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
-            colors={["#C83B62", "#7F35CD"]}
+            colors={['#C83B62', '#7F35CD']}
             style={historyStyle.modalLinear}
           >
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={historyStyle.linearActionLayer}
-            >
+            <TouchableOpacity activeOpacity={0.7} style={historyStyle.linearActionLayer}>
               <Text style={historyStyle.ModalButtonText}>Submit Review</Text>
             </TouchableOpacity>
           </LinearGradient>

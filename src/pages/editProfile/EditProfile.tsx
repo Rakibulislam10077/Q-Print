@@ -1,27 +1,20 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Platform,
-  Image,
-  TextInput,
-} from "react-native";
-import React, { useState } from "react";
-import { profileStyle } from "../../screen/profile/ProfileStyle";
+import { View, Text, TouchableOpacity, Platform, Image, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { profileStyle } from '../../screen/profile/ProfileStyle';
 import {
   CameraIcon,
   ColoredCameraIcon,
   GalleryIcon,
   ModalCameraIcon,
   WhiteBackArrow,
-} from "../../constants/allSvg/AllSvg";
-import { useNavigation } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
-import { editProfileStyle } from "./EditProfileStyle";
-import { Divider } from "react-native-paper";
-import * as ImagePicker from "expo-image-picker";
-import Modal from "react-native-modal";
-import { StatusBar } from "expo-status-bar";
+} from '../../constants/allSvg/AllSvg';
+import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { editProfileStyle } from './EditProfileStyle';
+import { Divider } from 'react-native-paper';
+import * as ImagePicker from 'expo-image-picker';
+import Modal from 'react-native-modal';
+import { StatusBar } from 'expo-status-bar';
 
 const EditProfile = () => {
   const navigation: any = useNavigation();
@@ -42,7 +35,7 @@ const EditProfile = () => {
         await saveImage(result.assets[0].uri);
       }
     } catch (error: any) {
-      alert("Error Uploading image" + error.message);
+      alert('Error Uploading image' + error.message);
     }
   };
 
@@ -60,7 +53,7 @@ const EditProfile = () => {
         await saveImage(result.assets[0].uri);
       }
     } catch (error: any) {
-      alert("Error Uploading image" + error.message);
+      alert('Error Uploading image' + error.message);
     }
   };
 
@@ -79,8 +72,8 @@ const EditProfile = () => {
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        colors={["#C83B62", "#7F35CD"]}
-        style={{ flex: 1, paddingTop: Platform.OS === "ios" ? 30 : 30 }}
+        colors={['#C83B62', '#7F35CD']}
+        style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 30 : 30 }}
       >
         {/* header section */}
         <View style={profileStyle.headerContainer}>
@@ -105,47 +98,32 @@ const EditProfile = () => {
         <View style={editProfileStyle.bodyContainer}>
           <View>
             <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput
-              style={editProfileStyle.input}
-              placeholder="Mohammad Shahin"
-            />
+            <TextInput style={editProfileStyle.input} placeholder="Mohammad Shahin" />
           </View>
           <Divider style={editProfileStyle.dividerStyle} />
           <View>
             <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput
-              style={editProfileStyle.input}
-              placeholder="hello@expersquad.net"
-            />
+            <TextInput style={editProfileStyle.input} placeholder="hello@expersquad.net" />
           </View>
           <Divider style={editProfileStyle.dividerStyle} />
           <View>
             <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput
-              style={editProfileStyle.input}
-              placeholder="01601113299"
-            />
+            <TextInput style={editProfileStyle.input} placeholder="01601113299" />
           </View>
           <Divider style={editProfileStyle.dividerStyle} />
           <View>
             <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput
-              style={editProfileStyle.input}
-              placeholder="Rakibulislam118"
-            />
+            <TextInput style={editProfileStyle.input} placeholder="Rakibulislam118" />
           </View>
 
           {/* update button */}
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            colors={["#C83B62", "#7F35CD"]}
+            colors={['#C83B62', '#7F35CD']}
             style={editProfileStyle.updateButton}
           >
-            <TouchableOpacity
-              activeOpacity={0.5}
-              style={editProfileStyle.updateButtonTouchAction}
-            >
+            <TouchableOpacity activeOpacity={0.5} style={editProfileStyle.updateButtonTouchAction}>
               <Text style={editProfileStyle.buttonText}>Update</Text>
             </TouchableOpacity>
           </LinearGradient>
@@ -156,14 +134,8 @@ const EditProfile = () => {
         onBackdropPress={() => setIsCameraModalOpen(false)}
         onBackButtonPress={() => setIsCameraModalOpen(false)}
         swipeDirection="down"
-        animationIn="fadeIn"
-        animationOut="fadeOut"
-        animationInTiming={100}
-        animationOutTiming={100}
         isVisible={isCameraModalOpen}
-        style={{ justifyContent: "center", margin: 0, alignItems: "center" }}
-        backdropTransitionInTiming={100}
-        backdropTransitionOutTiming={100}
+        style={{ justifyContent: 'center', margin: 0, alignItems: 'center' }}
       >
         <View style={profileStyle.cameraModal}>
           <Text style={profileStyle.ProfileModalTitle}>Profile Photo</Text>

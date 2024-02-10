@@ -1,76 +1,112 @@
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
-import { productsStyle } from "./ProductsStyle";
-import {
-  BackArrow,
-  CartBag,
-  CartIcon,
-  Magnify,
-  ThreeLine,
-} from "../../constants/allSvg/AllSvg";
-import { TopTab } from "../../routes/material_Tab/TopTab";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
-import Modal from "react-native-modal";
-import ModalContent from "../../pages/homePage/modalComponents/ModalContent";
-import { StatusBar } from "expo-status-bar";
+/**
+ * Products Component:
+ * This component represents a screen for displaying all products.
+ * It consists of a header section with navigation controls, search input,
+ * and a modal for additional options. The body section displays product tabs.
+ *
+ * Props:
+ * None
+ *
+ * State:
+ * - isModalVisible: boolean state to manage the visibility of the modal.
+ *
+ * Navigation:
+ * - The back arrow button navigates back to the previous screen.
+ *
+ * Usage Example:
+ * ```jsx
+ * import Products from './Products';
+ * <Products />
+ * ```
+ */
+
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import Modal from 'react-native-modal';
+import { productsStyle } from './ProductsStyle';
+import { BackArrow, CartBag, Magnify, ThreeLine } from '../../constants/allSvg/AllSvg';
+import { TopTab } from '../../routes/material_Tab/TopTab';
+import ModalContent from '../../pages/homePage/modalComponents/ModalContent';
+
 const Products = () => {
-  const navigation: any = useNavigation();
+  const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
   return (
     <View style={productsStyle.container}>
+      {/* ======================= */}
+      {/* Header Section */}
+      {/* ======================= */}
       <View style={productsStyle.headerContainer}>
+        {/* ======================= */}
+        {/* Navigation Controls */}
+        {/* ======================= */}
         <View style={productsStyle.navigationAndCard}>
           <View style={productsStyle.navigationAndTitle}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              activeOpacity={0.7}
-            >
+            {/* ======================= */}
+            {/* Back Button */}
+            {/* ======================= */}
+            <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.7}>
               <BackArrow />
             </TouchableOpacity>
+            {/* ======================= */}
+            {/* Title */}
+            {/* ======================= */}
             <Text style={productsStyle.title}>All Products</Text>
           </View>
+          {/* ======================= */}
+          {/* Cart Icon */}
+          {/* ======================= */}
           <TouchableOpacity style={productsStyle.cartBag}>
             <CartBag />
           </TouchableOpacity>
         </View>
+        {/* ======================= */}
+        {/* Search Input and Three Line Icon */}
+        {/* ======================= */}
         <View style={productsStyle.inputAndThreelineCon}>
+          {/* ======================= */}
+          {/* Search Input */}
+          {/* ======================= */}
           <View style={productsStyle.magnifyAndInputCon}>
             <Magnify />
-            <TextInput
-              style={productsStyle.input}
-              placeholder="Search Product"
-            />
+            <TextInput style={productsStyle.input} placeholder="Search Product" />
           </View>
-          <TouchableOpacity
-            onPress={() => setIsModalVisible(true)}
-            style={productsStyle.threeline}
-          >
+          {/* ======================= */}
+          {/* Three Line Icon for Modal */}
+          {/* ======================= */}
+          <TouchableOpacity onPress={() => setIsModalVisible(true)} style={productsStyle.threeline}>
             <ThreeLine />
           </TouchableOpacity>
         </View>
       </View>
-      {/* body container */}
-
+      {/* ======================= */}
+      {/* Body Section */}
+      {/* ======================= */}
       <View style={productsStyle.bodyContainer}>
+        {/* ======================= */}
+        {/* material top tab  */}
+        {/* ======================= */}
         <TopTab />
       </View>
+      {/* ======================= */}
+      {/* Modal for Additional Options */}
+      {/* ======================= */}
       <Modal
         onBackdropPress={() => setIsModalVisible(false)}
         onBackButtonPress={() => setIsModalVisible(false)}
         swipeDirection="down"
         onSwipeComplete={() => setIsModalVisible(!isModalVisible)}
-        animationIn="bounceInUp"
-        animationOut="bounceOutDown"
-        animationInTiming={100}
-        animationOutTiming={100}
         isVisible={isModalVisible}
-        style={{ justifyContent: "flex-end", margin: 0 }}
-        backdropTransitionInTiming={100}
-        backdropTransitionOutTiming={100}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
       >
         <ModalContent />
       </Modal>
+      {/* ======================= */}
+      {/* Status Bar */}
+      {/* ======================= */}
       <StatusBar style="dark" />
     </View>
   );
