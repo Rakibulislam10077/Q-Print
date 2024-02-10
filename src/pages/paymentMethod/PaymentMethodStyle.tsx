@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { Color, Font, shadows } from "../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font, shadows } from '../../constants/GlobalStyle';
 
 export const paymentMethodStyle = StyleSheet.create({
   bodyContainer: {
@@ -9,11 +9,11 @@ export const paymentMethodStyle = StyleSheet.create({
   },
   PaymentMethodText: {
     fontSize: Font.Font_M,
-    color: "rgba(0,0,0,0.8)",
-    fontWeight: "500",
+    color: 'rgba(0,0,0,0.8)',
+    fontWeight: '500',
   },
   PaymentCartContainer: {
-    width: "100%",
+    width: '100%',
     borderRadius: 15,
     backgroundColor: Color.C_white,
     paddingVertical: 20,
@@ -29,14 +29,14 @@ export const paymentMethodStyle = StyleSheet.create({
     shadowOpacity: shadows.opacity_1,
   },
   dabidCartTextAndArrowCon: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginHorizontal: 20,
   },
   cartImgAndTextCon: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   cardImg: {
     width: 40,
@@ -48,18 +48,18 @@ export const paymentMethodStyle = StyleSheet.create({
     fontSize: Font.Font_L,
   },
   card: {
-    width: "90%",
+    width: '90%',
     height: 200,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 10,
     borderRadius: 20,
-    resizeMode: "contain",
+    resizeMode: 'contain',
   },
   addNewDebid: {
     marginTop: 10,
-    alignSelf: "center",
+    alignSelf: 'center',
     fontSize: Font.Font_M,
-    color: "rgba(0,0,0,0.8)",
+    color: 'rgba(0,0,0,0.8)',
   },
   radio: {
     width: 20,
@@ -73,13 +73,13 @@ export const paymentMethodStyle = StyleSheet.create({
     marginTop: 18,
   },
   inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Color.C_border,
     height: 50,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     paddingHorizontal: 10,
     marginTop: 10,
   },
@@ -93,8 +93,8 @@ export const paymentMethodStyle = StyleSheet.create({
     fontSize: Font.Font_L,
   },
   expirDateAndCVVCon: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 20,
     marginHorizontal: 20,
     gap: 20,
@@ -116,10 +116,10 @@ export const paymentMethodStyle = StyleSheet.create({
     fontSize: Font.Font_L,
   },
   secureTextCon: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginLeft: 20,
     marginTop: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   checkmarkCon: {
     width: 24,
@@ -128,8 +128,8 @@ export const paymentMethodStyle = StyleSheet.create({
     borderColor: Color.C_border,
     borderRadius: 6,
     marginRight: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   checkmarkText: {
     fontSize: Font.Font_S,
@@ -147,9 +147,9 @@ export const paymentMethodStyle = StyleSheet.create({
     shadowRadius: shadows.radius_1,
     shadowOpacity: shadows.opacity_1,
     backgroundColor: Color.C_white,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
   },
   totalAmount: {
@@ -159,18 +159,23 @@ export const paymentMethodStyle = StyleSheet.create({
   },
   currency: {
     fontSize: Font.Font_X,
-    fontWeight: "700",
+    fontWeight: '700',
     color: Color.C_main,
   },
   buttonActionLayer: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     fontSize: Font.Font_X,
     color: Color.C_white,
-    fontWeight: "500",
+    fontWeight: '500',
+  },
+  buttonContainer: {
+    width: 150,
+    height: 50,
+    borderRadius: 25,
   },
 });

@@ -1,3 +1,21 @@
+/**
+ * Order Confirmation Component
+ *
+ * This component displays the confirmation details of a booking order, including order code,
+ * date, customer information, and social sharing options.
+ *
+ * Features:
+ * - Displays a header with the title "Booking Confirmation".
+ * - Utilizes Lottie animation for visual feedback upon confirmation.
+ * - Includes social sharing buttons for Messenger and Whatsapp.
+ * - Shows order details such as order code, date, customer name, phone number, and address.
+ * - Provides buttons for viewing the order and confirming the action.
+ * - Utilizes reanimated animations for smoother transitions and interactions.
+ * - Utilizes LinearGradient for gradient background styling.
+ *
+ * @returns JSX.Element
+ */
+
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import CommonHeader from '../../../components/common/commonHeader/CommonHeader';
@@ -5,18 +23,17 @@ import { customOrderConfirmationStyle } from './OrderConfimationStyle';
 import { Messenger, Whatsapp } from '../../../constants/allSvg/AllSvg';
 import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-import Animated, { BounceIn, BounceInUp, FadeInDown } from 'react-native-reanimated';
+import Animated, { BounceIn, FadeInDown } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
+import { StatusBar } from 'expo-status-bar';
 
 const OrderConfirmation = () => {
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
   const animation = useRef<any>(null);
 
   useEffect(() => {
-    //==========================================
     // This effect runs when the component mounts.
     // It plays the Lottie animation once after a delay of 500 milliseconds.
-    //=========================================
     if (shouldPlayLottie) {
       setTimeout(() => {
         animation.current?.play();
@@ -26,11 +43,10 @@ const OrderConfirmation = () => {
   }, [shouldPlayLottie]);
   return (
     <View style={customOrderConfirmationStyle.container}>
+      {/* Header Section */}
       <CommonHeader title="Booking Confirmation" />
       <ScrollView>
-        {/* =========================================== */}
-        {/* top logo and other text container */}
-        {/* ========================================== */}
+        {/* Top Logo and Text Container */}
         <View style={customOrderConfirmationStyle.logoCon}>
           <Animated.Image
             entering={BounceIn}
@@ -63,9 +79,7 @@ const OrderConfirmation = () => {
             You have requested for printing a custom paper size, Very soon we will contact you
           </Animated.Text>
         </View>
-        {/* ========================================== */}
-        {/* social button container */}
-        {/* ========================================== */}
+        {/* Social Button Container */}
         <View style={customOrderConfirmationStyle.socialButtonCon}>
           <TouchableOpacity
             style={[customOrderConfirmationStyle.socialButton, { backgroundColor: '#097DFF' }]}
@@ -80,14 +94,10 @@ const OrderConfirmation = () => {
             <Text style={customOrderConfirmationStyle.buttonText}>Messenger</Text>
           </TouchableOpacity>
         </View>
-        {/* ========================================== */}
-        {/* order details container */}
-        {/* ========================================== */}
+        {/* Order Details Container */}
         <View>
           <Text style={customOrderConfirmationStyle.orderDetailsText}>Order details</Text>
-          {/* ========================================== */}
-          {/* order date and code container */}
-          {/* ========================================== */}
+          {/* Order Date and Code Container */}
           <View
             style={[customOrderConfirmationStyle.orderCodeAndDateCon, { paddingHorizontal: 15 }]}
           >
@@ -101,9 +111,7 @@ const OrderConfirmation = () => {
               <Text>October 19, 2023</Text>
             </View>
           </View>
-          {/* ========================================== */}
-          {/* name and phone and address container */}
-          {/* ========================================== */}
+          {/* Name, Phone, and Address Container */}
           <View style={customOrderConfirmationStyle.orderCodeAndDateCon}>
             <View style={[customOrderConfirmationStyle.itemCon, { paddingHorizontal: 15 }]}>
               <Text style={customOrderConfirmationStyle.Text}>
@@ -127,9 +135,7 @@ const OrderConfirmation = () => {
             </View>
           </View>
         </View>
-        {/* ========================================== */}
-        {/* button container */}
-        {/* ========================================== */}
+        {/* Button Container */}
         <View style={customOrderConfirmationStyle.buttonCont}>
           <TouchableOpacity activeOpacity={0.7} style={customOrderConfirmationStyle.viewButton}>
             <Text style={customOrderConfirmationStyle.viewButtonText}>View Order</Text>
@@ -145,6 +151,7 @@ const OrderConfirmation = () => {
           </LinearGradient>
         </View>
       </ScrollView>
+      <StatusBar style="dark" />
     </View>
   );
 };

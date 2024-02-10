@@ -57,13 +57,6 @@ const HomePage = () => {
             <Magnify />
             <Text style={homePageStyle.searchText}>Search Products</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setIsModalVisible(true)}
-            activeOpacity={0.7}
-            style={homePageStyle.threeLine}
-          >
-            <ThreeLine />
-          </TouchableOpacity>
         </Animated.View>
 
         {/* Brand Logo Container */}

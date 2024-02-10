@@ -1,5 +1,22 @@
-import { View, Text, TouchableOpacity, Platform, ScrollView, Image } from 'react-native';
+/**
+ * Profile Component
+ *
+ * This component represents the user's profile page, displaying various options and settings.
+ *
+ * Features:
+ * - Allows users to view and edit their profile information.
+ * - Provides options for users to upload a profile picture from the camera or gallery.
+ * - Displays a list of profile-related options and settings, such as order history, notifications, favorites, etc.
+ * - Includes modal components for rating, sharing, and logging out.
+ * - Utilizes reanimated animations for smoother transitions and interactions.
+ * - Utilizes LinearGradient for gradient background styling.
+ * - Utilizes StatusBar for configuring the status bar style.
+ *
+ * @returns JSX.Element
+ */
+
 import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Platform, ScrollView, Image } from 'react-native';
 import {
   CameraIcon,
   EditIcon,
@@ -28,33 +45,40 @@ import RatingComponents from '../../components/modalComponents/ratingCom/RatingC
 import { logFunc } from '../../utils/log';
 import LogoutComponents from '../../components/modalComponents/logoCom/LogoutComponents';
 import * as ImagePicker from 'expo-image-picker';
-const Profile = () => {
+import Animated, { FadeInDown } from 'react-native-reanimated';
+import * as Sharing from 'expo-sharing';
+
+const Profile: React.FC = () => {
   const navigation: any = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
   const [image, setImage] = useState<any>();
   const [isCameraModalOpen, setIsCameraModalOpen] = useState<boolean>(false);
 
+  // Toggles the visibility of the modal
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
-  // =========== rating modal ==============
+
+  // Opens the rating modal
   const RatingModal = () => {
     setModalIndex(0);
     setIsModalVisible(true);
   };
-  // =========== shareModal ============
+
+  // Opens the share modal
   const ShareModal = () => {
     setModalIndex(1);
     setIsModalVisible(true);
   };
-  //  ========= logout modal ==========
+
+  // Opens the logout modal
   const LogoutModal = () => {
     setModalIndex(2);
     setIsModalVisible(true);
   };
 
-  // upload image from camera
+  // Uploads an image from the camera
   const uploadImage = async () => {
     try {
       await ImagePicker.requestCameraPermissionsAsync();
@@ -72,7 +96,7 @@ const Profile = () => {
     }
   };
 
-  // upload image from gallery
+  // Uploads an image from the gallery
   const uploadImageFromGallery = async () => {
     try {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -90,6 +114,7 @@ const Profile = () => {
     }
   };
 
+  // Saves the uploaded image
   const saveImage = async (image: any) => {
     try {
       // update displayed image
@@ -100,33 +125,36 @@ const Profile = () => {
     }
   };
 
+  const apk: any = '/Users/rakibulislam/Downloads/Q-Print';
   return (
     <View style={{ flex: 1 }}>
+      {/* Linear gradient background */}
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={['#C83B62', '#7F35CD']}
         style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 30 : 30 }}
       >
-        {/* =================================== */}
-        {/* header section */}
-        {/* =================================== */}
+        {/* Header section */}
         <View style={profileStyle.headerContainer}>
+          {/* Back button */}
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <WhiteBackArrow />
           </TouchableOpacity>
           <Text style={profileStyle.headerTitle}>My Profile</Text>
         </View>
-        {/* =================================== */}
-        {/* profile section */}
-        {/* =================================== */}
+
+        {/* Profile section */}
         <View style={profileStyle.profileCon}>
+          {/* Edit profile button */}
           <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('EditProfile')}>
             <EditIcon />
           </TouchableOpacity>
+          {/* User image */}
           <View style={profileStyle.userImg}>
             <Image style={profileStyle.img} source={{ uri: image }} />
           </View>
+          {/* Camera button */}
           <TouchableOpacity
             onPress={() => {
               setIsCameraModalOpen(true);
@@ -136,12 +164,13 @@ const Profile = () => {
             <CameraIcon />
           </TouchableOpacity>
         </View>
+        {/* User name */}
         <Text style={profileStyle.userName}>Mohammad Shahin</Text>
-        {/* =================================== */}
-        {/* body section */}
-        {/* =================================== */}
-        <View style={profileStyle.bodyCon}>
+
+        {/* Body section */}
+        <Animated.View entering={FadeInDown.delay(50).duration(250)} style={profileStyle.bodyCon}>
           <ScrollView showsVerticalScrollIndicator={false}>
+            {/* Order for printing design */}
             <TouchableOpacity
               onPress={() => navigation.navigate('OrderAndPrinterDesignPage')}
               activeOpacity={0.7}
@@ -153,9 +182,7 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
-            {/* =================================== */}
-            {/* ================ end here ================== */}
-            {/* =================================== */}
+            {/* My order history */}
             <TouchableOpacity
               onPress={() => navigation.navigate('OrderHistory')}
               activeOpacity={0.7}
@@ -167,9 +194,7 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Review */}
             <TouchableOpacity
               onPress={() => navigation.navigate('Review')}
               activeOpacity={0.7}
@@ -182,9 +207,7 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Notifications */}
             <TouchableOpacity
               onPress={() => navigation.navigate('NotificationPage')}
               activeOpacity={0.7}
@@ -196,9 +219,7 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Favorite */}
             <TouchableOpacity
               onPress={() => navigation.navigate('Favorite')}
               activeOpacity={0.7}
@@ -211,9 +232,7 @@ const Profile = () => {
               <GoArrow />
             </TouchableOpacity>
             <Divider />
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Rate */}
             <TouchableOpacity
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
@@ -225,11 +244,12 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Share */}
             <TouchableOpacity
-              onPress={() => ShareModal()}
+              onPress={() => {
+                Sharing.shareAsync(apk.file);
+                // ShareModal();
+              }}
               activeOpacity={0.7}
               style={profileStyle.routeItemCon}
             >
@@ -240,9 +260,7 @@ const Profile = () => {
               <GoArrow />
             </TouchableOpacity>
             <Divider />
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Terms & Conditions */}
             <TouchableOpacity
               onPress={() => navigation.navigate('TermsAndCond')}
               activeOpacity={0.7}
@@ -254,9 +272,7 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Privacy Policy */}
             <TouchableOpacity
               onPress={() => navigation.navigate('PrivacyPolicy')}
               activeOpacity={0.7}
@@ -268,9 +284,7 @@ const Profile = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* FAQ */}
             <TouchableOpacity
               onPress={() => navigation.navigate('FAQ')}
               activeOpacity={0.7}
@@ -283,9 +297,7 @@ const Profile = () => {
               <GoArrow />
             </TouchableOpacity>
             <Divider />
-            {/* =================================== */}
-            {/* ============ end here =========== */}
-            {/* =================================== */}
+            {/* Logout */}
             <TouchableOpacity
               onPress={() => LogoutModal()}
               activeOpacity={0.7}
@@ -298,9 +310,11 @@ const Profile = () => {
               <GoArrow />
             </TouchableOpacity>
           </ScrollView>
-        </View>
+        </Animated.View>
       </LinearGradient>
+      {/* StatusBar */}
       <StatusBar style="light" />
+      {/* Modal for various actions */}
       <Modal
         onBackdropPress={() => setIsModalVisible(false)}
         onBackButtonPress={() => setIsModalVisible(false)}
@@ -310,6 +324,7 @@ const Profile = () => {
         style={{ justifyContent: 'flex-end', margin: 0 }}
       >
         <View style={profileStyle.modal}>
+          {/* Rating, Share, and Logout components */}
           {modalIndex === 0 ? (
             <RatingComponents />
           ) : modalIndex === 1 ? (
@@ -321,7 +336,7 @@ const Profile = () => {
           )}
         </View>
       </Modal>
-
+      {/* Modal for selecting image source */}
       <Modal
         onBackdropPress={() => setIsCameraModalOpen(false)}
         onBackButtonPress={() => setIsCameraModalOpen(false)}
@@ -333,25 +348,19 @@ const Profile = () => {
         <View style={profileStyle.cameraModal}>
           <Text style={profileStyle.ProfileModalTitle}>Profile Photo</Text>
           <View style={profileStyle.cameraModalContentCon}>
+            {/* Option to select from gallery */}
             <View>
               <TouchableOpacity
-                onPress={() => {
-                  uploadImageFromGallery();
-                }}
+                onPress={() => uploadImageFromGallery()}
                 style={profileStyle.iconCon}
               >
                 <GalleryIcon />
                 <Text style={profileStyle.profileModalLabel}>Gallery</Text>
               </TouchableOpacity>
             </View>
+            {/* Option to take a photo */}
             <View>
-              <TouchableOpacity
-                onPress={() => {
-                  uploadImage();
-                  setIsCameraModalOpen(false);
-                }}
-                style={profileStyle.iconCon}
-              >
+              <TouchableOpacity onPress={() => uploadImage()} style={profileStyle.iconCon}>
                 <ModalCameraIcon />
                 <Text style={profileStyle.profileModalLabel}>Camera</Text>
               </TouchableOpacity>
@@ -359,6 +368,7 @@ const Profile = () => {
           </View>
         </View>
       </Modal>
+      {/* StatusBar */}
       <StatusBar style="light" />
     </View>
   );

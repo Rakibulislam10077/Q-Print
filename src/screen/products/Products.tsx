@@ -36,77 +36,38 @@ const Products = () => {
 
   return (
     <View style={productsStyle.container}>
-      {/* ======================= */}
       {/* Header Section */}
-      {/* ======================= */}
       <View style={productsStyle.headerContainer}>
-        {/* ======================= */}
         {/* Navigation Controls */}
-        {/* ======================= */}
         <View style={productsStyle.navigationAndCard}>
           <View style={productsStyle.navigationAndTitle}>
-            {/* ======================= */}
             {/* Back Button */}
-            {/* ======================= */}
             <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.7}>
               <BackArrow />
             </TouchableOpacity>
-            {/* ======================= */}
             {/* Title */}
-            {/* ======================= */}
             <Text style={productsStyle.title}>All Products</Text>
           </View>
-          {/* ======================= */}
           {/* Cart Icon */}
-          {/* ======================= */}
           <TouchableOpacity style={productsStyle.cartBag}>
             <CartBag />
           </TouchableOpacity>
         </View>
-        {/* ======================= */}
         {/* Search Input and Three Line Icon */}
-        {/* ======================= */}
         <View style={productsStyle.inputAndThreelineCon}>
-          {/* ======================= */}
           {/* Search Input */}
-          {/* ======================= */}
           <View style={productsStyle.magnifyAndInputCon}>
             <Magnify />
             <TextInput style={productsStyle.input} placeholder="Search Product" />
           </View>
-          {/* ======================= */}
-          {/* Three Line Icon for Modal */}
-          {/* ======================= */}
-          <TouchableOpacity onPress={() => setIsModalVisible(true)} style={productsStyle.threeline}>
-            <ThreeLine />
-          </TouchableOpacity>
         </View>
       </View>
-      {/* ======================= */}
       {/* Body Section */}
-      {/* ======================= */}
       <View style={productsStyle.bodyContainer}>
-        {/* ======================= */}
         {/* material top tab  */}
-        {/* ======================= */}
         <TopTab />
       </View>
-      {/* ======================= */}
-      {/* Modal for Additional Options */}
-      {/* ======================= */}
-      <Modal
-        onBackdropPress={() => setIsModalVisible(false)}
-        onBackButtonPress={() => setIsModalVisible(false)}
-        swipeDirection="down"
-        onSwipeComplete={() => setIsModalVisible(!isModalVisible)}
-        isVisible={isModalVisible}
-        style={{ justifyContent: 'flex-end', margin: 0 }}
-      >
-        <ModalContent />
-      </Modal>
-      {/* ======================= */}
       {/* Status Bar */}
-      {/* ======================= */}
       <StatusBar style="dark" />
     </View>
   );

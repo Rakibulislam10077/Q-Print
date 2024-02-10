@@ -54,16 +54,6 @@ export const productsStyle = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
   },
-  threeline: {
-    width: 40,
-    height: 40,
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: Color.C_main,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 15,
-  },
 
   // body section
   bodyContainer: {

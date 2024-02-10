@@ -1,8 +1,24 @@
-import { View, Text, TouchableOpacity, Platform, Image, TextInput } from 'react-native';
+/**
+ * Edit Profile Component
+ *
+ * This component allows users to edit their profile information including name, email, phone number, and profile picture.
+ *
+ * Features:
+ * - Displays a header with the title "Edit Profile".
+ * - Allows users to upload or capture a new profile picture using the camera or gallery.
+ * - Provides input fields for editing name, email, phone number, and username.
+ * - Includes a button to update the profile information.
+ * - Utilizes LinearGradient for gradient background styling.
+ * - Utilizes StatusBar for configuring the status bar style.
+ * - Utilizes Modal for displaying options to upload a profile picture.
+ *
+ * @returns JSX.Element
+ */
+
+import { View, Text, TouchableOpacity, Platform, Image, TextInput, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { profileStyle } from '../../screen/profile/ProfileStyle';
 import {
-  CameraIcon,
   ColoredCameraIcon,
   GalleryIcon,
   ModalCameraIcon,
@@ -21,7 +37,7 @@ const EditProfile = () => {
   const [image, setImage] = useState<any>();
   const [isCameraModalOpen, setIsCameraModalOpen] = useState<boolean>(false);
 
-  // upload image from camera
+  // Upload image from camera
   const uploadImage = async () => {
     try {
       await ImagePicker.requestCameraPermissionsAsync();
@@ -39,7 +55,7 @@ const EditProfile = () => {
     }
   };
 
-  // upload image from gallery
+  // Upload image from gallery
   const uploadImageFromGallery = async () => {
     try {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -57,9 +73,10 @@ const EditProfile = () => {
     }
   };
 
+  // Save the uploaded image
   const saveImage = async (image: any) => {
     try {
-      // update displayed image
+      // Update displayed image
       setImage(image);
       setIsCameraModalOpen(false);
     } catch (error) {
@@ -69,20 +86,21 @@ const EditProfile = () => {
 
   return (
     <View style={{ flex: 1 }}>
+      {/* Background gradient */}
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={['#C83B62', '#7F35CD']}
         style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 30 : 30 }}
       >
-        {/* header section */}
+        {/* Header section */}
         <View style={profileStyle.headerContainer}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <WhiteBackArrow />
           </TouchableOpacity>
           <Text style={profileStyle.headerTitle}>Edit Profile</Text>
         </View>
-        {/* profile section */}
+        {/* Profile section */}
         <View style={editProfileStyle.userImgCon}>
           <Image style={editProfileStyle.img} source={{ uri: image }} />
           <TouchableOpacity
@@ -94,29 +112,30 @@ const EditProfile = () => {
             <ColoredCameraIcon />
           </TouchableOpacity>
         </View>
-        {/* body container */}
+        {/* Body container */}
         <View style={editProfileStyle.bodyContainer}>
-          <View>
-            <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput style={editProfileStyle.input} placeholder="Mohammad Shahin" />
-          </View>
-          <Divider style={editProfileStyle.dividerStyle} />
-          <View>
-            <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput style={editProfileStyle.input} placeholder="hello@expersquad.net" />
-          </View>
-          <Divider style={editProfileStyle.dividerStyle} />
-          <View>
-            <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput style={editProfileStyle.input} placeholder="01601113299" />
-          </View>
-          <Divider style={editProfileStyle.dividerStyle} />
-          <View>
-            <Text style={editProfileStyle.label}>Full Name</Text>
-            <TextInput style={editProfileStyle.input} placeholder="Rakibulislam118" />
-          </View>
-
-          {/* update button */}
+          <ScrollView>
+            <View>
+              <Text style={editProfileStyle.label}>Full Name</Text>
+              <TextInput style={editProfileStyle.input} placeholder="Mohammad Shahin" />
+            </View>
+            <Divider style={editProfileStyle.dividerStyle} />
+            <View>
+              <Text style={editProfileStyle.label}>Email</Text>
+              <TextInput style={editProfileStyle.input} placeholder="hello@expersquad.net" />
+            </View>
+            <Divider style={editProfileStyle.dividerStyle} />
+            <View>
+              <Text style={editProfileStyle.label}>Phone Number</Text>
+              <TextInput style={editProfileStyle.input} placeholder="01601113299" />
+            </View>
+            <Divider style={editProfileStyle.dividerStyle} />
+            <View>
+              <Text style={editProfileStyle.label}>Username</Text>
+              <TextInput style={editProfileStyle.input} placeholder="Rakibulislam118" />
+            </View>
+            {/* Update button */}
+          </ScrollView>
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
@@ -130,6 +149,7 @@ const EditProfile = () => {
         </View>
       </LinearGradient>
 
+      {/* Camera Modal */}
       <Modal
         onBackdropPress={() => setIsCameraModalOpen(false)}
         onBackButtonPress={() => setIsCameraModalOpen(false)}
@@ -166,6 +186,7 @@ const EditProfile = () => {
           </View>
         </View>
       </Modal>
+      {/* StatusBar */}
       <StatusBar style="light" />
     </View>
   );

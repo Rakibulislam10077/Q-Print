@@ -1,9 +1,6 @@
 import { View, Text, Image, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import PageOne from './onboardingPages/pageOne/PageOne';
-import PageTwo from './onboardingPages/pageTwo/PageTwo';
-import PageThree from './onboardingPages/pageThree/PageThree';
 import { onboardingStyle } from './OnboardingStyle';
 import { Logo, WhiteLogo } from '../../constants/allSvg/AllSvg';
 import LottieView from 'lottie-react-native';

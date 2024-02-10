@@ -41,8 +41,8 @@ export const onboardingStyle = StyleSheet.create({
   },
   lottieStyle: {
     // width: DWidth === 350 ? 350 : 300,
-    width: width <= 400 ? width / 1.5 : width,
-    height: width <= 400 ? width / 1.5 : width,
+    width: width <= 380 ? width / 1.5 : width,
+    height: width <= 380 ? width / 1.5 : width,
     alignSelf: 'center',
     // marginTop: 20,
     resizeMode: 'cover',
@@ -50,12 +50,12 @@ export const onboardingStyle = StyleSheet.create({
   },
   lottieSecondIndexStyle: {
     marginTop: 30,
-    width: width <= 400 ? width / 1.5 : width,
-    height: width <= 400 ? width / 1.7 : width,
+    width: width <= 380 ? width / 1.5 : width,
+    height: width <= 380 ? width / 1.7 : width,
     alignSelf: 'center',
   },
   titleAndDescCon: {
-    marginTop: width <= 400 ? 10 : 30,
+    marginTop: width <= 380 ? 10 : 30,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',

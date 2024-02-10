@@ -22,13 +22,14 @@ import Printer from '../../components/productsCategory/Printer/Printer';
 import Cartridge from '../../components/productsCategory/Cartridge/Cartridge';
 import Ink from '../../components/productsCategory/Ink/Ink';
 import { Color } from '../../constants/GlobalStyle';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const Tab = createMaterialTopTabNavigator();
 const DimensionsWidth = Dimensions.get('window').width;
 
 export const TopTab = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <Animated.View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* =============================== */}
       {/* Top Tab Navigator */}
       {/* =============================== */}
@@ -60,6 +61,6 @@ export const TopTab = () => {
         {/* =============================== */}
         <Tab.Screen name="Ink" component={Ink} />
       </Tab.Navigator>
-    </View>
+    </Animated.View>
   );
 };

@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { Color, Font } from "../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font } from '../../constants/GlobalStyle';
 
 export const confirmOrderStyle = StyleSheet.create({
   container: { flex: 1, backgroundColor: Color.C_white },
@@ -7,35 +7,35 @@ export const confirmOrderStyle = StyleSheet.create({
     paddingHorizontal: 20,
   },
   logoContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginVertical: 40,
   },
   orderPayment: {
     fontSize: Font.Font_XL,
-    fontWeight: "600",
+    fontWeight: '600',
     marginTop: 40,
     marginBottom: 10,
   },
   desc: {
     color: Color.C_H_black,
     fontSize: Font.Font_L,
-    textAlign: "center",
+    textAlign: 'center',
   },
   informationCon: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     height: 50,
   },
   amountTextAndother: {
     fontSize: Font.Font_L,
     color: Color.C_H_black,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   totalPriceAndother: {
     fontSize: Font.Font_L,
-    fontWeight: "600",
-    color: "rgba(0,0,0,0.7)",
+    fontWeight: '600',
+    color: 'rgba(0,0,0,0.7)',
   },
   viewOrderButton: {
     width: 120,
@@ -43,10 +43,10 @@ export const confirmOrderStyle = StyleSheet.create({
     borderRadius: 8,
     borderColor: Color.C_main,
     borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 50,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginBottom: 50,
   },
   buttonText: {
@@ -54,14 +54,21 @@ export const confirmOrderStyle = StyleSheet.create({
     color: Color.C_main,
   },
   buttonActionLayer: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   OkeyButtonText: {
     fontSize: Font.Font_X,
     color: Color.C_white,
-    fontWeight: "500",
+    fontWeight: '500',
+  },
+  linearGradientStyle: {
+    width: '90%',
+    alignSelf: 'center',
+    marginBottom: 20,
+    height: 50,
+    borderRadius: 25,
   },
 });

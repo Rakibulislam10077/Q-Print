@@ -33,7 +33,8 @@
     "react-native-shimmer-placeholder": "^2.0.9",
     "react-native-svg": "^14.1.0",
     "react-native-tab-view": "^3.5.2",
-    "sharp-cli": "^4.2.0"
+    "sharp-cli": "^4.2.0",
+    "expo-sharing": "~11.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

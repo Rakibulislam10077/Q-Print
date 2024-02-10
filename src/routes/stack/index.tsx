@@ -79,7 +79,7 @@ const BottomTab = () => {
                   style={{
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
-                    fontSize: width <= 400 ? 10 : 12,
+                    fontSize: width <= 380 ? 10 : 12,
                   }}
                 >
                   Home
@@ -115,7 +115,7 @@ const BottomTab = () => {
                   style={{
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
-                    fontSize: width <= 400 ? 10 : 12,
+                    fontSize: width <= 380 ? 10 : 12,
                   }}
                 >
                   Products
@@ -150,7 +150,7 @@ const BottomTab = () => {
                   style={{
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
-                    fontSize: width <= 400 ? 10 : 12,
+                    fontSize: width <= 380 ? 10 : 12,
                   }}
                 >
                   Brand
@@ -183,7 +183,7 @@ const BottomTab = () => {
                   style={{
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
-                    fontSize: width <= 400 ? 10 : 12,
+                    fontSize: width <= 380 ? 10 : 12,
                   }}
                 >
                   Notifications
@@ -216,7 +216,7 @@ const BottomTab = () => {
                   style={{
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
-                    fontSize: width <= 400 ? 10 : 12,
+                    fontSize: width <= 380 ? 10 : 12,
                   }}
                 >
                   Profile

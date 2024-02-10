@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
-import { Color, Font, shadows } from "../../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 
 export const AllCartStyle = StyleSheet.create({
   container: {
-    width: "48%",
+    width: '48%',
     paddingBottom: 10,
     backgroundColor: Color.C_white,
     borderRadius: 10,
@@ -20,34 +20,34 @@ export const AllCartStyle = StyleSheet.create({
   discountCon: {
     width: 30,
     height: 30,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 50,
-    position: "absolute",
+    position: 'absolute',
     top: 10,
     left: 10,
-    backgroundColor: "rgba(255, 0, 0, 0.10)",
+    backgroundColor: 'rgba(255, 0, 0, 0.10)',
   },
   discountText: {
     fontSize: 10,
     color: Color.C_red,
   },
   imgCon: {
-    width: "40%",
+    width: '40%',
     height: 100,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 10,
   },
   img: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain",
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
   },
   descCon: {
     marginHorizontal: 20,
   },
   title: {
-    color: "rgba(0, 0, 0, 0.80)",
+    color: 'rgba(0, 0, 0, 0.80)',
     fontSize: Font.Font_L,
     marginBottom: 5,
   },
@@ -57,27 +57,27 @@ export const AllCartStyle = StyleSheet.create({
   },
   rating: {
     fontSize: Font.Font_S,
-    color: "rgba(0,0,0,0.5)",
+    color: 'rgba(0,0,0,0.5)',
   },
   priceCon: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   currentPrice: {
     fontSize: Font.Font_L,
-    fontWeight: "700",
+    fontWeight: '700',
     color: Color.C_main,
     marginRight: 10,
   },
   currency: {
     fontSize: Font.Font_STen,
-    fontWeight: "700",
+    fontWeight: '700',
     color: Color.C_main,
   },
   discountedPrice: {
     fontSize: Font.Font_S,
-    color: "rgba(0,0,0,0.4)",
-    fontWeight: "500",
-    textDecorationLine: "line-through",
+    color: 'rgba(0,0,0,0.4)',
+    fontWeight: '500',
+    textDecorationLine: 'line-through',
   },
 });
