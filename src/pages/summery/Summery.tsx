@@ -20,8 +20,7 @@
 
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Dropdown, Goback, LocationIcon, RadioButton } from '../../constants/allSvg/AllSvg';
+import { Dropdown } from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import { summeryStyle } from './SummeryStyle';
 import { Divider } from 'react-native-paper';

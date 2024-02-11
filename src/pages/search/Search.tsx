@@ -27,7 +27,7 @@ import { View, Text, TouchableOpacity, FlatList, ScrollView, TextInput } from 'r
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
-import { CartBag, Goback, Magnify, ThreeLine } from '../../constants/allSvg/AllSvg';
+import { CartBag, Goback, Magnify, ThreeLine } from '../../../assets/allSvg/AllSvg';
 import { searchStyle } from './SearchStyle';
 import { Color } from '../../constants/GlobalStyle';
 import Cart from '../../components/card/allCart/Cart';

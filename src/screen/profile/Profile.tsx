@@ -34,7 +34,7 @@ import {
   StartIcon,
   TermsAndConditionIcon,
   WhiteBackArrow,
-} from '../../constants/allSvg/AllSvg';
+} from '../../../assets/allSvg/AllSvg';
 import { LinearGradient } from 'expo-linear-gradient';
 import { profileStyle } from './ProfileStyle';
 import { StatusBar } from 'expo-status-bar';

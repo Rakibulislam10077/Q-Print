@@ -1,9 +1,9 @@
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { SignUpStyle } from "./SignUpStyle";
-import { Eye, EyeOf, WhiteLogo } from "../../constants/allSvg/AllSvg";
-import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { SignUpStyle } from './SignUpStyle';
+import { Eye, EyeOf, WhiteLogo } from '../../../assets/allSvg/AllSvg';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUp = () => {
   const [eye, setEye] = useState(true);
@@ -14,7 +14,7 @@ const SignUp = () => {
       <View style={SignUpStyle.gradientImgCon}>
         <Image
           style={SignUpStyle.gradientImg}
-          source={require("../../../assets/image/LoginGradient.png")}
+          source={require('../../../assets/image/LoginGradient.png')}
         />
       </View>
       {/* logo container */}
@@ -27,20 +27,12 @@ const SignUp = () => {
         {/* number input and labe container */}
         <View style={SignUpStyle.inputAndTextCon}>
           <Text style={SignUpStyle.label}>Email Or Phone Number</Text>
-          <TextInput
-            placeholder="+012"
-            keyboardType="numeric"
-            style={SignUpStyle.input}
-          />
+          <TextInput placeholder="+012" keyboardType="numeric" style={SignUpStyle.input} />
         </View>
         {/* QID input and labe container */}
         <View style={SignUpStyle.inputAndTextCon}>
           <Text style={SignUpStyle.label}>QID</Text>
-          <TextInput
-            placeholder="Type QID"
-            keyboardType="numeric"
-            style={SignUpStyle.input}
-          />
+          <TextInput placeholder="Type QID" keyboardType="numeric" style={SignUpStyle.input} />
         </View>
         {/* password input and label container */}
         <View style={SignUpStyle.inputAndTextCon}>
@@ -82,13 +74,13 @@ const SignUp = () => {
         </View>
         {/* sign up button  */}
         <LinearGradient
-          colors={["#C83B62", "#7F35CD "]}
+          colors={['#C83B62', '#7F35CD ']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={SignUpStyle.signUpButton}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("OTP")}
+            onPress={() => navigation.navigate('OTP')}
             style={SignUpStyle.actionLayer}
           >
             <Text style={SignUpStyle.buttonText}>Sign Up</Text>

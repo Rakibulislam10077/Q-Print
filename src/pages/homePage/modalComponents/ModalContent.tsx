@@ -1,19 +1,8 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from "react-native";
-import React, { useState } from "react";
-import { modalStyle } from "./ModalContentStyle";
-import { Close, Dropdown, Magnify } from "../../../constants/allSvg/AllSvg";
-import Animated, {
-  BounceOut,
-  FlipInXUp,
-  FlipOutXDown,
-  StretchOutX,
-} from "react-native-reanimated";
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { modalStyle } from './ModalContentStyle';
+import { Close, Dropdown, Magnify } from '../../../../assets/allSvg/AllSvg';
+import Animated, { BounceOut, FlipInXUp, FlipOutXDown, StretchOutX } from 'react-native-reanimated';
 
 const ModalContent = () => {
   const [isBrandClicked, setIsBrandClicked] = useState<boolean>(false);
@@ -47,9 +36,7 @@ const ModalContent = () => {
       {/* modal indicator */}
       <View style={modalStyle.modalIndicator} />
       <Text style={modalStyle.title}>Find perfect Cartridge</Text>
-      <Text style={modalStyle.subTitle}>
-        You can find the right Cartridges for your Printer
-      </Text>
+      <Text style={modalStyle.subTitle}>You can find the right Cartridges for your Printer</Text>
       {/* printer Brand container */}
       {isSeriesDropDown && isModelDropDown && (
         <TouchableOpacity
@@ -82,10 +69,7 @@ const ModalContent = () => {
         <View>
           <View style={modalStyle.itemCon}>
             {isMagnifyClicked && (
-              <Animated.View
-                entering={FlipInXUp.delay(50).duration(500)}
-                exiting={StretchOutX}
-              >
+              <Animated.View entering={FlipInXUp.delay(50).duration(500)} exiting={StretchOutX}>
                 <TextInput style={modalStyle.input} placeholder="Search" />
               </Animated.View>
             )}
@@ -167,10 +151,7 @@ const ModalContent = () => {
         <View>
           <View style={modalStyle.itemCon}>
             {isMagnifyClicked && (
-              <Animated.View
-                entering={FlipInXUp.delay(50).duration(500)}
-                exiting={FlipOutXDown}
-              >
+              <Animated.View entering={FlipInXUp.delay(50).duration(500)} exiting={FlipOutXDown}>
                 <TextInput style={modalStyle.input} placeholder="Search" />
               </Animated.View>
             )}
@@ -251,10 +232,7 @@ const ModalContent = () => {
         <View>
           <View style={modalStyle.itemCon}>
             {isMagnifyClicked && (
-              <Animated.View
-                entering={FlipInXUp.delay(50).duration(500)}
-                exiting={FlipOutXDown}
-              >
+              <Animated.View entering={FlipInXUp.delay(50).duration(500)} exiting={FlipOutXDown}>
                 <TextInput style={modalStyle.input} placeholder="Search" />
               </Animated.View>
             )}

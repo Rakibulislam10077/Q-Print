@@ -1,8 +1,8 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import { BackArrow, CartBag, CartIcon } from "../../../constants/allSvg/AllSvg";
-import { commonHeaderStyle } from "./CommonHeaderStyle";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { BackArrow, CartBag, CartIcon } from '../../../../assets/allSvg/AllSvg';
+import { commonHeaderStyle } from './CommonHeaderStyle';
+import { useNavigation } from '@react-navigation/native';
 
 const CommonHeader = ({ title }: { title: any }) => {
   const navigation: any = useNavigation();
@@ -19,7 +19,7 @@ const CommonHeader = ({ title }: { title: any }) => {
         <Text style={commonHeaderStyle.title}>{title}</Text>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("MyCart")}
+        onPress={() => navigation.navigate('MyCart')}
         activeOpacity={0.7}
         style={commonHeaderStyle.cartIcon}
       >

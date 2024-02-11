@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { FavIcon } from '../../constants/allSvg/AllSvg';
+import { FavIcon } from '../../../assets/allSvg/AllSvg';
 import { brandDetailsStyle } from './BrandDetailsStyle';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { TopTab } from '../../routes/material_Tab/TopTab';

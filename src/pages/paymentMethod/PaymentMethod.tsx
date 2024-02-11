@@ -20,7 +20,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Checkmark } from '../../constants/allSvg/AllSvg';
+import { Checkmark } from '../../../assets/allSvg/AllSvg';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { paymentMethodStyle } from './PaymentMethodStyle';
 import { Color } from '../../constants/GlobalStyle';

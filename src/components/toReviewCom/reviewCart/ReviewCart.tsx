@@ -4,7 +4,7 @@ import { reviewCartStyle } from './ReviewCartStyle';
 import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import Modal from 'react-native-modal';
-import { RatingStar } from '../../../constants/allSvg/AllSvg';
+import { RatingStar } from '../../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const ReviewCart = () => {

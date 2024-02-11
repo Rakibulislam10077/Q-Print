@@ -1,12 +1,12 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Color } from "../../constants/GlobalStyle";
-import Animated from "react-native-reanimated";
-import { SharedElement } from "react-navigation-shared-element";
-import { FavIcon, Goback } from "../../constants/allSvg/AllSvg";
-import { productDetailPageStyle } from "./ProductDetailPageStyle";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Color } from '../../constants/GlobalStyle';
+import Animated from 'react-native-reanimated';
+import { SharedElement } from 'react-navigation-shared-element';
+import { FavIcon, Goback } from '../../../assets/allSvg/AllSvg';
+import { productDetailPageStyle } from './ProductDetailPageStyle';
+import { useNavigation } from '@react-navigation/native';
 interface ProductDetailsPageProps {
   route: {
     params: {

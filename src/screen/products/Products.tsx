@@ -26,7 +26,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import Modal from 'react-native-modal';
 import { productsStyle } from './ProductsStyle';
-import { BackArrow, CartBag, Magnify, ThreeLine } from '../../constants/allSvg/AllSvg';
+import { BackArrow, CartBag, Magnify, ThreeLine } from '../../../assets/allSvg/AllSvg';
 import { TopTab } from '../../routes/material_Tab/TopTab';
 import ModalContent from '../../pages/homePage/modalComponents/ModalContent';
 

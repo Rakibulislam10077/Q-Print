@@ -23,7 +23,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import AddToCart from '../../components/addToCart/AddToCart';
-import { BackArrow } from '../../constants/allSvg/AllSvg';
+import { BackArrow } from '../../../assets/allSvg/AllSvg';
 import { myCartStyle } from './MyCartStyle';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';

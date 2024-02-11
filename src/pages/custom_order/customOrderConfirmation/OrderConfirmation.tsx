@@ -20,7 +20,7 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import CommonHeader from '../../../components/common/commonHeader/CommonHeader';
 import { customOrderConfirmationStyle } from './OrderConfimationStyle';
-import { Messenger, Whatsapp } from '../../../constants/allSvg/AllSvg';
+import { Messenger, Whatsapp } from '../../../../assets/allSvg/AllSvg';
 import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { BounceIn, FadeInDown } from 'react-native-reanimated';

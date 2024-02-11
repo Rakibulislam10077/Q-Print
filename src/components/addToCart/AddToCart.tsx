@@ -1,14 +1,10 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import { addToCartStyle } from "./AddToCartStyle";
-import { Close } from "../../constants/allSvg/AllSvg";
-import Animated, {
-  BounceIn,
-  FadeInDown,
-  FlipInEasyX,
-} from "react-native-reanimated";
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { addToCartStyle } from './AddToCartStyle';
+import { Close } from '../../../assets/allSvg/AllSvg';
+import Animated, { BounceIn, FadeInDown, FlipInEasyX } from 'react-native-reanimated';
 
-let dynamicColor = "red";
+let dynamicColor = 'red';
 const AddToCart = () => {
   return (
     <Animated.View
@@ -16,17 +12,14 @@ const AddToCart = () => {
       style={addToCartStyle.cartContainer}
     >
       <View style={addToCartStyle.imgCon}>
-        <Image
-          style={addToCartStyle.img}
-          source={require("../../../assets/image/homepod.jpeg")}
-        />
+        <Image style={addToCartStyle.img} source={require('../../../assets/image/homepod.jpeg')} />
       </View>
       <View style={{ flex: 1 }}>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            width: "100%",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
           }}
         >
           <View style={addToCartStyle.titleCon}>
@@ -40,19 +33,14 @@ const AddToCart = () => {
         </View>
         <View style={addToCartStyle.storeNameAndColorIndicator}>
           <Text style={addToCartStyle.storeName}>Brother</Text>
-          <View
-            style={[
-              addToCartStyle.colorIndicator,
-              { backgroundColor: dynamicColor },
-            ]}
-          />
+          <View style={[addToCartStyle.colorIndicator, { backgroundColor: dynamicColor }]} />
         </View>
         <View style={addToCartStyle.currencyCon}>
           <Text style={addToCartStyle.priceAndCurrency}>1100 QAR</Text>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
             <TouchableOpacity style={addToCartStyle.plusAndMinus}>

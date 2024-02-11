@@ -23,7 +23,7 @@ import {
   GalleryIcon,
   ModalCameraIcon,
   WhiteBackArrow,
-} from '../../constants/allSvg/AllSvg';
+} from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { editProfileStyle } from './EditProfileStyle';

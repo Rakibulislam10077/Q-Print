@@ -1,17 +1,10 @@
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import React, { useRef, useState } from "react";
-import { Color } from "../../constants/GlobalStyle";
-import { LinearGradient } from "expo-linear-gradient";
-import { otpStyle } from "../OTP/OTPStyle";
-import { useNavigation } from "@react-navigation/native";
-import { BackArrow } from "../../constants/allSvg/AllSvg";
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Color } from '../../constants/GlobalStyle';
+import { LinearGradient } from 'expo-linear-gradient';
+import { otpStyle } from '../OTP/OTPStyle';
+import { useNavigation } from '@react-navigation/native';
+import { BackArrow } from '../../../assets/allSvg/AllSvg';
 
 const otpInput = [1, 1, 1, 1];
 const ForgotPass = ({ disable }: any) => {
@@ -34,16 +27,13 @@ const ForgotPass = ({ disable }: any) => {
         style={{
           height: 70,
           marginTop: 50,
-          flexDirection: "row",
-          alignItems: "center",
-          width: "100%",
+          flexDirection: 'row',
+          alignItems: 'center',
+          width: '100%',
           paddingHorizontal: 20,
         }}
       >
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => navigation.goBack()}
-        >
+        <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.goBack()}>
           <BackArrow />
         </TouchableOpacity>
         <Text style={{ fontSize: 18, marginLeft: 10 }}>Forgot password</Text>
@@ -53,7 +43,7 @@ const ForgotPass = ({ disable }: any) => {
         <View style={{ marginBottom: 50, marginTop: 40 }}>
           <Image
             style={otpStyle.otpLogo}
-            source={require("../../../assets/image/otpScreenLogo.png")}
+            source={require('../../../assets/image/otpScreenLogo.png')}
           />
         </View>
         <View style={otpStyle.textContainer}>
@@ -89,8 +79,8 @@ const ForgotPass = ({ disable }: any) => {
                 testID={`OTPInput=${index}`}
                 keyboardType="numeric"
                 style={{
-                  width: "50%",
-                  height: "100%",
+                  width: '50%',
+                  height: '100%',
                   fontSize: 24,
                   color: Color.C_main,
                 }}
@@ -102,7 +92,7 @@ const ForgotPass = ({ disable }: any) => {
         </View>
         {/* verify button */}
         <LinearGradient
-          colors={["#C83B62", "#7F35CD"]}
+          colors={['#C83B62', '#7F35CD']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={{
@@ -112,17 +102,13 @@ const ForgotPass = ({ disable }: any) => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("NewPass")}
+            onPress={() => navigation.navigate('NewPass')}
             style={otpStyle.actionLayer}
           >
             <Text style={otpStyle.buttonText}>Verify</Text>
           </TouchableOpacity>
         </LinearGradient>
-        <Text
-          style={{ alignSelf: "center", marginTop: 20, color: Color.C_main }}
-        >
-          0:30s
-        </Text>
+        <Text style={{ alignSelf: 'center', marginTop: 20, color: Color.C_main }}>0:30s</Text>
       </ScrollView>
     </View>
   );

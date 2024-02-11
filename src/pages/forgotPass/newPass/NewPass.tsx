@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
-import { newPassStyle } from "./NewPassStyle";
-import CommonHeader from "../../../components/common/commonHeader/CommonHeader";
-import { BackArrow, Eye, EyeOf } from "../../../constants/allSvg/AllSvg";
-import { useNavigation } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { newPassStyle } from './NewPassStyle';
+import CommonHeader from '../../../components/common/commonHeader/CommonHeader';
+import { BackArrow, Eye, EyeOf } from '../../../../assets/allSvg/AllSvg';
+import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const NewPass = () => {
   const navigation: any = useNavigation();
@@ -35,10 +35,7 @@ const NewPass = () => {
               style={newPassStyle.input}
               placeholder="new password"
             />
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => setNewPassView(!newPassView)}
-            >
+            <TouchableOpacity activeOpacity={0.7} onPress={() => setNewPassView(!newPassView)}>
               {newPassView ? <Eye /> : <EyeOf />}
             </TouchableOpacity>
           </View>
@@ -51,17 +48,14 @@ const NewPass = () => {
               style={newPassStyle.input}
               placeholder="confirm password"
             />
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => setConPass(!conPass)}
-            >
+            <TouchableOpacity activeOpacity={0.7} onPress={() => setConPass(!conPass)}>
               {conPass ? <Eye /> : <EyeOf />}
             </TouchableOpacity>
           </View>
         </View>
         {/* save password button */}
         <LinearGradient
-          colors={["#C83B62", "#7F35CD"]}
+          colors={['#C83B62', '#7F35CD']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={newPassStyle.saveButton}

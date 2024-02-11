@@ -19,9 +19,9 @@
 
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import HomePageTopCon from '../../components/homePageTopCon/HomePageTopCon';
+import HomePageTopCon from '../../components/homePageTopCon/HomePageHeader';
 import { homePageStyle } from './HomePageStyle';
-import { Magnify, ThreeLine } from '../../constants/allSvg/AllSvg';
+import { Magnify, ThreeLine } from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { FadeInLeft } from 'react-native-reanimated';
 import BrandInHome from '../../components/brandInHome/BrandInHome';

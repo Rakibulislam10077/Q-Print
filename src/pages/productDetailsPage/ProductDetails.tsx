@@ -17,7 +17,7 @@ import {
   FavIcon,
   Goback,
   InActiveIndicator,
-} from '../../constants/allSvg/AllSvg';
+} from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import Animated, {
   FadeInDown,

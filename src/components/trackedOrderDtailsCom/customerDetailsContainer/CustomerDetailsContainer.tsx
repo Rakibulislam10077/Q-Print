@@ -1,13 +1,8 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
-import { customerContainerStyle } from "./CustomerDetailsContainerStyle";
-import {
-  CallIcon,
-  LocationIcon,
-  MessageBox,
-  ShiftCar,
-} from "../../../constants/allSvg/AllSvg";
-import { Divider } from "react-native-paper";
+import { View, Text, Image } from 'react-native';
+import React from 'react';
+import { customerContainerStyle } from './CustomerDetailsContainerStyle';
+import { CallIcon, LocationIcon, MessageBox, ShiftCar } from '../../../../assets/allSvg/AllSvg';
+import { Divider } from 'react-native-paper';
 
 const CustomerDetailsContainer = () => {
   return (
@@ -18,9 +13,7 @@ const CustomerDetailsContainer = () => {
         </Text>
         <View style={customerContainerStyle.deliveryDateAndCarCon}>
           <ShiftCar />
-          <Text style={customerContainerStyle.deliveryDate}>
-            Estimated delivery: Dec 20, 2023
-          </Text>
+          <Text style={customerContainerStyle.deliveryDate}>Estimated delivery: Dec 20, 2023</Text>
         </View>
       </View>
       <Divider style={customerContainerStyle.dividerStyle} />
@@ -36,9 +29,7 @@ const CustomerDetailsContainer = () => {
         {/* ========= */}
         <View style={customerContainerStyle.infoCon}>
           <MessageBox />
-          <Text style={customerContainerStyle.infoText}>
-            hello@expertSquad.net
-          </Text>
+          <Text style={customerContainerStyle.infoText}>hello@expertSquad.net</Text>
         </View>
         {/* ========= */}
         <View style={customerContainerStyle.infoCon}>
@@ -48,9 +39,7 @@ const CustomerDetailsContainer = () => {
         {/* ========= */}
         <View style={customerContainerStyle.infoCon}>
           <LocationIcon />
-          <Text style={customerContainerStyle.infoText}>
-            Qatar Al Khor and Al Thakhira, 3830
-          </Text>
+          <Text style={customerContainerStyle.infoText}>Qatar Al Khor and Al Thakhira, 3830</Text>
         </View>
       </View>
       <Divider style={customerContainerStyle.dividerStyle} />
@@ -58,7 +47,7 @@ const CustomerDetailsContainer = () => {
       <View>
         <Text style={customerContainerStyle.paidBy}>Paid by</Text>
         <View style={customerContainerStyle.infoCon}>
-          <Image source={require("../../../../assets/image/visa-logo.png")} />
+          <Image source={require('../../../../assets/image/visa-logo.png')} />
           <Text style={customerContainerStyle.cardText}>Debit/VisaCard</Text>
         </View>
       </View>

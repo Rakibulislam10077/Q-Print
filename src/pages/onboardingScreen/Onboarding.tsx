@@ -2,7 +2,7 @@ import { View, Text, Image, FlatList, Dimensions, TouchableOpacity } from 'react
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { onboardingStyle } from './OnboardingStyle';
-import { Logo, WhiteLogo } from '../../constants/allSvg/AllSvg';
+import { Logo, WhiteLogo } from '../../../assets/allSvg/AllSvg';
 import LottieView from 'lottie-react-native';
 import { Color, Font } from '../../constants/GlobalStyle';
 import { useNavigation } from '@react-navigation/native';

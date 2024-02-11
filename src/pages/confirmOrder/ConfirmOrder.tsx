@@ -10,23 +10,37 @@
  * - Provides information such as total amount paid, payment method, transaction date, and transaction number.
  * - Offers a button to view the order details.
  * - Utilizes TouchableOpacity, ScrollView, and Linear Gradient for interactive elements.
+ * - Utilizes Lottie animation for visual feedback upon confirmation.
  * - Integrates with navigation to navigate between screens.
  * - Utilizes Animated for animations like BounceIn and FadeInDown.
  *
  * @returns JSX.Element
  */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { confirmOrderStyle } from './ConfirmOrderStyle';
-import { SuccessPageLogo } from '../../constants/allSvg/AllSvg';
+import { SuccessPageLogo } from '../../../assets/allSvg/AllSvg';
 import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { BounceIn, FadeInDown } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
 
 const ConfirmOrder = () => {
+  const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
+  const animation = useRef<any>(null);
+
+  useEffect(() => {
+    // This effect runs when the component mounts.
+    // It plays the Lottie animation once after a delay of 500 milliseconds.
+    if (shouldPlayLottie) {
+      setTimeout(() => {
+        animation.current?.play();
+        setShouldPlayLottie(false);
+      }, 500);
+    }
+  }, [shouldPlayLottie]);
   return (
     <View style={confirmOrderStyle.container}>
       {/* common header component */}
@@ -37,7 +51,7 @@ const ConfirmOrder = () => {
         <View style={confirmOrderStyle.bodyContainer}>
           {/* Success Logo and Text */}
           <Animated.View style={confirmOrderStyle.logoContainer}>
-            <Animated.View entering={BounceIn.delay(100).duration(600)}>
+            <Animated.View entering={BounceIn.delay(50).duration(500)}>
               <SuccessPageLogo />
             </Animated.View>
             <Text style={confirmOrderStyle.orderPayment}>Order Payment Success</Text>

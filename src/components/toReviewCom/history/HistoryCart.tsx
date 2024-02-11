@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Divider } from 'react-native-paper';
 import { historyStyle } from './HistoryCartStyle';
 import { LinearGradient } from 'expo-linear-gradient';
-import { RatingStar } from '../../../constants/allSvg/AllSvg';
+import { RatingStar } from '../../../../assets/allSvg/AllSvg';
 import Modal from 'react-native-modal';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 const HistoryCart = () => {

@@ -1,11 +1,11 @@
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { loginStyle } from "./LoginStyle";
-import { Eye, EyeOf, WhiteLogo } from "../../constants/allSvg/AllSvg";
-import { LinearGradient } from "expo-linear-gradient";
-import { Color } from "../../constants/GlobalStyle";
-import { useNavigation } from "@react-navigation/native";
-import Modal from "react-native-modal";
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { loginStyle } from './LoginStyle';
+import { Eye, EyeOf, WhiteLogo } from '../../../assets/allSvg/AllSvg';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Color } from '../../constants/GlobalStyle';
+import { useNavigation } from '@react-navigation/native';
+import Modal from 'react-native-modal';
 
 const Login = () => {
   const navigation: any = useNavigation();
@@ -17,7 +17,7 @@ const Login = () => {
       <View style={loginStyle.gradientContainer}>
         <Image
           style={loginStyle.gradientImg}
-          source={require("../../../assets/image/LoginGradient.png")}
+          source={require('../../../assets/image/LoginGradient.png')}
         />
       </View>
       {/* company logo container */}
@@ -42,33 +42,24 @@ const Login = () => {
               secureTextEntry={eye}
               placeholder="Enter password"
             />
-            <TouchableOpacity
-              onPress={() => setEye(!eye)}
-              style={loginStyle.eye}
-            >
+            <TouchableOpacity onPress={() => setEye(!eye)} style={loginStyle.eye}>
               {eye ? <EyeOf /> : <Eye />}
             </TouchableOpacity>
           </View>
         </View>
         {/* remember and forgot password text container */}
         <View style={loginStyle.rememberAndForgotTextCon}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={loginStyle.checkMarkAndRememberText}
-          >
-            <Image source={require("../../../assets/image/checkIcon.png")} />
+          <TouchableOpacity activeOpacity={0.7} style={loginStyle.checkMarkAndRememberText}>
+            <Image source={require('../../../assets/image/checkIcon.png')} />
             <Text style={loginStyle.rememberText}>Remember me</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setIsModalVisible(true)}
-            activeOpacity={0.7}
-          >
+          <TouchableOpacity onPress={() => setIsModalVisible(true)} activeOpacity={0.7}>
             <Text style={loginStyle.forgotText}>Forgot Password</Text>
           </TouchableOpacity>
         </View>
         {/* login button */}
         <LinearGradient
-          colors={["#C83B62", "#7F35CD"]}
+          colors={['#C83B62', '#7F35CD']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={loginStyle.loginButtonCon}
@@ -80,10 +71,10 @@ const Login = () => {
         {/* sign up button and text con */}
         <View>
           <Text style={loginStyle.signupText}>
-            Don't have an account?{"  "}
+            Don't have an account?{'  '}
             <Text
-              onPress={() => navigation.navigate("SignUp")}
-              style={{ color: Color.C_main, fontWeight: "600" }}
+              onPress={() => navigation.navigate('SignUp')}
+              style={{ color: Color.C_main, fontWeight: '600' }}
             >
               Sing Up
             </Text>
@@ -96,7 +87,7 @@ const Login = () => {
         swipeDirection="down"
         onSwipeComplete={() => setIsModalVisible(!isModalVisible)}
         isVisible={isModalVisible}
-        style={{ justifyContent: "flex-end", margin: 0 }}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
         backdropTransitionInTiming={50}
         backdropTransitionOutTiming={50}
       >
@@ -105,8 +96,7 @@ const Login = () => {
           <View style={loginStyle.modalIndicator} />
           <Text style={loginStyle.forgotTextInModal}>Forgot Password</Text>
           <Text style={loginStyle.dummyText}>
-            Enter your email for the verification proccess we will send 4 degits
-            code to your email
+            Enter your email for the verification proccess we will send 4 degits code to your email
           </Text>
           {/* input and input labe */}
           <View style={loginStyle.inputAndLabeCon}>
@@ -114,7 +104,7 @@ const Login = () => {
             <TextInput style={loginStyle.input} placeholder="Enter Email" />
           </View>
           <LinearGradient
-            colors={["#C83B62", "#7F35CD"]}
+            colors={['#C83B62', '#7F35CD']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={loginStyle.continueButton}
@@ -122,7 +112,7 @@ const Login = () => {
             <TouchableOpacity
               onPress={() => {
                 setIsModalVisible(false);
-                navigation.navigate("forgotPass");
+                navigation.navigate('forgotPass');
               }}
               activeOpacity={0.7}
               style={loginStyle.actionLayer}

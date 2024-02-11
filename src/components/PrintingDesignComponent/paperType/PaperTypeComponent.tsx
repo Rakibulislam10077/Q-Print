@@ -4,7 +4,7 @@ import { paperTypeStyle } from './PaperTypeStyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../../constants/GlobalStyle';
 import { Divider } from 'react-native-paper';
-import { Upload } from '../../../constants/allSvg/AllSvg';
+import { Upload } from '../../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const paperType = [
