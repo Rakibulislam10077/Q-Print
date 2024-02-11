@@ -160,7 +160,30 @@ const Summery: React.FC = () => {
                   </TouchableOpacity>
                 </Animated.View>
                 {/* Other Address Input Fields */}
-                {/* ... */}
+                <Animated.View entering={FadeInUp.delay(50).duration(520)}>
+                  <TouchableOpacity activeOpacity={0.7} style={summeryStyle.inputBox}>
+                    <Text style={summeryStyle.inputText}>District</Text>
+                    <Dropdown />
+                  </TouchableOpacity>
+                </Animated.View>
+                <Animated.View entering={FadeInUp.delay(50).duration(530)}>
+                  <TouchableOpacity activeOpacity={0.7} style={summeryStyle.inputBox}>
+                    <Text style={summeryStyle.inputText}>Street address</Text>
+                  </TouchableOpacity>
+                </Animated.View>
+                <Animated.View entering={FadeInUp.delay(50).duration(540)}>
+                  <TextInput placeholder="" />
+                </Animated.View>
+                <Animated.View
+                  entering={FadeInUp.delay(50).duration(550)}
+                  style={summeryStyle.nameInputContainer}
+                >
+                  <TextInput style={summeryStyle.nameInput} placeholder="Town & City" />
+                  <TextInput style={summeryStyle.nameInput} placeholder="Zip Code" />
+                </Animated.View>
+                <Animated.View entering={FadeInUp.delay(50).duration(560)}>
+                  <TextInput style={summeryStyle.numberInput} placeholder="Town & City" />
+                </Animated.View>
                 {/* Save as Default Address Option */}
                 <Animated.View entering={FadeInUp.delay(50).duration(570)}>
                   <TouchableOpacity

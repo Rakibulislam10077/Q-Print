@@ -132,6 +132,7 @@ const MyCart = () => {
                   borderWidth: 2,
                   top: -10,
                   borderColor: Color.C_main,
+                  backgroundColor: Color.C_white,
                 }}
               >
                 <Text style={{ fontSize: 14 }}>{percentageProgress}</Text>

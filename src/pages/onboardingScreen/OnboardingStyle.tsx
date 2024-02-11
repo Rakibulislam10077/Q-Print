@@ -95,7 +95,7 @@ export const onboardingStyle = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'center',
     marginTop: 'auto',
-    marginBottom: 20,
+    marginBottom: 25,
   },
   actionLayer: {
     width: '100%',

@@ -369,7 +369,7 @@ const Profile: React.FC = () => {
         </View>
       </Modal>
       {/* StatusBar */}
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
     </View>
   );
 };
