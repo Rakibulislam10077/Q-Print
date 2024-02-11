@@ -16,8 +16,6 @@
 
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import All from '../../components/productsCategory/all/All';
 import Printer from '../../components/productsCategory/Printer/Printer';
 import Cartridge from '../../components/productsCategory/Cartridge/Cartridge';
 import Ink from '../../components/productsCategory/Ink/Ink';
@@ -25,7 +23,6 @@ import { Color } from '../../constants/GlobalStyle';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const Tab = createMaterialTopTabNavigator();
-const DimensionsWidth = Dimensions.get('window').width;
 
 export const TopTab = () => {
   return (

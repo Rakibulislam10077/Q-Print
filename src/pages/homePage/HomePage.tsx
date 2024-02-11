@@ -32,6 +32,7 @@ import { StatusBar } from 'expo-status-bar';
 import Modal from 'react-native-modal';
 import ModalContent from './modalComponents/ModalContent';
 import { Color } from '../../constants/GlobalStyle';
+import Brand_Skeleton from '../../components/allSkeleton/Home_page_brand_Skeleton/Brand_Skeleton';
 
 const HomePage = () => {
   const navigation: any = useNavigation();
@@ -62,7 +63,7 @@ const HomePage = () => {
         {/* Brand Logo Container */}
         <BrandInHome />
         {/* Brand_Skeleton */}
-
+        {/* <Brand_Skeleton /> */}
         {/* Custom Carousel */}
         <Carousel />
         {/* Carousel_Skeleton */}

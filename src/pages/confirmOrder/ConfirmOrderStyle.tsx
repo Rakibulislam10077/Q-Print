@@ -8,12 +8,11 @@ export const confirmOrderStyle = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginVertical: 40,
   },
   orderPayment: {
     fontSize: Font.Font_XL,
     fontWeight: '600',
-    marginTop: 40,
+    marginTop: 10,
     marginBottom: 10,
   },
   desc: {

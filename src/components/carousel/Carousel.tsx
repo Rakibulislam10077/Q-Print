@@ -40,6 +40,22 @@ const logodata = [
     id: 5,
     img: require('../../../assets/image/adidas.png'),
   },
+  {
+    id: 6,
+    img: require('../../../assets/image/adidas.png'),
+  },
+  {
+    id: 7,
+    img: require('../../../assets/image/adidas.png'),
+  },
+  {
+    id: 8,
+    img: require('../../../assets/image/adidas.png'),
+  },
+  {
+    id: 9,
+    img: require('../../../assets/image/adidas.png'),
+  },
 ];
 
 const Carousel = () => {

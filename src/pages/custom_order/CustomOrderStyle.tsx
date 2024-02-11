@@ -1,15 +1,15 @@
-import { StyleSheet } from "react-native";
-import { Color, Font } from "../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font } from '../../constants/GlobalStyle';
 
 export const orderAndPrinterDesignStyle = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Color.C_white,
-    paddingBottom: 50,
+    // paddingBottom: 50,
   },
   dummyTextContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: 10,
     paddingBottom: 30,
   },
@@ -17,13 +17,13 @@ export const orderAndPrinterDesignStyle = StyleSheet.create({
     fontSize: Font.Font_X,
     color: Color.C_main,
     marginVertical: 20,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   text_Two: {
     fontSize: Font.Font_M,
     color: Color.C_H_black,
-    textAlign: "center",
+    textAlign: 'center',
     lineHeight: 20,
-    width: "60%",
+    width: '60%',
   },
 });

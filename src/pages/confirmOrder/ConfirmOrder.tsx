@@ -26,6 +26,7 @@ import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { BounceIn, FadeInDown } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
+import LottieView from 'lottie-react-native';
 
 const ConfirmOrder = () => {
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
@@ -38,7 +39,7 @@ const ConfirmOrder = () => {
       setTimeout(() => {
         animation.current?.play();
         setShouldPlayLottie(false);
-      }, 500);
+      }, 200);
     }
   }, [shouldPlayLottie]);
   return (
@@ -51,8 +52,17 @@ const ConfirmOrder = () => {
         <View style={confirmOrderStyle.bodyContainer}>
           {/* Success Logo and Text */}
           <Animated.View style={confirmOrderStyle.logoContainer}>
-            <Animated.View entering={BounceIn.delay(50).duration(500)}>
-              <SuccessPageLogo />
+            <Animated.View
+              style={{ width: '100%', height: 280, alignItems: 'center', justifyContent: 'center' }}
+              entering={BounceIn.delay(50).duration(500)}
+            >
+              {/* <SuccessPageLogo /> */}
+              <LottieView
+                loop={false}
+                ref={animation}
+                style={{ width: '90%', height: '80%', position: 'absolute' }}
+                source={require('../../../assets/image/Right_Mark.json')}
+              />
             </Animated.View>
             <Text style={confirmOrderStyle.orderPayment}>Order Payment Success</Text>
             <Text style={confirmOrderStyle.desc}>
