@@ -2,7 +2,7 @@
   "expo": {
     "name": "Q-Print",
     "slug": "Q-Print",
-    "scheme": "Q-Print",
+    "scheme": ["qprint"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
