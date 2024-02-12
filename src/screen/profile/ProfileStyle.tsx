@@ -73,7 +73,7 @@ export const profileStyle = StyleSheet.create({
     borderTopLeftRadius: 25,
     backgroundColor: '#fff',
     // height: Platform.OS === 'ios' ? 400 : 380,
-    paddingHorizontal: 50,
+    paddingHorizontal: 20,
     paddingTop: 30,
   },
   cameraModal: {

@@ -1,7 +1,7 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { productSpecStyle } from "./ProductSpecStyle";
-import Animated, { FadeInRight, SlideInRight } from "react-native-reanimated";
+import { View, Text } from 'react-native';
+import React from 'react';
+import { productSpecStyle } from './ProductSpecStyle';
+import Animated, { FadeInRight, SlideInRight } from 'react-native-reanimated';
 
 const ProductSpec = () => {
   return (

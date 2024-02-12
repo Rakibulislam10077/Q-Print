@@ -36,6 +36,7 @@ import ProductDesc from '../../components/productDesc/ProductDesc';
 import ProductReviews from '../../components/productReviews/ProductReviews';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
+import ProductDetailsTopTab from '../../routes/material_Tab/ProductDetailsTopTab';
 
 const HEADER_HEIGHT = 200;
 const ProductDetails = (props: any) => {
@@ -95,7 +96,7 @@ const ProductDetails = (props: any) => {
     setQuantity(value);
   };
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={{ flex: 1, backgroundColor: Color.C_white }}>
       <ScrollView
       // style={{ flex: 1 }}
       // ref={scrollViewRef}
@@ -255,8 +256,11 @@ const ProductDetails = (props: any) => {
         {/* view more information container */}
         <View style={{ marginBottom: 200, flex: 1 }}>
           {isViewMore && (
-            <Animated.View entering={FadeInRight.delay(100).duration(500)}>
-              <View style={productDetailsStyle.navigationContainer}>
+            <Animated.View
+              style={{ flex: 1, height: 1000 }}
+              entering={FadeInRight.delay(100).duration(500)}
+            >
+              {/* <View style={productDetailsStyle.navigationContainer}>
                 <TouchableOpacity
                   style={[
                     index === 0
@@ -304,7 +308,8 @@ const ProductDetails = (props: any) => {
                 <ProductDesc />
               ) : (
                 index === 2 && <ProductReviews />
-              )}
+              )} */}
+              <ProductDetailsTopTab />
             </Animated.View>
             // <TopTab />
           )}

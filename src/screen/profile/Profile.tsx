@@ -47,6 +47,7 @@ import LogoutComponents from '../../components/modalComponents/logoCom/LogoutCom
 import * as ImagePicker from 'expo-image-picker';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import * as Sharing from 'expo-sharing';
+import ContactUs from '../../components/modalComponents/contactUs/ContactUs';
 
 const Profile: React.FC = () => {
   const navigation: any = useNavigation();
@@ -75,6 +76,11 @@ const Profile: React.FC = () => {
   // Opens the logout modal
   const LogoutModal = () => {
     setModalIndex(2);
+    setIsModalVisible(true);
+  };
+  // Opens the logout modal
+  const ContactModal = () => {
+    setModalIndex(3);
     setIsModalVisible(true);
   };
 
@@ -231,6 +237,18 @@ const Profile: React.FC = () => {
               </View>
               <GoArrow />
             </TouchableOpacity>
+            {/* contact us */}
+            <TouchableOpacity
+              onPress={() => ContactModal()}
+              activeOpacity={0.7}
+              style={profileStyle.routeItemCon}
+            >
+              <View style={profileStyle.iconAndTitleCon}>
+                <FavIcon />
+                <Text style={profileStyle.title}>Contact us</Text>
+              </View>
+              <GoArrow />
+            </TouchableOpacity>
             <Divider />
             {/* Rate */}
             <TouchableOpacity
@@ -331,8 +349,10 @@ const Profile: React.FC = () => {
             <View style={{ backgroundColor: '#fff', height: 400 }}>
               <Text>logout</Text>
             </View>
-          ) : (
+          ) : modalIndex === 2 ? (
             <LogoutComponents />
+          ) : (
+            <ContactUs />
           )}
         </View>
       </Modal>
