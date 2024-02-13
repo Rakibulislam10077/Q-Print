@@ -11,7 +11,7 @@ import ProductReviews from '../../components/productReviews/ProductReviews';
 const Tab = createMaterialTopTabNavigator();
 const ProductDetailsTopTab = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {

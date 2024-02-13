@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableWithoutFeedback,
+  Dimensions,
 } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -46,6 +47,8 @@ const ProductDetails = (props: any) => {
   const [isViewMore, setIsViewMore] = useState<boolean>(true);
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(0);
+
+  const { height } = Dimensions.get('screen');
 
   useEffect(() => {
     setTimeout(() => {
@@ -97,12 +100,7 @@ const ProductDetails = (props: any) => {
   };
   return (
     <View style={{ flex: 1, backgroundColor: Color.C_white }}>
-      <ScrollView
-      // style={{ flex: 1 }}
-      // ref={scrollViewRef}
-      // onScroll={handleScroll}
-      // scrollEventThrottle={16}
-      >
+      <ScrollView style={{ flex: 1 }}>
         <Animated.View style={productDetailsStyle.imageAndNavContainer}>
           <View style={productDetailsStyle.navigationAndFavCon}>
             <Animated.View entering={FadeInLeft.duration(500).delay(50)}>
@@ -127,12 +125,6 @@ const ProductDetails = (props: any) => {
               </Animated.View>
             </View>
           </View>
-          {/* <Animated.View style={}>
-                <Image
-                  source={require("../../../assets/image/smartlock.jpeg")}
-                  style={{ flex: 1, resizeMode: "cover" }}
-                />
-              </Animated.View> */}
           <Animated.View>
             <Animated.Image
               sharedTransitionTag={`img${item?.id}`}
@@ -142,9 +134,6 @@ const ProductDetails = (props: any) => {
                   width: '90%',
                   height: 280,
                   alignSelf: 'center',
-                  // position: "absolute",
-                  // top: 0,
-                  // left: 0,
                 },
                 // animatedImageStyle,
               ]}
@@ -254,69 +243,13 @@ const ProductDetails = (props: any) => {
           </Animated.View>
         </View>
         {/* view more information container */}
-        <View style={{ marginBottom: 200, flex: 1 }}>
-          {isViewMore && (
-            <Animated.View
-              style={{ flex: 1, height: 1000 }}
-              entering={FadeInRight.delay(100).duration(500)}
-            >
-              {/* <View style={productDetailsStyle.navigationContainer}>
-                <TouchableOpacity
-                  style={[
-                    index === 0
-                      ? productDetailsStyle.activeNavigation
-                      : productDetailsStyle.defaultNavigation,
-                  ]}
-                  onPress={() => setIndex(0)}
-                >
-                  <Text
-                    style={[index === 0 ? { color: Color.C_main } : { color: Color.C_H_black }]}
-                  >
-                    Specification
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    index === 1
-                      ? productDetailsStyle.activeNavigation
-                      : productDetailsStyle.defaultNavigation,
-                  ]}
-                  onPress={() => setIndex(1)}
-                >
-                  <Text
-                    style={[index === 1 ? { color: Color.C_main } : { color: Color.C_H_black }]}
-                  >
-                    Description
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    index === 2
-                      ? productDetailsStyle.activeNavigation
-                      : productDetailsStyle.defaultNavigation,
-                  ]}
-                  onPress={() => setIndex(2)}
-                >
-                  <Text
-                    style={[index === 2 ? { color: Color.C_main } : { color: Color.C_H_black }]}
-                  >{`Reviews ${index === 2 ? '' : '(0)'}`}</Text>
-                </TouchableOpacity>
-              </View>
-              {index === 0 ? (
-                <ProductSpec />
-              ) : index === 1 ? (
-                <ProductDesc />
-              ) : (
-                index === 2 && <ProductReviews />
-              )} */}
-              <ProductDetailsTopTab />
-            </Animated.View>
-            // <TopTab />
-          )}
+        <View style={{ height: height - 60 }}>
+          {/* hey chatgpt this is my material top tab component */}
+          <ProductDetailsTopTab />
         </View>
-        {/* fixed buy now button and price */}
       </ScrollView>
-      <View style={productDetailsStyle.BuyNowButtonAndPriceContainer}>
+      {/* fixed buy now button and price */}
+      {/* <View style={productDetailsStyle.BuyNowButtonAndPriceContainer}>
         <View style={productDetailsStyle.totalPriceConInfixedButtonBox}>
           <Text style={productDetailsStyle.totalPrice}>Total price</Text>
           <Text style={productDetailsStyle.productPrice}>
@@ -342,7 +275,7 @@ const ProductDetails = (props: any) => {
             <CartBag />
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
       <StatusBar style="dark" />
     </View>
   );
