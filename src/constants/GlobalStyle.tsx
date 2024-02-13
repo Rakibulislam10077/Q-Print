@@ -25,7 +25,7 @@ export const Color = {
 };
 
 export const shadows = {
-  shadow_color: 'rgba(0,0,0,0.2)',
+  shadow_color: 'rgba(0,0,0,0.4)',
   elevation_1: 15,
   elevation_2: 10,
   offsetWidth_1: 2,
