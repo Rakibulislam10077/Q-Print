@@ -50,7 +50,6 @@ const onboardingItem: IOnboarding[] = [
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const navigation: any = useNavigation();
-  const screenWidth = Dimensions.get('window').width;
 
   return (
     <View style={onboardingStyle.container}>

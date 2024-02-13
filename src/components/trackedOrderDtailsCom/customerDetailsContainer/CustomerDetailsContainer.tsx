@@ -3,10 +3,14 @@ import React from 'react';
 import { customerContainerStyle } from './CustomerDetailsContainerStyle';
 import { CallIcon, LocationIcon, MessageBox, ShiftCar } from '../../../../assets/allSvg/AllSvg';
 import { Divider } from 'react-native-paper';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const CustomerDetailsContainer = () => {
   return (
-    <View style={customerContainerStyle.container}>
+    <Animated.View
+      entering={FadeInDown.delay(50).duration(500)}
+      style={customerContainerStyle.container}
+    >
       <View>
         <Text style={customerContainerStyle.orderID}>
           Order ID: <Text style={customerContainerStyle.ID}>3354654654526</Text>
@@ -51,7 +55,7 @@ const CustomerDetailsContainer = () => {
           <Text style={customerContainerStyle.cardText}>Debit/VisaCard</Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

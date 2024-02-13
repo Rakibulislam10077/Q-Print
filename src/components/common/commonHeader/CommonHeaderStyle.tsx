@@ -1,11 +1,11 @@
-import { Platform, StyleSheet } from "react-native";
-import { Color, Font, shadows } from "../../../constants/GlobalStyle";
+import { Platform, StyleSheet } from 'react-native';
+import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 
 export const commonHeaderStyle = StyleSheet.create({
   container: {
-    height: Platform.OS === "ios" ? 110 : 100,
-    flexDirection: "row",
-    alignItems: "center",
+    height: Platform.OS === 'ios' ? 110 : 100,
+    flexDirection: 'row',
+    alignItems: 'center',
     // justifyContent:'center',
     paddingHorizontal: 20,
     shadowColor: shadows.shadow_color,
@@ -17,19 +17,21 @@ export const commonHeaderStyle = StyleSheet.create({
     shadowRadius: shadows.radius_1,
     shadowOpacity: shadows.opacity_1,
     backgroundColor: Color.C_white,
-    justifyContent: "space-between",
-    paddingTop: Platform.OS === "ios" ? 50 : 40,
+    justifyContent: 'space-between',
+    paddingTop: Platform.OS === 'ios' ? 50 : 40,
+    borderBottomColor: 'rgba(0,0,0,0.1)',
+    borderBottomWidth: 1,
   },
   backButton: {
     marginRight: 20,
   },
   titleCon: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
     fontSize: Font.Font_X,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   cartIcon: {
     width: 40,
@@ -37,7 +39,7 @@ export const commonHeaderStyle = StyleSheet.create({
     borderWidth: 1,
     borderColor: Color.C_border,
     borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

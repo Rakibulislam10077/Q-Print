@@ -155,10 +155,11 @@ const EditProfile = () => {
         onBackButtonPress={() => setIsCameraModalOpen(false)}
         swipeDirection="down"
         isVisible={isCameraModalOpen}
-        style={{ justifyContent: 'center', margin: 0, alignItems: 'center' }}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
       >
         <View style={profileStyle.cameraModal}>
-          <Text style={profileStyle.ProfileModalTitle}>Profile Photo</Text>
+          <View style={profileStyle.cameraModalIndicator} />
+          <Text style={profileStyle.ProfileModalTitle}>Change Profile Picture</Text>
           <View style={profileStyle.cameraModalContentCon}>
             <View>
               <TouchableOpacity

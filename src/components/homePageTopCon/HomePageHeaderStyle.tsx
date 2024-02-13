@@ -1,15 +1,15 @@
-import { StyleSheet } from "react-native";
-import { Color, shadows } from "../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, shadows } from '../../constants/GlobalStyle';
 
 export const homePageStyle = StyleSheet.create({
   container: {
     height: 110,
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 20,
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "#ffffff",
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#ffffff',
     shadowColor: shadows.shadow_color,
     elevation: shadows.elevation_1,
     shadowOffset: {
@@ -19,14 +19,16 @@ export const homePageStyle = StyleSheet.create({
     shadowRadius: shadows.radius_1,
     shadowOpacity: shadows.opacity_1,
     paddingTop: 45,
+    borderBottomColor: 'rgba(0,0,0,0.1)',
+    borderBottomWidth: 1,
   },
   cart: {
-    position: "relative",
+    position: 'relative',
     width: 25,
     height: 30,
   },
   badge: {
-    position: "absolute",
+    position: 'absolute',
     top: -10,
     right: -10,
   },

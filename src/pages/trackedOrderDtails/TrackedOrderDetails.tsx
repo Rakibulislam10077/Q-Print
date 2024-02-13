@@ -39,10 +39,7 @@ const TrackedOrderDetails = () => {
   };
 
   return (
-    <Animated.View
-      entering={FadeInDown.delay(50).duration(500)}
-      style={trackedOrderDetailsStyle.container}
-    >
+    <Animated.View style={trackedOrderDetailsStyle.container}>
       {/* ======================== */}
       {/* header section */}
       {/* ======================== */}
@@ -59,18 +56,7 @@ const TrackedOrderDetails = () => {
           {/* ======================== */}
           {/* order step container */}
           {/* ======================== */}
-          <View>
-            {isStepChange === 1 ? (
-              <Animated.View
-                entering={FadeInRight.delay(50).duration(200)}
-                style={orderStepContainerStyle.container}
-              >
-                <Text>bla bla bla</Text>
-              </Animated.View>
-            ) : (
-              <OrderStepContainer />
-            )}
-          </View>
+          <OrderStepContainer />
           {/* ======================== */}
           {/* product container */}
           {/* ======================== */}

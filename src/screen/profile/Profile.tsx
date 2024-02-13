@@ -363,9 +363,10 @@ const Profile: React.FC = () => {
         swipeDirection="down"
         onSwipeComplete={() => toggleModal()}
         isVisible={isCameraModalOpen}
-        style={{ justifyContent: 'center', margin: 0, alignItems: 'center' }}
+        style={{ margin: 0, justifyContent: 'flex-end' }}
       >
         <View style={profileStyle.cameraModal}>
+          <View style={profileStyle.cameraModalIndicator} />
           <Text style={profileStyle.ProfileModalTitle}>Profile Photo</Text>
           <View style={profileStyle.cameraModalContentCon}>
             {/* Option to select from gallery */}

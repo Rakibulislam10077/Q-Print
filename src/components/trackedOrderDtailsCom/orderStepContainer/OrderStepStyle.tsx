@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { Color, shadows } from "../../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 
 export const orderStepContainerStyle = StyleSheet.create({
   container: {
@@ -13,8 +13,53 @@ export const orderStepContainerStyle = StyleSheet.create({
     },
     shadowRadius: shadows.radius_1,
     shadowOpacity: shadows.opacity_1,
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     borderRadius: 10,
+    flexDirection: 'row',
+  },
+  indicatorCon: {
+    alignItems: 'center',
+  },
+  indicatorBox: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  relatedDivider: {
+    width: 1,
+    backgroundColor: 'red',
+    height: 85,
+  },
+  stepDetailsCon: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  stepDetails: {
+    height: 135,
+  },
+  dateCon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dateAndTime: {
+    flexDirection: 'row',
+  },
+  dateAndTimeText: {
+    color: Color.C_H_black,
+  },
+  state: {
+    fontSize: Font.Font_L,
+    fontWeight: '600',
+    marginBottom: 10,
+    marginTop: 5,
+  },
+  subState: {
+    fontSize: Font.Font_M,
+    color: Color.C_H_black,
+    lineHeight: 20,
   },
 });

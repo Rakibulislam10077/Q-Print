@@ -28,7 +28,7 @@ const FavoriteCart = (item: any) => {
             <Text style={favoriteCartStyle.currency}>110 QAR</Text>
             <TouchableOpacity activeOpacity={0.7} style={favoriteCartStyle.addToCartButton}>
               <CartBag />
-              <Text style={favoriteCartStyle.buttonText}>Add To Cart</Text>
+              <Text style={favoriteCartStyle.buttonText}>Add</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -1,8 +1,8 @@
-import React from "react";
-import { View, Animated, Dimensions } from "react-native";
-import { Color } from "../../constants/GlobalStyle";
+import React from 'react';
+import { View, Animated, Dimensions } from 'react-native';
+import { Color } from '../../constants/GlobalStyle';
 
-const { width } = Dimensions.get("screen");
+const { width } = Dimensions.get('screen');
 
 interface PaginationProps {
   data: any[];
@@ -14,9 +14,9 @@ const Pagination: React.FC<PaginationProps> = ({ data, scrollX, index }) => {
   return (
     <View
       style={{
-        flexDirection: "row",
-        width: "100%",
-        justifyContent: "center",
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
         marginTop: 15,
       }}
     >
@@ -24,24 +24,24 @@ const Pagination: React.FC<PaginationProps> = ({ data, scrollX, index }) => {
         const inputRange = [(idx - 1) * width, idx * width, (idx + 1) * width];
         const dotWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [12, 25, 12],
-          extrapolate: "clamp",
+          outputRange: [8, 15, 8],
+          extrapolate: 'clamp',
         });
         const backgroundColor = scrollX.interpolate({
           inputRange,
-          outputRange: ["#E5DCD1", `${Color.C_main}`, "#E5DCD1"],
-          extrapolate: "clamp",
+          outputRange: ['#E5DCD1', `${Color.C_main}`, '#E5DCD1'],
+          extrapolate: 'clamp',
         });
 
         return (
           <Animated.View
             style={[
               {
-                width: 10,
-                height: 10,
-                borderRadius: 10,
+                width: 8,
+                height: 8,
+                borderRadius: 8,
                 marginHorizontal: 5,
-                backgroundColor: index === idx ? "red" : "#EDE4DA",
+                backgroundColor: index === idx ? 'red' : '#EDE4DA',
               },
               { width: dotWidth, backgroundColor },
             ]}

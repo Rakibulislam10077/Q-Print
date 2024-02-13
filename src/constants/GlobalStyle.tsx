@@ -12,20 +12,20 @@ export const Font = {
 };
 
 export const Color = {
-  C_main: "#980442",
-  C_second: "",
-  C_third: "",
-  C_shadow: "rgba(0,0,0,0.4)",
-  C_white: "#ffffff",
-  C_black: "#000000",
-  C_red: "#ff0000",
-  C_H_black: "rgba(0,0,0,0.5)",
-  C_border: "rgba(0, 0, 0, 0.12)",
-  C_black_eight: "rgba(0,0,0,0.8)",
+  C_main: '#980442',
+  C_second: '',
+  C_third: '',
+  C_shadow: 'rgba(0,0,0,0.4)',
+  C_white: '#ffffff',
+  C_black: '#000000',
+  C_red: '#ff0000',
+  C_H_black: 'rgba(0,0,0,0.5)',
+  C_border: 'rgba(0, 0, 0, 0.12)',
+  C_black_eight: 'rgba(0,0,0,0.8)',
 };
 
 export const shadows = {
-  shadow_color: "rgba(0,0,0,0.4)",
+  shadow_color: 'rgba(0,0,0,0.2)',
   elevation_1: 15,
   elevation_2: 10,
   offsetWidth_1: 2,
