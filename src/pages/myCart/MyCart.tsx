@@ -35,8 +35,9 @@ import LottieView from 'lottie-react-native';
 
 const MyCart = () => {
   const navigation: any = useNavigation();
-
   const [isLottie, setIsLottie] = useState<boolean>(true);
+  const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
+  const animation = useRef<any>(null);
 
   // State variables to track current and target amounts
   const [currentAmount, setCurrentAmount] = useState(30000);
@@ -66,9 +67,6 @@ const MyCart = () => {
       position: 'relative',
     };
   });
-
-  const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
-  const animation = useRef<any>(null);
 
   useEffect(() => {
     // This effect runs when the component mounts.
