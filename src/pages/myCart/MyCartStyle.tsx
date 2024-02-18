@@ -66,6 +66,25 @@ export const myCartStyle = StyleSheet.create({
     fontWeight: '600',
     color: Color.C_white,
   },
+  percentageValueCon: {
+    position: 'absolute',
+    right: -10,
+    borderRadius: 15,
+    width: 25,
+    height: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    top: -10,
+    borderColor: Color.C_main,
+    backgroundColor: Color.C_white,
+  },
+  customProgressBG: {
+    width: '100%',
+    height: 5,
+    borderRadius: 10,
+    backgroundColor: Color.C_border,
+  },
 
   // ==================================
   // lottie style

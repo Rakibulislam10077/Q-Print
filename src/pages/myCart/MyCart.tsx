@@ -20,7 +20,7 @@
  * ```
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import AddToCart from '../../components/addToCart/AddToCart';
 import { BackArrow } from '../../../assets/allSvg/AllSvg';
@@ -36,17 +36,11 @@ import LottieView from 'lottie-react-native';
 const MyCart = () => {
   const navigation: any = useNavigation();
 
-  // State variables to track current and target amounts
-  const [currentAmount, setCurrentAmount] = useState(9000);
-  const targetAmount = 10000;
+  const [isLottie, setIsLottie] = useState<boolean>(true);
 
-  // Effect to initialize progress animation when currentAmount changes
-  useEffect(() => {
-    // Ensure the progress animation starts from 0 when currentAmount is initially set to 0
-    if (currentAmount === 0) {
-      animatedProgress.value = withTiming(0, { duration: 1000 });
-    }
-  }, [currentAmount]);
+  // State variables to track current and target amounts
+  const [currentAmount, setCurrentAmount] = useState(30000);
+  const targetAmount = 30000;
 
   // Calculate the percentage progress towards the target amount
   const percentageProgress =
@@ -55,12 +49,11 @@ const MyCart = () => {
   // Shared value for animated progress
   const animatedProgress = useSharedValue(0);
 
+  // Effect to initialize progress animation when currentAmount changes
   useEffect(() => {
-    if (currentAmount < targetAmount) {
-      setCurrentAmount(currentAmount + 100); // Increase by 100 for demonstration purposes
-      animatedProgress.value = withTiming((currentAmount + 100) / targetAmount, { duration: 1000 });
-    }
-  }, []);
+    const percentage = Math.min(100, Math.round((currentAmount / targetAmount) * 100));
+    animatedProgress.value = withTiming(percentage / 100, { duration: 1000 });
+  }, [currentAmount, targetAmount]);
 
   // Animated style for the progress bar
   const progressStyle = useAnimatedStyle(() => {
@@ -73,6 +66,26 @@ const MyCart = () => {
       position: 'relative',
     };
   });
+
+  const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
+  const animation = useRef<any>(null);
+
+  useEffect(() => {
+    // This effect runs when the component mounts.
+    // It plays the Lottie animation once after a delay of 500 milliseconds.
+    if (shouldPlayLottie) {
+      setTimeout(() => {
+        animation.current?.play();
+        setShouldPlayLottie(false);
+      }, 200);
+    }
+  }, [shouldPlayLottie]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLottie(false);
+    }, 2500);
+  }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -110,32 +123,14 @@ const MyCart = () => {
 
         {/* Display the progress bar */}
         <View style={{ position: 'relative' }}>
-          <View
-            style={{
-              width: '100%',
-              height: 5,
-              borderRadius: 10,
-              borderWidth: 1,
-              borderColor: Color.C_border,
-            }}
-          >
+          <View style={myCartStyle.customProgressBG}>
             <Animated.View style={progressStyle}>
-              <View
-                style={{
-                  position: 'absolute',
-                  right: -22,
-                  borderRadius: 15,
-                  width: 24,
-                  height: 24,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderWidth: 2,
-                  top: -10,
-                  borderColor: Color.C_main,
-                  backgroundColor: Color.C_white,
-                }}
-              >
-                <Text style={{ fontSize: 14 }}>{percentageProgress}</Text>
+              <View style={myCartStyle.percentageValueCon}>
+                {currentAmount >= targetAmount ? (
+                  <Text style={{ fontSize: 12 }}>100</Text>
+                ) : (
+                  <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
+                )}
               </View>
             </Animated.View>
           </View>
@@ -165,13 +160,16 @@ const MyCart = () => {
       </View>
 
       {/* Display the congratulation lottie */}
-      {currentAmount === targetAmount && (
+      {currentAmount >= targetAmount && (
         <View style={myCartStyle.lottieConStyle}>
-          <LottieView
-            autoPlay
-            source={require('../../../assets/image/cong3.json')}
-            style={myCartStyle.lottieStyle}
-          />
+          {isLottie && (
+            <LottieView
+              loop={false}
+              ref={animation}
+              source={require('../../../assets/image/cong3.json')}
+              style={myCartStyle.lottieStyle}
+            />
+          )}
         </View>
       )}
       <StatusBar style="dark" />

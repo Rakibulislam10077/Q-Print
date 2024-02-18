@@ -28,7 +28,12 @@ import Animated, {
   useSharedValue,
   withSpring,
   useAnimatedScrollHandler,
+  useAnimatedRef,
+  useDerivedValue,
+  useScrollViewOffset,
+  interpolate,
 } from 'react-native-reanimated';
+import { AntDesign } from '@expo/vector-icons';
 
 import { productDetailsStyle } from './ProductDetailsStyle';
 // import SkeletonInProductDetails from "../../components/allSkeleton/SkeletonInProductDetails";
@@ -55,8 +60,6 @@ const ProductDetails = (props: any) => {
       setIsSkeleton(false);
     }, 1000);
   }, []);
-
-  const highLightedInfo = [1, 2, 3, 4];
 
   // const scrollY = useSharedValue(0);
   // const scrollViewRef = useRef(null);
@@ -98,10 +101,14 @@ const ProductDetails = (props: any) => {
     const value = quantity - 1;
     setQuantity(value);
   };
+
+  // =========================================
+  // =========================================
+
   return (
-    <View style={{ flex: 1, backgroundColor: Color.C_white }}>
-      <ScrollView style={{ flex: 1 }}>
-        <Animated.View style={productDetailsStyle.imageAndNavContainer}>
+    <View style={{ height: height, backgroundColor: Color.C_white }}>
+      <Animated.ScrollView scrollEventThrottle={16}>
+        <Animated.View style={[productDetailsStyle.imageAndNavContainer]}>
           <View style={productDetailsStyle.navigationAndFavCon}>
             <Animated.View entering={FadeInLeft.duration(500).delay(50)}>
               <TouchableOpacity
@@ -126,6 +133,8 @@ const ProductDetails = (props: any) => {
             </View>
           </View>
           <Animated.View>
+            {/* ============================================ */}
+            {/* ============================================ */}
             <Animated.Image
               sharedTransitionTag={`img${item?.id}`}
               source={item?.item?.img}
@@ -135,7 +144,7 @@ const ProductDetails = (props: any) => {
                   height: 280,
                   alignSelf: 'center',
                 },
-                // animatedImageStyle,
+                // imageAnime,
               ]}
             />
           </Animated.View>
@@ -190,12 +199,12 @@ const ProductDetails = (props: any) => {
             =================================
             =================================
              */}
-          <View style={productDetailsStyle.colorIndicatorCon}>
+          {/* <View style={productDetailsStyle.colorIndicatorCon}>
             <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
             <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
             <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
             <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
-          </View>
+          </View> */}
           <Animated.View
             entering={FadeInDown.delay(50).duration(500)}
             style={productDetailsStyle.priceContainer}
@@ -222,10 +231,12 @@ const ProductDetails = (props: any) => {
                   onPress={() => decrease()}
                   style={productDetailsStyle.inDecActionLayer}
                 >
-                  <Text style={productDetailsStyle.minusPlusText}>-</Text>
+                  <AntDesign name="minus" size={20} color="black" />
                 </TouchableOpacity>
               </LinearGradient>
-              <Text style={productDetailsStyle.quantity}>{quantity}</Text>
+              <View style={productDetailsStyle.quantityBox}>
+                <Text>{quantity}</Text>
+              </View>
               <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
@@ -236,18 +247,18 @@ const ProductDetails = (props: any) => {
                   onPress={() => increase()}
                   style={productDetailsStyle.inDecActionLayer}
                 >
-                  <Text style={productDetailsStyle.minusPlusText}>+</Text>
+                  <AntDesign name="plus" size={20} color="black" />
                 </TouchableOpacity>
               </LinearGradient>
             </View>
           </Animated.View>
         </View>
         {/* view more information container */}
-        <View style={{ height: height - 60 }}>
+        <View style={{ height: height - 100 }}>
           {/* hey chatgpt this is my material top tab component */}
           <ProductDetailsTopTab />
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
       {/* fixed buy now button and price */}
       {/* <View style={productDetailsStyle.BuyNowButtonAndPriceContainer}>
         <View style={productDetailsStyle.totalPriceConInfixedButtonBox}>
@@ -282,10 +293,3 @@ const ProductDetails = (props: any) => {
 };
 
 export default ProductDetails;
-
-const styles = StyleSheet.create({
-  header: {
-    height: HEADER_HEIGHT,
-    overflow: 'hidden',
-  },
-});
