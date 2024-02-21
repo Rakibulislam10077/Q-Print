@@ -38,7 +38,7 @@ const MyCart = () => {
   const navigation: any = useNavigation();
   const [isLottie, setIsLottie] = useState<boolean>(true);
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
-  const [currentAmount, setCurrentAmount] = useState(23000);
+  const [currentAmount, setCurrentAmount] = useState(30000);
 
   const animation = useRef<any>(null);
   // State variables to track current and target amounts
