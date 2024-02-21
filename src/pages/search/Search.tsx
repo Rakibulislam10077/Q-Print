@@ -107,7 +107,8 @@ const Search = () => {
               <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={[1, 1, 1, 1, 1]}
+                contentContainerStyle={{ paddingRight: 20 }}
+                data={[1, 1, 1, 1, 1, 1, 1, 1]}
                 renderItem={({ item }) => <BrandInGlobalSearch item={item} />}
               />
             </View>

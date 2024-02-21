@@ -1,28 +1,28 @@
-import { View, Text, FlatList } from "react-native";
-import React from "react";
-import Brand from "./Brand";
-import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
+import { View, Text, FlatList } from 'react-native';
+import React from 'react';
+import Brand from './Brand';
+import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
 
 const logodata = [
   {
     id: 1,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 2,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 3,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 4,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
   {
     id: 5,
-    img: require("../../../assets/image/adidas.png"),
+    img: require('../../../assets/image/adidas.png'),
   },
 ];
 const BrandInHome = () => {
@@ -32,6 +32,7 @@ const BrandInHome = () => {
         entering={FadeInRight.delay(50).duration(245)}
         horizontal
         showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingRight: 20 }}
         data={logodata}
         renderItem={({ item }) => <Brand item={item} />}
       />

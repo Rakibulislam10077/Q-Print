@@ -1,8 +1,9 @@
 /**
- * MyCart Component:
- * This component represents the shopping cart screen, displaying a list of items added to the cart,
+ * MyCart Component Comment:
+ *
+ * This component serves as the shopping cart screen in the application. It displays a list of items added to the cart,
  * the total price, a progress bar indicating the amount spent towards free shipping, and a button to proceed to checkout.
- * It also includes an animated congratulatory message upon reaching the target amount.
+ * Additionally, it includes an animated congratulatory message upon reaching the target amount for free shipping.
  *
  * State:
  * - currentAmount: Represents the current total amount in the cart.
@@ -37,10 +38,10 @@ const MyCart = () => {
   const navigation: any = useNavigation();
   const [isLottie, setIsLottie] = useState<boolean>(true);
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
-  const animation = useRef<any>(null);
+  const [currentAmount, setCurrentAmount] = useState(23000);
 
+  const animation = useRef<any>(null);
   // State variables to track current and target amounts
-  const [currentAmount, setCurrentAmount] = useState(30000);
   const targetAmount = 30000;
 
   // Calculate the percentage progress towards the target amount

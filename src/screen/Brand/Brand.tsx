@@ -61,6 +61,7 @@ const Brand = () => {
             entering={FadeInRight.delay(50).duration(500)}
             horizontal
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingRight: 20 }}
             data={logodata}
             renderItem={({ item }) => <TopBrand item={item} />}
           />
