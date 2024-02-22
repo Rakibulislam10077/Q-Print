@@ -2,7 +2,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { addToCartStyle } from './AddToCartStyle';
 import { Close } from '../../../assets/allSvg/AllSvg';
-import Animated, { BounceIn, FadeInDown, FlipInEasyX } from 'react-native-reanimated';
+import Animated, { FadeInDown } from 'react-native-reanimated';
+import { AntDesign } from '@expo/vector-icons';
 
 let dynamicColor = 'red';
 const AddToCart = () => {
@@ -44,11 +45,11 @@ const AddToCart = () => {
             }}
           >
             <TouchableOpacity style={addToCartStyle.plusAndMinus}>
-              <Text>-</Text>
+              <AntDesign name="minus" size={16} color="black" />
             </TouchableOpacity>
             <Text style={addToCartStyle.quantity}>1</Text>
             <TouchableOpacity style={addToCartStyle.plusAndMinus}>
-              <Text>+</Text>
+              <AntDesign name="plus" size={16} color="black" />
             </TouchableOpacity>
           </View>
         </View>

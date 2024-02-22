@@ -7,7 +7,6 @@ import Products from '../../screen/products/Products';
 import Brand from '../../screen/Brand/Brand';
 import Notification from '../../screen/notification/Notification';
 import Profile from '../../screen/profile/Profile';
-import HomePage from '../../pages/homePage/HomePage';
 import ProductDetails from '../../pages/productDetailsPage/ProductDetails';
 import Search from '../../pages/search/Search';
 import MyCart from '../../pages/myCart/MyCart';
@@ -239,7 +238,6 @@ const Index = () => {
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />
       <Stack.Screen options={{ headerShown: false }} name="BottomTab" component={BottomTab} />
-      <Stack.Screen options={{ headerShown: false }} name="HomePage" component={HomePage} />
       <Stack.Screen options={{ headerShown: false }} name="Search" component={Search} />
       <Stack.Screen
         options={{ headerShown: false }}
