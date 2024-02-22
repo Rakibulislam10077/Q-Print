@@ -1,14 +1,11 @@
 /**
  * Products Component:
- * This component represents a screen for displaying all products.
- * It consists of a header section with navigation controls, search input,
- * and a modal for additional options. The body section displays product tabs.
+ * This component renders a screen displaying all available products.
+ * It includes a header section with navigation controls, a search input, and icons.
+ * The body section displays product categories using a material top tab.
  *
  * Props:
  * None
- *
- * State:
- * - isModalVisible: boolean state to manage the visibility of the modal.
  *
  * Navigation:
  * - The back arrow button navigates back to the previous screen.
@@ -24,15 +21,12 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import Modal from 'react-native-modal';
 import { productsStyle } from './ProductsStyle';
 import { BackArrow, CartBag, Magnify, ThreeLine } from '../../../assets/allSvg/AllSvg';
 import { TopTab } from '../../routes/material_Tab/TopTab';
-import ModalContent from '../../pages/homePage/modalComponents/ModalContent';
 
 const Products = () => {
   const navigation = useNavigation();
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   return (
     <View style={productsStyle.container}>

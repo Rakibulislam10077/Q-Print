@@ -9,14 +9,11 @@ import BrandInHome from '../../components/brandInHome/BrandInHome';
 import Carousel from '../../components/carousel/Carousel';
 import OfferCart from '../../components/card/offeredCart/OfferCart';
 import AllCart from '../../components/card/allCart/AllCart';
-import ModalContent from '../../pages/homePage/modalComponents/ModalContent';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import Modal from 'react-native-modal';
 
 const Home = () => {
   const navigation: any = useNavigation();
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -57,19 +54,6 @@ const Home = () => {
           <AllCart />
           {/* Cart_Skeleton */}
         </ScrollView>
-
-        {/* Modal */}
-        <Modal
-          onBackdropPress={() => setIsModalVisible(false)}
-          onBackButtonPress={() => setIsModalVisible(false)}
-          swipeDirection="down"
-          onSwipeComplete={() => setIsModalVisible(!isModalVisible)}
-          isVisible={isModalVisible}
-          style={{ justifyContent: 'flex-end', margin: 0 }}
-        >
-          <ModalContent />
-        </Modal>
-
         {/* StatusBar */}
         <StatusBar style="dark" />
       </View>
