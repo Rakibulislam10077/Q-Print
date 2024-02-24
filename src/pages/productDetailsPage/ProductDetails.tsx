@@ -1,16 +1,5 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Dimensions,
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import {
   CartBag,
@@ -20,19 +9,7 @@ import {
   InActiveIndicator,
 } from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
-import Animated, {
-  FadeInDown,
-  FadeInLeft,
-  FadeInRight,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-  useAnimatedScrollHandler,
-  useAnimatedRef,
-  useDerivedValue,
-  useScrollViewOffset,
-  interpolate,
-} from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
 
 import { productDetailsStyle } from './ProductDetailsStyle';
@@ -43,13 +20,13 @@ import ProductReviews from '../../components/productReviews/ProductReviews';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
 import ProductDetailsTopTab from '../../routes/material_Tab/ProductDetailsTopTab';
+import { connect } from 'react-redux'; // Import connect from react-redux
+import { IProduct } from '../../types/interfaces/product.interface';
 
 const HEADER_HEIGHT = 200;
-const ProductDetails = (props: any) => {
-  const item: any = props?.route?.params;
+const ProductDetails = (props: IProduct) => {
+  const item: IProduct = props?.route?.params;
   const navigation: any = useNavigation();
-  const [index, setIndex] = useState<number>(0);
-  const [isViewMore, setIsViewMore] = useState<boolean>(true);
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -105,6 +82,8 @@ const ProductDetails = (props: any) => {
   // =========================================
   // =========================================
 
+  console.log(JSON.stringify(item?.productPhotos, null, 2));
+
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
       <Animated.ScrollView scrollEventThrottle={16}>
@@ -136,8 +115,8 @@ const ProductDetails = (props: any) => {
             {/* ============================================ */}
             {/* ============================================ */}
             <Animated.Image
-              sharedTransitionTag={`img${item?.id}`}
-              source={item?.item?.img}
+              sharedTransitionTag={`img${item?._id}`}
+              source={{ uri: `5.182.33.12:5000${item?.productPhotos}` }}
               style={[
                 {
                   width: '90%',
@@ -155,10 +134,12 @@ const ProductDetails = (props: any) => {
             entering={FadeInDown.delay(50).duration(500)}
             style={productDetailsStyle.ratingContainer}
           >
-            <View style={productDetailsStyle.inStockContainer}>
-              <InActiveIndicator />
-              <Text style={productDetailsStyle.inStockText}>In stock</Text>
-            </View>
+            {item?.defaultVariant?.inStock > 0 && (
+              <View style={productDetailsStyle.inStockContainer}>
+                <InActiveIndicator />
+                <Text style={productDetailsStyle.inStockText}>In stock</Text>
+              </View>
+            )}
             <Text style={productDetailsStyle.verticalDivider}>|</Text>
             <Text style={productDetailsStyle.ratingText}>
               ⭐<Text style={productDetailsStyle.ratingNumber}>(4.5)</Text>
@@ -170,7 +151,9 @@ const ProductDetails = (props: any) => {
               colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
               style={productDetailsStyle.discountTextCon}
             >
-              <Text style={productDetailsStyle.discountPercent}>30% OFF</Text>
+              <Text style={productDetailsStyle.discountPercent}>
+                {item?.defaultVariant.discountPercentage}% off
+              </Text>
             </LinearGradient>
           </Animated.View>
           <Animated.Text
@@ -178,19 +161,25 @@ const ProductDetails = (props: any) => {
             numberOfLines={2}
             style={productDetailsStyle.title}
           >
-            {item?.title} Brother HL-L3270CDW Single Function Color Laser Printer
+            {item?.productName}
           </Animated.Text>
           <Animated.View
             entering={FadeInDown.delay(50).duration(500)}
             style={productDetailsStyle.productIdandDisc}
           >
             <View style={productDetailsStyle.brandLogoContainer}>
-              <Image
-                style={productDetailsStyle.brandLogo}
-                source={require('../../../assets/image/adidas.png')}
-              />
+              {item?.productPhotos.map((img) => {
+                console.log(img, '=======================12==1=2=1=2=1=2=12==12=1=2=1=2=');
+
+                return (
+                  <Image
+                    style={productDetailsStyle.brandLogo}
+                    source={{ uri: `5.182.33.12:5000${img}` }}
+                  />
+                );
+              })}
             </View>
-            <Text style={productDetailsStyle.brandName}>Brother</Text>
+            <Text style={productDetailsStyle.brandName}>{item?.brand?.brandName}</Text>
           </Animated.View>
           {/*
             =================================
@@ -210,14 +199,15 @@ const ProductDetails = (props: any) => {
             style={productDetailsStyle.priceContainer}
           >
             <Text style={productDetailsStyle.currentPrice}>
-              {item?.price}
               <Text style={productDetailsStyle.productPrice}>
-                594439 <Text style={productDetailsStyle.currency}>QAR</Text>
+                {item?.defaultVariant?.discountedPrice}{' '}
+                <Text style={productDetailsStyle.currency}>QAR</Text>
               </Text>
             </Text>
             {/* offer QAR */}
             <Text style={productDetailsStyle.discountedPrice}>
-              1560 <Text style={productDetailsStyle.discountedCurrency}>QAR</Text>
+              {item?.defaultVariant?.sellingPrice}{' '}
+              <Text style={productDetailsStyle.discountedCurrency}>QAR</Text>
             </Text>
             {/* quantity Container */}
             <View style={productDetailsStyle.quantityCon}>
@@ -255,8 +245,11 @@ const ProductDetails = (props: any) => {
         </View>
         {/* view more information container */}
         <View style={{ height: height - 100 }}>
-          {/* hey chatgpt this is my material top tab component */}
-          <ProductDetailsTopTab />
+          {/* hey chatgpt this is my material top tab component
+          please solve my problem
+          */}
+
+          <ProductDetailsTopTab item={item} />
         </View>
       </Animated.ScrollView>
       {/* fixed buy now button and price */}
@@ -292,4 +285,14 @@ const ProductDetails = (props: any) => {
   );
 };
 
-export default ProductDetails;
+const mapStateToProps = (state: any) => ({
+  item: state.item, // Assuming you have an item reducer that stores the item data
+});
+
+// const mapDispatchToProps = (dispatch: any) => ({
+//   fetchData: () => dispatch(fetchData()), // Dispatch the action to fetch data
+// });
+
+export default connect(mapStateToProps)(ProductDetails);
+
+// export default ProductDetails;

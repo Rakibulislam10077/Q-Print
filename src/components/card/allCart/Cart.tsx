@@ -7,11 +7,14 @@ import { allCartStyle } from './AllCartStyle';
 
 const Cart = (item: any) => {
   const navigation: any = useNavigation();
+  const PRODUCT = item?.item;
+  // console.log(JSON.stringify(PRODUCT, null, 2));
+
   return (
     <Animated.View style={AllCartStyle.container} entering={FadeInDown.delay(50).duration(500)}>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('ProductDeatils')}
+        onPress={() => navigation.navigate('ProductDeatils', { ...PRODUCT })}
         // style={[AllCartStyle.container]}
       >
         <View style={AllCartStyle.imgCon}>
@@ -22,7 +25,7 @@ const Cart = (item: any) => {
         </View>
         <View style={AllCartStyle.descCon}>
           <Text style={AllCartStyle.title} numberOfLines={2}>
-            Apple Watch lk link pons papfdsi por sno iwlksdljf
+            {PRODUCT?.productName}
           </Text>
           <Text style={AllCartStyle.startRating}>
             ⭐️ <Text style={AllCartStyle.rating}>(4.5)</Text>

@@ -1,17 +1,13 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
-import React from "react";
-import { productReviewsStyle } from "./ProductReviewsStyle";
-import { LinearGradient } from "expo-linear-gradient";
-import Animated, { FadeInRight, SlideInRight } from "react-native-reanimated";
+import { View, Text, FlatList, Image, TextInput, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { productReviewsStyle } from './ProductReviewsStyle';
+import { LinearGradient } from 'expo-linear-gradient';
+import Animated, { FadeInRight, SlideInRight } from 'react-native-reanimated';
+import { IReviews } from '../../types/interfaces/product.interface';
 
-const ProductReviews = () => {
+const ProductReviews = ({ item }: { item: IReviews[] }) => {
+  // console.log(item, '*****************************');
+
   return (
     <Animated.View entering={FadeInRight.delay(50).duration(300)}>
       <View style={productReviewsStyle.ratingViewBox}>
@@ -20,20 +16,16 @@ const ProductReviews = () => {
             <Text style={productReviewsStyle.averageTating}>4.4</Text>
             <Text>⭐</Text>
           </View>
-          <Text style={productReviewsStyle.ratingText}>
-            923 Ratings & 04 Reviews
-          </Text>
+          <Text style={productReviewsStyle.ratingText}>923 Ratings & 04 Reviews</Text>
         </View>
         <View style={productReviewsStyle.ratingProgressBox}></View>
       </View>
       <View style={productReviewsStyle.ratingAndReviewsCon}>
-        <Text style={productReviewsStyle.ratingAndReviewsText}>
-          Ratings & Reviews
-        </Text>
+        <Text style={productReviewsStyle.ratingAndReviewsText}>Ratings & Reviews</Text>
         <View style={productReviewsStyle.reviewerCon}>
           <Image
             style={productReviewsStyle.reviewerImg}
-            source={require("../../../assets/image/homepod.jpeg")}
+            source={require('../../../assets/image/homepod.jpeg')}
           />
           <View style={productReviewsStyle.reviewerNameAndDate}>
             <Text style={productReviewsStyle.reviewerName}>Rakibul islam</Text>
@@ -42,7 +34,7 @@ const ProductReviews = () => {
         </View>
         <View style={productReviewsStyle.seeReviewAndArrowCon}>
           <Text>View All 15 Reviews</Text>
-          <Text>{`${">"}`}</Text>
+          <Text>{`${'>'}`}</Text>
         </View>
       </View>
       <View style={productReviewsStyle.yourReviewCon}>
@@ -51,10 +43,7 @@ const ProductReviews = () => {
         <View></View>
         {/* input Container for reviews */}
         <View>
-          <TextInput
-            style={productReviewsStyle.nameTextInput}
-            placeholder="Name"
-          />
+          <TextInput style={productReviewsStyle.nameTextInput} placeholder="Name" />
           <TextInput
             style={productReviewsStyle.reviewTextInput}
             placeholder="Wite a Review"

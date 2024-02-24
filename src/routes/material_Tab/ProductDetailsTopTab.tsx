@@ -7,9 +7,13 @@ import { Color } from '../../constants/GlobalStyle';
 import ProductSpec from '../../components/productSpec/ProductSpec';
 import ProductDesc from '../../components/productDesc/ProductDesc';
 import ProductReviews from '../../components/productReviews/ProductReviews';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
+import { IProduct, ISpecification } from '../../types/interfaces/product.interface';
 
 const Tab = createMaterialTopTabNavigator();
-const ProductDetailsTopTab = () => {
+const ProductDetailsTopTab = ({ item }: { item: IProduct }) => {
+  console.log(item, '12323454354567657546453423321342345654645');
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <Tab.Navigator
@@ -27,9 +31,34 @@ const ProductDetailsTopTab = () => {
           },
         }}
       >
-        <Tab.Screen name="Specification" component={ProductSpec} />
-        <Tab.Screen name="Description" component={ProductDesc} />
-        <Tab.Screen name="Reviews" component={ProductReviews} />
+        <Tab.Screen name="Specification">
+          {({
+            route,
+            navigation,
+          }: {
+            route: RouteProp<ParamListBase, 'Specification'>;
+            navigation: IProduct;
+          }) => <ProductSpec route={route} navigation={navigation} items={item?.specifications} />}
+        </Tab.Screen>
+
+        <Tab.Screen name="Description">
+          {({
+            route,
+            navigation,
+          }: {
+            route: RouteProp<ParamListBase, 'Description'>;
+            navigation: IProduct;
+          }) => <ProductDesc route={route} navigation={navigation} item={item?.description} />}
+        </Tab.Screen>
+        <Tab.Screen name="Reviews">
+          {({
+            route,
+            navigation,
+          }: {
+            route: RouteProp<ParamListBase, 'Reviews'>;
+            navigation: IProduct;
+          }) => <ProductReviews route={route} navigation={navigation} item={item?.reviews} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </View>
   );
