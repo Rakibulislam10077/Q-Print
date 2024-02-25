@@ -48,6 +48,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import * as Sharing from 'expo-sharing';
 import ContactUs from '../../components/modalComponents/contactUs/ContactUs';
+import { useGetUserQuery } from '../../redux/api/apiSlice';
 
 const Profile: React.FC = () => {
   const navigation: any = useNavigation();
@@ -55,6 +56,10 @@ const Profile: React.FC = () => {
   const [modalIndex, setModalIndex] = useState(0);
   const [image, setImage] = useState<any>();
   const [isCameraModalOpen, setIsCameraModalOpen] = useState<boolean>(false);
+  const { data, isLoading, isError, error } = useGetUserQuery(undefined);
+  const info = data?.data;
+
+  console.log(JSON.stringify(data, null, 2));
 
   // Toggles the visibility of the modal
   const toggleModal = () => {
@@ -130,8 +135,8 @@ const Profile: React.FC = () => {
       throw error;
     }
   };
-
   const apk: any = '/Users/rakibulislam/Downloads/Q-Print';
+
   return (
     <View style={{ flex: 1 }}>
       {/* Linear gradient background */}
@@ -158,7 +163,10 @@ const Profile: React.FC = () => {
           </TouchableOpacity>
           {/* User image */}
           <View style={profileStyle.userImg}>
-            <Image style={profileStyle.img} source={{ uri: image }} />
+            <Image
+              style={profileStyle.img}
+              source={{ uri: `http://5.182.33.12:5000/${info?.profilePhoto}` }}
+            />
           </View>
           {/* Camera button */}
           <TouchableOpacity
@@ -171,7 +179,7 @@ const Profile: React.FC = () => {
           </TouchableOpacity>
         </View>
         {/* User name */}
-        <Text style={profileStyle.userName}>Mohammad Shahin</Text>
+        <Text style={profileStyle.userName}>{info?.fullName}</Text>
 
         {/* Body section */}
         <Animated.View entering={FadeInDown.delay(50).duration(250)} style={profileStyle.bodyCon}>

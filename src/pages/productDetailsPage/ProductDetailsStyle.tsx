@@ -69,6 +69,7 @@ export const productDetailsStyle = StyleSheet.create({
   brandLogo: {
     width: '100%',
     height: '100%',
+    borderRadius: 3,
   },
   verticalDivider: {
     fontSize: Font.Font_M,
@@ -295,5 +296,12 @@ export const productDetailsStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 10,
+  },
+  contentContainerStyle: {
+    height: 280,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
 });

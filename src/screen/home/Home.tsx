@@ -2,18 +2,24 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { Color } from '../../constants/GlobalStyle';
 import HomePageTopCon from '../../components/homePageTopCon/HomePageHeader';
-import Animated, { FadeInLeft } from 'react-native-reanimated';
+import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import { homePageStyle } from './HomePageStyle';
 import { Magnify } from '../../../assets/allSvg/AllSvg';
-import BrandInHome from '../../components/brandInHome/BrandInHome';
 import Carousel from '../../components/carousel/Carousel';
 import OfferCart from '../../components/card/offeredCart/OfferCart';
-import AllCart from '../../components/card/allCart/AllCart';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
+import { useGetBrandQuery, useGetProductQuery } from '../../redux/api/apiSlice';
+import Brand from '../../components/brandInHome/Brand';
+import HomePageProductCateTitle from '../../components/common/homePageProductCategory/HomePageProductCateTitle';
+import { IProduct } from '../../types/interfaces/product.interface';
+import Cart from '../../components/card/allCart/Cart';
+import Brand_Skeleton from '../../components/skeleton/Home_page_brand_Skeleton/Brand_Skeleton';
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigation: any = useNavigation();
+  const { data: brandData, isLoading: loadingBrand } = useGetBrandQuery(undefined);
+  const { data: productData, isLoading: loadingProduct } = useGetProductQuery(undefined);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -39,9 +45,16 @@ const Home = () => {
           </Animated.View>
 
           {/* Brand Logo Container */}
-          <BrandInHome />
+          <Animated.FlatList
+            entering={FadeInRight.delay(50).duration(245)}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingRight: 20 }}
+            data={brandData?.data}
+            renderItem={({ item }) => <Brand item={item} />}
+          />
           {/* Brand_Skeleton */}
-          {/* <Brand_Skeleton /> */}
+          {loadingBrand && <Brand_Skeleton />}
           {/* Custom Carousel */}
           <Carousel />
           {/* Carousel_Skeleton */}
@@ -51,7 +64,14 @@ const Home = () => {
           {/* Cart_Skeleton */}
 
           {/* All Cart Section */}
-          <AllCart />
+          <View style={homePageStyle.cordContainer}>
+            {/* Renders the title and subtitle */}
+            <HomePageProductCateTitle title="Printers, Cartridge, Ink" subTitle="see all" />
+            {/* Maps over the data and renders individual Cart components */}
+            {productData?.data?.map((item: IProduct, index: number) => {
+              return <Cart key={index.toString()} item={item} />;
+            })}
+          </View>
           {/* Cart_Skeleton */}
         </ScrollView>
         {/* StatusBar */}

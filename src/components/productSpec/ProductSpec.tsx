@@ -9,14 +9,11 @@ const ProductSpec = ({ items }: { items: ISpecification[] }) => {
   // console.log(JSON.stringify(items, null, 2), '+++++++++++++++++++++++++++++++++');
   // const item = items?.specifications?.map((i) => i.sectionName);
   const item = items;
-  console.log(item);
 
   return (
     <Animated.View entering={FadeInRight} style={{ backgroundColor: '#fff', flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
         {items?.map((item, index: number) => {
-          console.log(item);
-
           return (
             <View>
               <View key={index.toString()} style={productSpecStyle.specBox}>

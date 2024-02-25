@@ -35,4 +35,12 @@ export const homePageStyle = StyleSheet.create({
     fontSize: Font.Font_M,
     marginLeft: 5,
   },
+  cordContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
+    backgroundColor: Color.C_white,
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+  },
 });

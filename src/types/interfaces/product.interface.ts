@@ -1,7 +1,7 @@
 export interface IProduct {
   _id: string;
   productName: string;
-  productPhotos: string[];
+  productPhotos: IProductPhotos[];
   brand: Partial<IBrand> & { brandId: string };
   series?: string;
   model?: string;
@@ -24,6 +24,8 @@ export interface IProduct {
   route: {
     params: any; // You can refine the type of params if you know its structure
   };
+  item:any;
+  key: string;
 }
 
 export interface ICategory {
@@ -74,8 +76,13 @@ export interface IDescription {
     title: string;
   };
   _id: string;
+  route:any
 }
 
 export interface IReviews{
   
+};
+
+export interface IProductPhotos{
+  productPhotos: string[];
 }

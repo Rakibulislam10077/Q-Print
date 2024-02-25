@@ -21,10 +21,12 @@ import { brandDetailsStyle } from './BrandDetailsStyle';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { TopTab } from '../../routes/material_Tab/TopTab';
 import { StatusBar } from 'expo-status-bar';
+import { IBrand } from '../../types/interfaces/brand.interface';
 
-const BrandDetails = (props: any) => {
+const BrandDetails = (props: IBrand) => {
   // Extract the brand details from route params
   const item = props?.route?.params;
+  const data = item?.item;
 
   return (
     <View style={brandDetailsStyle.container}>
@@ -36,11 +38,11 @@ const BrandDetails = (props: any) => {
         <View style={brandDetailsStyle.brandLogoAndNameCon}>
           {/* Brand Logo */}
           <View style={brandDetailsStyle.logoCon}>
-            <Image style={brandDetailsStyle.logo} source={item?.item?.img} />
+            <Image style={brandDetailsStyle.logo} source={{ uri: data?.brandPhoto }} />
           </View>
           {/* Brand Name and Availability */}
           <View>
-            <Text style={brandDetailsStyle.brandName}>Canon</Text>
+            <Text style={brandDetailsStyle.brandName}>{data?.brandName}</Text>
             <Text style={brandDetailsStyle.availableText}>25 Product Available</Text>
           </View>
         </View>

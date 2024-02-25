@@ -1,37 +1,30 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {
-  CartBag,
-  CartIcon,
-  FavIcon,
-  Goback,
-  InActiveIndicator,
-} from '../../../assets/allSvg/AllSvg';
+import { CartBag, FavIcon, Goback, InActiveIndicator } from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { FadeInDown, FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
 
 import { productDetailsStyle } from './ProductDetailsStyle';
 // import SkeletonInProductDetails from "../../components/allSkeleton/SkeletonInProductDetails";
-import ProductSpec from '../../components/productSpec/ProductSpec';
-import ProductDesc from '../../components/productDesc/ProductDesc';
-import ProductReviews from '../../components/productReviews/ProductReviews';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
 import ProductDetailsTopTab from '../../routes/material_Tab/ProductDetailsTopTab';
 import { connect } from 'react-redux'; // Import connect from react-redux
 import { IProduct } from '../../types/interfaces/product.interface';
+import { FlatList } from 'react-native-gesture-handler';
+import ProductDetailSkeleton from '../../components/skeleton/ProductDetails.skeleton';
+import { useGetProductQuery } from '../../redux/api/apiSlice';
+import * as ImageManipulator from 'expo-image-manipulator';
 
-const HEADER_HEIGHT = 200;
 const ProductDetails = (props: IProduct) => {
-  const item: IProduct = props?.route?.params;
+  const data: IProduct = props?.route?.params;
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(0);
-
   const { height } = Dimensions.get('screen');
-
+  const { isLoading } = useGetProductQuery(undefined);
   useEffect(() => {
     setTimeout(() => {
       setIsSkeleton(false);
@@ -82,7 +75,26 @@ const ProductDetails = (props: IProduct) => {
   // =========================================
   // =========================================
 
-  console.log(JSON.stringify(item?.productPhotos, null, 2));
+  // useEffect(() => {
+  //   const compressImage = async () => {
+  //     try {
+  //       const response = await fetch('');
+  //       const blob = await response.blob();
+
+  //       const compressedImage = await ImageManipulator.manipulateAsync(
+  //         blob,
+  //         [{ resize: { width: 200 } }], // Adjust dimensions as needed
+  //         { compress: 0.2, format: 'jpeg' } // Adjust compression and format as needed
+  //       );
+
+  //       setCompressedImageURI(compressedImage.uri);
+  //     } catch (error) {
+  //       console.error('Error compressing image:', error);
+  //     }
+  //   };
+
+  //   compressImage();
+  // }, []);
 
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
@@ -114,18 +126,30 @@ const ProductDetails = (props: IProduct) => {
           <Animated.View>
             {/* ============================================ */}
             {/* ============================================ */}
-            <Animated.Image
-              sharedTransitionTag={`img${item?._id}`}
-              source={{ uri: `5.182.33.12:5000${item?.productPhotos}` }}
-              style={[
-                {
-                  width: '90%',
-                  height: 280,
-                  alignSelf: 'center',
-                },
-                // imageAnime,
-              ]}
-            />
+            {isLoading ? (
+              <ProductDetailSkeleton />
+            ) : (
+              <FlatList
+                horizontal={true}
+                contentContainerStyle={productDetailsStyle.contentContainerStyle}
+                pagingEnabled={true}
+                data={data?.productPhotos}
+                // keyExtractor={(index) => {}}
+                renderItem={({ item: img }) => {
+                  return (
+                    <Animated.Image
+                      source={{ uri: `http://5.182.33.12:5000/${img}` }}
+                      style={{
+                        width: '100%',
+                        height: 280,
+                        alignSelf: 'center',
+                      }}
+                      // Add any other styles or animations as needed
+                    />
+                  );
+                }}
+              />
+            )}
           </Animated.View>
         </Animated.View>
         {/* price and quantity container */}
@@ -134,7 +158,7 @@ const ProductDetails = (props: IProduct) => {
             entering={FadeInDown.delay(50).duration(500)}
             style={productDetailsStyle.ratingContainer}
           >
-            {item?.defaultVariant?.inStock > 0 && (
+            {data?.defaultVariant?.inStock > 0 && (
               <View style={productDetailsStyle.inStockContainer}>
                 <InActiveIndicator />
                 <Text style={productDetailsStyle.inStockText}>In stock</Text>
@@ -151,9 +175,11 @@ const ProductDetails = (props: IProduct) => {
               colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
               style={productDetailsStyle.discountTextCon}
             >
-              <Text style={productDetailsStyle.discountPercent}>
-                {item?.defaultVariant.discountPercentage}% off
-              </Text>
+              {data?.defaultVariant?.discountPercentage && (
+                <Text style={productDetailsStyle.discountPercent}>
+                  {data?.defaultVariant.discountPercentage}% off
+                </Text>
+              )}
             </LinearGradient>
           </Animated.View>
           <Animated.Text
@@ -161,25 +187,19 @@ const ProductDetails = (props: IProduct) => {
             numberOfLines={2}
             style={productDetailsStyle.title}
           >
-            {item?.productName}
+            {data?.productName}
           </Animated.Text>
           <Animated.View
             entering={FadeInDown.delay(50).duration(500)}
             style={productDetailsStyle.productIdandDisc}
           >
             <View style={productDetailsStyle.brandLogoContainer}>
-              {item?.productPhotos.map((img) => {
-                console.log(img, '=======================12==1=2=1=2=1=2=12==12=1=2=1=2=');
-
-                return (
-                  <Image
-                    style={productDetailsStyle.brandLogo}
-                    source={{ uri: `5.182.33.12:5000${img}` }}
-                  />
-                );
-              })}
+              <Image
+                style={productDetailsStyle.brandLogo}
+                source={{ uri: `http://5.182.33.12:5000/${data?.brand?.brandPhoto}` }}
+              />
             </View>
-            <Text style={productDetailsStyle.brandName}>{item?.brand?.brandName}</Text>
+            <Text style={productDetailsStyle.brandName}>{data?.brand?.brandName}</Text>
           </Animated.View>
           {/*
             =================================
@@ -200,13 +220,13 @@ const ProductDetails = (props: IProduct) => {
           >
             <Text style={productDetailsStyle.currentPrice}>
               <Text style={productDetailsStyle.productPrice}>
-                {item?.defaultVariant?.discountedPrice}{' '}
+                {data?.defaultVariant?.discountedPrice}{' '}
                 <Text style={productDetailsStyle.currency}>QAR</Text>
               </Text>
             </Text>
             {/* offer QAR */}
             <Text style={productDetailsStyle.discountedPrice}>
-              {item?.defaultVariant?.sellingPrice}{' '}
+              {data?.defaultVariant?.sellingPrice}{' '}
               <Text style={productDetailsStyle.discountedCurrency}>QAR</Text>
             </Text>
             {/* quantity Container */}
@@ -249,7 +269,7 @@ const ProductDetails = (props: IProduct) => {
           please solve my problem
           */}
 
-          <ProductDetailsTopTab item={item} />
+          <ProductDetailsTopTab item={data} />
         </View>
       </Animated.ScrollView>
       {/* fixed buy now button and price */}

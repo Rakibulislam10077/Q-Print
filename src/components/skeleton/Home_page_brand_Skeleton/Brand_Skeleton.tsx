@@ -1,7 +1,7 @@
-import { View, Text, FlatList, StyleSheet } from "react-native";
-import React from "react";
-import { LinearGradient } from "expo-linear-gradient";
-import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import React from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 
 const Brand_Skeleton = () => {
@@ -11,7 +11,7 @@ const Brand_Skeleton = () => {
         showsHorizontalScrollIndicator={false}
         data={[1, 1, 1, 1, 1]}
         renderItem={({}) => {
-          return <ShimmerPlaceHolder style={styles.item}></ShimmerPlaceHolder>;
+          return <ShimmerPlaceHolder style={styles.item} />;
         }}
         horizontal
       />

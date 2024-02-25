@@ -8,12 +8,10 @@ import ProductSpec from '../../components/productSpec/ProductSpec';
 import ProductDesc from '../../components/productDesc/ProductDesc';
 import ProductReviews from '../../components/productReviews/ProductReviews';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
-import { IProduct, ISpecification } from '../../types/interfaces/product.interface';
+import { IDescription, IProduct, ISpecification } from '../../types/interfaces/product.interface';
 
 const Tab = createMaterialTopTabNavigator();
 const ProductDetailsTopTab = ({ item }: { item: IProduct }) => {
-  console.log(item, '12323454354567657546453423321342345654645');
-
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <Tab.Navigator
@@ -47,7 +45,7 @@ const ProductDetailsTopTab = ({ item }: { item: IProduct }) => {
             navigation,
           }: {
             route: RouteProp<ParamListBase, 'Description'>;
-            navigation: IProduct;
+            navigation: IDescription;
           }) => <ProductDesc route={route} navigation={navigation} item={item?.description} />}
         </Tab.Screen>
         <Tab.Screen name="Reviews">

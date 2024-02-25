@@ -33,16 +33,17 @@ export const AllCartStyle = StyleSheet.create({
     color: Color.C_red,
   },
   imgCon: {
-    width: '40%',
-    height: 100,
+    width: '50%',
+    height: 110,
     alignSelf: 'center',
-    marginTop: 10,
+    marginVertical: 10,
   },
-  img: {
+  contentContainerStyle: {
     width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
+    height: 90,
   },
+  productImg: { width: '100%', height: '100%', borderRadius: 10 },
+  productImgCon: { width: '100%', height: 90 },
   descCon: {
     marginHorizontal: 20,
   },
@@ -79,5 +80,20 @@ export const AllCartStyle = StyleSheet.create({
     color: 'rgba(0,0,0,0.4)',
     fontWeight: '500',
     textDecorationLine: 'line-through',
+  },
+
+  paginationCon: {
+    // position: "absolute",
+    // bottom: 80,
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    height: 10,
+    marginTop: 5,
+  },
+  paginationDot: {
+    height: 5,
+    marginHorizontal: 5,
+    borderRadius: 10,
   },
 });
