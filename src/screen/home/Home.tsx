@@ -14,11 +14,12 @@ import Brand from '../../components/brandInHome/Brand';
 import HomePageProductCateTitle from '../../components/common/homePageProductCategory/HomePageProductCateTitle';
 import { IProduct } from '../../types/interfaces/product.interface';
 import Cart from '../../components/card/allCart/Cart';
-import Brand_Skeleton from '../../components/skeleton/Home_page_brand_Skeleton/Brand_Skeleton';
+import Brand_Skeleton from '../../components/skeleton/Brand_Skeleton';
+import Carousel_Skeleton from '../../components/skeleton/Carousel_Skeleton';
 
 const Home: React.FC = () => {
   const navigation: any = useNavigation();
-  const { data: brandData, isLoading: loadingBrand } = useGetBrandQuery(undefined);
+  const { data: brandData, isLoading: isBrandLoading } = useGetBrandQuery(undefined);
   const { data: productData, isLoading: loadingProduct } = useGetProductQuery(undefined);
 
   return (
@@ -56,11 +57,9 @@ const Home: React.FC = () => {
             }}
           />
           {/* Brand_Skeleton */}
-          {loadingBrand && <Brand_Skeleton />}
+          {isBrandLoading && <Brand_Skeleton />}
           {/* Custom Carousel */}
-          <Carousel />
-          {/* Carousel_Skeleton */}
-
+          {!isBrandLoading ? <Carousel /> : <Carousel_Skeleton />}
           {/* Offer Cart Section */}
           <OfferCart />
           {/* Cart_Skeleton */}

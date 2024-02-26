@@ -29,10 +29,12 @@ import {
   ModalCameraIcon,
   NotificationBell,
   PrivacyIcon,
+  ProfileIcon,
   ReviewIcon,
   ShareIcon,
   StartIcon,
   TermsAndConditionIcon,
+  UserIcon,
   WhiteBackArrow,
 } from '../../../assets/allSvg/AllSvg';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -163,10 +165,14 @@ const Profile: React.FC = () => {
           </TouchableOpacity>
           {/* User image */}
           <View style={profileStyle.userImg}>
-            <Image
-              style={profileStyle.img}
-              source={{ uri: `http://5.182.33.12:5000/${info?.profilePhoto}` }}
-            />
+            {!info?.profilePhoto ? (
+              <ProfileIcon />
+            ) : (
+              <Image
+                style={profileStyle.img}
+                source={{ uri: `http://5.182.33.12:5000/${info?.profilePhoto}` }}
+              />
+            )}
           </View>
           {/* Camera button */}
           <TouchableOpacity

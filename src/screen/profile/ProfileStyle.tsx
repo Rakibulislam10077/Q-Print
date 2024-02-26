@@ -27,6 +27,8 @@ export const profileStyle = StyleSheet.create({
     borderColor: Color.C_white,
     borderRadius: 50,
     marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   img: {
     height: 85,

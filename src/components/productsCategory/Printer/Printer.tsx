@@ -5,6 +5,7 @@ import Cart from '../../card/allCart/Cart';
 import { printerStyle } from './PrinterStyle';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useGetProductQuery } from '../../../redux/api/apiSlice';
+import { IProduct } from '../../../types/interfaces/product.interface';
 const cartItem = [1, 2, 3, 4, 5];
 const Printer = () => {
   const { data, isLoading } = useGetProductQuery(undefined);
@@ -12,8 +13,8 @@ const Printer = () => {
   return (
     <ScrollView style={printerStyle.container}>
       <Animated.View style={printerStyle.cartContainer}>
-        {data?.data?.map((item, index) => {
-          return <Cart key={index.toString()} item={item} />;
+        {data?.data?.map((item, index: number) => {
+          return <Cart key={index?.toString()} item={item} />;
         })}
       </Animated.View>
     </ScrollView>
