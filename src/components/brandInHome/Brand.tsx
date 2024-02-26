@@ -4,8 +4,10 @@ import { brandStyle } from './BrandStyle';
 import { useNavigation } from '@react-navigation/native';
 import { IBrand } from '../../types/interfaces/brand.interface';
 
-const Brand = (item: IBrand) => {
+const Brand = ({ item }: { item: IBrand }) => {
   const navigation: any = useNavigation();
+
+  console.log(item?.brandPhoto);
 
   return (
     <TouchableOpacity
@@ -14,7 +16,7 @@ const Brand = (item: IBrand) => {
       style={brandStyle.container}
     >
       <Image
-        style={{ width: '90%', height: 40 }}
+        style={{ width: '90%', height: 35, borderRadius: 25 }}
         source={{ uri: `http://5.182.33.12:5000/${item?.brandPhoto}` }}
       />
     </TouchableOpacity>

@@ -21,6 +21,7 @@ import TopBrand from './topBrand/TopBrand';
 import AllBrand from './allBrand/AllBrand';
 import Animated, { FadeInRight } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
+import { useGetBrandQuery } from '../../redux/api/apiSlice';
 
 const logodata = [
   {
@@ -46,6 +47,9 @@ const logodata = [
 ];
 
 const Brand = () => {
+  const { data, isLoading } = useGetBrandQuery(undefined);
+  console.log(JSON.stringify(data?.data, null, 2));
+
   return (
     <View style={brandStyle.container}>
       {/* Custom Header */}
@@ -62,7 +66,7 @@ const Brand = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingRight: 20 }}
-            data={logodata}
+            data={data?.data}
             renderItem={({ item }) => <TopBrand item={item} />}
           />
 
@@ -71,8 +75,8 @@ const Brand = () => {
             <Text style={brandStyle.allBrandText}>All Brand</Text>
             <Animated.View style={brandStyle.allCartContainer}>
               {/* Render All Brands */}
-              {logodata?.map((item) => {
-                return <AllBrand key={item?.id} item={item} />; // all brand cart
+              {data?.data?.map((item, index) => {
+                return <AllBrand key={index.toString()} item={item} />; // all brand cart
               })}
             </Animated.View>
           </View>

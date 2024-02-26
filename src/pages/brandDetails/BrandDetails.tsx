@@ -26,7 +26,6 @@ import { IBrand } from '../../types/interfaces/brand.interface';
 const BrandDetails = (props: IBrand) => {
   // Extract the brand details from route params
   const item = props?.route?.params;
-  const data = item?.item;
 
   return (
     <View style={brandDetailsStyle.container}>
@@ -38,11 +37,14 @@ const BrandDetails = (props: IBrand) => {
         <View style={brandDetailsStyle.brandLogoAndNameCon}>
           {/* Brand Logo */}
           <View style={brandDetailsStyle.logoCon}>
-            <Image style={brandDetailsStyle.logo} source={{ uri: data?.brandPhoto }} />
+            <Image
+              style={brandDetailsStyle.logo}
+              source={{ uri: `http://5.182.33.12:5000/${item?.brandPhoto}` }}
+            />
           </View>
           {/* Brand Name and Availability */}
           <View>
-            <Text style={brandDetailsStyle.brandName}>{data?.brandName}</Text>
+            <Text style={brandDetailsStyle.brandName}>{item?.brandName}</Text>
             <Text style={brandDetailsStyle.availableText}>25 Product Available</Text>
           </View>
         </View>

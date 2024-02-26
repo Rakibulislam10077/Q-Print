@@ -51,7 +51,9 @@ const Home: React.FC = () => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingRight: 20 }}
             data={brandData?.data}
-            renderItem={({ item }) => <Brand item={item} />}
+            renderItem={({ item }) => {
+              return <Brand item={item} />;
+            }}
           />
           {/* Brand_Skeleton */}
           {loadingBrand && <Brand_Skeleton />}

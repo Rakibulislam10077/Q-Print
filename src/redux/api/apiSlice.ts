@@ -2,6 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {  IProduct } from '../../types/interfaces/product.interface';
 import { IBrand } from '../../types/interfaces/brand.interface';
 import { IUserData } from '../../types/interfaces/get_me.user.interface';
+import { IAddAddress } from '../../types/interfaces/add.address.interface';
 
 
 // Define a selector to access the access token from your Redux store
@@ -25,6 +26,13 @@ export const api = createApi({
                 "authorization":`bearer ${token}`
             }}),
             
+        }),
+        postAddress: builder.mutation<{success: boolean, message: string, data: IAddAddress}, undefined>({
+            query: () =>({
+                url: '/user-address/add',
+                method: 'PATCH',
+                // body: patch
+            })
         })
     })
 })
