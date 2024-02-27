@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { Color, Font } from "../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font } from '../../constants/GlobalStyle';
 
 export const SignUpStyle = StyleSheet.create({
   container: {
@@ -7,21 +7,21 @@ export const SignUpStyle = StyleSheet.create({
     backgroundColor: Color.C_white,
   },
   gradientImgCon: {
-    width: "100%",
+    width: '100%',
   },
   gradientImg: {
-    width: "100%",
-    position: "absolute",
+    width: '100%',
+    position: 'absolute',
   },
   logoCon: {
     marginTop: 120,
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center',
   },
   inputContainer: {
     backgroundColor: Color.C_white,
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     borderRadius: 15,
     shadowColor: Color.C_shadow,
     elevation: 15,
@@ -33,7 +33,7 @@ export const SignUpStyle = StyleSheet.create({
     shadowRadius: 8,
     paddingVertical: 30,
     paddingHorizontal: 10,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 60,
   },
   signUpText: {
@@ -43,7 +43,7 @@ export const SignUpStyle = StyleSheet.create({
   },
   inputAndTextCon: {
     marginBottom: 20,
-    width: "90%",
+    width: '90%',
   },
   label: {
     fontSize: Font.Font_M,
@@ -62,8 +62,8 @@ export const SignUpStyle = StyleSheet.create({
     borderColor: Color.C_border,
     borderRadius: 6,
     height: 45,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 10,
   },
   passwordInput: {
@@ -72,25 +72,25 @@ export const SignUpStyle = StyleSheet.create({
   },
   eye: {
     width: 30,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   signUpButton: {
     height: 50,
     borderRadius: 8,
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     marginTop: 40,
   },
   actionLayer: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     fontSize: Font.Font_X,
     color: Color.C_white,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });

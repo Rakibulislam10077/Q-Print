@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { Color, Font } from "../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font } from '../../constants/GlobalStyle';
 
 export const loginStyle = StyleSheet.create({
   container: {
@@ -7,20 +7,20 @@ export const loginStyle = StyleSheet.create({
     backgroundColor: Color.C_white,
   },
   gradientContainer: {
-    width: "100%",
+    width: '100%',
   },
   gradientImg: {
-    width: "100%",
-    position: "absolute",
+    width: '100%',
+    position: 'absolute',
   },
   LogoContainer: {
     marginTop: 130,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 
   inputContainer: {
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     backgroundColor: Color.C_white,
     shadowColor: Color.C_shadow,
     elevation: 15,
@@ -34,11 +34,11 @@ export const loginStyle = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 10,
     marginTop: 60,
-    alignItems: "center",
+    alignItems: 'center',
   },
   login: {
     fontSize: Font.Font_XXL,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 10,
     color: Color.C_main,
   },
@@ -47,8 +47,8 @@ export const loginStyle = StyleSheet.create({
     color: Color.C_H_black,
   },
   inputAndLabelCon: {
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     marginBottom: 30,
   },
   label: {
@@ -65,7 +65,7 @@ export const loginStyle = StyleSheet.create({
     fontSize: Font.Font_L,
   },
   inputPasswordCon: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderRadius: 6,
     borderWidth: 1,
     borderColor: Color.C_border,
@@ -75,52 +75,53 @@ export const loginStyle = StyleSheet.create({
   inputPassword: {
     flex: 1,
     fontSize: Font.Font_L,
+    height: '100%',
   },
   eye: {
     width: 30,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   rememberAndForgotTextCon: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "90%",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '90%',
   },
   checkMarkAndRememberText: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   rememberText: {
-    color: "rgba(0,0,0,0.7)",
+    color: 'rgba(0,0,0,0.7)',
     fontSize: Font.Font_M,
     marginLeft: 10,
   },
   forgotText: {
     color: Color.C_main,
-    textDecorationLine: "underline",
+    textDecorationLine: 'underline',
   },
   loginButtonCon: {
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     height: 50,
     marginTop: 60,
     borderRadius: 6,
   },
   actionLayer: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
     fontSize: Font.Font_X,
-    fontWeight: "600",
+    fontWeight: '600',
     color: Color.C_white,
   },
   signupText: {
     fontSize: Font.Font_M,
-    color: "rgba(0,0,0,0.7)",
+    color: 'rgba(0,0,0,0.7)',
     marginTop: 30,
   },
 
@@ -136,18 +137,18 @@ export const loginStyle = StyleSheet.create({
     width: 120,
     height: 5,
     borderRadius: 5,
-    alignSelf: "center",
-    backgroundColor: "rgba(0,0,0,0.1)",
+    alignSelf: 'center',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     marginTop: 10,
   },
   forgotTextInModal: {
     fontSize: Font.Font_XL,
-    fontWeight: "600",
+    fontWeight: '600',
     marginVertical: 20,
   },
   dummyText: {
     fontSize: Font.Font_M,
-    color: "rgba(0,0,0,0.6)",
+    color: 'rgba(0,0,0,0.6)',
     lineHeight: 22,
   },
   inputAndLabeCon: {

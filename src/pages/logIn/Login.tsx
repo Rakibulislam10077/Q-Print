@@ -1,16 +1,44 @@
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { loginStyle } from './LoginStyle';
 import { Eye, EyeOf, WhiteLogo } from '../../../assets/allSvg/AllSvg';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
+import { useLoginUserMutation } from '../../redux/api/apiSlice';
 
 const Login = () => {
   const navigation: any = useNavigation();
   const [eye, setEye] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [emailOrPhone, setEmailOrPhone] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  // const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
+  const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
+  const handleSubmit = async () => {
+    if (emailOrPhone && password) {
+      await loginUser({ emailOrPhone, password });
+    } else {
+      return Alert.alert('sorry!');
+    }
+    console.log(emailOrPhone, password);
+    setEmailOrPhone('');
+    setPassword('');
+  };
+
+  // console.log(isLoading, 'loading');
+  // console.log(isError, 'error');
+  // console.log(isSuccess, 'success');
+  // console.log(EmailOrPhone, 'email');
+  // console.log(password, 'password');
+  useEffect(() => {
+    if (isSuccess) {
+      Alert.alert('success');
+      () => navigation.navigate('Home');
+    }
+  }, [isSuccess]);
+
   return (
     <View style={loginStyle.container}>
       {/* gradient background image container */}
@@ -31,7 +59,12 @@ const Login = () => {
         {/* input and label container */}
         <View style={loginStyle.inputAndLabelCon}>
           <Text style={loginStyle.label}>Email or Phone</Text>
-          <TextInput placeholder="Type here" style={loginStyle.input} />
+          <TextInput
+            placeholder="Type here"
+            style={loginStyle.input}
+            value={emailOrPhone}
+            onChangeText={(Text) => setEmailOrPhone(Text)}
+          />
         </View>
         {/* input and label container */}
         <View style={loginStyle.inputAndLabelCon}>
@@ -41,6 +74,8 @@ const Login = () => {
               style={loginStyle.inputPassword}
               secureTextEntry={eye}
               placeholder="Enter password"
+              value={password}
+              onChangeText={(Text) => setPassword(Text)}
             />
             <TouchableOpacity onPress={() => setEye(!eye)} style={loginStyle.eye}>
               {eye ? <EyeOf /> : <Eye />}
@@ -64,7 +99,11 @@ const Login = () => {
           end={{ x: 1, y: 0 }}
           style={loginStyle.loginButtonCon}
         >
-          <TouchableOpacity activeOpacity={0.7} style={loginStyle.actionLayer}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={loginStyle.actionLayer}
+            onPress={() => handleSubmit()}
+          >
             <Text style={loginStyle.buttonText}>Log in</Text>
           </TouchableOpacity>
         </LinearGradient>

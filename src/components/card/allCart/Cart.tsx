@@ -7,7 +7,12 @@ import { allCartStyle } from './AllCartStyle';
 import { IProduct, IProductPhotos } from '../../../types/interfaces/product.interface';
 import { Color } from '../../../constants/GlobalStyle';
 
-const Cart = ({ item }: IProduct) => {
+// cart props
+interface CartProps {
+  item: IProduct;
+}
+
+const Cart: React.FC<CartProps> = ({ item }) => {
   const navigation: any = useNavigation();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // console.log(

@@ -158,10 +158,17 @@ const ProductDetails = (props: IProduct) => {
             entering={FadeInDown.delay(50).duration(500)}
             style={productDetailsStyle.ratingContainer}
           >
-            {data?.defaultVariant?.inStock > 0 && (
+            {data?.defaultVariant?.inStock > 0 ? (
               <View style={productDetailsStyle.inStockContainer}>
                 <InActiveIndicator />
                 <Text style={productDetailsStyle.inStockText}>In stock</Text>
+              </View>
+            ) : (
+              <View style={productDetailsStyle.inStockContainer}>
+                <InActiveIndicator />
+                <Text style={[productDetailsStyle.inStockText, { color: Color.C_red }]}>
+                  In stock
+                </Text>
               </View>
             )}
             <Text style={productDetailsStyle.verticalDivider}>|</Text>

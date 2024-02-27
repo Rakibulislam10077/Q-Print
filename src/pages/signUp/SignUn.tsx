@@ -74,9 +74,9 @@ const SignUp = () => {
         </View>
         {/* sign up button  */}
         <LinearGradient
-          colors={['#C83B62', '#7F35CD ']}
+          colors={['#C83B62', '#7F35CD']}
           start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
+          end={{ x: 1, y: 1 }}
           style={SignUpStyle.signUpButton}
         >
           <TouchableOpacity
