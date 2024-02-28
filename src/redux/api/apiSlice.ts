@@ -34,6 +34,13 @@ export const api = createApi({
         body,
       }),
     }),
+    getAddress: builder.mutation({
+      query: (body) =>({
+       url: '/user-address/add',
+       method: 'POST',
+       body 
+      })
+    })
   }),
 });
 export const { useGetProductQuery, useGetBrandQuery, useGetUserQuery, useLoginUserMutation } = api;

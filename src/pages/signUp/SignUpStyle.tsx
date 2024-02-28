@@ -15,8 +15,9 @@ export const SignUpStyle = StyleSheet.create({
   },
   logoCon: {
     marginTop: 120,
-    width: '100%',
     alignItems: 'center',
+    flexDirection: 'row',
+    alignSelf: 'center',
   },
   inputContainer: {
     backgroundColor: Color.C_white,

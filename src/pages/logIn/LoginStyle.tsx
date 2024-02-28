@@ -16,6 +16,8 @@ export const loginStyle = StyleSheet.create({
   LogoContainer: {
     marginTop: 130,
     alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   inputContainer: {
@@ -45,6 +47,7 @@ export const loginStyle = StyleSheet.create({
   dummy: {
     fontSize: Font.Font_L,
     color: Color.C_H_black,
+    marginBottom: 20,
   },
   inputAndLabelCon: {
     width: '90%',
@@ -64,11 +67,28 @@ export const loginStyle = StyleSheet.create({
     height: 45,
     fontSize: Font.Font_L,
   },
+  failedInput: {
+    borderWidth: 1,
+    borderColor: Color.C_main,
+    borderRadius: 6,
+    padding: 10,
+    height: 45,
+    fontSize: Font.Font_L,
+  },
+
   inputPasswordCon: {
     flexDirection: 'row',
     borderRadius: 6,
     borderWidth: 1,
     borderColor: Color.C_border,
+    height: 45,
+    padding: 10,
+  },
+  failedPassword: {
+    flexDirection: 'row',
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: Color.C_main,
     height: 45,
     padding: 10,
   },
@@ -101,11 +121,22 @@ export const loginStyle = StyleSheet.create({
     color: Color.C_main,
     textDecorationLine: 'underline',
   },
+  errorMessageCon: {
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  errorMessage: {
+    fontSize: Font.Font_M,
+    color: Color.C_main,
+    fontWeight: '600',
+  },
   loginButtonCon: {
     width: '90%',
     alignSelf: 'center',
     height: 50,
-    marginTop: 60,
+    marginTop: 20,
     borderRadius: 6,
   },
   actionLayer: {

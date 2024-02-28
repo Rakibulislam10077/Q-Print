@@ -1,9 +1,20 @@
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { SignUpStyle } from './SignUpStyle';
-import { Eye, EyeOf, WhiteLogo } from '../../../assets/allSvg/AllSvg';
+import {
+  Eye,
+  EyeOf,
+  ILogo,
+  NLogo,
+  PLogo,
+  QLogo,
+  RLogo,
+  TLogo,
+  WhiteLogo,
+} from '../../../assets/allSvg/AllSvg';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import Animated, { ZoomInUp } from 'react-native-reanimated';
 
 const SignUp = () => {
   const [eye, setEye] = useState(true);
@@ -19,7 +30,36 @@ const SignUp = () => {
       </View>
       {/* logo container */}
       <View style={SignUpStyle.logoCon}>
-        <WhiteLogo />
+        <Animated.View entering={ZoomInUp.delay(50).duration(500).springify().damping(14)}>
+          <QLogo />
+        </Animated.View>
+        <Animated.View entering={ZoomInUp.delay(100).duration(600).springify().damping(14)}>
+          <PLogo />
+        </Animated.View>
+        <Animated.View
+          entering={ZoomInUp.delay(200).duration(700).springify().damping(14)}
+          style={logoStyle}
+        >
+          <RLogo />
+        </Animated.View>
+        <Animated.View
+          entering={ZoomInUp.delay(300).duration(800).springify().damping(14)}
+          style={logoStyle}
+        >
+          <ILogo />
+        </Animated.View>
+        <Animated.View
+          entering={ZoomInUp.delay(400).duration(900).springify().damping(14)}
+          style={logoStyle}
+        >
+          <NLogo />
+        </Animated.View>
+        <Animated.View
+          entering={ZoomInUp.delay(500).duration(1000).springify().damping(14)}
+          style={logoStyle}
+        >
+          <TLogo />
+        </Animated.View>
       </View>
       {/* input container */}
       <View style={SignUpStyle.inputContainer}>
@@ -92,3 +132,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+const logoStyle = { marginBottom: 5, marginLeft: 2 };
