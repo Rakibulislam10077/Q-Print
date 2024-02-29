@@ -233,7 +233,7 @@ const BottomTab = () => {
 
 const Index = () => {
   return (
-    <Stack.Navigator initialRouteName="login">
+    <Stack.Navigator initialRouteName="BottomTab">
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />

@@ -1,4 +1,13 @@
-import { View, Text, Image, TextInput, TouchableOpacity, Alert, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  Platform,
+  Dimensions,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { loginStyle } from './LoginStyle';
 import {

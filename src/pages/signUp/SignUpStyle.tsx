@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Color, Font } from '../../constants/GlobalStyle';
-
+const SCREEN_HEIGHT = Dimensions.get('screen').height;
 export const SignUpStyle = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,7 +14,7 @@ export const SignUpStyle = StyleSheet.create({
     position: 'absolute',
   },
   logoCon: {
-    marginTop: 120,
+    marginTop: SCREEN_HEIGHT <= 700 ? 50 : 120,
     alignItems: 'center',
     flexDirection: 'row',
     alignSelf: 'center',
@@ -32,15 +32,15 @@ export const SignUpStyle = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 8,
-    paddingVertical: 30,
+    paddingVertical: SCREEN_HEIGHT <= 700 ? 15 : 30,
     paddingHorizontal: 10,
     alignItems: 'center',
-    marginTop: 60,
+    marginTop: SCREEN_HEIGHT <= 700 ? 25 : 60,
   },
   signUpText: {
     fontSize: Font.Font_XXXL,
     color: Color.C_main,
-    marginBottom: 30,
+    marginBottom: SCREEN_HEIGHT <= 700 ? 15 : 30,
   },
   inputAndTextCon: {
     marginBottom: 20,
@@ -81,7 +81,7 @@ export const SignUpStyle = StyleSheet.create({
     borderRadius: 8,
     width: '90%',
     alignSelf: 'center',
-    marginTop: 40,
+    marginTop: SCREEN_HEIGHT <= 700 ? 20 : 40,
   },
   actionLayer: {
     width: '100%',

@@ -1,4 +1,4 @@
-export interface IAddAddress{
+export interface IMeAddAddress{
     firstName: string
         lastName: string
         state: string,

@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Color, Font } from '../../constants/GlobalStyle';
-
+const SCREEN_HEIGHT = Dimensions.get('screen').height;
+console.log(SCREEN_HEIGHT);
 export const loginStyle = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,7 +15,7 @@ export const loginStyle = StyleSheet.create({
     position: 'absolute',
   },
   LogoContainer: {
-    marginTop: 130,
+    marginTop: SCREEN_HEIGHT <= 667 ? 50 : 130,
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
@@ -35,7 +36,7 @@ export const loginStyle = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 20,
     paddingHorizontal: 10,
-    marginTop: 60,
+    marginTop: SCREEN_HEIGHT <= 667 ? 30 : 60,
     alignItems: 'center',
   },
   login: {

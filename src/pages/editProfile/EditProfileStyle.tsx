@@ -27,43 +27,13 @@ export const editProfileStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bodyContainer: {
+  bodyCon: {
     flex: 1,
     backgroundColor: Color.C_white,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
     marginTop: 35,
-    paddingTop: 30,
-    paddingHorizontal: 30,
-  },
-  label: {
-    fontSize: Font.Font_L,
-    color: 'rgba(0,0,0,0.3)',
-    marginVertical: 10,
-  },
-  input: {
-    fontSize: Font.Font_X,
-  },
-  dividerStyle: {
-    marginTop: 10,
-  },
-  updateButton: {
-    width: '85%',
-    height: 50,
-    borderRadius: 25,
-    alignSelf: 'center',
-    // marginTop: 'auto',
-    marginTop: 'auto',
-    marginBottom: 20,
-  },
-  updateButtonTouchAction: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  buttonText: {
-    fontSize: Font.Font_X,
-    color: Color.C_white,
+    paddingTop: 20,
+    paddingHorizontal: 20,
   },
 });

@@ -15,7 +15,7 @@
  * @returns JSX.Element
  */
 
-import { View, Text, TouchableOpacity, Platform, Image, TextInput, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, Image } from 'react-native';
 import React, { useState } from 'react';
 import { profileStyle } from '../../screen/profile/ProfileStyle';
 import {
@@ -27,10 +27,11 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { editProfileStyle } from './EditProfileStyle';
-import { Divider } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
 import { StatusBar } from 'expo-status-bar';
+import EditProfileTopTab from '../../routes/material_Tab/EditProfileTopTab';
+import { Color } from '../../constants/GlobalStyle';
 
 const EditProfile = () => {
   const navigation: any = useNavigation();
@@ -113,39 +114,8 @@ const EditProfile = () => {
           </TouchableOpacity>
         </View>
         {/* Body container */}
-        <View style={editProfileStyle.bodyContainer}>
-          <ScrollView>
-            <View>
-              <Text style={editProfileStyle.label}>Full Name</Text>
-              <TextInput style={editProfileStyle.input} placeholder="Mohammad Shahin" />
-            </View>
-            <Divider style={editProfileStyle.dividerStyle} />
-            <View>
-              <Text style={editProfileStyle.label}>Email</Text>
-              <TextInput style={editProfileStyle.input} placeholder="hello@expersquad.net" />
-            </View>
-            <Divider style={editProfileStyle.dividerStyle} />
-            <View>
-              <Text style={editProfileStyle.label}>Phone Number</Text>
-              <TextInput style={editProfileStyle.input} placeholder="01601113299" />
-            </View>
-            <Divider style={editProfileStyle.dividerStyle} />
-            <View>
-              <Text style={editProfileStyle.label}>Username</Text>
-              <TextInput style={editProfileStyle.input} placeholder="Rakibulislam118" />
-            </View>
-            {/* Update button */}
-          </ScrollView>
-          <LinearGradient
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            colors={['#C83B62', '#7F35CD']}
-            style={editProfileStyle.updateButton}
-          >
-            <TouchableOpacity activeOpacity={0.5} style={editProfileStyle.updateButtonTouchAction}>
-              <Text style={editProfileStyle.buttonText}>Update</Text>
-            </TouchableOpacity>
-          </LinearGradient>
+        <View style={editProfileStyle.bodyCon}>
+          <EditProfileTopTab />
         </View>
       </LinearGradient>
 
