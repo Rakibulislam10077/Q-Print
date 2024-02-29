@@ -13,8 +13,12 @@ import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color, Font } from '../../constants/GlobalStyle';
 import { editProfileStyle } from '../../pages/editProfile/EditProfileStyle';
+import { useGetUserQuery } from '../../redux/api/apiSlice';
 
 const EditUserInfo = () => {
+  const { data, isLoading } = useGetUserQuery(undefined);
+  console.log(JSON.stringify(data?.data, null, 2));
+  const info = data?.data?.defaultAddress?.addressId;
   return (
     <View style={styles.bodyContainer}>
       <ScrollView>
@@ -22,7 +26,7 @@ const EditUserInfo = () => {
         <TextInput
           style={styles.input}
           placeholderTextColor={Color.C_black_eight}
-          placeholder="Mohammad"
+          placeholder={`${info?.firstName}`}
         />
 
         <Divider style={styles.dividerStyle} />
@@ -31,7 +35,7 @@ const EditUserInfo = () => {
         <TextInput
           style={styles.input}
           placeholderTextColor={Color.C_black_eight}
-          placeholder="Shahin"
+          placeholder={`${info?.lastName}`}
         />
 
         <Divider style={styles.dividerStyle} />
@@ -49,7 +53,7 @@ const EditUserInfo = () => {
         <TextInput
           style={styles.input}
           placeholderTextColor={Color.C_black_eight}
-          placeholder="01601113299"
+          placeholder={`${info?.phoneNumber}`}
         />
 
         <Divider style={styles.dividerStyle} />

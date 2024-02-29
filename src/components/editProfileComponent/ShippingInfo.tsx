@@ -3,7 +3,6 @@ import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color, Font } from '../../constants/GlobalStyle';
 import React from 'react';
-
 const ShippingInfo = () => {
   return (
     <View style={styles.bodyContainer}>

@@ -1,11 +1,11 @@
 export interface IUserData {
-  defaultAddress?: {
+  defaultAddress: {
     isBilling?: boolean;
-    addressId?: string | null;
+    addressId: IAddressId;
   };
-  billingAddress?: {
+  billingAddress: {
     isDefault?: boolean;
-    addressId?: string;
+    addressId: string;
   };
   _id: string;
   fullName: string;
@@ -23,4 +23,20 @@ export interface IUserData {
   uid?: string;
   __v?: number;
   id?: string;
+}
+
+export interface IAddressId {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  state: string;
+  country: string;
+  streetAddress: string;
+  phoneNumber: string;
+  zipCode: number;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  id: string;
 }
