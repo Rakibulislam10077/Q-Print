@@ -19,6 +19,7 @@ import NotificationItem from '../../components/notificationItem/NotificationItem
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { notificationStyle } from './NotificationStyle';
 import { StatusBar } from 'expo-status-bar';
+import { useSharedValue } from 'react-native-reanimated';
 
 // Sample data for notifications
 const logodata = [

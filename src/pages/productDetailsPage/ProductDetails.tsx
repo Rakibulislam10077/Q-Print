@@ -1,9 +1,16 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { CartBag, FavIcon, Goback, InActiveIndicator } from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
-import Animated, { FadeInDown, FadeInLeft, FadeInRight } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  FadeInLeft,
+  FadeInRight,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
 
 import { productDetailsStyle } from './ProductDetailsStyle';
@@ -17,6 +24,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import ProductDetailSkeleton from '../../components/skeleton/ProductDetails.skeleton';
 import { useGetProductQuery } from '../../redux/api/apiSlice';
 import * as ImageManipulator from 'expo-image-manipulator';
+import { myCartStyle } from '../myCart/MyCartStyle';
 
 const ProductDetails = (props: IProduct) => {
   const data: IProduct = props?.route?.params;
@@ -95,6 +103,37 @@ const ProductDetails = (props: IProduct) => {
 
   //   compressImage();
   // }, []);
+
+  const [currentAmount, setCurrentAmount] = useState(20000);
+
+  const animation = useRef<any>(null);
+  // State variables to track current and target amounts
+  const targetAmount = 30000;
+
+  // Calculate the percentage progress towards the target amount
+  const percentageProgress =
+    currentAmount === 0 ? 0 : Math.round((currentAmount / targetAmount) * 100);
+
+  // Shared value for animated progress
+  const animatedProgress = useSharedValue(0);
+
+  // Effect to initialize progress animation when currentAmount changes
+  useEffect(() => {
+    const percentage = Math.min(100, Math.round((currentAmount / targetAmount) * 100));
+    animatedProgress.value = withTiming(percentage / 100, { duration: 1000 });
+  }, [currentAmount, targetAmount]);
+
+  // Animated style for the progress bar
+  const progressStyle = useAnimatedStyle(() => {
+    return {
+      width: `${animatedProgress.value * 100}%`,
+      height: 5,
+      backgroundColor: Color.C_main,
+      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10,
+      position: 'relative',
+    };
+  });
 
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
@@ -221,6 +260,7 @@ const ProductDetails = (props: IProduct) => {
             <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
             <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
           </View> */}
+
           <Animated.View
             entering={FadeInDown.delay(50).duration(500)}
             style={productDetailsStyle.priceContainer}
@@ -269,6 +309,19 @@ const ProductDetails = (props: IProduct) => {
               </LinearGradient>
             </View>
           </Animated.View>
+          <View style={{ position: 'relative' }}>
+            <View style={productDetailsStyle.customProgressBG}>
+              <Animated.View style={progressStyle}>
+                <View style={productDetailsStyle.percentageValueCon}>
+                  {currentAmount >= targetAmount ? (
+                    <Text style={{ fontSize: 12 }}>100</Text>
+                  ) : (
+                    <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
+                  )}
+                </View>
+              </Animated.View>
+            </View>
+          </View>
         </View>
         {/* view more information container */}
         <View style={{ height: height - 100 }}>

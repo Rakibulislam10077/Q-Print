@@ -39,7 +39,6 @@ const MyCart = () => {
   const [isLottie, setIsLottie] = useState<boolean>(true);
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
   const [currentAmount, setCurrentAmount] = useState(30000);
-
   const animation = useRef<any>(null);
   // State variables to track current and target amounts
   const targetAmount = 30000;
@@ -103,7 +102,7 @@ const MyCart = () => {
       </View>
 
       {/* FlatList to render cart items */}
-      <FlatList
+      <Animated.FlatList
         data={[1, 1, 1, 1, 1, 1, 1]}
         renderItem={({ i }: any) => {
           return <AddToCart />;

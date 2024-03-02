@@ -5,7 +5,7 @@ export interface IUserData {
   };
   billingAddress: {
     isDefault?: boolean;
-    addressId: string;
+    addressId: IAddressId;
   };
   _id: string;
   fullName: string;

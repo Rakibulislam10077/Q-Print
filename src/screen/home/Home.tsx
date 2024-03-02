@@ -17,7 +17,11 @@ import Cart from '../../components/card/allCart/Cart';
 import Brand_Skeleton from '../../components/skeleton/Brand_Skeleton';
 import Carousel_Skeleton from '../../components/skeleton/Carousel_Skeleton';
 
-const Home: React.FC = () => {
+type HomeProps = {
+  handleScroll: (event: any) => void;
+};
+
+const Home = ({ handleScroll }: HomeProps) => {
   const navigation: any = useNavigation();
   const { data: brandData, isLoading: isBrandLoading } = useGetBrandQuery(undefined);
   const { data: productData, isLoading: loadingProduct } = useGetProductQuery(undefined);
@@ -29,7 +33,7 @@ const Home: React.FC = () => {
         <HomePageTopCon />
 
         {/* Body container */}
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView onScroll={handleScroll} style={{ flex: 1 }}>
           {/* Search and Three-line Container */}
           <Animated.View
             entering={FadeInLeft.delay(50).duration(150)}

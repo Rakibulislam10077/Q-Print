@@ -1,14 +1,36 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ViewToken } from 'react-native';
 import React from 'react';
 import { favoriteCartStyle } from './FavoriteCartStyle';
-import { CartBag, CartIcon, RedClose } from '../../../assets/allSvg/AllSvg';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import { CartBag, RedClose } from '../../../assets/allSvg/AllSvg';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-const FavoriteCart = (item: any) => {
+type ListItemProps = {
+  viewableItems: Animated.SharedValue<ViewToken[]>;
+  item: any;
+};
+
+// const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity)
+
+const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
+  const rStyle = useAnimatedStyle(() => {
+    const isVisible = Boolean(
+      viewableItems.value
+        .filter((item) => item.isViewable)
+        .find((viewableItems) => viewableItems.item.id === item.id)
+    );
+    return {
+      opacity: withTiming(isVisible ? 1 : 0),
+      transform: [
+        {
+          scale: withTiming(isVisible ? 1 : 0.6),
+        },
+      ],
+    };
+  }, []);
   return (
     <Animated.View
-      entering={FadeInDown.delay(50).duration(500)}
-      style={favoriteCartStyle.container}
+      // entering={FadeInDown.delay(50).duration(500)}
+      style={[favoriteCartStyle.container, rStyle]}
     >
       <View style={favoriteCartStyle.itemCon}>
         <View style={favoriteCartStyle.imgCon}>

@@ -45,7 +45,7 @@ const Login = () => {
         ? Alert.alert('sorry! you must fill in these fields')
         : setDisableButton(true);
     }
-    console.log(phoneNumber, password);
+    // console.log(phoneNumber, password);
     setPhoneNumber('');
     setPassword('');
   };

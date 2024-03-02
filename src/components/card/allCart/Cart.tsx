@@ -15,12 +15,6 @@ interface CartProps {
 const Cart: React.FC<CartProps> = ({ item }) => {
   const navigation: any = useNavigation();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  // console.log(
-  //   JSON.stringify(item, null, 2),
-  //   'sdflkas;lkdjf;lkajsdfl;jals;kdjflkajsd;lkfjl;askdjfl;kjasdl;kfj;laksjdf;ljasdkl;jf'
-  // );
-
-  // console.log(JSON.stringify(PRODUCT, null, 2));
 
   return (
     <Animated.View style={AllCartStyle.container} entering={FadeInDown.delay(50).duration(500)}>

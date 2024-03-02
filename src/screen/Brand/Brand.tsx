@@ -23,32 +23,9 @@ import Animated, { FadeInRight } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
 import { useGetBrandQuery } from '../../redux/api/apiSlice';
 
-const logodata = [
-  {
-    id: 1,
-    img: require('../../../assets/image/adidas.png'),
-  },
-  {
-    id: 2,
-    img: require('../../../assets/image/adidas.png'),
-  },
-  {
-    id: 3,
-    img: require('../../../assets/image/adidas.png'),
-  },
-  {
-    id: 4,
-    img: require('../../../assets/image/adidas.png'),
-  },
-  {
-    id: 5,
-    img: require('../../../assets/image/adidas.png'),
-  },
-];
-
 const Brand = () => {
   const { data, isLoading } = useGetBrandQuery(undefined);
-  console.log(JSON.stringify(data?.data, null, 2));
+  // console.log(JSON.stringify(data?.data, null, 2));
 
   return (
     <View style={brandStyle.container}>

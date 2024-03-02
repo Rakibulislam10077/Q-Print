@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
-import { Color, Font, shadows } from "../../../constants/GlobalStyle";
+import { StyleSheet } from 'react-native';
+import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 
 export const topBrandStyle = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
     width: 70,
     marginLeft: 15,
   },
@@ -22,19 +22,20 @@ export const topBrandStyle = StyleSheet.create({
     },
     shadowRadius: shadows.radius_1,
     shadowOpacity: shadows.opacity_1,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
-    width: 40,
-    height: 40,
-    resizeMode: "contain",
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+    borderRadius: 25,
   },
   brandName: {
-    textAlign: "center",
-    alignSelf: "center",
+    textAlign: 'center',
+    alignSelf: 'center',
     fontSize: Font.Font_M,
-    color: "rgba(0,0,0,0.7)",
+    color: 'rgba(0,0,0,0.7)',
   },
 });

@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { Color, Font } from '../../constants/GlobalStyle';
 const SCREEN_HEIGHT = Dimensions.get('screen').height;
-console.log(SCREEN_HEIGHT);
+// console.log(SCREEN_HEIGHT);
 export const loginStyle = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ViewToken } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
@@ -6,6 +6,7 @@ import { favoriteStyle } from './FavoriteStyle';
 import FavoriteCart from '../../components/favoriteCartComponents/FavoriteCart';
 import { Font } from '../../constants/GlobalStyle';
 import { StatusBar } from 'expo-status-bar';
+import Animated, { useSharedValue } from 'react-native-reanimated';
 
 const logodata = [
   {
@@ -28,9 +29,30 @@ const logodata = [
     id: 5,
     img: require('../../../assets/image/adidas.png'),
   },
+  {
+    id: 6,
+    img: require('../../../assets/image/adidas.png'),
+  },
+  {
+    id: 7,
+    img: require('../../../assets/image/adidas.png'),
+  },
+  {
+    id: 8,
+    img: require('../../../assets/image/adidas.png'),
+  },
+  {
+    id: 9,
+    img: require('../../../assets/image/adidas.png'),
+  },
+  {
+    id: 10,
+    img: require('../../../assets/image/adidas.png'),
+  },
 ];
 
 const Favorite = () => {
+  const viewableItems = useSharedValue<ViewToken[]>([]);
   return (
     <View style={favoriteStyle.container}>
       {/* ===================== */}
@@ -41,8 +63,11 @@ const Favorite = () => {
       <View style={favoriteStyle.bodyContainer}>
         <FlatList
           data={logodata}
+          onViewableItemsChanged={({ viewableItems: vItems }) => {
+            viewableItems.value = vItems;
+          }}
           renderItem={({ item }) => {
-            return <FavoriteCart item={item} />;
+            return <FavoriteCart item={item} viewableItems={viewableItems} />;
           }}
           ListFooterComponent={
             <TouchableOpacity style={favoriteStyle.footerButton}>

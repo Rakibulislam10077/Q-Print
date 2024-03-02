@@ -6,7 +6,7 @@ import { IMeAddAddress } from '../../types/interfaces/me.address.interface';
 
 // Define a selector to access the access token from your Redux store
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDkxODY3MjEsImV4cCI6MTcwOTI3MzEyMX0.p6HIklaHeJgXN8b1BKcAP_aOUftjf1mD143UPmcp4s8';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDkzNTIyNjksImV4cCI6MTcwOTQzODY2OX0.Ex8OC7BPJ760l1tdwMzsB_UbzL3X9T7TCOPteUC5vfw';
 const url = 'http://5.182.33.12:5000/api/v1';
 export const api = createApi({
   reducerPath: 'api',

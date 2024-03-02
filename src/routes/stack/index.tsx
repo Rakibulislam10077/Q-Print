@@ -1,5 +1,5 @@
-import { View, Text, Image, Platform, Dimensions } from 'react-native';
-import React from 'react';
+import { View, Text, Image, Platform, Dimensions, Animated } from 'react-native';
+import React, { useRef } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../../screen/home/Home';
@@ -36,8 +36,24 @@ import OrderConfirmation from '../../pages/custom_order/customOrderConfirmation/
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const { width } = Dimensions.get('window');
 const BottomTab = () => {
-  const { width } = Dimensions.get('window');
+  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const translateY = scrollY.interpolate({
+    inputRange: [0, 100], // adjust the threshold as needed
+    outputRange: [0, 100], // adjust the distance to move the tab bar
+    extrapolate: 'clamp',
+  });
+
+  const handleScroll = (event: any) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    // console.log('Offset Y:', offsetY);
+    if (offsetY <= 200) {
+      scrollY.setValue(offsetY);
+    }
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -54,6 +70,7 @@ const BottomTab = () => {
           shadowOpacity: 0.2,
           shadowRadius: 3,
           height: Platform.OS === 'ios' ? 80 : 70,
+          transform: [{ translateY: translateY }],
         },
         tabBarHideOnKeyboard: true,
       }}
@@ -91,8 +108,9 @@ const BottomTab = () => {
           headerTitleStyle: { marginTop: 30 },
         }}
         name="Home"
-        component={Home}
-      />
+      >
+        {(props) => <Home {...props} handleScroll={handleScroll} />}
+      </Tab.Screen>
       <Tab.Screen
         options={{
           headerShown: false,

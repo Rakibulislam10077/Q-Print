@@ -17,7 +17,6 @@ import { useGetUserQuery } from '../../redux/api/apiSlice';
 
 const EditUserInfo = () => {
   const { data, isLoading } = useGetUserQuery(undefined);
-  console.log(JSON.stringify(data?.data, null, 2));
   const info = data?.data?.defaultAddress?.addressId;
   return (
     <View style={styles.bodyContainer}>

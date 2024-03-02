@@ -22,7 +22,7 @@
  * @returns JSX.Element
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ScrollView, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -32,6 +32,7 @@ import { searchStyle } from './SearchStyle';
 import { Color } from '../../constants/GlobalStyle';
 import Cart from '../../components/card/allCart/Cart';
 import BrandInGlobalSearch from '../../components/globalSearchCom/brand/BrandInGlobalSearch';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 const Search = () => {
   const navigation: any = useNavigation();
@@ -69,7 +70,7 @@ const Search = () => {
         >
           <Goback />
         </TouchableOpacity>
-        <View style={searchStyle.searchContainer}>
+        <Animated.View style={[searchStyle.searchContainer]}>
           <Magnify />
           <TextInput
             onEndEditing={handleEndEditing}
@@ -80,7 +81,7 @@ const Search = () => {
             autoFocus={true}
             onTextInput={onChangeTextInput}
           />
-        </View>
+        </Animated.View>
         <TouchableOpacity
           onPress={() => navigation.navigate('MyCart')}
           activeOpacity={0.7}

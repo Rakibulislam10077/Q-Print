@@ -3,7 +3,11 @@ import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color, Font } from '../../constants/GlobalStyle';
 import React from 'react';
+import { useGetUserQuery } from '../../redux/api/apiSlice';
 const ShippingInfo = () => {
+  const { data, isLoading } = useGetUserQuery(undefined);
+  console.log(JSON.stringify(data?.data, null, 2));
+  const info = data?.data?.billingAddress?.addressId;
   return (
     <View style={styles.bodyContainer}>
       <ScrollView>
@@ -12,7 +16,7 @@ const ShippingInfo = () => {
           <TextInput
             style={styles.input}
             placeholderTextColor={Color.C_black_eight}
-            placeholder="Mohammad Shahin"
+            placeholder={`${info?.country}`}
           />
         </View>
         <Divider style={styles.dividerStyle} />
@@ -21,7 +25,7 @@ const ShippingInfo = () => {
           <TextInput
             style={styles.input}
             placeholderTextColor={Color.C_black_eight}
-            placeholder="hello@expersquad.net"
+            placeholder={`${info?.state}`}
           />
         </View>
         <Divider style={styles.dividerStyle} />
@@ -30,7 +34,7 @@ const ShippingInfo = () => {
           <TextInput
             style={styles.input}
             placeholderTextColor={Color.C_black_eight}
-            placeholder="01601113299"
+            placeholder={`${info?.zipCode}`}
           />
         </View>
         <Divider style={styles.dividerStyle} />
@@ -49,7 +53,8 @@ const ShippingInfo = () => {
           <TextInput
             style={styles.input}
             placeholderTextColor={Color.C_black_eight}
-            placeholder="Rakibulislam118"
+            placeholder={`${info?.streetAddress}`}
+            numberOfLines={2}
           />
         </View>
         <Divider style={styles.dividerStyle} />
