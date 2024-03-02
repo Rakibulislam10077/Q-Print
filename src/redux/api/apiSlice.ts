@@ -45,7 +45,14 @@ export const api = createApi({
         authorization: `bearer ${token}`,
        } 
       })
+    }),
+    postAddress: builder.mutation<{message: string, success: string, data: IMeAddAddress}, undefined>({
+      query: (body) =>({
+       url: '/user-address/add',
+       method: 'POST',
+       body
+      })
     })
   }),
 });
-export const { useGetProductQuery, useGetBrandQuery, useGetUserQuery, useLoginUserMutation, useGetQueryProductQuery, useGetAddressQuery } = api;
+export const { useGetProductQuery, useGetBrandQuery, useGetUserQuery, useLoginUserMutation, useGetQueryProductQuery, useGetAddressQuery, usePostAddressMutation } = api;

@@ -19,10 +19,10 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
         .find((viewableItems) => viewableItems.item.id === item.id)
     );
     return {
-      opacity: withTiming(isVisible ? 1 : 0),
+      opacity: withTiming(isVisible ? 1 : 0.7),
       transform: [
         {
-          scale: withTiming(isVisible ? 1 : 0.6),
+          scaleX: withTiming(isVisible ? 1 : 0.6),
         },
       ],
     };

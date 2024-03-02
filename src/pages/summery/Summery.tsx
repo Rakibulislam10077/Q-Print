@@ -43,6 +43,15 @@ const Summery: React.FC = () => {
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
   const [defaultLocation, setDefaultLocation] = useState<boolean>(false);
+  const [textInputValues, setTextInputValues] = useState({
+    input1: '',
+    input2: '',
+    input3: '',
+    input4: '',
+    input5: '',
+    input6: '',
+    // Add more input fields as needed
+  });
   const height = useSharedValue(100);
 
   const openBox = () => {
@@ -58,6 +67,25 @@ const Summery: React.FC = () => {
       height: height.value,
     };
   });
+
+  const handleTextInputChange = (text: string, inputIdentifier: string) => {
+    setTextInputValues((prevValues) => ({
+      ...prevValues,
+      [inputIdentifier]: text,
+    }));
+  };
+
+  const handleSubmit = () => {
+    // Access values from textInputValues state object
+    console.log('Input 1:', textInputValues.input1);
+    console.log('Input 2:', textInputValues.input2);
+    console.log('Input 3:', textInputValues.input3);
+    console.log('Input 4:', textInputValues.input4);
+    console.log('Input 5:', textInputValues.input5);
+    console.log('Input 6:', textInputValues.input6);
+    // Add more as needed
+    // navigation.navigate('Payment')
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -149,8 +177,16 @@ const Summery: React.FC = () => {
                   entering={FadeInUp.delay(50).duration(500)}
                   style={summeryStyle.nameInputContainer}
                 >
-                  <TextInput style={summeryStyle.nameInput} placeholder="First Name" />
-                  <TextInput style={summeryStyle.nameInput} placeholder="Last Name" />
+                  <TextInput
+                    style={summeryStyle.nameInput}
+                    onChangeText={(text) => handleTextInputChange(text, 'input1')}
+                    placeholder="First Name"
+                  />
+                  <TextInput
+                    style={summeryStyle.nameInput}
+                    onChangeText={(text) => handleTextInputChange(text, 'input2')}
+                    placeholder="Last Name"
+                  />
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(50).duration(510)}>
                   <TouchableOpacity activeOpacity={0.7} style={summeryStyle.inputBox}>
@@ -166,22 +202,36 @@ const Summery: React.FC = () => {
                   </TouchableOpacity>
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(50).duration(530)}>
-                  <TouchableOpacity activeOpacity={0.7} style={summeryStyle.inputBox}>
-                    <Text style={summeryStyle.inputText}>Street address</Text>
-                  </TouchableOpacity>
+                  <TextInput
+                    style={[summeryStyle.inputBox]}
+                    onChangeText={(text) => handleTextInputChange(text, 'input3')}
+                    placeholder="street address"
+                  />
                 </Animated.View>
-                <Animated.View entering={FadeInUp.delay(50).duration(540)}>
+                {/* <Animated.View entering={FadeInUp.delay(50).duration(540)}>
                   <TextInput placeholder="" />
-                </Animated.View>
+                </Animated.View> */}
                 <Animated.View
                   entering={FadeInUp.delay(50).duration(550)}
                   style={summeryStyle.nameInputContainer}
                 >
-                  <TextInput style={summeryStyle.nameInput} placeholder="Town & City" />
-                  <TextInput style={summeryStyle.nameInput} placeholder="Zip Code" />
+                  <TextInput
+                    style={summeryStyle.nameInput}
+                    onChangeText={(text) => handleTextInputChange(text, 'input4')}
+                    placeholder="Town & City"
+                  />
+                  <TextInput
+                    style={summeryStyle.nameInput}
+                    onChangeText={(text) => handleTextInputChange(text, 'input5')}
+                    placeholder="Zip Code"
+                  />
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(50).duration(560)}>
-                  <TextInput style={summeryStyle.numberInput} placeholder="Town & City" />
+                  <TextInput
+                    style={summeryStyle.numberInput}
+                    onChangeText={(text) => handleTextInputChange(text, 'input6')}
+                    placeholder="Town & City"
+                  />
                 </Animated.View>
                 {/* Save as Default Address Option */}
                 <Animated.View entering={FadeInUp.delay(50).duration(570)}>
@@ -215,7 +265,9 @@ const Summery: React.FC = () => {
       >
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('Payment')}
+          onPress={() => {
+            handleSubmit();
+          }}
           style={{
             width: '100%',
             height: '100%',
