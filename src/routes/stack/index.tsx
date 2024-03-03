@@ -67,7 +67,7 @@ const BottomTab = () => {
             width: 2,
             height: 1,
           },
-          shadowOpacity: 0.2,
+          // shadowOpacity: 0.2,
           shadowRadius: 3,
           height: Platform.OS === 'ios' ? 80 : 70,
           transform: [{ translateY: translateY }],
@@ -251,7 +251,7 @@ const BottomTab = () => {
 
 const Index = () => {
   return (
-    <Stack.Navigator initialRouteName="BottomTab">
+    <Stack.Navigator initialRouteName="login">
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />

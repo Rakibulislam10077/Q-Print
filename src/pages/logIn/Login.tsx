@@ -26,6 +26,7 @@ import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
 import { useLoginUserMutation } from '../../redux/api/apiSlice';
 import Animated, { FadeInDown, ZoomInUp } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const navigation: any = useNavigation();
@@ -36,6 +37,25 @@ const Login = () => {
   const [disabledButton, setDisableButton] = useState<boolean>(false);
   // const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
   const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
+
+  console.log(data?.data?.accessToken);
+  useEffect(() => {
+    const storeToken = async () => {
+      try {
+        // Make sure data?.data?.accessToken exists and is not empty before storing
+        if (data?.data?.accessToken) {
+          await AsyncStorage.setItem('token', data.data.accessToken);
+          console.log('Token stored successfully:', data.data.accessToken);
+        } else {
+          console.log('Access token is empty or undefined');
+        }
+      } catch (error) {
+        console.log('Sorry, there was an error in the storage system:', error);
+      }
+    };
+
+    storeToken(); // Call the async function inside useEffect
+  }, [data?.data?.accessToken]);
 
   const handleSubmit = async () => {
     if (phoneNumber && password) {

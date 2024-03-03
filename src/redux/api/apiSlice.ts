@@ -3,32 +3,49 @@ import { IProduct } from '../../types/interfaces/product.interface';
 import { IBrand } from '../../types/interfaces/brand.interface';
 import { IUserData } from '../../types/interfaces/get_me.user.interface';
 import { IMeAddAddress } from '../../types/interfaces/me.address.interface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Define a selector to access the access token from your Redux store
+
+const getToken = async () => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    console.log(token, 'from api slice');
+    return token;
+  } catch (error) {
+    console.log('Error getting token:', error);
+    return null;
+  }
+};
+
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDkzNTIyNjksImV4cCI6MTcwOTQzODY2OX0.Ex8OC7BPJ760l1tdwMzsB_UbzL3X9T7TCOPteUC5vfw';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDk0NzExODUsImV4cCI6MTcwOTU1NzU4NX0.4G8qATDB355hANw2wJCjT47n7VD0vLxS6cVtRWFG9UM';
 const url = 'http://5.182.33.12:5000/api/v1';
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: url}),
+  baseQuery: fetchBaseQuery({ baseUrl: url }),
   endpoints: (builder) => ({
     getProduct: builder.query<{ message: string; success?: boolean; data: IProduct[] }, undefined>({
       query: () => '/product',
     }),
-    getQueryProduct: builder.query<{message: string; success?: boolean; data: IProduct[]}, string>({
-      query: (categoryName) => `/product?category.categoryName=${categoryName}`
+    getQueryProduct: builder.query<{ message: string; success?: boolean; data: IProduct[] },string>({
+      query: (categoryName) => `/product?category.categoryName=${categoryName}`,
     }),
     getBrand: builder.query<{ success: boolean; message: string; data: IBrand[] }, undefined>({
       query: () => '/brand',
     }),
     getUser: builder.query<{ success: boolean; message: string; data: IUserData }, undefined>({
-      query: () => ({
-        url: '/user/me',
-        method: 'GET',
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      }),
+      query: () =>
+        // const token = await getToken() // Retrieve the token
+        // console.log(token, 'From inside the question');
+
+        ({
+          url: '/user/me',
+          method: 'GET',
+          headers: {
+            authorization: `bearer ${token}`, // Set the bearer token in the header
+          },
+        }),
     }),
     loginUser: builder.mutation({
       query: (body) => ({
@@ -37,22 +54,38 @@ export const api = createApi({
         body,
       }),
     }),
-    getAddress: builder.query<{message: string, success: string, data: IMeAddAddress}, undefined>({
-      query: () =>({
-       url: '/user-address/me',
-       method: 'GET',
-       headers:{
-        authorization: `bearer ${token}`,
-       } 
-      })
+    getAddress: builder.query<{ message: string; success: string; data: IMeAddAddress }, undefined>(
+      {
+        query: () =>
+          // const token = await getToken(); // Retrieve the token
+          // const token = await AsyncStorage.getItem('token')
+          ({
+            url: '/user-address/me',
+            method: 'GET',
+            headers: {
+              authorization: `bearer ${token}`,
+            },
+          }),
+      }
+    ),
+    postAddress: builder.mutation<
+      { message: string; success: string; data: IMeAddAddress },
+      undefined
+    >({
+      query: (body) => ({
+        url: '/user-address/add',
+        method: 'POST',
+        body,
+      }),
     }),
-    postAddress: builder.mutation<{message: string, success: string, data: IMeAddAddress}, undefined>({
-      query: (body) =>({
-       url: '/user-address/add',
-       method: 'POST',
-       body
-      })
-    })
   }),
 });
-export const { useGetProductQuery, useGetBrandQuery, useGetUserQuery, useLoginUserMutation, useGetQueryProductQuery, useGetAddressQuery, usePostAddressMutation } = api;
+export const {
+  useGetProductQuery,
+  useGetBrandQuery,
+  useGetUserQuery,
+  useLoginUserMutation,
+  useGetQueryProductQuery,
+  useGetAddressQuery,
+  usePostAddressMutation,
+} = api;

@@ -2,7 +2,7 @@ import { View, Text, Image, TouchableOpacity, ViewToken } from 'react-native';
 import React from 'react';
 import { favoriteCartStyle } from './FavoriteCartStyle';
 import { CartBag, RedClose } from '../../../assets/allSvg/AllSvg';
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated, { FadeInDown, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 type ListItemProps = {
   viewableItems: Animated.SharedValue<ViewToken[]>;
@@ -29,7 +29,7 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
   }, []);
   return (
     <Animated.View
-      // entering={FadeInDown.delay(50).duration(500)}
+      entering={FadeInDown.delay(50).duration(500)}
       style={[favoriteCartStyle.container, rStyle]}
     >
       <View style={favoriteCartStyle.itemCon}>

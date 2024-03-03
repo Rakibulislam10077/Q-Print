@@ -9,6 +9,7 @@ import Animated, {
   FadeInRight,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
@@ -25,6 +26,7 @@ import ProductDetailSkeleton from '../../components/skeleton/ProductDetails.skel
 import { useGetProductQuery } from '../../redux/api/apiSlice';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { myCartStyle } from '../myCart/MyCartStyle';
+import { Badge } from 'react-native-paper';
 
 const ProductDetails = (props: IProduct) => {
   const data: IProduct = props?.route?.params;
@@ -33,47 +35,46 @@ const ProductDetails = (props: IProduct) => {
   const [quantity, setQuantity] = useState<number>(0);
   const { height } = Dimensions.get('screen');
   const { isLoading } = useGetProductQuery(undefined);
+  const animatedY = useSharedValue(0);
+  const animatedX = useSharedValue(0);
+  const scale = useSharedValue(0);
+  const scale2 = useSharedValue(0);
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: animatedX.value },
+        { translateY: animatedY.value },
+        { scale: scale.value },
+      ],
+    };
+  });
+  const animatedStyle2 = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale2.value }],
+    };
+  });
   useEffect(() => {
     setTimeout(() => {
       setIsSkeleton(false);
     }, 1000);
   }, []);
 
-  // const scrollY = useSharedValue(0);
-  // const scrollViewRef = useRef(null);
-
-  // const scrollHandler = useAnimatedScrollHandler({
-  //   onScroll: (event) => {
-  //     scrollY.value = event.contentOffset.y;
-  //   },
-  // });
-
-  // const imagePositionX = useSharedValue(0);
-
-  // const animatedImageStyle = useAnimatedStyle(() => {
-  //   return {
-  //     transform: [{ translateX: withSpring(imagePositionX.value) }],
-  //   };
-  // });
-
-  // const handleScroll = (event: any) => {
-  //   scrollHandler(event);
-  //   const offsetY = event.nativeEvent.contentOffset.y;
-
-  //   // Adjust these values based on your specific requirements
-  //   const triggerThreshold = 100;
-  //   const targetPositionX = -100;
-
-  //   if (offsetY > triggerThreshold) {
-  //     imagePositionX.value = targetPositionX;
-  //   } else {
-  //     imagePositionX.value = 0;
-  //   }
-  // };
-
   const increase = () => {
-    const value = quantity + 1;
-    setQuantity(value);
+    if (animatedX.value === 0) {
+      scale.value = 1;
+      animatedY.value = withTiming(-450, { duration: 500 });
+      animatedX.value = withTiming(-8, { duration: 500 });
+      setTimeout(() => {
+        scale.value = 0;
+        setQuantity(quantity + 1);
+        scale2.value = withSpring(1.5);
+        animatedY.value = withTiming(0, { duration: 500 });
+        animatedX.value = withTiming(0, { duration: 500 });
+        setTimeout(() => {
+          scale2.value = withSpring(1);
+        }, 150);
+      }, 500);
+    }
   };
   const decrease = () => {
     const value = quantity - 1;
@@ -153,6 +154,9 @@ const ProductDetails = (props: IProduct) => {
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
                 <TouchableOpacity activeOpacity={0.7}>
                   <CartBag />
+                  <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
+                    <Text style={productDetailsStyle.badgeText}>{quantity}</Text>
+                  </Animated.View>
                 </TouchableOpacity>
               </Animated.View>
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
@@ -277,7 +281,11 @@ const ProductDetails = (props: IProduct) => {
               <Text style={productDetailsStyle.discountedCurrency}>QAR</Text>
             </Text>
             {/* quantity Container */}
+
             <View style={productDetailsStyle.quantityCon}>
+              <Animated.View style={[productDetailsStyle.quantityAnimCon, animatedStyle]}>
+                <Text style={productDetailsStyle.badgeText}>{'+1'}</Text>
+              </Animated.View>
               <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
@@ -333,7 +341,7 @@ const ProductDetails = (props: IProduct) => {
         </View>
       </Animated.ScrollView>
       {/* fixed buy now button and price */}
-      {/* <View style={productDetailsStyle.BuyNowButtonAndPriceContainer}>
+      <View style={productDetailsStyle.BuyNowButtonAndPriceContainer}>
         <View style={productDetailsStyle.totalPriceConInfixedButtonBox}>
           <Text style={productDetailsStyle.totalPrice}>Total price</Text>
           <Text style={productDetailsStyle.productPrice}>
@@ -359,8 +367,8 @@ const ProductDetails = (props: IProduct) => {
             <CartBag />
           </TouchableOpacity>
         </View>
-      </View> */}
-      <StatusBar style="dark" />
+      </View>
+      <StatusBar style="dark" backgroundColor="#F8F3FB" />
     </View>
   );
 };

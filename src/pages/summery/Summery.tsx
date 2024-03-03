@@ -38,21 +38,24 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { usePostAddressMutation } from '../../redux/api/apiSlice';
 
 const Summery: React.FC = () => {
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
   const [defaultLocation, setDefaultLocation] = useState<boolean>(false);
   const [textInputValues, setTextInputValues] = useState({
-    input1: '',
-    input2: '',
-    input3: '',
+    firstName: '',
+    lastName: '',
+    streetAddress: '',
     input4: '',
-    input5: '',
-    input6: '',
-    // Add more input fields as needed
+    zipCode: '',
+    phoneNumber: '',
   });
+  const [postAddress, { data, isLoading, isSuccess, isError }] = usePostAddressMutation();
   const height = useSharedValue(100);
+
+  // const handleSubmit = async () => {};
 
   const openBox = () => {
     height.value = withTiming(isDown ? 100 : 370, {
@@ -77,12 +80,11 @@ const Summery: React.FC = () => {
 
   const handleSubmit = () => {
     // Access values from textInputValues state object
-    console.log('Input 1:', textInputValues.input1);
-    console.log('Input 2:', textInputValues.input2);
-    console.log('Input 3:', textInputValues.input3);
-    console.log('Input 4:', textInputValues.input4);
-    console.log('Input 5:', textInputValues.input5);
-    console.log('Input 6:', textInputValues.input6);
+    console.log('firstName', textInputValues.firstName);
+    console.log('lastName', textInputValues.lastName);
+    console.log('streetAddress:', textInputValues.streetAddress);
+    console.log('zipCode', textInputValues.zipCode);
+    console.log('phoneNumber:', textInputValues.phoneNumber);
     // Add more as needed
     // navigation.navigate('Payment')
   };

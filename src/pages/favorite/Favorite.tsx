@@ -55,9 +55,7 @@ const Favorite = () => {
   const viewableItems = useSharedValue<ViewToken[]>([]);
   return (
     <View style={favoriteStyle.container}>
-      {/* ===================== */}
       {/* header section */}
-      {/* ==================== */}
       <CommonHeader title="My Favorite" />
       {/* body section */}
       <View style={favoriteStyle.bodyContainer}>
