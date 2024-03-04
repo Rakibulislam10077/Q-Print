@@ -38,19 +38,19 @@ const Login = () => {
   // const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
   const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
 
-  console.log(data?.data?.accessToken);
+  // console.log(data?.data);
   useEffect(() => {
     const storeToken = async () => {
       try {
         // Make sure data?.data?.accessToken exists and is not empty before storing
         if (data?.data?.accessToken) {
           await AsyncStorage.setItem('token', data.data.accessToken);
-          console.log('Token stored successfully:', data.data.accessToken);
+          // console.log('Token stored successfully:', data.data.accessToken);
         } else {
-          console.log('Access token is empty or undefined');
+          // console.log('Access token is empty or undefined');
         }
       } catch (error) {
-        console.log('Sorry, there was an error in the storage system:', error);
+        // console.log('Sorry, there was an error in the storage system:', error);
       }
     };
 

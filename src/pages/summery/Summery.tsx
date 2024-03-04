@@ -37,7 +37,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { Color } from '../../constants/GlobalStyle';
 import Animated, {
-  BounceIn,
   Easing,
   FadeInDown,
   FadeInLeft,
@@ -75,7 +74,7 @@ const Summery: React.FC = () => {
     zipCode: 0,
     country: 'Qatar',
   });
-  const [postAddress, { data, isLoading, isSuccess, isError }] = usePostAddressMutation();
+  const [postAddress, { data, isSuccess, isError }] = usePostAddressMutation();
   const height = useSharedValue(100);
 
   const handleInputChange = (fieldName: any, value: string) => {
@@ -86,31 +85,34 @@ const Summery: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    if (
-      formData.firstName &&
-      formData.lastName &&
-      formData.streetAddress &&
-      formData.state &&
-      // formData.companyName &&
-      formData.phoneNumber &&
-      formData.zipCode &&
-      formData.country
-    ) {
-      const postData = await postAddress({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        streetAddress: formData.streetAddress,
-        state: formData.state,
-        // companyName: formData.companyName,
-        phoneNumber: formData.phoneNumber,
-        zipCode: formData.zipCode,
-        country: formData.country,
-      });
-      console.log(postData, 'postData');
-    } else if (isError) {
-      return Alert.alert('sorry!');
+    try {
+      if (
+        formData.firstName &&
+        formData.lastName &&
+        formData.streetAddress &&
+        formData.state &&
+        // formData.companyName &&
+        formData.phoneNumber &&
+        formData.zipCode &&
+        formData.country
+      ) {
+        const postData = await postAddress({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          streetAddress: formData.streetAddress,
+          state: formData.state,
+          // companyName: formData.companyName,
+          phoneNumber: formData.phoneNumber,
+          zipCode: formData.zipCode,
+          country: formData.country,
+        });
+        // console.log(postData, 'postData');
+      } else if (isError) {
+        return Alert.alert('sorry!');
+      }
+    } catch (error) {
+      // console.log(formData, 'formData')
     }
-    console.log(formData, 'formData');
   };
 
   const openBox = () => {
@@ -261,7 +263,10 @@ const Summery: React.FC = () => {
                         <Text>Doha</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
-                        onPress={() => handleInputChange('state', 'other')}
+                        onPress={() => {
+                          handleInputChange('state', 'other');
+                          setIsDropdown(false);
+                        }}
                         style={summeryStyle.dropdownItem}
                       >
                         <Text>Other</Text>

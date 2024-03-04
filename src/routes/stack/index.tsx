@@ -32,6 +32,7 @@ import ForgotPass from '../../pages/forgotPass/ForgotPass';
 import OptionalSignIn from '../../pages/signUp/optionalSignUpPage/OptionalSignIn';
 import Onboarding from '../../pages/onboardingScreen/Onboarding';
 import OrderConfirmation from '../../pages/custom_order/customOrderConfirmation/OrderConfirmation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -250,6 +251,15 @@ const BottomTab = () => {
 };
 
 const Index = () => {
+  // const accessToken = async () => {
+  //   const token = await AsyncStorage.getItem('token');
+  //   if (token) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
+  // }
   return (
     <Stack.Navigator initialRouteName="login">
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />

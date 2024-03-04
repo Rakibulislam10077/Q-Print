@@ -7,7 +7,6 @@ import Cart from '../../card/allCart/Cart';
 
 const Cartridge = () => {
   const { data, isLoading } = useGetQueryProductQuery('Mobile Phone');
-  console.log(data?.data?.length);
 
   return (
     <ScrollView style={styles.container}>

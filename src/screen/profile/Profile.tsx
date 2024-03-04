@@ -50,7 +50,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import * as Sharing from 'expo-sharing';
 import ContactUs from '../../components/modalComponents/contactUs/ContactUs';
-import { useGetUserQuery } from '../../redux/api/apiSlice';
+import { getToken, useGetUserQuery } from '../../redux/api/apiSlice';
 
 const Profile: React.FC = () => {
   const navigation: any = useNavigation();
@@ -61,7 +61,10 @@ const Profile: React.FC = () => {
   const { data, isLoading, isError, error } = useGetUserQuery(undefined);
   const info = data?.data;
 
-  console.log(JSON.stringify(data, null, 2));
+  console.log(data);
+  console.log(error);
+
+  // console.log(JSON.stringify(data, null, 2));
 
   // Toggles the visibility of the modal
   const toggleModal = () => {
