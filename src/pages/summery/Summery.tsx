@@ -19,8 +19,17 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
-import { Dropdown } from '../../../assets/allSvg/AllSvg';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  ScrollView,
+  Platform,
+  Alert,
+} from 'react-native';
+import { Dropdown, UpArrow } from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import { summeryStyle } from './SummeryStyle';
 import { Divider } from 'react-native-paper';
@@ -40,29 +49,75 @@ import Animated, {
 } from 'react-native-reanimated';
 import { usePostAddressMutation } from '../../redux/api/apiSlice';
 
+interface FormState {
+  firstName: string;
+  lastName: string;
+  streetAddress: string;
+  state: string;
+  // companyName: string;
+  phoneNumber: string;
+  zipCode: number;
+  country: string;
+}
+
 const Summery: React.FC = () => {
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
   const [defaultLocation, setDefaultLocation] = useState<boolean>(false);
-  const [textInputValues, setTextInputValues] = useState({
+  const [isDropdown, setIsDropdown] = useState<boolean>(false);
+  const [formData, setFormData] = useState<FormState>({
     firstName: '',
     lastName: '',
     streetAddress: '',
-    input4: '',
-    zipCode: '',
+    state: '',
+    // companyName: '',
     phoneNumber: '',
+    zipCode: 0,
+    country: 'Qatar',
   });
   const [postAddress, { data, isLoading, isSuccess, isError }] = usePostAddressMutation();
   const height = useSharedValue(100);
 
-  // const handleSubmit = async () => {};
+  const handleInputChange = (fieldName: any, value: string) => {
+    setFormData({
+      ...formData,
+      [fieldName]: value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    if (
+      formData.firstName &&
+      formData.lastName &&
+      formData.streetAddress &&
+      formData.state &&
+      // formData.companyName &&
+      formData.phoneNumber &&
+      formData.zipCode &&
+      formData.country
+    ) {
+      const postData = await postAddress({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        streetAddress: formData.streetAddress,
+        state: formData.state,
+        // companyName: formData.companyName,
+        phoneNumber: formData.phoneNumber,
+        zipCode: formData.zipCode,
+        country: formData.country,
+      });
+      console.log(postData, 'postData');
+    } else if (isError) {
+      return Alert.alert('sorry!');
+    }
+    console.log(formData, 'formData');
+  };
 
   const openBox = () => {
-    height.value = withTiming(isDown ? 100 : 370, {
+    height.value = withTiming(isDown ? 100 : 370 && !isDropdown ? 470 : 100, {
       duration: 450,
       easing: Easing.inOut(Easing.ease),
     });
-
     setIsDown(!isDown);
   };
   const animatedStyle = useAnimatedStyle(() => {
@@ -70,24 +125,6 @@ const Summery: React.FC = () => {
       height: height.value,
     };
   });
-
-  const handleTextInputChange = (text: string, inputIdentifier: string) => {
-    setTextInputValues((prevValues) => ({
-      ...prevValues,
-      [inputIdentifier]: text,
-    }));
-  };
-
-  const handleSubmit = () => {
-    // Access values from textInputValues state object
-    console.log('firstName', textInputValues.firstName);
-    console.log('lastName', textInputValues.lastName);
-    console.log('streetAddress:', textInputValues.streetAddress);
-    console.log('zipCode', textInputValues.zipCode);
-    console.log('phoneNumber:', textInputValues.phoneNumber);
-    // Add more as needed
-    // navigation.navigate('Payment')
-  };
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -181,32 +218,62 @@ const Summery: React.FC = () => {
                 >
                   <TextInput
                     style={summeryStyle.nameInput}
-                    onChangeText={(text) => handleTextInputChange(text, 'input1')}
+                    onChangeText={(text) => handleInputChange('firstName', text)}
                     placeholder="First Name"
                   />
                   <TextInput
                     style={summeryStyle.nameInput}
-                    onChangeText={(text) => handleTextInputChange(text, 'input2')}
+                    onChangeText={(text) => handleInputChange('lastName', text)}
                     placeholder="Last Name"
                   />
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(50).duration(510)}>
                   <TouchableOpacity activeOpacity={0.7} style={summeryStyle.inputBox}>
-                    <Text style={summeryStyle.inputText}>Country</Text>
+                    <Text style={summeryStyle.inputText}>Qatar</Text>
                     <Dropdown />
                   </TouchableOpacity>
                 </Animated.View>
                 {/* Other Address Input Fields */}
-                <Animated.View entering={FadeInUp.delay(50).duration(520)}>
-                  <TouchableOpacity activeOpacity={0.7} style={summeryStyle.inputBox}>
-                    <Text style={summeryStyle.inputText}>District</Text>
-                    <Dropdown />
+                <Animated.View
+                  style={[
+                    isDropdown
+                      ? [summeryStyle.districtBox, { height: 140 }]
+                      : summeryStyle.districtBox,
+                  ]}
+                  entering={FadeInUp.delay(50).duration(520)}
+                >
+                  <TouchableOpacity
+                    onPress={() => setIsDropdown(!isDropdown)}
+                    activeOpacity={0.7}
+                    style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}
+                  >
+                    <Text style={summeryStyle.inputText}>state</Text>
+                    {isDropdown ? <UpArrow /> : <Dropdown />}
                   </TouchableOpacity>
+                  {isDropdown && (
+                    <>
+                      <TouchableOpacity
+                        onPress={() => {
+                          handleInputChange('state', 'Doha'), setIsDropdown(false);
+                        }}
+                        style={summeryStyle.dropdownItem}
+                      >
+                        <Text>Doha</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => handleInputChange('state', 'other')}
+                        style={summeryStyle.dropdownItem}
+                      >
+                        <Text>Other</Text>
+                      </TouchableOpacity>
+                    </>
+                  )}
                 </Animated.View>
+
                 <Animated.View entering={FadeInUp.delay(50).duration(530)}>
                   <TextInput
                     style={[summeryStyle.inputBox]}
-                    onChangeText={(text) => handleTextInputChange(text, 'input3')}
+                    onChangeText={(text) => handleInputChange('streetAddress', text)}
                     placeholder="street address"
                   />
                 </Animated.View>
@@ -219,20 +286,20 @@ const Summery: React.FC = () => {
                 >
                   <TextInput
                     style={summeryStyle.nameInput}
-                    onChangeText={(text) => handleTextInputChange(text, 'input4')}
-                    placeholder="Town & City"
+                    onChangeText={(text) => handleInputChange('companyName', text)}
+                    placeholder="company name"
                   />
                   <TextInput
                     style={summeryStyle.nameInput}
-                    onChangeText={(text) => handleTextInputChange(text, 'input5')}
+                    onChangeText={(text) => handleInputChange('zipCode', text)}
                     placeholder="Zip Code"
                   />
                 </Animated.View>
                 <Animated.View entering={FadeInUp.delay(50).duration(560)}>
                   <TextInput
                     style={summeryStyle.numberInput}
-                    onChangeText={(text) => handleTextInputChange(text, 'input6')}
-                    placeholder="Town & City"
+                    onChangeText={(text) => handleInputChange('phoneNumber', text)}
+                    placeholder="+880"
                   />
                 </Animated.View>
                 {/* Save as Default Address Option */}

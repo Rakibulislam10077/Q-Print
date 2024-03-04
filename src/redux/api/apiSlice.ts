@@ -19,7 +19,7 @@ const getToken = async () => {
 };
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDk0NzExODUsImV4cCI6MTcwOTU1NzU4NX0.4G8qATDB355hANw2wJCjT47n7VD0vLxS6cVtRWFG9UM';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDk1MzU3MTQsImV4cCI6MTcwOTYyMjExNH0.ju-1en3CgOWQxhIaNcmchpt5eEL4PXtySuW2VvOGigM';
 const url = 'http://5.182.33.12:5000/api/v1';
 export const api = createApi({
   reducerPath: 'api',
@@ -68,10 +68,7 @@ export const api = createApi({
           }),
       }
     ),
-    postAddress: builder.mutation<
-      { message: string; success: string; data: IMeAddAddress },
-      undefined
-    >({
+    postAddress: builder.mutation({
       query: (body) => ({
         url: '/user-address/add',
         method: 'POST',
