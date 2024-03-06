@@ -21,7 +21,7 @@ type HomeProps = {
   handleScroll: (event: any) => void;
 };
 
-const Home = ({ handleScroll }: HomeProps) => {
+const Home = () => {
   const navigation: any = useNavigation();
   const { data: brandData, isLoading: isBrandLoading } = useGetBrandQuery(undefined);
   const { data: productData, isLoading: loadingProduct } = useGetProductQuery(undefined);
@@ -33,7 +33,7 @@ const Home = ({ handleScroll }: HomeProps) => {
         <HomePageTopCon />
 
         {/* Body container */}
-        <ScrollView onScroll={handleScroll} style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
           {/* Search and Three-line Container */}
           <Animated.View
             entering={FadeInLeft.delay(50).duration(150)}

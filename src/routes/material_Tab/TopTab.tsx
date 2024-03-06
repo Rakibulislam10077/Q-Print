@@ -24,7 +24,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const Tab = createMaterialTopTabNavigator();
 
-export const TopTab = () => {
+export const TopTab = ({ itemId }: { itemId: string }) => {
   return (
     <Animated.View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* =============================== */}
@@ -48,7 +48,7 @@ export const TopTab = () => {
         {/* =============================== */}
         {/* Printer Category Tab */}
         {/* =============================== */}
-        <Tab.Screen name="Printer" component={Printer} />
+        <Tab.Screen name="Printer">{() => <Printer itemId={itemId} />}</Tab.Screen>
         {/* =============================== */}
         {/* Cartridge Category Tab */}
         {/* =============================== */}

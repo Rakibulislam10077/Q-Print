@@ -33,28 +33,13 @@ import OptionalSignIn from '../../pages/signUp/optionalSignUpPage/OptionalSignIn
 import Onboarding from '../../pages/onboardingScreen/Onboarding';
 import OrderConfirmation from '../../pages/custom_order/customOrderConfirmation/OrderConfirmation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { IProduct } from '../../types/interfaces/product.interface';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const { width } = Dimensions.get('window');
 const BottomTab = () => {
-  const scrollY = useRef(new Animated.Value(0)).current;
-
-  const translateY = scrollY.interpolate({
-    inputRange: [0, 100], // adjust the threshold as needed
-    outputRange: [0, 100], // adjust the distance to move the tab bar
-    extrapolate: 'clamp',
-  });
-
-  const handleScroll = (event: any) => {
-    const offsetY = event.nativeEvent.contentOffset.y;
-    // console.log('Offset Y:', offsetY);
-    if (offsetY <= 200) {
-      scrollY.setValue(offsetY);
-    }
-  };
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -71,7 +56,6 @@ const BottomTab = () => {
           // shadowOpacity: 0.2,
           shadowRadius: 3,
           height: Platform.OS === 'ios' ? 80 : 70,
-          transform: [{ translateY: translateY }],
         },
         tabBarHideOnKeyboard: true,
       }}
@@ -109,9 +93,8 @@ const BottomTab = () => {
           headerTitleStyle: { marginTop: 30 },
         }}
         name="Home"
-      >
-        {(props) => <Home {...props} handleScroll={handleScroll} />}
-      </Tab.Screen>
+        component={Home}
+      ></Tab.Screen>
       <Tab.Screen
         options={{
           headerShown: false,
@@ -259,24 +242,24 @@ const Index = () => {
   //     return false;
   //   }
   // };
-  // }
+
   return (
-    <Stack.Navigator initialRouteName="login">
+    <Stack.Navigator initialRouteName="BottomTab">
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />
       <Stack.Screen options={{ headerShown: false }} name="BottomTab" component={BottomTab} />
       <Stack.Screen options={{ headerShown: false }} name="Search" component={Search} />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="ProductDeatils"
-        component={ProductDetails}
-      />
+      <Stack.Screen options={{ headerShown: false }} name="ProductDeatils">
+        {(props: any) => <ProductDetails {...props} />}
+      </Stack.Screen>
       <Stack.Screen options={{ headerShown: false }} name="MyCart" component={MyCart} />
       <Stack.Screen options={{ headerShown: false }} name="Summery" component={Summery} />
       <Stack.Screen options={{ headerShown: false }} name="Payment" component={PaymentMethod} />
       <Stack.Screen options={{ headerShown: false }} name="confirmorder" component={ConfirmOrder} />
-      <Stack.Screen options={{ headerShown: false }} name="BrandDetails" component={BrandDetails} />
+      <Stack.Screen options={{ headerShown: false }} name="BrandDetails">
+        {(props: any) => <BrandDetails {...props} />}
+      </Stack.Screen>
       <Stack.Screen
         options={{ headerShown: false }}
         name="NotificationPage"

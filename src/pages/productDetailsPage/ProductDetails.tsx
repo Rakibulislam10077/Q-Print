@@ -28,7 +28,7 @@ import * as ImageManipulator from 'expo-image-manipulator';
 import { myCartStyle } from '../myCart/MyCartStyle';
 import { Badge } from 'react-native-paper';
 
-const ProductDetails = (props: IProduct) => {
+const ProductDetails: React.FC<IProduct> = (props) => {
   const data: IProduct = props?.route?.params;
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
@@ -373,14 +373,14 @@ const ProductDetails = (props: IProduct) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  item: state.item, // Assuming you have an item reducer that stores the item data
-});
-
-// const mapDispatchToProps = (dispatch: any) => ({
-//   fetchData: () => dispatch(fetchData()), // Dispatch the action to fetch data
+// const mapStateToProps = (state: any) => ({
+//   item: state.item, // Assuming you have an item reducer that stores the item data
 // });
 
-export default connect(mapStateToProps)(ProductDetails);
+// // const mapDispatchToProps = (dispatch: any) => ({
+// //   fetchData: () => dispatch(fetchData()), // Dispatch the action to fetch data
+// // });
 
-// export default ProductDetails;
+// export default connect(mapStateToProps)(ProductDetails);
+
+export default ProductDetails;

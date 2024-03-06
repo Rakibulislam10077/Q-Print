@@ -41,7 +41,7 @@ export const api = createApi({
       query: () => '/product',
     }),
     getQueryProduct: builder.query<{ message: string; success?: boolean; data: IProduct[] },string>({
-      query: (categoryName) => `/product?category.categoryName=${categoryName}`,
+      query: ({categoryName, brandId}:any) => `/product?category.categoryName=${categoryName}&brand.brandId=${brandId}`,
     }),
     getBrand: builder.query<{ success: boolean; message: string; data: IBrand[] }, undefined>({
       query: () => '/brand',

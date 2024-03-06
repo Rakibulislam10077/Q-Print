@@ -23,9 +23,11 @@ import { TopTab } from '../../routes/material_Tab/TopTab';
 import { StatusBar } from 'expo-status-bar';
 import { IBrand } from '../../types/interfaces/brand.interface';
 
-const BrandDetails = (props: IBrand) => {
+const BrandDetails: React.FC<IBrand> = (props) => {
   // Extract the brand details from route params
   const item = props?.route?.params;
+
+  console.log(item?._id);
 
   return (
     <View style={brandDetailsStyle.container}>
@@ -56,7 +58,7 @@ const BrandDetails = (props: IBrand) => {
 
       {/* Tab Section */}
       <View style={{ flex: 1 }}>
-        <TopTab />
+        <TopTab itemId={item?._id} />
       </View>
 
       {/* StatusBar Configuration */}
