@@ -52,7 +52,7 @@ export const TopTab = ({ itemId }: { itemId: string }) => {
         {/* =============================== */}
         {/* Cartridge Category Tab */}
         {/* =============================== */}
-        <Tab.Screen name="Cartridge" component={Cartridge} />
+        <Tab.Screen name="Cartridge">{() => <Cartridge itemId={itemId} />}</Tab.Screen>
         {/* =============================== */}
         {/* Ink Category Tab */}
         {/* =============================== */}

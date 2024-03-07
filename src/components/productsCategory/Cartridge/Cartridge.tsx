@@ -5,8 +5,10 @@ import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import Animated from 'react-native-reanimated';
 import Cart from '../../card/allCart/Cart';
 
-const Cartridge = () => {
-  const { data, isLoading } = useGetQueryProductQuery('Mobile Phone');
+const Cartridge = ({ itemId }: { itemId: string }) => {
+  const { data, isLoading } = useGetQueryProductQuery(
+    `category.categoryName=Mobile Phone&brand.brandId=${itemId}`
+  );
 
   return (
     <ScrollView style={styles.container}>

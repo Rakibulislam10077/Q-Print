@@ -8,10 +8,9 @@ import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import { IProduct } from '../../../types/interfaces/product.interface';
 import AllProductSkeleton from '../../skeleton/allProduct.skeleton';
 const Printer = ({ itemId }: { itemId: string }) => {
-  const categoryName = 'Computer Laptop';
-  const id = itemId;
-
-  const { data, isLoading } = useGetQueryProductQuery({ categoryName, brandId: id });
+  const { data, isLoading } = useGetQueryProductQuery(
+    `category.categoryName=Computer Laptop&brand.brandId=${itemId}`
+  );
 
   // console.log(itemId, 'from Printer');
   // // console.log(JSON.stringify(data?.data[0]?.brand?.brandId, null, 2));

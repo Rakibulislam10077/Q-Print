@@ -18,8 +18,8 @@ export const getToken = async () => {
 };
 
 
-// const accessToken =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDk1MzU3MTQsImV4cCI6MTcwOTYyMjExNH0.ju-1en3CgOWQxhIaNcmchpt5eEL4PXtySuW2VvOGigM';
+const accessToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDk1MzU3MTQsImV4cCI6MTcwOTYyMjExNH0.ju-1en3CgOWQxhIaNcmchpt5eEL4PXtySuW2VvOGigM';
 const url = 'http://5.182.33.12:5000/api/v1';
 export const api = createApi({
   reducerPath: 'api',
@@ -41,7 +41,8 @@ export const api = createApi({
       query: () => '/product',
     }),
     getQueryProduct: builder.query<{ message: string; success?: boolean; data: IProduct[] },string>({
-      query: ({categoryName, brandId}:any) => `/product?category.categoryName=${categoryName}&brand.brandId=${brandId}`,
+      // query: ({categoryName, brandId}:any) => `/product?category.categoryName=${categoryName}&brand.brandId=${brandId}`,
+      query: (q) => `/product?${q}`,
     }),
     getBrand: builder.query<{ success: boolean; message: string; data: IBrand[] }, undefined>({
       query: () => '/brand',
@@ -49,8 +50,14 @@ export const api = createApi({
  
 
     getUser: builder.query<{ success: boolean; message: string; data: IUserData }, void>({
-      query: () => '/user/me', // Set the bearer token in the header
-          
+      query: () => ({
+        url: '/user/me',
+        method: 'GET',
+        headers:{
+          athorization: `Bearer ${accessToken}`
+        }
+      })
+      
     }),
     
     
