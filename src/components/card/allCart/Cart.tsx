@@ -25,14 +25,14 @@ const Cart: React.FC<CartProps> = ({ item }) => {
       >
         <View style={AllCartStyle.imgCon}>
           <FlatList
-            data={item?.productPhotos}
+            pagingEnabled={true}
             horizontal
+            data={item?.productPhotos}
             onScroll={(e) => {
               setCurrentIndex(
                 (e.nativeEvent.contentOffset.x / Dimensions.get('window').width).toFixed(0)
               );
             }}
-            pagingEnabled
             contentContainerStyle={AllCartStyle.contentContainerStyle}
             renderItem={({ item: img }) => {
               return (
@@ -43,7 +43,7 @@ const Cart: React.FC<CartProps> = ({ item }) => {
                 >
                   <Image
                     style={AllCartStyle.productImg}
-                    source={{ uri: `http://5.182.33.12:5000/${img}` }}
+                    source={{ uri: `http://192.168.0.106:5000/${img}` }}
                   />
                 </TouchableOpacity>
               );

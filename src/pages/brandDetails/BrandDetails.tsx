@@ -41,7 +41,7 @@ const BrandDetails: React.FC<IBrand> = (props) => {
           <View style={brandDetailsStyle.logoCon}>
             <Image
               style={brandDetailsStyle.logo}
-              source={{ uri: `http://5.182.33.12:5000/${item?.brandPhoto}` }}
+              source={{ uri: `http://192.168.0.106:5000/${item?.brandPhoto}` }}
             />
           </View>
           {/* Brand Name and Availability */}

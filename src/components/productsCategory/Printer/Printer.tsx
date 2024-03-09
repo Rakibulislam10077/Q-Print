@@ -9,22 +9,14 @@ import { IProduct } from '../../../types/interfaces/product.interface';
 import AllProductSkeleton from '../../skeleton/allProduct.skeleton';
 const Printer = ({ itemId }: { itemId: string }) => {
   const { data, isLoading } = useGetQueryProductQuery(
-    `category.categoryName=Computer Laptop&brand.brandId=${itemId}`
+    `category.categoryName=Computer Laptop&${itemId ? 'brand.brandId=' + itemId : ''}`
   );
-
-  // console.log(itemId, 'from Printer');
-  // // console.log(JSON.stringify(data?.data[0]?.brand?.brandId, null, 2));
-  // const ds = data?.data[0]?.brand?.brandId;
-  // console.log(ds, 'form ds');
-
-  // if (itemId === ds) {
-  // }
 
   return (
     <>
       <ScrollView style={printerStyle.container}>
         <Animated.View style={printerStyle.cartContainer}>
-          {data?.data?.map((item, index: number) => {
+          {data?.data?.map((item: IProduct, index: number) => {
             return <Cart key={index?.toString()} item={item} />;
           })}
         </Animated.View>

@@ -22,6 +22,9 @@ import AllBrand from './allBrand/AllBrand';
 import Animated, { FadeInRight } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
 import { useGetBrandQuery } from '../../redux/api/apiSlice';
+import BrandCircleSkeleton from '../../components/skeleton/Brand.circle.skeleton';
+import Cart_Skeleton from '../../components/skeleton/Cart_SkeletonInHome';
+import BrandCartSkeleton from '../../components/skeleton/Brand.cart.skeleton';
 
 const Brand = () => {
   const { data, isLoading } = useGetBrandQuery(undefined);
@@ -38,24 +41,32 @@ const Brand = () => {
           <Text style={brandStyle.topBrandText}>Top Brand</Text>
 
           {/* Top Brand Section */}
-          <Animated.FlatList
-            entering={FadeInRight.delay(50).duration(500)}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingRight: 20 }}
-            data={data?.data}
-            renderItem={({ item }) => <TopBrand item={item} />}
-          />
+          {isLoading ? (
+            <BrandCircleSkeleton />
+          ) : (
+            <Animated.FlatList
+              entering={FadeInRight.delay(50).duration(500)}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingRight: 20 }}
+              data={data?.data}
+              renderItem={({ item }) => <TopBrand item={item} />}
+            />
+          )}
 
           {/* All Brand Container */}
           <View style={brandStyle.allBrandContainer}>
             <Text style={brandStyle.allBrandText}>All Brand</Text>
-            <Animated.View style={brandStyle.allCartContainer}>
-              {/* Render All Brands */}
-              {data?.data?.map((item, index) => {
-                return <AllBrand key={index.toString()} item={item} />; // all brand cart
-              })}
-            </Animated.View>
+            {isLoading ? (
+              <BrandCartSkeleton />
+            ) : (
+              <Animated.View style={brandStyle.allCartContainer}>
+                {/* Render All Brands */}
+                {data?.data?.map((item, index) => {
+                  return <AllBrand key={index.toString()} item={item} />; // all brand cart
+                })}
+              </Animated.View>
+            )}
           </View>
         </View>
       </ScrollView>

@@ -25,7 +25,7 @@ import { productsStyle } from './ProductsStyle';
 import { BackArrow, CartBag, Magnify, ThreeLine } from '../../../assets/allSvg/AllSvg';
 import { TopTab } from '../../routes/material_Tab/TopTab';
 
-const Products = () => {
+const Products = ({ itemId }: { itemId: string }) => {
   const navigation = useNavigation();
 
   return (
@@ -59,7 +59,7 @@ const Products = () => {
       {/* Body Section */}
       <View style={productsStyle.bodyContainer}>
         {/* material top tab  */}
-        <TopTab />
+        <TopTab itemId={itemId} />
       </View>
       {/* Status Bar */}
       <StatusBar style="dark" />

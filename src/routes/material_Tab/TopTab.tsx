@@ -21,6 +21,7 @@ import Cartridge from '../../components/productsCategory/Cartridge/Cartridge';
 import Ink from '../../components/productsCategory/Ink/Ink';
 import { Color } from '../../constants/GlobalStyle';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import ProductAll from '../../components/productsCategory/All/Product.all';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -48,6 +49,7 @@ export const TopTab = ({ itemId }: { itemId: string }) => {
         {/* =============================== */}
         {/* Printer Category Tab */}
         {/* =============================== */}
+        <Tab.Screen name="All">{() => <ProductAll itemId={itemId} />}</Tab.Screen>
         <Tab.Screen name="Printer">{() => <Printer itemId={itemId} />}</Tab.Screen>
         {/* =============================== */}
         {/* Cartridge Category Tab */}

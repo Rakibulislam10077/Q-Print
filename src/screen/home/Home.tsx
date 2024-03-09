@@ -14,7 +14,7 @@ import Brand from '../../components/brandInHome/Brand';
 import HomePageProductCateTitle from '../../components/common/homePageProductCategory/HomePageProductCateTitle';
 import { IProduct } from '../../types/interfaces/product.interface';
 import Cart from '../../components/card/allCart/Cart';
-import Brand_Skeleton from '../../components/skeleton/Brand_Skeleton';
+import Brand_Skeleton from '../../components/skeleton/Home.Brand_Skeleton';
 import Carousel_Skeleton from '../../components/skeleton/Carousel_Skeleton';
 
 type HomeProps = {

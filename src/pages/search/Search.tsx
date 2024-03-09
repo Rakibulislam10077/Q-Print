@@ -24,7 +24,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ScrollView, TextInput } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+// import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { CartBag, Goback, Magnify, ThreeLine } from '../../../assets/allSvg/AllSvg';
@@ -33,6 +33,7 @@ import { Color } from '../../constants/GlobalStyle';
 import Cart from '../../components/card/allCart/Cart';
 import BrandInGlobalSearch from '../../components/globalSearchCom/brand/BrandInGlobalSearch';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Search = () => {
   const navigation: any = useNavigation();

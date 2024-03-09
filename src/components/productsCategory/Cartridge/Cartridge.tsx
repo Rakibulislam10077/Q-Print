@@ -6,8 +6,11 @@ import Animated from 'react-native-reanimated';
 import Cart from '../../card/allCart/Cart';
 
 const Cartridge = ({ itemId }: { itemId: string }) => {
+  // const { data, isLoading } = useGetQueryProductQuery(
+  //   `category.categoryName=Mobile Phone&brand.brandId=${itemId}`
+  // );
   const { data, isLoading } = useGetQueryProductQuery(
-    `category.categoryName=Mobile Phone&brand.brandId=${itemId}`
+    `category.categoryName=Mobile Phone&${itemId ? 'brand.brandId=' + itemId : ''}`
   );
 
   return (
