@@ -7,20 +7,26 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import { IProduct } from '../../../types/interfaces/product.interface';
 import AllProductSkeleton from '../../skeleton/allProduct.skeleton';
-const Printer = ({ itemId }: { itemId: string }) => {
+import EmptyData from '../../common/EmptyData';
+const Printer = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
   const { data, isLoading } = useGetQueryProductQuery(
-    `category.categoryName=Computer Laptop&${itemId ? 'brand.brandId=' + itemId : ''}`
+    `category.categoryName=Computer Laptop&${searchText ? 'searchTerm=' + searchText : ''}&${itemId ? 'brand.brandId=' + itemId : ''}`
   );
 
   return (
     <>
-      <ScrollView style={printerStyle.container}>
-        <Animated.View style={printerStyle.cartContainer}>
-          {data?.data?.map((item: IProduct, index: number) => {
-            return <Cart key={index?.toString()} item={item} />;
-          })}
-        </Animated.View>
-      </ScrollView>
+      {data?.data?.length === 0 ? (
+        <EmptyData />
+      ) : (
+        // <></>
+        <ScrollView style={printerStyle.container}>
+          <Animated.View style={printerStyle.cartContainer}>
+            {data?.data?.map((item: IProduct, index: number) => {
+              return <Cart key={index?.toString()} item={item} />;
+            })}
+          </Animated.View>
+        </ScrollView>
+      )}
       {isLoading && <AllProductSkeleton />}
     </>
   );

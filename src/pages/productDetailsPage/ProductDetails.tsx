@@ -181,7 +181,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                 renderItem={({ item: img }) => {
                   return (
                     <Animated.Image
-                      source={{ uri: `http://5.182.33.12:5000/${img}` }}
+                      source={{ uri: `http://192.168.0.103:5000/${img}` }}
                       style={{
                         width: '100%',
                         height: 280,
@@ -246,7 +246,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             <View style={productDetailsStyle.brandLogoContainer}>
               <Image
                 style={productDetailsStyle.brandLogo}
-                source={{ uri: `http://5.182.33.12:5000/${data?.brand?.brandPhoto}` }}
+                source={{ uri: `http://192.168.0.103:5000/${data?.brand?.brandPhoto}` }}
               />
             </View>
             <Text style={productDetailsStyle.brandName}>{data?.brand?.brandName}</Text>

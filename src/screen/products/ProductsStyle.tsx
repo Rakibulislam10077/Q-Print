@@ -9,6 +9,7 @@ export const productsStyle = StyleSheet.create({
   },
   headerContainer: {
     paddingHorizontal: 20,
+    marginTop: 20,
   },
   navigationAndCard: {
     flexDirection: 'row',
@@ -32,29 +33,33 @@ export const productsStyle = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft: 40,
   },
   inputAndThreelineCon: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 15,
+    // marginTop: 15,
   },
   magnifyAndInputCon: {
     borderWidth: 1,
     borderColor: Color.C_border,
     borderRadius: 25,
     height: 40,
-    flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
   },
   input: {
     height: 40,
     flex: 1,
-    marginLeft: 10,
   },
 
+  magnify: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   // body section
   bodyContainer: {
     flex: 1,

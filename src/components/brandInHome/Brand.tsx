@@ -17,7 +17,7 @@ const Brand = ({ item }: { item: IBrand }) => {
     >
       <Image
         style={{ width: '90%', height: 35, borderRadius: 25 }}
-        source={{ uri: `http://192.168.0.106:5000/${item?.brandPhoto}` }}
+        source={{ uri: `http://192.168.0.103:5000/${item?.brandPhoto}` }}
       />
     </TouchableOpacity>
   );

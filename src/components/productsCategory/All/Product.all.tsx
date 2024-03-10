@@ -7,8 +7,10 @@ import { IProduct } from '../../../types/interfaces/product.interface';
 import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import { Color } from '../../../constants/GlobalStyle';
 
-const ProductAll = ({ itemId }: { itemId: string }) => {
-  const { data, isLoading } = useGetQueryProductQuery(`${itemId ? 'brand.brandId=' + itemId : ''}`);
+const ProductAll = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
+  const { data, isLoading } = useGetQueryProductQuery(
+    `${searchText ? 'searchTerm=' + searchText : ''}&${itemId ? 'brand.brandId=' + itemId : ''}`
+  );
   return (
     <>
       <ScrollView style={styles.container}>

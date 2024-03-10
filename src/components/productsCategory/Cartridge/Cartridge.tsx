@@ -5,12 +5,12 @@ import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import Animated from 'react-native-reanimated';
 import Cart from '../../card/allCart/Cart';
 
-const Cartridge = ({ itemId }: { itemId: string }) => {
+const Cartridge = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
   // const { data, isLoading } = useGetQueryProductQuery(
   //   `category.categoryName=Mobile Phone&brand.brandId=${itemId}`
   // );
   const { data, isLoading } = useGetQueryProductQuery(
-    `category.categoryName=Mobile Phone&${itemId ? 'brand.brandId=' + itemId : ''}`
+    `category.categoryName=Mobile Phone&${searchText ? 'searchTerm=' + searchText : ''}&${itemId ? 'brand.brandId=' + itemId : ''}`
   );
 
   return (

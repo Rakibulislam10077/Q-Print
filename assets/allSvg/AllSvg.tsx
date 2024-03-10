@@ -1791,3 +1791,15 @@ export const TLogo = () => {
     </Svg>
   );
 };
+
+export const EmptyDataLogo = () => {
+  return (
+    <Svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+      <Circle cx="100" cy="100" r="90" fill="#fff0f5" />
+
+      <Rect x="30" y="90" width="40" height="60" fill="#4CAF50" />
+      <Rect x="80" y="70" width="40" height="80" fill="#2196F3" />
+      <Rect x="130" y="50" width="40" height="100" fill="#FFC107" />
+    </Svg>
+  );
+};

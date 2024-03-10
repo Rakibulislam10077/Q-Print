@@ -25,7 +25,7 @@ import ProductAll from '../../components/productsCategory/All/Product.all';
 
 const Tab = createMaterialTopTabNavigator();
 
-export const TopTab = ({ itemId }: { itemId: string }) => {
+export const TopTab = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
   return (
     <Animated.View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* =============================== */}
@@ -49,12 +49,18 @@ export const TopTab = ({ itemId }: { itemId: string }) => {
         {/* =============================== */}
         {/* Printer Category Tab */}
         {/* =============================== */}
-        <Tab.Screen name="All">{() => <ProductAll itemId={itemId} />}</Tab.Screen>
-        <Tab.Screen name="Printer">{() => <Printer itemId={itemId} />}</Tab.Screen>
+        <Tab.Screen name="All">
+          {() => <ProductAll searchText={searchText} itemId={itemId} />}
+        </Tab.Screen>
+        <Tab.Screen name="Printer">
+          {() => <Printer searchText={searchText} itemId={itemId} />}
+        </Tab.Screen>
         {/* =============================== */}
         {/* Cartridge Category Tab */}
         {/* =============================== */}
-        <Tab.Screen name="Cartridge">{() => <Cartridge itemId={itemId} />}</Tab.Screen>
+        <Tab.Screen name="Cartridge">
+          {() => <Cartridge searchText={searchText} itemId={itemId} />}
+        </Tab.Screen>
         {/* =============================== */}
         {/* Ink Category Tab */}
         {/* =============================== */}

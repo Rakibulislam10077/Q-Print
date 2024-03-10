@@ -17,7 +17,7 @@ const TopBrand = ({ item }: { item: IBrand }) => {
           <View style={topBrandStyle.logoCon}>
             <Image
               style={topBrandStyle.logo}
-              source={{ uri: `http://192.168.0.106:5000/${item?.brandPhoto}` }}
+              source={{ uri: `http://192.168.0.103:5000/${item?.brandPhoto}` }}
             />
           </View>
           <Text style={topBrandStyle.brandName}>{item?.brandName}</Text>

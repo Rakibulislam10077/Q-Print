@@ -1,9 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Color, Font, shadows } from '../../../constants/GlobalStyle';
+
+const DimensionsWidth = Dimensions.get('window').width;
 
 export const AllCartStyle = StyleSheet.create({
   container: {
-    width: '48%',
+    // width: '48%',
+    width: DimensionsWidth / 2.3,
     paddingBottom: 10,
     backgroundColor: Color.C_white,
     borderRadius: 10,
@@ -17,60 +20,50 @@ export const AllCartStyle = StyleSheet.create({
     shadowOpacity: shadows.opacity_1,
     marginVertical: 10,
   },
-  // discountCon: {
-  //   width: 30,
-  //   height: 30,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   borderRadius: 50,
-  //   position: 'absolute',
-  //   top: 10,
-  //   left: 10,
-  //   backgroundColor: 'rgba(255, 0, 0, 0.10)',
-  // },
+  discountCon: {
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    backgroundColor: 'rgba(255, 0, 0, 0.10)',
+  },
   discountText: {
     fontSize: 10,
     color: Color.C_red,
   },
   imgCon: {
-    // width: '90%',
-    // height: 110,
-    // alignSelf: 'center',
-    // marginVertical: 10,
-    // flexDirection: 'row', // Ensure horizontal layout
-    overflow: 'hidden',
-    alignItems: 'center',
-    backgroundColor: 'blue',
-    padding: 10,
-    flex: 1,
+    width: '90%',
+    height: 110,
+    alignSelf: 'center',
+    // padding: 10,
   },
   contentContainerStyle: {
-    width: '90%',
+    // width: '90%',
     // flex: 1,
     // height: 90,
     // marginHorizontal: 10,
     // flexDirection: 'row',
     // flexGrow: 1,
     // justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
+    // alignItems: 'center',
+    // backgroundColor: 'red',
   },
   productImgCon: {
-    width: '90%',
-    // flex: 1,
-    height: 90,
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    // zIndex: 100,
+    justifyContent: 'center',
+    // marginHorizontal: 20,
+    backgroundColor: 'red',
   },
   productImg: {
-    // aspectRatio: 1,
-    width: '100%',
+    // aspectRatio: 2,
+    width: 120,
+    alignSelf: 'center',
     height: '100%',
-    // resizeMode: 'stretch',
-    // flex: 1,
-    borderRadius: 10,
-    // marginHorizontal: 10,
   },
 
   descCon: {
