@@ -179,6 +179,7 @@ export const productDetailsStyle = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     top: -30,
+    right: 20,
   },
   increaseDecreaseButton: {
     width: 30,
@@ -260,10 +261,10 @@ export const productDetailsStyle = StyleSheet.create({
     alignItems: 'center',
   },
   BuyNowButtonAndPriceContainer: {
-    height: 80,
+    height: 90,
     position: 'absolute',
     bottom: 0,
-    backgroundColor: 'red',
+    backgroundColor: Color.C_white,
     width: '100%',
     shadowColor: shadows.shadow_color,
     elevation: shadows.elevation_1,
@@ -277,7 +278,8 @@ export const productDetailsStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    marginBottom: 15,
+    // marginBottom: 15,
+    paddingBottom: 15,
   },
   totalPriceConInfixedButtonBox: {},
   totalPrice: {
@@ -288,6 +290,7 @@ export const productDetailsStyle = StyleSheet.create({
   buyButtonAndCartCon: {
     flexDirection: 'row',
     alignItems: 'center',
+    position: 'relative',
   },
   linearButton: {
     height: 50,

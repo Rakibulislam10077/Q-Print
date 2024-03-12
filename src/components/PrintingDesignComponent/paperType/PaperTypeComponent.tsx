@@ -6,7 +6,7 @@ import { Color } from '../../../constants/GlobalStyle';
 import { Divider } from 'react-native-paper';
 import { Upload } from '../../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-
+import * as ImagePicker from 'expo-image-picker';
 const paperType = [
   {
     type: 'Inkjet printer paper',
@@ -43,6 +43,7 @@ const PrintingMode = [
 const PaperTypeComponent = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentIndexInPrint, setCurrentIndexInPrint] = useState<number>(0);
+  const [image, setImage] = useState<any>();
 
   const handlePaperType = (index: number) => {
     setCurrentIndex(index);
@@ -50,6 +51,35 @@ const PaperTypeComponent = () => {
 
   const handlePrintMode = (index: number) => {
     setCurrentIndexInPrint(index);
+  };
+
+  // Uploads an image from the gallery
+  const uploadImageFromGallery = async () => {
+    try {
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+      if (!result.canceled) {
+        await saveImage(result.assets[0].uri);
+      }
+    } catch (error: any) {
+      alert('Error Uploading image' + error.message);
+    }
+  };
+
+  // Saves the uploaded image
+  const saveImage = async (image: any) => {
+    try {
+      // update displayed image
+      setImage(image);
+      // console.log(image);
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
@@ -64,6 +94,7 @@ const PaperTypeComponent = () => {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={[paperTypeStyle.typeItem]}
+              key={index.toString()}
             >
               <TouchableOpacity
                 onPress={() => handlePaperType(index)}
@@ -98,6 +129,7 @@ const PaperTypeComponent = () => {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={paperTypeStyle.mode}
+                key={index.toString()}
               >
                 <TouchableOpacity
                   activeOpacity={0.7}
@@ -124,7 +156,11 @@ const PaperTypeComponent = () => {
       {/* attachment container */}
       <View>
         <Text style={paperTypeStyle.attachmentText}>Attachment</Text>
-        <TouchableOpacity activeOpacity={0.7} style={paperTypeStyle.uploadButton}>
+        <TouchableOpacity
+          onPress={() => uploadImageFromGallery()}
+          activeOpacity={0.7}
+          style={paperTypeStyle.uploadButton}
+        >
           <Upload />
           <Text style={paperTypeStyle.uploadButtonText}>Upload file</Text>
         </TouchableOpacity>

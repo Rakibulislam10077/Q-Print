@@ -6,7 +6,9 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
 
 let dynamicColor = 'red';
-const AddToCart = () => {
+const AddToCart = ({ item }: { item: any }) => {
+  console.log(JSON.stringify(item, null, 2));
+
   return (
     <Animated.View
       entering={FadeInDown.delay(100).duration(500)}
@@ -25,7 +27,7 @@ const AddToCart = () => {
         >
           <View style={addToCartStyle.titleCon}>
             <Text numberOfLines={2} style={addToCartStyle.title}>
-              Brother HL-L3270CDW Single{`\n`}Function Color Laser Printer
+              {item.productName}
             </Text>
           </View>
           <TouchableOpacity style={addToCartStyle.close}>
@@ -33,7 +35,7 @@ const AddToCart = () => {
           </TouchableOpacity>
         </View>
         <View style={addToCartStyle.storeNameAndColorIndicator}>
-          <Text style={addToCartStyle.storeName}>Brother</Text>
+          <Text style={addToCartStyle.storeName}>{item?.brand?.brandName}</Text>
           <View style={[addToCartStyle.colorIndicator, { backgroundColor: dynamicColor }]} />
         </View>
         <View style={addToCartStyle.currencyCon}>

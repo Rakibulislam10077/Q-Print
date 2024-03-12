@@ -21,7 +21,7 @@ const AllBrand = ({ item }: { item: IBrand }) => {
       >
         <Image
           style={allBrandStyle.logo}
-          source={{ uri: `http://192.168.0.106:5000/${item?.brandPhoto}` }}
+          source={{ uri: `http://192.168.0.103:5000/${item?.brandPhoto}` }}
         />
         <Text style={allBrandStyle.brandName}>{item?.brandName}</Text>
         <Divider />

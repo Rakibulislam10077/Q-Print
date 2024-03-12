@@ -27,7 +27,7 @@ const BrandDetails: React.FC<IBrand> = (props) => {
   // Extract the brand details from route params
   const item = props?.route?.params;
 
-  console.log(item?._id);
+  console.log(item?.brand?.brandName, 'item item item item item');
 
   return (
     <View style={brandDetailsStyle.container}>
@@ -46,7 +46,9 @@ const BrandDetails: React.FC<IBrand> = (props) => {
           </View>
           {/* Brand Name and Availability */}
           <View>
-            <Text style={brandDetailsStyle.brandName}>{item?.brandName}</Text>
+            <Text style={brandDetailsStyle.brandName}>
+              {item?.brandName || item?.brand?.brandName}
+            </Text>
             <Text style={brandDetailsStyle.availableText}>25 Product Available</Text>
           </View>
         </View>
@@ -58,7 +60,7 @@ const BrandDetails: React.FC<IBrand> = (props) => {
 
       {/* Tab Section */}
       <View style={{ flex: 1 }}>
-        <TopTab itemId={item?._id} />
+        <TopTab itemId={item?._id || item?.brand?.brandId} />
       </View>
 
       {/* StatusBar Configuration */}

@@ -33,12 +33,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { commonHeaderStyle } from '../../components/common/commonHeader/CommonHeaderStyle';
 import { Color } from '../../constants/GlobalStyle';
 import LottieView from 'lottie-react-native';
+import { useAppSelector } from '../../redux/hook';
 
 const MyCart = () => {
   const navigation: any = useNavigation();
   const [isLottie, setIsLottie] = useState<boolean>(true);
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
   const [currentAmount, setCurrentAmount] = useState(30000);
+
+  const { products } = useAppSelector((state) => state.cart);
+
+  console.log(products, 'products');
+
   const animation = useRef<any>(null);
   // State variables to track current and target amounts
   const targetAmount = 30000;
@@ -103,9 +109,9 @@ const MyCart = () => {
 
       {/* FlatList to render cart items */}
       <Animated.FlatList
-        data={[1, 1, 1, 1, 1, 1, 1]}
-        renderItem={({ i }: any) => {
-          return <AddToCart />;
+        data={products}
+        renderItem={({ item }: any) => {
+          return <AddToCart item={item} />;
         }}
       />
 

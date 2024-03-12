@@ -19,7 +19,7 @@ import { productDetailsStyle } from './ProductDetailsStyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
 import ProductDetailsTopTab from '../../routes/material_Tab/ProductDetailsTopTab';
-import { connect } from 'react-redux'; // Import connect from react-redux
+import { useDispatch } from 'react-redux'; // Import connect from react-redux
 import { IProduct } from '../../types/interfaces/product.interface';
 import { FlatList } from 'react-native-gesture-handler';
 import ProductDetailSkeleton from '../../components/skeleton/ProductDetails.skeleton';
@@ -27,6 +27,7 @@ import { useGetProductQuery } from '../../redux/api/apiSlice';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { myCartStyle } from '../myCart/MyCartStyle';
 import { Badge } from 'react-native-paper';
+import { addToCart } from '../../redux/features/addTocart';
 
 const ProductDetails: React.FC<IProduct> = (props) => {
   const data: IProduct = props?.route?.params;
@@ -39,6 +40,13 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const animatedX = useSharedValue(0);
   const scale = useSharedValue(0);
   const scale2 = useSharedValue(0);
+
+  const dispatch = useDispatch();
+
+  const addCart = (product: IProduct) => {
+    dispatch(addToCart(product));
+  };
+
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -62,8 +70,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const increase = () => {
     if (animatedX.value === 0) {
       scale.value = 1;
-      animatedY.value = withTiming(-450, { duration: 500 });
-      animatedX.value = withTiming(-8, { duration: 500 });
+      animatedY.value = withTiming(-770, { duration: 500 });
+      animatedX.value = withTiming(-30, { duration: 500 });
       setTimeout(() => {
         scale.value = 0;
         setQuantity(quantity + 1);
@@ -283,9 +291,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             {/* quantity Container */}
 
             <View style={productDetailsStyle.quantityCon}>
-              <Animated.View style={[productDetailsStyle.quantityAnimCon, animatedStyle]}>
-                <Text style={productDetailsStyle.badgeText}>{'+1'}</Text>
-              </Animated.View>
               <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
@@ -361,11 +366,17 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           </LinearGradient>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate('MyCart')}
+            onPress={() => {
+              addCart(data);
+              increase();
+            }}
             style={productDetailsStyle.cartButton}
           >
             <CartBag />
           </TouchableOpacity>
+          <Animated.View style={[productDetailsStyle.quantityAnimCon, animatedStyle]}>
+            <Text style={productDetailsStyle.badgeText}>{'+1'}</Text>
+          </Animated.View>
         </View>
       </View>
       <StatusBar style="dark" backgroundColor="#F8F3FB" />

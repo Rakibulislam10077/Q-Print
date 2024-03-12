@@ -6,7 +6,7 @@ import React from 'react';
 import { useGetUserQuery } from '../../redux/api/apiSlice';
 const ShippingInfo = () => {
   const { data, isLoading } = useGetUserQuery(undefined);
-  console.log(JSON.stringify(data?.data, null, 2));
+  // console.log(JSON.stringify(data?.data, null, 2));
   const info = data?.data?.billingAddress?.addressId;
   return (
     <View style={styles.bodyContainer}>

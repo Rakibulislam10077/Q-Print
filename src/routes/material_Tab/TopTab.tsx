@@ -38,7 +38,7 @@ export const TopTab = ({ itemId, searchText }: { itemId: string; searchText: str
           },
           tabBarActiveTintColor: Color.C_main,
           tabBarInactiveTintColor: '#9E9E9E',
-          tabBarLabelStyle: { fontSize: 16, textTransform: 'lowercase' }, // Text style for tab labels
+          tabBarLabelStyle: { fontSize: 15, textTransform: 'capitalize' }, // Text style for tab labels
           tabBarIndicatorStyle: {
             backgroundColor: Color.C_main, // Color of the indicator line
             height: 1, // Height of the indicator line

@@ -34,31 +34,19 @@ import Cart from '../../components/card/allCart/Cart';
 import BrandInGlobalSearch from '../../components/globalSearchCom/brand/BrandInGlobalSearch';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useGetQueryProductQuery } from '../../redux/api/apiSlice';
 
 const Search = () => {
   const navigation: any = useNavigation();
   const [dummyText, setDummyText] = useState<boolean>(true);
   const [input, setInput] = useState<string>('');
   const [skeleton, setSkeleton] = useState(false);
-
+  const { data, isLoading } = useGetQueryProductQuery(`searchTerm=${input}`);
   // Function to handle search field end editing event
-  const handleEndEditing = () => {
-    const trimmedInput = input.trim();
-    if (trimmedInput?.length === 0) {
-      setDummyText(true);
-    } else {
-      setDummyText(false);
-      setSkeleton(false);
-    }
-    setDummyText(false);
-  };
-
   // Function to handle text input change event
   const onChangeTextInput = () => {
     setSkeleton(true);
   };
-
-  const data = [1, 2, 3, 4, 4];
 
   return (
     <SafeAreaView style={searchStyle.container}>
@@ -74,13 +62,11 @@ const Search = () => {
         <Animated.View style={[searchStyle.searchContainer]}>
           <Magnify />
           <TextInput
-            onEndEditing={handleEndEditing}
             style={searchStyle.input}
             placeholder="Search"
             placeholderTextColor={Color.C_H_black}
             onChangeText={(text) => setInput(text)}
             autoFocus={true}
-            onTextInput={onChangeTextInput}
           />
         </Animated.View>
         <TouchableOpacity
@@ -93,7 +79,6 @@ const Search = () => {
       </View>
 
       {/* Main Body */}
-      {skeleton && <Text>hello</Text>}
       {dummyText ? (
         // Dummy Container
         <View style={searchStyle.dummyTextCont}>
@@ -110,7 +95,7 @@ const Search = () => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{ paddingRight: 20 }}
-                data={[1, 1, 1, 1, 1, 1, 1, 1]}
+                data={data?.data}
                 renderItem={({ item }) => <BrandInGlobalSearch item={item} />}
               />
             </View>
@@ -125,8 +110,8 @@ const Search = () => {
               }}
             >
               {/* Render Cart Items */}
-              {data.map((item) => {
-                return <Cart />;
+              {data?.data?.map((item) => {
+                return <Cart item={item} />;
               })}
             </View>
           </View>

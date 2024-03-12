@@ -43,7 +43,7 @@ const Products = ({ itemId }: { itemId: string }) => {
 
   const CustomTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
-  console.log(searchText);
+  // console.log(searchText);
   const animation = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -93,7 +93,7 @@ const Products = ({ itemId }: { itemId: string }) => {
                     placeholder="Search products"
                     value={searchText}
                     onSubmitEditing={() => {
-                      console.log(searchText);
+                      // console.log(searchText);
                     }}
                   />
                 )}
