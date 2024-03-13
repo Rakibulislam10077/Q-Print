@@ -4,18 +4,23 @@ import { addToCartStyle } from './AddToCartStyle';
 import { Close } from '../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
+import { addToCart, removeFromCart, removeOneFromCart } from '../../redux/features/addTocart';
 
 let dynamicColor = 'red';
 const AddToCart = ({ item }: { item: any }) => {
-  console.log(JSON.stringify(item, null, 2));
-
+  console.log(JSON.stringify(item?.productPhotos, null, 2));
+  const dispatch = useDispatch();
   return (
     <Animated.View
       entering={FadeInDown.delay(100).duration(500)}
       style={addToCartStyle.cartContainer}
     >
       <View style={addToCartStyle.imgCon}>
-        <Image style={addToCartStyle.img} source={require('../../../assets/image/homepod.jpeg')} />
+        <Image
+          style={addToCartStyle.img}
+          source={{ uri: `http://192.168.0.183:5000/${item?.productPhotos[0]}` }}
+        />
       </View>
       <View style={{ flex: 1 }}>
         <View
@@ -30,7 +35,10 @@ const AddToCart = ({ item }: { item: any }) => {
               {item.productName}
             </Text>
           </View>
-          <TouchableOpacity style={addToCartStyle.close}>
+          <TouchableOpacity
+            onPress={() => dispatch(removeFromCart(item))}
+            style={addToCartStyle.close}
+          >
             <Close />
           </TouchableOpacity>
         </View>
@@ -39,18 +47,30 @@ const AddToCart = ({ item }: { item: any }) => {
           <View style={[addToCartStyle.colorIndicator, { backgroundColor: dynamicColor }]} />
         </View>
         <View style={addToCartStyle.currencyCon}>
-          <Text style={addToCartStyle.priceAndCurrency}>1100 QAR</Text>
+          <Text style={addToCartStyle.priceAndCurrency}>
+            {item?.defaultVariant?.discountedPrice}
+          </Text>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
             }}
           >
-            <TouchableOpacity style={addToCartStyle.plusAndMinus}>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(removeOneFromCart(item));
+              }}
+              style={addToCartStyle.plusAndMinus}
+            >
               <AntDesign name="minus" size={16} color="black" />
             </TouchableOpacity>
-            <Text style={addToCartStyle.quantity}>1</Text>
-            <TouchableOpacity style={addToCartStyle.plusAndMinus}>
+            <Text style={addToCartStyle.quantity}>{item?.quantity}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(addToCart(item));
+              }}
+              style={addToCartStyle.plusAndMinus}
+            >
               <AntDesign name="plus" size={16} color="black" />
             </TouchableOpacity>
           </View>

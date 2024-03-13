@@ -50,7 +50,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import * as Sharing from 'expo-sharing';
 import ContactUs from '../../components/modalComponents/contactUs/ContactUs';
-import { getToken, useGetUserQuery } from '../../redux/api/apiSlice';
+import { useGetUserQuery } from '../../redux/api/apiSlice';
 
 const Profile: React.FC = () => {
   const navigation: any = useNavigation();

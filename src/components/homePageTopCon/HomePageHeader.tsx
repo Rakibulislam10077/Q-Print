@@ -4,9 +4,11 @@ import { homePageStyle } from './HomePageHeaderStyle';
 import { CartBag } from '../../../assets/allSvg/AllSvg';
 import { Badge } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useAppSelector } from '../../redux/hook';
 
 const HomePageTopCon = () => {
   const navigation: any = useNavigation();
+  const { products } = useAppSelector((state) => state.cart);
   return (
     <View style={homePageStyle.container}>
       <View>
@@ -18,7 +20,7 @@ const HomePageTopCon = () => {
         style={homePageStyle.cart}
       >
         <CartBag />
-        <Badge style={homePageStyle.badge}>3</Badge>
+        <Badge style={homePageStyle.badge}>{products?.length}</Badge>
       </TouchableOpacity>
     </View>
   );

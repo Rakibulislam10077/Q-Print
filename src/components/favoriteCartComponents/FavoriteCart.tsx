@@ -3,6 +3,9 @@ import React from 'react';
 import { favoriteCartStyle } from './FavoriteCartStyle';
 import { CartBag, RedClose } from '../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { useAppDispatch } from '../../redux/hook';
+import { removeFromFavorite } from '../../redux/features/addFavourite';
+import { addToCart } from '../../redux/features/addTocart';
 
 type ListItemProps = {
   viewableItems: Animated.SharedValue<ViewToken[]>;
@@ -12,6 +15,8 @@ type ListItemProps = {
 // const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity)
 
 const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
+  const dispatch = useAppDispatch();
+
   const rStyle = useAnimatedStyle(() => {
     const isVisible = Boolean(
       viewableItems.value
@@ -27,6 +32,9 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
       ],
     };
   }, []);
+
+  console.log(JSON.stringify(item, null, 2));
+
   return (
     <Animated.View
       entering={FadeInDown.delay(50).duration(500)}
@@ -34,21 +42,31 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
     >
       <View style={favoriteCartStyle.itemCon}>
         <View style={favoriteCartStyle.imgCon}>
-          <Image style={favoriteCartStyle.img} source={item?.item?.img} />
-          <TouchableOpacity style={favoriteCartStyle.close}>
+          <Image
+            style={favoriteCartStyle.img}
+            source={{ uri: `http://192.168.0.183:5000/${item?.productPhotos[0]}` }}
+          />
+          <TouchableOpacity
+            onPress={() => dispatch(removeFromFavorite(item))}
+            style={favoriteCartStyle.close}
+          >
             <RedClose />
           </TouchableOpacity>
         </View>
         <View style={favoriteCartStyle.allText}>
           <View>
-            <Text style={favoriteCartStyle.brandSpecTitle}>
-              Brother HL-L3270CDW Single Function color Laser Printer
-            </Text>
+            <Text style={favoriteCartStyle.brandSpecTitle}>{item?.productName}</Text>
             <Text style={favoriteCartStyle.ratingText}>(5.0)</Text>
           </View>
           <View style={favoriteCartStyle.currencyAndButtonCon}>
-            <Text style={favoriteCartStyle.currency}>110 QAR</Text>
-            <TouchableOpacity activeOpacity={0.7} style={favoriteCartStyle.addToCartButton}>
+            <Text style={favoriteCartStyle.currency}>
+              {item?.defaultVariant?.discountedPrice} QAR
+            </Text>
+            <TouchableOpacity
+              onPress={() => dispatch(addToCart(item))}
+              activeOpacity={0.7}
+              style={favoriteCartStyle.addToCartButton}
+            >
               <CartBag />
               <Text style={favoriteCartStyle.buttonText}>Add</Text>
             </TouchableOpacity>

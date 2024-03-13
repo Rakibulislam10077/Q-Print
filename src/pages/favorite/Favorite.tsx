@@ -7,6 +7,7 @@ import FavoriteCart from '../../components/favoriteCartComponents/FavoriteCart';
 import { Font } from '../../constants/GlobalStyle';
 import { StatusBar } from 'expo-status-bar';
 import Animated, { useSharedValue } from 'react-native-reanimated';
+import { useAppSelector } from '../../redux/hook';
 
 const logodata = [
   {
@@ -53,6 +54,9 @@ const logodata = [
 
 const Favorite = () => {
   const viewableItems = useSharedValue<ViewToken[]>([]);
+
+  const { favorites } = useAppSelector((state) => state.favorite);
+
   return (
     <View style={favoriteStyle.container}>
       {/* header section */}
@@ -60,7 +64,7 @@ const Favorite = () => {
       {/* body section */}
       <View style={favoriteStyle.bodyContainer}>
         <FlatList
-          data={logodata}
+          data={favorites}
           onViewableItemsChanged={({ viewableItems: vItems }) => {
             viewableItems.value = vItems;
           }}

@@ -16,7 +16,7 @@ const Printer = ({ itemId, searchText }: { itemId: string; searchText: string })
   return (
     <>
       {data?.data?.length === 0 ? (
-        <EmptyData />
+        <EmptyData children="No Product Found" />
       ) : (
         // <></>
         <ScrollView style={printerStyle.container}>

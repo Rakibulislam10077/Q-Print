@@ -35,15 +35,17 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
+import { Badge } from 'react-native-paper';
+import { CustomTouchable } from '../../shared/CustomTouchable';
+import { useAppSelector } from '../../redux/hook';
 const Products = ({ itemId }: { itemId: string }) => {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const [isClickedSearch, setIsClickedSearch] = useState(false);
   const DimentionsWidth = Dimensions.get('window').width;
 
-  const CustomTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+  const { products } = useAppSelector((state) => state.cart);
 
-  // console.log(searchText);
   const animation = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -121,6 +123,7 @@ const Products = ({ itemId }: { itemId: string }) => {
             {!isClickedSearch === true && (
               <CustomTouchable entering={ZoomIn.delay(50)} style={productsStyle.cartBag}>
                 <CartBag />
+                <Badge style={productsStyle.badge}>{products?.length}</Badge>
               </CustomTouchable>
             )}
           </View>

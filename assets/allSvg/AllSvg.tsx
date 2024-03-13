@@ -265,6 +265,22 @@ export const FavIcon = () => {
     </Svg>
   );
 };
+export const ActiveFavIcon = () => {
+  return (
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="#1A1A1A"
+    >
+      <Path
+        d="M9.99961 17.5453C-6.66673 8.33354 4.99993 -1.66646 9.99961 4.65692C14.9999 -1.66646 26.6666 8.33354 9.99961 17.5453Z"
+        stroke="#1A1A1A"
+      />
+    </Svg>
+  );
+};
 export const Goback = () => {
   return (
     <Svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

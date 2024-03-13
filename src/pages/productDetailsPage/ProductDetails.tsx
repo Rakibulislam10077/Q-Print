@@ -1,7 +1,13 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { CartBag, FavIcon, Goback, InActiveIndicator } from '../../../assets/allSvg/AllSvg';
+import {
+  ActiveFavIcon,
+  CartBag,
+  FavIcon,
+  Goback,
+  InActiveIndicator,
+} from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import Animated, {
   FadeInDown,
@@ -12,41 +18,69 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { AntDesign } from '@expo/vector-icons';
 
 import { productDetailsStyle } from './ProductDetailsStyle';
 // import SkeletonInProductDetails from "../../components/allSkeleton/SkeletonInProductDetails";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
-import ProductDetailsTopTab from '../../routes/material_Tab/ProductDetailsTopTab';
-import { useDispatch } from 'react-redux'; // Import connect from react-redux
+import ProductDetailsTopTab from '../../routes/material_Tab/ProductDetailsTopTab'; // Import connect from react-redux
 import { IProduct } from '../../types/interfaces/product.interface';
 import { FlatList } from 'react-native-gesture-handler';
 import ProductDetailSkeleton from '../../components/skeleton/ProductDetails.skeleton';
 import { useGetProductQuery } from '../../redux/api/apiSlice';
-import * as ImageManipulator from 'expo-image-manipulator';
-import { myCartStyle } from '../myCart/MyCartStyle';
-import { Badge } from 'react-native-paper';
 import { addToCart } from '../../redux/features/addTocart';
+import { useAppDispatch, useAppSelector } from '../../redux/hook';
+import { addToFavorite, removeFromFavorite } from '../../redux/features/addFavourite';
+import ProgressBar from '../../components/progressbar/ProgressBar';
+import Counter from '../../components/quantityCounter/Counter';
+import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
 
 const ProductDetails: React.FC<IProduct> = (props) => {
   const data: IProduct = props?.route?.params;
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
-  const [quantity, setQuantity] = useState<number>(0);
+  const [addFavorite, setAddFavorite] = useState(false);
+
   const { height } = Dimensions.get('screen');
+  const [selectedFavorite, setSelectedFavorite] = useState<string>('');
+
   const { isLoading } = useGetProductQuery(undefined);
   const animatedY = useSharedValue(0);
   const animatedX = useSharedValue(0);
   const scale = useSharedValue(0);
   const scale2 = useSharedValue(0);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const products = useAppSelector((state) => state.cart.products);
+  const { favorites } = useAppSelector((state) => state.favorite);
 
   const addCart = (product: IProduct) => {
     dispatch(addToCart(product));
   };
 
+  const addRemoveFavorite = async (data: any) => {
+    dispatch(addToFavorite(data));
+    setAddFavorite(false);
+  };
+
+  const revmoveFav = (data: any) => {
+    dispatch(removeFromFavorite(data));
+    setAddFavorite(true);
+  };
+
+  useEffect(() => {
+    const updateSelectedFavorite = () => {
+      if (favorites) {
+        // Map through favorites and set the selected favorite
+        favorites.forEach((item: any) => {
+          setSelectedFavorite(item?._id);
+        });
+      }
+    };
+    updateSelectedFavorite();
+  }, [favorites]);
+
+  // the animation for add to cart button
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -56,16 +90,23 @@ const ProductDetails: React.FC<IProduct> = (props) => {
       ],
     };
   });
+
   const animatedStyle2 = useAnimatedStyle(() => {
     return {
       transform: [{ scale: scale2.value }],
     };
   });
+  //  end here
+
+  // skeleton timing
   useEffect(() => {
     setTimeout(() => {
       setIsSkeleton(false);
     }, 1000);
   }, []);
+
+  // =========================================
+  // =========================================
 
   const increase = () => {
     if (animatedX.value === 0) {
@@ -74,7 +115,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
       animatedX.value = withTiming(-30, { duration: 500 });
       setTimeout(() => {
         scale.value = 0;
-        setQuantity(quantity + 1);
+        // setQuantity(products?.length + 1);
         scale2.value = withSpring(1.5);
         animatedY.value = withTiming(0, { duration: 500 });
         animatedX.value = withTiming(0, { duration: 500 });
@@ -85,64 +126,9 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     }
   };
   const decrease = () => {
-    const value = quantity - 1;
-    setQuantity(value);
+    // const value = products?.length - 1;
+    // setQuantity(value);
   };
-
-  // =========================================
-  // =========================================
-
-  // useEffect(() => {
-  //   const compressImage = async () => {
-  //     try {
-  //       const response = await fetch('');
-  //       const blob = await response.blob();
-
-  //       const compressedImage = await ImageManipulator.manipulateAsync(
-  //         blob,
-  //         [{ resize: { width: 200 } }], // Adjust dimensions as needed
-  //         { compress: 0.2, format: 'jpeg' } // Adjust compression and format as needed
-  //       );
-
-  //       setCompressedImageURI(compressedImage.uri);
-  //     } catch (error) {
-  //       console.error('Error compressing image:', error);
-  //     }
-  //   };
-
-  //   compressImage();
-  // }, []);
-
-  const [currentAmount, setCurrentAmount] = useState(20000);
-
-  const animation = useRef<any>(null);
-  // State variables to track current and target amounts
-  const targetAmount = 30000;
-
-  // Calculate the percentage progress towards the target amount
-  const percentageProgress =
-    currentAmount === 0 ? 0 : Math.round((currentAmount / targetAmount) * 100);
-
-  // Shared value for animated progress
-  const animatedProgress = useSharedValue(0);
-
-  // Effect to initialize progress animation when currentAmount changes
-  useEffect(() => {
-    const percentage = Math.min(100, Math.round((currentAmount / targetAmount) * 100));
-    animatedProgress.value = withTiming(percentage / 100, { duration: 1000 });
-  }, [currentAmount, targetAmount]);
-
-  // Animated style for the progress bar
-  const progressStyle = useAnimatedStyle(() => {
-    return {
-      width: `${animatedProgress.value * 100}%`,
-      height: 5,
-      backgroundColor: Color.C_main,
-      borderTopLeftRadius: 10,
-      borderBottomLeftRadius: 10,
-      position: 'relative',
-    };
-  });
 
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
@@ -163,13 +149,19 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                 <TouchableOpacity activeOpacity={0.7}>
                   <CartBag />
                   <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
-                    <Text style={productDetailsStyle.badgeText}>{quantity}</Text>
+                    <Text style={productDetailsStyle.badgeText}>{products?.length}</Text>
                   </Animated.View>
                 </TouchableOpacity>
               </Animated.View>
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
-                <TouchableOpacity activeOpacity={0.7} style={productDetailsStyle.navAndFav}>
-                  <FavIcon />
+                <TouchableOpacity
+                  onPress={() => {
+                    addRemoveFavorite(data);
+                  }}
+                  activeOpacity={0.7}
+                  style={productDetailsStyle.navAndFav}
+                >
+                  {data?._id === selectedFavorite ? <ActiveFavIcon /> : <FavIcon />}
                 </TouchableOpacity>
               </Animated.View>
             </View>
@@ -204,144 +196,10 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           </Animated.View>
         </Animated.View>
         {/* price and quantity container */}
-        <View style={productDetailsStyle.description}>
-          <Animated.View
-            entering={FadeInDown.delay(50).duration(500)}
-            style={productDetailsStyle.ratingContainer}
-          >
-            {data?.defaultVariant?.inStock > 0 ? (
-              <View style={productDetailsStyle.inStockContainer}>
-                <InActiveIndicator />
-                <Text style={productDetailsStyle.inStockText}>In stock</Text>
-              </View>
-            ) : (
-              <View style={productDetailsStyle.inStockContainer}>
-                <InActiveIndicator />
-                <Text style={[productDetailsStyle.inStockText, { color: Color.C_red }]}>
-                  In stock
-                </Text>
-              </View>
-            )}
-            <Text style={productDetailsStyle.verticalDivider}>|</Text>
-            <Text style={productDetailsStyle.ratingText}>
-              ⭐<Text style={productDetailsStyle.ratingNumber}>(4.5)</Text>
-            </Text>
-            <Text style={productDetailsStyle.verticalDivider}>|</Text>
-            <LinearGradient
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
-              style={productDetailsStyle.discountTextCon}
-            >
-              {data?.defaultVariant?.discountPercentage && (
-                <Text style={productDetailsStyle.discountPercent}>
-                  {data?.defaultVariant.discountPercentage}% off
-                </Text>
-              )}
-            </LinearGradient>
-          </Animated.View>
-          <Animated.Text
-            entering={FadeInDown.delay(50).duration(500)}
-            numberOfLines={2}
-            style={productDetailsStyle.title}
-          >
-            {data?.productName}
-          </Animated.Text>
-          <Animated.View
-            entering={FadeInDown.delay(50).duration(500)}
-            style={productDetailsStyle.productIdandDisc}
-          >
-            <View style={productDetailsStyle.brandLogoContainer}>
-              <Image
-                style={productDetailsStyle.brandLogo}
-                source={{ uri: `http://192.168.0.103:5000/${data?.brand?.brandPhoto}` }}
-              />
-            </View>
-            <Text style={productDetailsStyle.brandName}>{data?.brand?.brandName}</Text>
-          </Animated.View>
-          {/*
-            =================================
-            =================================
-                available color container
-            =================================
-            =================================
-             */}
-          {/* <View style={productDetailsStyle.colorIndicatorCon}>
-            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
-            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
-            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
-            <TouchableOpacity style={productDetailsStyle.colorIndicator}></TouchableOpacity>
-          </View> */}
-
-          <Animated.View
-            entering={FadeInDown.delay(50).duration(500)}
-            style={productDetailsStyle.priceContainer}
-          >
-            <Text style={productDetailsStyle.currentPrice}>
-              <Text style={productDetailsStyle.productPrice}>
-                {data?.defaultVariant?.discountedPrice}{' '}
-                <Text style={productDetailsStyle.currency}>QAR</Text>
-              </Text>
-            </Text>
-            {/* offer QAR */}
-            <Text style={productDetailsStyle.discountedPrice}>
-              {data?.defaultVariant?.sellingPrice}{' '}
-              <Text style={productDetailsStyle.discountedCurrency}>QAR</Text>
-            </Text>
-            {/* quantity Container */}
-
-            <View style={productDetailsStyle.quantityCon}>
-              <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
-                style={productDetailsStyle.increaseDecreaseButton}
-              >
-                <TouchableOpacity
-                  onPress={() => decrease()}
-                  style={productDetailsStyle.inDecActionLayer}
-                >
-                  <AntDesign name="minus" size={20} color="black" />
-                </TouchableOpacity>
-              </LinearGradient>
-              <View style={productDetailsStyle.quantityBox}>
-                <Text>{quantity}</Text>
-              </View>
-              <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
-                style={productDetailsStyle.increaseDecreaseButton}
-              >
-                <TouchableOpacity
-                  onPress={() => increase()}
-                  style={productDetailsStyle.inDecActionLayer}
-                >
-                  <AntDesign name="plus" size={20} color="black" />
-                </TouchableOpacity>
-              </LinearGradient>
-            </View>
-          </Animated.View>
-          <View style={{ position: 'relative' }}>
-            <View style={productDetailsStyle.customProgressBG}>
-              <Animated.View style={progressStyle}>
-                <View style={productDetailsStyle.percentageValueCon}>
-                  {currentAmount >= targetAmount ? (
-                    <Text style={{ fontSize: 12 }}>100</Text>
-                  ) : (
-                    <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
-                  )}
-                </View>
-              </Animated.View>
-            </View>
-          </View>
-        </View>
+        {/* product details container here*/}
+        <ProductDetailsDesc data={data} />
         {/* view more information container */}
         <View style={{ height: height - 100 }}>
-          {/* hey chatgpt this is my material top tab component
-          please solve my problem
-          */}
-
           <ProductDetailsTopTab item={data} />
         </View>
       </Animated.ScrollView>
@@ -357,7 +215,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            colors={['rgba(200, 59, 98, 0.80)', 'rgba(127, 53, 205, 0.80)']}
+            colors={['rgba(200, 59, 98, 0.90)', 'rgba(127, 53, 205, 0.80)']}
             style={productDetailsStyle.linearButton}
           >
             <TouchableOpacity style={productDetailsStyle.buyButton}>
@@ -383,15 +241,5 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     </View>
   );
 };
-
-// const mapStateToProps = (state: any) => ({
-//   item: state.item, // Assuming you have an item reducer that stores the item data
-// });
-
-// // const mapDispatchToProps = (dispatch: any) => ({
-// //   fetchData: () => dispatch(fetchData()), // Dispatch the action to fetch data
-// // });
-
-// export default connect(mapStateToProps)(ProductDetails);
 
 export default ProductDetails;

@@ -43,7 +43,7 @@ const MyCart = () => {
 
   const { products } = useAppSelector((state) => state.cart);
 
-  console.log(products, 'products');
+  console.log(products);
 
   const animation = useRef<any>(null);
   // State variables to track current and target amounts

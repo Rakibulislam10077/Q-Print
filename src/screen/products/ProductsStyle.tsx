@@ -35,6 +35,11 @@ export const productsStyle = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 40,
   },
+  badge: {
+    position: 'absolute',
+    top: -8,
+    right: -5,
+  },
   inputAndThreelineCon: {
     flexDirection: 'row',
     alignItems: 'center',

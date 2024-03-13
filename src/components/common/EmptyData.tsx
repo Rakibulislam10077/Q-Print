@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { EmptyDataLogo } from '../../../assets/allSvg/AllSvg';
 
-const EmptyData = () => {
+const EmptyData = ({ children }: { children: string }) => {
   return (
     <View style={styles.container}>
       <Image
@@ -11,7 +11,7 @@ const EmptyData = () => {
       />
       <Text style={{ fontSize: 30, color: 'rgba(0,0,0,0.6)', marginTop: 20 }}>Opp's</Text>
       <Text style={{ fontSize: 16, color: 'rgba(0,0,0,0.4)', marginTop: 10, textAlign: 'center' }}>
-        Sorry this category product {`\n`} is not available
+        {children}
       </Text>
     </View>
   );

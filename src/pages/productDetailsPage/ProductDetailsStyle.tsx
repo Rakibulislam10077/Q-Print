@@ -47,129 +47,13 @@ export const productDetailsStyle = StyleSheet.create({
     borderColor: Color.C_border,
     borderWidth: 1,
   },
-  description: {
-    marginHorizontal: 20,
-    paddingVertical: 20,
-    borderBottomColor: Color.C_border,
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    backgroundColor: Color.C_white,
-  },
-  title: {
-    fontSize: Font.Font_L,
-    marginBottom: 10,
-    lineHeight: 25,
-  },
-  productIdandDisc: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  brandLogoContainer: {
-    width: 24,
-    height: 24,
-    backgroundColor: Color.C_white,
-    borderRadius: 4,
-    shadowColor: shadows.shadow_color,
-    elevation: shadows.elevation_1,
-    shadowOffset: {
-      width: shadows.offsetWidth_1,
-      height: shadows.offsetHeight_1,
-    },
-    shadowRadius: shadows.radius_1,
-    shadowOpacity: shadows.opacity_1,
-    padding: 4,
-    marginRight: 5,
-  },
-  brandLogo: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 3,
-  },
-  verticalDivider: {
-    fontSize: Font.Font_M,
-    fontWeight: '700',
-    color: Color.C_border,
-    marginHorizontal: 10,
-  },
-  brandName: {
-    fontSize: Font.Font_M,
-    color: 'rgba(0,0,0,0.6)',
-  },
-  colorIndicatorCon: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
 
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  ratingText: {
-    marginRight: 5,
-  },
-  ratingNumber: {
-    color: Color.C_H_black,
-  },
-  inStockContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  inStockText: {
-    fontSize: Font.Font_M,
-    color: '#009420',
-    marginRight: 10,
-    marginLeft: 5,
-  },
-  priceContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  currentPrice: {
-    fontSize: Font.Font_XL,
-    marginRight: 10,
-  },
   productPrice: {
     fontSize: Font.Font_XL,
     fontWeight: '700',
     color: Color.C_main,
   },
-  currency: {
-    fontSize: Font.Font_X,
-    fontWeight: '500',
-  },
-  discountedPrice: {
-    fontSize: Font.Font_L,
-    color: Color.C_H_black,
-    textDecorationLine: 'line-through',
-  },
-  discountedCurrency: {
-    fontSize: Font.Font_M,
-  },
-  discountTextCon: {
-    height: 30,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-  },
-  discountPercent: {
-    color: Color.C_main,
-    fontSize: Font.Font_S,
-  },
-  quantityCon: {
-    borderWidth: 1,
-    borderColor: Color.C_border,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 'auto',
-    height: 40,
-    paddingHorizontal: 5,
-    flexDirection: 'row',
-  },
+
   quantityAnimCon: {
     width: 20,
     height: 20,
@@ -181,28 +65,11 @@ export const productDetailsStyle = StyleSheet.create({
     top: -30,
     right: 20,
   },
-  increaseDecreaseButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inDecActionLayer: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   minusPlusText: {
     fontSize: Font.Font_XXL,
   },
-  quantityBox: {
-    width: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   highLightedInfo: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -322,25 +189,5 @@ export const productDetailsStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-  },
-  customProgressBG: {
-    width: '96%',
-    height: 5,
-    borderRadius: 10,
-    backgroundColor: Color.C_border,
-    marginTop: 20,
-  },
-  percentageValueCon: {
-    position: 'absolute',
-    right: -10,
-    borderRadius: 15,
-    width: 25,
-    height: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    top: -10,
-    borderColor: Color.C_main,
-    backgroundColor: Color.C_white,
   },
 });
