@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { api } from './api/apiSlice';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import cartSlice from '../redux/features/addTocart'
+import cartSlice from './features/cartSlice'
 import favoriteSlice from '../redux/features/addFavourite'
 export const store = configureStore({
   reducer: {

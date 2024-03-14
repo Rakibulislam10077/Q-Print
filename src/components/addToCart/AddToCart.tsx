@@ -4,13 +4,14 @@ import { addToCartStyle } from './AddToCartStyle';
 import { Close } from '../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
-import { useDispatch } from 'react-redux';
-import { addToCart, removeFromCart, removeOneFromCart } from '../../redux/features/addTocart';
+import { addToCart, removeFromCart, removeOneFromCart } from '../../redux/features/cartSlice';
+import { useAppDispatch } from '../../redux/hook';
 
 let dynamicColor = 'red';
 const AddToCart = ({ item }: { item: any }) => {
-  console.log(JSON.stringify(item?.productPhotos, null, 2));
-  const dispatch = useDispatch();
+  const totalPrice = item?.defaultVariant?.discountedPrice * item?.quantity;
+
+  const dispatch = useAppDispatch();
   return (
     <Animated.View
       entering={FadeInDown.delay(100).duration(500)}
@@ -44,12 +45,15 @@ const AddToCart = ({ item }: { item: any }) => {
         </View>
         <View style={addToCartStyle.storeNameAndColorIndicator}>
           <Text style={addToCartStyle.storeName}>{item?.brand?.brandName}</Text>
-          <View style={[addToCartStyle.colorIndicator, { backgroundColor: dynamicColor }]} />
+          <View
+            style={[
+              addToCartStyle.colorIndicator,
+              { backgroundColor: item?.variant?.variantName.toLowerCase() },
+            ]}
+          />
         </View>
         <View style={addToCartStyle.currencyCon}>
-          <Text style={addToCartStyle.priceAndCurrency}>
-            {item?.defaultVariant?.discountedPrice}
-          </Text>
+          <Text style={addToCartStyle.priceAndCurrency}>{totalPrice}</Text>
           <View
             style={{
               flexDirection: 'row',

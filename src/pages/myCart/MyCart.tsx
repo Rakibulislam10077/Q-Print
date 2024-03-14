@@ -6,7 +6,7 @@
  * Additionally, it includes an animated congratulatory message upon reaching the target amount for free shipping.
  *
  * State:
- * - currentAmount: Represents the current total amount in the cart.
+ * - subTatal: Represents the current total amount in the cart.
  * - targetAmount: Represents the target amount for free shipping.
  * - percentageProgress: Calculates the percentage progress towards the target amount.
  * - animatedProgress: Shared value for animated progress bar.
@@ -39,29 +39,25 @@ const MyCart = () => {
   const navigation: any = useNavigation();
   const [isLottie, setIsLottie] = useState<boolean>(true);
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
-  const [currentAmount, setCurrentAmount] = useState(30000);
+  // const [subTatal, setsubTatal] = useState(30000);
 
   const { products } = useAppSelector((state) => state.cart);
-
-  console.log(products);
+  const subTotal = products?.reduce((total: number, product: any) => {
+    return total + product?.defaultVariant?.discountedPrice * product?.quantity;
+  }, 0);
 
   const animation = useRef<any>(null);
   // State variables to track current and target amounts
-  const targetAmount = 30000;
-
+  const targetAmount = 1000;
   // Calculate the percentage progress towards the target amount
-  const percentageProgress =
-    currentAmount === 0 ? 0 : Math.round((currentAmount / targetAmount) * 100);
-
+  const percentageProgress = subTotal === 0 ? 0 : Math.round((subTotal / targetAmount) * 100);
   // Shared value for animated progress
   const animatedProgress = useSharedValue(0);
-
-  // Effect to initialize progress animation when currentAmount changes
+  // Effect to initialize progress animation when subTatal changes
   useEffect(() => {
-    const percentage = Math.min(100, Math.round((currentAmount / targetAmount) * 100));
+    const percentage = Math.min(100, Math.round((subTotal / targetAmount) * 100));
     animatedProgress.value = withTiming(percentage / 100, { duration: 1000 });
-  }, [currentAmount, targetAmount]);
-
+  }, [subTotal, targetAmount]);
   // Animated style for the progress bar
   const progressStyle = useAnimatedStyle(() => {
     return {
@@ -121,7 +117,7 @@ const MyCart = () => {
         <View style={myCartStyle.grandTotalCon}>
           <Text>Grand Total</Text>
           <Text>
-            1855 <Text>QAR</Text>
+            {subTotal} <Text>QAR</Text>
           </Text>
         </View>
 
@@ -130,7 +126,7 @@ const MyCart = () => {
           <View style={myCartStyle.customProgressBG}>
             <Animated.View style={progressStyle}>
               <View style={myCartStyle.percentageValueCon}>
-                {currentAmount >= targetAmount ? (
+                {subTotal >= targetAmount ? (
                   <Text style={{ fontSize: 12 }}>100</Text>
                 ) : (
                   <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
@@ -142,8 +138,8 @@ const MyCart = () => {
 
         {/* Display information about free shipping */}
         <Text style={myCartStyle.freeShippingText}>
-          Spend <Text style={{ color: '#C83B62', fontWeight: '600' }}>3000</Text> more to reach{' '}
-          <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
+          Spend <Text style={{ color: '#C83B62', fontWeight: '600' }}>{targetAmount}</Text> more to
+          reach <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
         </Text>
 
         {/* Display the button to proceed to checkout */}
@@ -164,7 +160,7 @@ const MyCart = () => {
       </View>
 
       {/* Display the congratulation lottie */}
-      {currentAmount >= targetAmount && (
+      {subTotal >= targetAmount && (
         <View style={myCartStyle.lottieConStyle}>
           {isLottie && (
             <LottieView

@@ -28,22 +28,25 @@ import { IProduct } from '../../types/interfaces/product.interface';
 import { FlatList } from 'react-native-gesture-handler';
 import ProductDetailSkeleton from '../../components/skeleton/ProductDetails.skeleton';
 import { useGetProductQuery } from '../../redux/api/apiSlice';
-import { addToCart } from '../../redux/features/addTocart';
+import { addToCart } from '../../redux/features/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
-import { addToFavorite, removeFromFavorite } from '../../redux/features/addFavourite';
+import { addAndRemoveFavorite, removeFromFavorite } from '../../redux/features/addFavourite';
 import ProgressBar from '../../components/progressbar/ProgressBar';
 import Counter from '../../components/quantityCounter/Counter';
 import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
 
 const ProductDetails: React.FC<IProduct> = (props) => {
   const data: IProduct = props?.route?.params;
+
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [addFavorite, setAddFavorite] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState({
+    variantId: data.defaultVariant._id,
+    variantName: data.defaultVariant.variantName,
+  });
 
   const { height } = Dimensions.get('screen');
-  const [selectedFavorite, setSelectedFavorite] = useState<string>('');
-
   const { isLoading } = useGetProductQuery(undefined);
   const animatedY = useSharedValue(0);
   const animatedX = useSharedValue(0);
@@ -52,33 +55,15 @@ const ProductDetails: React.FC<IProduct> = (props) => {
 
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.cart.products);
-  const { favorites } = useAppSelector((state) => state.favorite);
 
   const addCart = (product: IProduct) => {
-    dispatch(addToCart(product));
+    dispatch(addToCart({ ...product, variant: selectedVariant }));
   };
 
   const addRemoveFavorite = async (data: any) => {
-    dispatch(addToFavorite(data));
+    dispatch(addAndRemoveFavorite(data));
     setAddFavorite(false);
   };
-
-  const revmoveFav = (data: any) => {
-    dispatch(removeFromFavorite(data));
-    setAddFavorite(true);
-  };
-
-  useEffect(() => {
-    const updateSelectedFavorite = () => {
-      if (favorites) {
-        // Map through favorites and set the selected favorite
-        favorites.forEach((item: any) => {
-          setSelectedFavorite(item?._id);
-        });
-      }
-    };
-    updateSelectedFavorite();
-  }, [favorites]);
 
   // the animation for add to cart button
   const animatedStyle = useAnimatedStyle(() => {
@@ -104,9 +89,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
       setIsSkeleton(false);
     }, 1000);
   }, []);
-
-  // =========================================
-  // =========================================
 
   const increase = () => {
     if (animatedX.value === 0) {
@@ -161,7 +143,11 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                   activeOpacity={0.7}
                   style={productDetailsStyle.navAndFav}
                 >
-                  {data?._id === selectedFavorite ? <ActiveFavIcon /> : <FavIcon />}
+                  <FavIcon />
+                  {/* {favorites?.map((favorite: any) => {
+                    return favorite?._id === data?._id ? <ActiveFavIcon /> : <FavIcon />;
+                  })} */}
+                  {/* <FavIcon /> */}
                 </TouchableOpacity>
               </Animated.View>
             </View>
@@ -197,7 +183,11 @@ const ProductDetails: React.FC<IProduct> = (props) => {
         </Animated.View>
         {/* price and quantity container */}
         {/* product details container here*/}
-        <ProductDetailsDesc data={data} />
+        <ProductDetailsDesc
+          data={data}
+          selectedVariant={selectedVariant}
+          setSelectedVariant={setSelectedVariant}
+        />
         {/* view more information container */}
         <View style={{ height: height - 100 }}>
           <ProductDetailsTopTab item={data} />

@@ -7,12 +7,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Counter from '../quantityCounter/Counter';
 import ProgressBar from '../progressbar/ProgressBar';
 
-const ProductDetailsDesc = ({ data }: { data: any }) => {
-  const [selectedColor, setSelectedColor] = useState<any>('');
-
+const ProductDetailsDesc = ({
+  data,
+  selectedVariant,
+  setSelectedVariant,
+}: {
+  data: any;
+  selectedVariant: { variantId?: string; variantName: string };
+  setSelectedVariant: Function;
+}) => {
   const handleColor = (variant: any) => {
     // dispatch()
-    setSelectedColor(variant);
+    setSelectedVariant(variant);
   };
 
   return (
@@ -76,7 +82,7 @@ const ProductDetailsDesc = ({ data }: { data: any }) => {
                   backgroundColor: variant?.variantName?.toLowerCase(),
 
                   borderColor:
-                    variant?.variantId === selectedColor?.variantId ? 'lightgray' : 'white',
+                    variant?.variantId === selectedVariant?.variantId ? 'lightgray' : 'white',
                 },
               ]}
             />

@@ -5,7 +5,7 @@ import { CartBag, RedClose } from '../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useAppDispatch } from '../../redux/hook';
 import { removeFromFavorite } from '../../redux/features/addFavourite';
-import { addToCart } from '../../redux/features/addTocart';
+import { addToCart } from '../../redux/features/cartSlice';
 
 type ListItemProps = {
   viewableItems: Animated.SharedValue<ViewToken[]>;
