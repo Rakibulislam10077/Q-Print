@@ -34,6 +34,7 @@ import { addAndRemoveFavorite, removeFromFavorite } from '../../redux/features/a
 import ProgressBar from '../../components/progressbar/ProgressBar';
 import Counter from '../../components/quantityCounter/Counter';
 import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
+import { Badge } from 'react-native-paper';
 
 const ProductDetails: React.FC<IProduct> = (props) => {
   const data: IProduct = props?.route?.params;
@@ -55,6 +56,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
 
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.cart.products);
+  const { favorites } = useAppSelector((state) => state.favorite);
 
   const addCart = (product: IProduct) => {
     dispatch(addToCart({ ...product, variant: selectedVariant }));
@@ -112,6 +114,12 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     // setQuantity(value);
   };
 
+  // useEffect(() => {
+  // favorites.forEach((element: any) => {
+  //   console.log(element?._id);
+  // });
+  // }, []);
+
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
       <Animated.ScrollView scrollEventThrottle={16}>
@@ -128,10 +136,17 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             </Animated.View>
             <View style={productDetailsStyle.favAndCartCon}>
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
-                <TouchableOpacity activeOpacity={0.7}>
+                <TouchableOpacity onPress={() => navigation.navigate('MyCart')} activeOpacity={0.7}>
                   <CartBag />
+                  {/* <Badge style={{ position: 'absolute', top: -1, right: -5 }}>
+                    {products?.length}
+                  </Badge> */}
                   <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
-                    <Text style={productDetailsStyle.badgeText}>{products?.length}</Text>
+                    {products?.length ? (
+                      <Text style={productDetailsStyle.badgeText}>{products?.length}</Text>
+                    ) : (
+                      <Text>0</Text>
+                    )}
                   </Animated.View>
                 </TouchableOpacity>
               </Animated.View>
@@ -144,10 +159,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                   style={productDetailsStyle.navAndFav}
                 >
                   <FavIcon />
-                  {/* {favorites?.map((favorite: any) => {
-                    return favorite?._id === data?._id ? <ActiveFavIcon /> : <FavIcon />;
-                  })} */}
-                  {/* <FavIcon /> */}
                 </TouchableOpacity>
               </Animated.View>
             </View>

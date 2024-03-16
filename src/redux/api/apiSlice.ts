@@ -22,7 +22,7 @@ import { IPaperType } from '../../types/interfaces/paparType.interface';
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MTAyMzgwMzMsImV4cCI6MTcxMDMyNDQzM30.HZGkUp0urTDxUbd4wxqNlyD-C1-8M0ISNeSOtIRt-7U';
 
 
-  const url = 'http://192.168.0.115:5000/api/v1';
+  const url = 'http://192.168.0.182:5000/api/v1';
 
 
 export const api = createApi({
@@ -88,7 +88,7 @@ export const api = createApi({
       { message: string; success: boolean; data: IPaperType[] },
       undefined
     >({
-      query: () => `/printing-setup`,
+      query: (q) => `/printing-setup?${q}`,
     }),
 
     postPaperRequest: builder.mutation({

@@ -34,27 +34,6 @@ const paperBoxSize = [
   },
 ];
 
-// const paperType = [
-//   {
-//     type: 'Inkjet printer paper',
-//   },
-//   {
-//     type: 'Laser Printer paper',
-//   },
-//   {
-//     type: 'Matte paper',
-//   },
-//   {
-//     type: 'Glossy paper',
-//   },
-//   {
-//     type: 'Card stock paper',
-//   },
-//   {
-//     type: 'Bond & Label paper',
-//   },
-// ];
-
 const PrintingMode = [
   {
     mode: 'RGB',
@@ -72,7 +51,7 @@ const OrderAndPrinterDesignPage = () => {
   const [currentIndexInPrint, setCurrentIndexInPrint] = useState<number>(0);
   const [customWidth, setCustomWidth] = useState<number>(0);
   const [image, setImage] = useState<any>();
-  const { data, isLoading } = useGetPaperTypeQuery(undefined);
+  const { data, isLoading } = useGetPaperTypeQuery(`printingSetupType=Paper Size`);
 
   const formData = new FormData();
 
@@ -117,11 +96,16 @@ const OrderAndPrinterDesignPage = () => {
   };
 
   const handleSubmit = () => {
-    const fdata = formData.append('printingRequestFile', image);
-    formData.append('paperSize', customWidth);
+    formData.append('printingRequestFile', image);
+    // formData.append('paperSize', customWidth);
     // console.log(fdata);
-    console.log(image);
+    // console.log(image);
   };
+
+  console.log(JSON.stringify(data?.data, null, 2));
+
+  const originalHeight = 10;
+  const originalWidth = 20;
 
   return (
     <View style={orderAndPrinterDesignStyle.container}>

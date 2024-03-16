@@ -38,23 +38,17 @@ const Login = () => {
   // const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
   const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
 
-  // console.log(data?.data);
   useEffect(() => {
     const storeToken = async () => {
       try {
         // Make sure data?.data?.accessToken exists and is not empty before storing
         if (data?.data?.accessToken) {
           await AsyncStorage.setItem('token', data.data.accessToken);
-          // console.log('Token stored successfully:', data.data.accessToken);
         } else {
-          // console.log('Access token is empty or undefined');
         }
-      } catch (error) {
-        // console.log('Sorry, there was an error in the storage system:', error);
-      }
+      } catch (error) {}
     };
-
-    storeToken(); // Call the async function inside useEffect
+    storeToken();
   }, [data?.data?.accessToken]);
 
   const handleSubmit = async () => {
@@ -65,10 +59,10 @@ const Login = () => {
         ? Alert.alert('sorry! you must fill in these fields')
         : setDisableButton(true);
     }
-    // console.log(phoneNumber, password);
     setPhoneNumber('');
     setPassword('');
   };
+
   useEffect(() => {
     if (isSuccess) {
       navigation.navigate('BottomTab');

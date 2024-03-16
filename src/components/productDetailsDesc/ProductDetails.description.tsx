@@ -16,8 +16,7 @@ const ProductDetailsDesc = ({
   selectedVariant: { variantId?: string; variantName: string };
   setSelectedVariant: Function;
 }) => {
-  const handleColor = (variant: any) => {
-    // dispatch()
+  const handleColor = (variant: string) => {
     setSelectedVariant(variant);
   };
 
