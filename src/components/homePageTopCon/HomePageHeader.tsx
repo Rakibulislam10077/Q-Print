@@ -8,7 +8,7 @@ import { useAppSelector } from '../../redux/hook';
 
 const HomePageTopCon = () => {
   const navigation: any = useNavigation();
-  const { products } = useAppSelector((state) => state.cart);
+  // const { products } = useAppSelector((state) => state.cart);
   return (
     <View style={homePageStyle.container}>
       <View>
@@ -20,7 +20,7 @@ const HomePageTopCon = () => {
         style={homePageStyle.cart}
       >
         <CartBag />
-        <Badge style={homePageStyle.badge}>{products?.length}</Badge>
+        {/* <Badge style={homePageStyle.badge}>{products?.length}</Badge> */}
       </TouchableOpacity>
     </View>
   );

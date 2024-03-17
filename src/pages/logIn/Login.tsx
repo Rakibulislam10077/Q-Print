@@ -24,42 +24,60 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
-import { useLoginUserMutation } from '../../redux/api/apiSlice';
+
 import Animated, { FadeInDown, ZoomInUp } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useUserLoginMutation } from '../../redux/api/authApi';
+import { storeUserInfo } from '../../services/auth.service';
 
 const Login = () => {
   const navigation: any = useNavigation();
   const [eye, setEye] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [disabledButton, setDisableButton] = useState<boolean>(false);
   // const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
-  const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
+  // const [loginUser, { data, isLoading, isError, isSuccess }] = useLoginUserMutation();
 
-  useEffect(() => {
-    const storeToken = async () => {
-      try {
-        // Make sure data?.data?.accessToken exists and is not empty before storing
-        if (data?.data?.accessToken) {
-          await AsyncStorage.setItem('token', data.data.accessToken);
-        } else {
-        }
-      } catch (error) {}
-    };
-    storeToken();
-  }, [data?.data?.accessToken]);
+  const [userLogin, { data, isError, isLoading, isSuccess }] = useUserLoginMutation();
 
-  const handleSubmit = async () => {
-    if (phoneNumber && password) {
-      await loginUser({ phoneNumber, password });
-    } else {
-      return Platform.OS === 'ios'
-        ? Alert.alert('sorry! you must fill in these fields')
-        : setDisableButton(true);
+  console.log(data);
+
+  // console.log('http://192.168.0.182:5000/api/v1/user/login');
+
+  // useEffect(() => {
+  //   const storeToken = async () => {
+  //     try {
+  //       // Make sure data?.data?.accessToken exists and is not empty before storing
+  //       if (data?.data?.accessToken) {
+  //         await AsyncStorage.setItem('token', data.data.accessToken);
+  //       } else {
+  //       }
+  //     } catch (error) {}
+  //   };
+  //   storeToken();
+  // }, [data?.data?.accessToken]);
+
+  const handleSubmit = async (data: any) => {
+    console.log(email, password);
+
+    try {
+      const res = await userLogin({ email, password }).unwrap();
+      // console.log('from res', res);
+
+      storeUserInfo({ accessToken: res.data.accessToken });
+    } catch (error) {
+      console.log('the error', error);
     }
-    setPhoneNumber('');
+    // if (phoneNumber && password) {
+    //   await userLogin({ phoneNumber, password });
+    // } else {
+    //   return Platform.OS === 'ios'
+    //     ? Alert.alert('sorry! you must fill in these fields')
+    //     : setDisableButton(true);
+    // }
+    setEmail('');
     setPassword('');
   };
 
@@ -124,8 +142,8 @@ const Login = () => {
           <TextInput
             placeholder="Type here"
             style={[isError ? loginStyle.failedInput : loginStyle.input]}
-            value={phoneNumber}
-            onChangeText={(Text) => setPhoneNumber(Text)}
+            value={email}
+            onChangeText={(Text) => setEmail(Text)}
           />
         </View>
         {/* input and label container */}
@@ -170,7 +188,7 @@ const Login = () => {
             // disabled={disabledButton}
             activeOpacity={0.7}
             style={loginStyle.actionLayer}
-            onPress={() => handleSubmit()}
+            onPress={(data: any) => handleSubmit(data)}
           >
             <Text style={loginStyle.buttonText}>Log in</Text>
           </TouchableOpacity>
