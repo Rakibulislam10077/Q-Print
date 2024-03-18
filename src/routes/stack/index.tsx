@@ -1,5 +1,5 @@
 import { View, Text, Image, Platform, Dimensions, Animated } from 'react-native';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../../screen/home/Home';
@@ -34,6 +34,9 @@ import Onboarding from '../../pages/onboardingScreen/Onboarding';
 import OrderConfirmation from '../../pages/custom_order/customOrderConfirmation/OrderConfirmation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IProduct } from '../../types/interfaces/product.interface';
+import { isLoggedIn } from '../../services/auth.service';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -234,17 +237,25 @@ const BottomTab = () => {
 };
 
 const Index = () => {
-  // const accessToken = async () => {
-  //   const token = await AsyncStorage.getItem('token');
-  //   if (token) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // };
+  const navigation = useNavigation<StackNavigationProp<any>>();
+  const [initialRoute, setInitialRoute] = useState('login');
+  useEffect(() => {
+    const checkAccessToken = async () => {
+      const accessToken = await isLoggedIn();
+      console.log(accessToken);
+
+      setInitialRoute(accessToken ? 'BottomTab' : 'login');
+      if (accessToken) {
+        navigation.navigate('BottomTab');
+      }
+    };
+
+    checkAccessToken();
+  }, [initialRoute]);
+  console.log(initialRoute);
 
   return (
-    <Stack.Navigator initialRouteName="login">
+    <Stack.Navigator initialRouteName={`${initialRoute}`}>
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />

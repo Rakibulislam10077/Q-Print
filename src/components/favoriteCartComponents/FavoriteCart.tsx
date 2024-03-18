@@ -33,8 +33,6 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
     };
   }, []);
 
-  console.log(JSON.stringify(item, null, 2));
-
   return (
     <Animated.View
       entering={FadeInDown.delay(50).duration(500)}

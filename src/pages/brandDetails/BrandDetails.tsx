@@ -27,8 +27,6 @@ const BrandDetails: React.FC<IBrand> = (props) => {
   // Extract the brand details from route params
   const item = props?.route?.params;
 
-  console.log(item?.brand?.brandName, 'item item item item item');
-
   return (
     <View style={brandDetailsStyle.container}>
       {/* Common Header */}

@@ -28,7 +28,7 @@ import Modal from 'react-native-modal';
 import Animated, { FadeInDown, ZoomInUp } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserLoginMutation } from '../../redux/api/authApi';
-import { storeUserInfo } from '../../services/auth.service';
+import { getuserInfo, storeUserInfo } from '../../services/auth.service';
 
 const Login = () => {
   const navigation: any = useNavigation();
@@ -42,8 +42,11 @@ const Login = () => {
 
   const [userLogin, { data, isError, isLoading, isSuccess }] = useUserLoginMutation();
 
-  console.log(data);
-
+  // console.log(data)
+  // const test = async () => {
+  //   console.log(await getuserInfo());
+  // };
+  // test();
   // console.log('http://192.168.0.182:5000/api/v1/user/login');
 
   // useEffect(() => {
@@ -59,33 +62,24 @@ const Login = () => {
   //   storeToken();
   // }, [data?.data?.accessToken]);
 
-  const handleSubmit = async (data: any) => {
-    console.log(email, password);
-
+  const handleSubmit = async () => {
     try {
       const res = await userLogin({ email, password }).unwrap();
-      // console.log('from res', res);
-
-      storeUserInfo({ accessToken: res.data.accessToken });
+      if (res?.data?.accessToken) {
+        navigation.navigate('BottomTab');
+      }
+      storeUserInfo({ accessToken: res?.data?.accessToken });
     } catch (error) {
-      console.log('the error', error);
+      // console.log('the error', error);
     }
-    // if (phoneNumber && password) {
-    //   await userLogin({ phoneNumber, password });
-    // } else {
-    //   return Platform.OS === 'ios'
-    //     ? Alert.alert('sorry! you must fill in these fields')
-    //     : setDisableButton(true);
-    // }
     setEmail('');
     setPassword('');
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      navigation.navigate('BottomTab');
-    }
-  }, [isSuccess]);
+  // const test = async () => {
+  //   console.log(await getuserInfo());
+  // };
+  // test();
 
   return (
     <View style={loginStyle.container}>
@@ -188,7 +182,7 @@ const Login = () => {
             // disabled={disabledButton}
             activeOpacity={0.7}
             style={loginStyle.actionLayer}
-            onPress={(data: any) => handleSubmit(data)}
+            onPress={() => handleSubmit()}
           >
             <Text style={loginStyle.buttonText}>Log in</Text>
           </TouchableOpacity>

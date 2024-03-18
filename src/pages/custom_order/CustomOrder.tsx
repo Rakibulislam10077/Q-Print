@@ -102,8 +102,6 @@ const OrderAndPrinterDesignPage = () => {
     // console.log(image);
   };
 
-  console.log(JSON.stringify(data?.data, null, 2));
-
   const originalHeight = 10;
   const originalWidth = 20;
 

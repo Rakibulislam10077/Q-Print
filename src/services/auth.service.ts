@@ -8,11 +8,22 @@ export const storeUserInfo = ({accessToken}:{accessToken:string}) => {
 }
 
 export const getuserInfo  = async () =>{
-    const authAsyncStorage = await getFromAsyncStorage(STORAGE_KEY);
-    console.log(typeof(authAsyncStorage));
+    const authAsyncToken = await getFromAsyncStorage(STORAGE_KEY);
     
-    if(authAsyncStorage){
-        const decodedData = decodedToken(authAsyncStorage);
+    if(authAsyncToken){
+        const decodedData = decodedToken(authAsyncToken);
+        console.log(decodedData, '======hello');
+        
+        return decodedData;
+    }
+    else{
+        return 'lfkjdslkfj'
     }
     
+}
+
+
+export const isLoggedIn = async () =>{
+    const authAsyncToken = await getFromAsyncStorage(STORAGE_KEY);
+    return !! authAsyncToken
 }

@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Color } from '../../constants/GlobalStyle';
 import HomePageTopCon from '../../components/homePageTopCon/HomePageHeader';
 import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
@@ -16,6 +16,7 @@ import { IProduct } from '../../types/interfaces/product.interface';
 import Cart from '../../components/card/allCart/Cart';
 import Brand_Skeleton from '../../components/skeleton/Home.Brand_Skeleton';
 import Carousel_Skeleton from '../../components/skeleton/Carousel_Skeleton';
+import { getuserInfo } from '../../services/auth.service';
 
 type HomeProps = {
   handleScroll: (event: any) => void;
@@ -25,6 +26,11 @@ const Home = () => {
   const navigation: any = useNavigation();
   const { data: brandData, isLoading: isBrandLoading } = useGetBrandQuery(undefined);
   const { data: productData, isLoading: loadingProduct } = useGetProductQuery(undefined);
+
+  const test = async () => {
+    console.log('from home page', await getuserInfo());
+  };
+  test();
 
   return (
     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>

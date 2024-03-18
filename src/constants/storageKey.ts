@@ -1,1 +1,1 @@
-export const STORAGE_KEY = 'accessToken';
+export const STORAGE_KEY = "accessToken";
