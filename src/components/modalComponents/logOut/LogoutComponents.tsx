@@ -1,19 +1,34 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { logoutComStyle } from './LogoutComSTyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../../constants/GlobalStyle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEY } from '../../../constants/storageKey';
 import { useNavigation } from '@react-navigation/native';
+import { isLoggedIn } from '../../../services/auth.service';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const LogoutComponents = ({ setIsModalVisible }: any) => {
-  const navigator: any = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const logout = async () => {
     await AsyncStorage.removeItem(STORAGE_KEY);
     // navigator.navigate('login');
     setIsModalVisible(false);
   };
+
+  useEffect(() => {
+    const checkAccessToken = async () => {
+      const accessToken = await isLoggedIn();
+      console.log(accessToken);
+      if (!accessToken) {
+        navigation.navigate('login');
+      }
+    };
+
+    checkAccessToken();
+  }, []);
+
   return (
     <View style={logoutComStyle.container}>
       <Image
