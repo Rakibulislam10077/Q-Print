@@ -13,12 +13,7 @@ export const SignUpStyle = StyleSheet.create({
     width: '100%',
     position: 'absolute',
   },
-  logoCon: {
-    marginTop: SCREEN_HEIGHT <= 700 ? 50 : 120,
-    alignItems: 'center',
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
+
   inputContainer: {
     backgroundColor: Color.C_white,
     width: '90%',

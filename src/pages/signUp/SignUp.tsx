@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { SignUpStyle } from './SignUpStyle';
 import {
@@ -15,10 +15,36 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { ZoomInUp } from 'react-native-reanimated';
+import CustomAnimatedLogo from '../../components/customLogo/CustomAnimatedLogo';
+import { SingUpFormState } from '../../types/interfaces/signUpAndLogin.interface';
+import { useUserSignUpMutation } from '../../redux/api/authApi';
 
 const SignUp = () => {
   const [eye, setEye] = useState(true);
   const navigation: any = useNavigation();
+
+  const [userSignUp] = useUserSignUpMutation();
+
+  const [fullName, setFullName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+
+  const handleSignUp = async () => {
+    const formData = new FormData();
+    formData.append('fullName', fullName);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('confirmPassword', confirmPassword);
+
+    try {
+      await userSignUp(formData);
+      // Handle successful signup, navigate to next screen, etc.
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
+  };
+
   return (
     <View style={SignUpStyle.container}>
       {/* gradient image container */}
@@ -29,51 +55,30 @@ const SignUp = () => {
         />
       </View>
       {/* logo container */}
-      <View style={SignUpStyle.logoCon}>
-        <Animated.View entering={ZoomInUp.delay(50).duration(500).springify().damping(14)}>
-          <QLogo />
-        </Animated.View>
-        <Animated.View entering={ZoomInUp.delay(100).duration(600).springify().damping(14)}>
-          <PLogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(200).duration(700).springify().damping(14)}
-          style={logoStyle}
-        >
-          <RLogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(300).duration(800).springify().damping(14)}
-          style={logoStyle}
-        >
-          <ILogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(400).duration(900).springify().damping(14)}
-          style={logoStyle}
-        >
-          <NLogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(500).duration(1000).springify().damping(14)}
-          style={logoStyle}
-        >
-          <TLogo />
-        </Animated.View>
-      </View>
+      <CustomAnimatedLogo />
       {/* input container */}
       <ScrollView>
         <View style={SignUpStyle.inputContainer}>
           <Text style={SignUpStyle.signUpText}>Sign Up</Text>
           {/* number input and labe container */}
           <View style={SignUpStyle.inputAndTextCon}>
-            <Text style={SignUpStyle.label}>Email Or Phone Number</Text>
-            <TextInput placeholder="+012" keyboardType="numeric" style={SignUpStyle.input} />
+            <Text style={SignUpStyle.label}>Full Name</Text>
+            <TextInput
+              onChangeText={(text) => setFullName(text)}
+              placeholder="Full Name"
+              keyboardType="default"
+              style={SignUpStyle.input}
+            />
           </View>
           {/* QID input and labe container */}
           <View style={SignUpStyle.inputAndTextCon}>
-            <Text style={SignUpStyle.label}>QID</Text>
-            <TextInput placeholder="Type QID" keyboardType="numeric" style={SignUpStyle.input} />
+            <Text style={SignUpStyle.label}>Email</Text>
+            <TextInput
+              onChangeText={(text) => setEmail(text)}
+              placeholder="Email"
+              keyboardType="default"
+              style={SignUpStyle.input}
+            />
           </View>
           {/* password input and label container */}
           <View style={SignUpStyle.inputAndTextCon}>
@@ -81,6 +86,7 @@ const SignUp = () => {
             {/* password */}
             <View style={SignUpStyle.passwordInputCon}>
               <TextInput
+                onChangeText={(text) => setPassword(text)}
                 secureTextEntry={eye}
                 placeholder="Enter Password"
                 style={SignUpStyle.passwordInput}
@@ -100,6 +106,7 @@ const SignUp = () => {
             {/* password */}
             <View style={SignUpStyle.passwordInputCon}>
               <TextInput
+                onChangeText={(text) => setConfirmPassword(text)}
                 secureTextEntry={eye}
                 placeholder="Enter Password"
                 style={SignUpStyle.passwordInput}
@@ -121,7 +128,10 @@ const SignUp = () => {
             style={SignUpStyle.signUpButton}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate('OTP')}
+              onPress={() => {
+                handleSignUp();
+                // navigation.navigate('OTP')
+              }}
               style={SignUpStyle.actionLayer}
             >
               <Text style={SignUpStyle.buttonText}>Sign Up</Text>
@@ -134,5 +144,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-const logoStyle = { marginBottom: 5, marginLeft: 2 };

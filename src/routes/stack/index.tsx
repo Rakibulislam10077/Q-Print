@@ -24,7 +24,7 @@ import TrackedOrderDetails from '../../pages/trackedOrderDtails/TrackedOrderDeta
 import { Color } from '../../constants/GlobalStyle';
 import OrderAndPrinterDesignPage from '../../pages/custom_order/CustomOrder';
 import Login from '../../pages/logIn/Login';
-import SignUp from '../../pages/signUp/SignUn';
+import SignUp from '../../pages/signUp/SignUp';
 import OTP from '../../pages/OTP/OTP';
 import NewPass from '../../pages/forgotPass/newPass/NewPass';
 import { forgotPass } from '../../pages/forgotPass/ForgotPassStyle';
@@ -245,9 +245,9 @@ const Index = () => {
       console.log(accessToken);
 
       setInitialRoute(accessToken ? 'BottomTab' : 'login');
-      if (accessToken) {
-        navigation.navigate('BottomTab');
-      }
+      // if (accessToken) {
+      //   navigation.navigate('BottomTab');
+      // }
     };
 
     checkAccessToken();
@@ -255,7 +255,8 @@ const Index = () => {
   console.log(initialRoute);
 
   return (
-    <Stack.Navigator initialRouteName={`${initialRoute}`}>
+    // <Stack.Navigator initialRouteName={`${initialRoute}`}>
+    <Stack.Navigator initialRouteName="SignUp">
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />

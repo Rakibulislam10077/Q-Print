@@ -47,24 +47,14 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { usePostAddressMutation } from '../../redux/api/apiSlice';
-
-interface FormState {
-  firstName: string;
-  lastName: string;
-  streetAddress: string;
-  state: string;
-  // companyName: string;
-  phoneNumber: string;
-  zipCode: number;
-  country: string;
-}
+import { AddressFormState } from '../../types/interfaces/signUpAndLogin.interface';
 
 const Summery: React.FC = () => {
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
   const [defaultLocation, setDefaultLocation] = useState<boolean>(false);
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormState>({
+  const [formData, setFormData] = useState<AddressFormState>({
     firstName: '',
     lastName: '',
     streetAddress: '',

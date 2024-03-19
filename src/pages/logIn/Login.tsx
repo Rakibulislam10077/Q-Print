@@ -29,6 +29,7 @@ import Animated, { FadeInDown, ZoomInUp } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserLoginMutation } from '../../redux/api/authApi';
 import { getuserInfo, storeUserInfo } from '../../services/auth.service';
+import CustomAnimatedLogo from '../../components/customLogo/CustomAnimatedLogo';
 
 const Login = () => {
   const navigation: any = useNavigation();
@@ -65,10 +66,12 @@ const Login = () => {
   const handleSubmit = async () => {
     try {
       const res = await userLogin({ email, password }).unwrap();
-      if (res?.data?.accessToken) {
+      console.log(res);
+
+      if (res?.accessToken) {
         navigation.navigate('BottomTab');
       }
-      storeUserInfo({ accessToken: res?.data?.accessToken });
+      storeUserInfo({ accessToken: res?.accessToken });
     } catch (error) {
       // console.log('the error', error);
     }
@@ -91,38 +94,7 @@ const Login = () => {
         />
       </View>
       {/* company logo container */}
-      <View style={loginStyle.LogoContainer}>
-        <Animated.View entering={ZoomInUp.delay(50).duration(500).springify().damping(14)}>
-          <QLogo />
-        </Animated.View>
-        <Animated.View entering={ZoomInUp.delay(100).duration(600).springify().damping(14)}>
-          <PLogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(200).duration(700).springify().damping(14)}
-          style={logoStyle}
-        >
-          <RLogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(300).duration(800).springify().damping(14)}
-          style={logoStyle}
-        >
-          <ILogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(400).duration(900).springify().damping(14)}
-          style={logoStyle}
-        >
-          <NLogo />
-        </Animated.View>
-        <Animated.View
-          entering={ZoomInUp.delay(500).duration(1000).springify().damping(14)}
-          style={logoStyle}
-        >
-          <TLogo />
-        </Animated.View>
-      </View>
+      <CustomAnimatedLogo />
       {/* input container */}
       <Animated.View
         entering={FadeInDown.delay(20).duration(400)}
