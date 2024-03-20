@@ -4,8 +4,8 @@ import { STORAGE_KEY } from "../../constants/storageKey";
 import { ResponseSuccessType } from "../../types";
 
 const instance = axios.create();
-    instance.defaults.headers.post["Content-Type"] = "application/json";
-    instance.defaults.headers["Accept"] = "application/json";
+    instance.defaults.headers.post["Content-Type"] = "";
+    instance.defaults.headers["Accept"] = "";
     instance.defaults.timeout = 60000;
     
 

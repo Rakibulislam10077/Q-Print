@@ -131,6 +131,7 @@ const BottomTab = () => {
           headerTitleStyle: { marginTop: 30 },
         }}
         name="Products"
+        //@ts-ignore
         component={Products}
       />
       <Tab.Screen
@@ -255,8 +256,8 @@ const Index = () => {
   console.log(initialRoute);
 
   return (
-    // <Stack.Navigator initialRouteName={`${initialRoute}`}>
-    <Stack.Navigator initialRouteName="SignUp">
+    // <Stack.Navigator initialRouteName="SignUp">
+    <Stack.Navigator initialRouteName={`${initialRoute}`}>
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />

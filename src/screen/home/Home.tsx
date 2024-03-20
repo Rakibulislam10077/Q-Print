@@ -9,7 +9,6 @@ import Carousel from '../../components/carousel/Carousel';
 import OfferCart from '../../components/card/offeredCart/OfferCart';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { useGetBrandQuery, useGetProductQuery } from '../../redux/api/apiSlice';
 import Brand from '../../components/brandInHome/Brand';
 import HomePageProductCateTitle from '../../components/common/homePageProductCategory/HomePageProductCateTitle';
 import { IProduct } from '../../types/interfaces/product.interface';
@@ -17,6 +16,8 @@ import Cart from '../../components/card/allCart/Cart';
 import Brand_Skeleton from '../../components/skeleton/Home.Brand_Skeleton';
 import Carousel_Skeleton from '../../components/skeleton/Carousel_Skeleton';
 import { getuserInfo } from '../../services/auth.service';
+import { useGetProductsQuery } from '../../redux/api/prductSlice';
+import { useGetBrandQuery } from '../../redux/api/brandSlice';
 
 type HomeProps = {
   handleScroll: (event: any) => void;
@@ -25,12 +26,12 @@ type HomeProps = {
 const Home = () => {
   const navigation: any = useNavigation();
   const { data: brandData, isLoading: isBrandLoading } = useGetBrandQuery(undefined);
-  const { data: productData, isLoading: loadingProduct } = useGetProductQuery(undefined);
+  const { data: productData, isLoading: loadingProduct } = useGetProductsQuery(undefined);
 
-  const test = async () => {
-    console.log('from home page', await getuserInfo());
-  };
-  test();
+  // const test = async () => {
+  //   console.log('from home page', await getuserInfo());
+  // };
+  // test();
 
   return (
     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -61,7 +62,7 @@ const Home = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingRight: 20 }}
-            data={brandData?.data}
+            data={brandData}
             renderItem={({ item }) => {
               return <Brand item={item} />;
             }}
@@ -79,8 +80,8 @@ const Home = () => {
             {/* Renders the title and subtitle */}
             <HomePageProductCateTitle title="Printers, Cartridge, Ink" subTitle="see all" />
             {/* Maps over the data and renders individual Cart components */}
-            {productData?.data?.map((item: IProduct, index: number) => {
-              return <Cart key={index.toString()} item={item} />;
+            {productData?.map((item: IProduct, index: number) => {
+              return <Cart key={item?._id} item={item} />;
             })}
           </View>
           {/* Cart_Skeleton */}

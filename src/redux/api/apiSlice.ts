@@ -40,7 +40,6 @@ export const api = createApi({
       { message: string; success?: boolean; data: IProduct[] },
       string
     >({
-      // query: ({categoryName, brandId}:any) => `/product?category.categoryName=${categoryName}&brand.brandId=${brandId}`,
       query: (q) => `/product?${q}`,
     }),
 

@@ -13,28 +13,31 @@ export const axiosBaseQuery =
       method?: AxiosRequestConfig['method']
       data?: AxiosRequestConfig['data']
       params?: AxiosRequestConfig['params']
-      headers?: AxiosRequestConfig['headers']
+      // headers?: AxiosRequestConfig['headers']
       meta?: IMeta
       contentType?: string
     },
     unknown,
     unknown
   > =>
-  async ({ url, method, data, params,headers, contentType}) => {
+  async ({ url, method, data, params, contentType}) => {
     try {
+      console.log(data);
+      
       const result = await axiosInstane({
         url: baseUrl + url,
         method,
         data,
         params,
-        headers:{contentType: contentType || 'application/json'}
+        headers:{contentType: contentType}
       })
-      return { data: result.data }
+      return { data: result }
     } catch (axiosError) {
       const err = axiosError as AxiosError
       return {
         error: {
           status: err.response?.status,
+          message: err.message,
           data: err.response?.data || err.message,
         },
       }

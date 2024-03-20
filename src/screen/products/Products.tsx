@@ -38,13 +38,18 @@ import { AntDesign } from '@expo/vector-icons';
 import { Badge } from 'react-native-paper';
 import { CustomTouchable } from '../../shared/CustomTouchable';
 import { useAppSelector } from '../../redux/hook';
-const Products = ({ itemId }: { itemId: string }) => {
+
+interface ProductsProps {
+  itemId: string;
+}
+
+const Products: React.FC<ProductsProps> = ({ itemId }) => {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const [isClickedSearch, setIsClickedSearch] = useState(false);
   const DimentionsWidth = Dimensions.get('window').width;
 
-  const { products } = useAppSelector((state) => state.cart);
+  // const { products } = useAppSelector((state) => state.cart);
 
   const animation = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => {
@@ -123,7 +128,7 @@ const Products = ({ itemId }: { itemId: string }) => {
             {!isClickedSearch === true && (
               <CustomTouchable entering={ZoomIn.delay(50)} style={productsStyle.cartBag}>
                 <CartBag />
-                <Badge style={productsStyle.badge}>{products?.length}</Badge>
+                {/* <Badge style={productsStyle.badge}>{products?.length}</Badge> */}
               </CustomTouchable>
             )}
           </View>

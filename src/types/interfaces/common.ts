@@ -1,13 +1,17 @@
+import { IProduct } from "./product.interface";
+
 export interface IMeta {
     limit: number;
     page: number;
-    size: number;
+    total: number;
 }
 
 
 export type ResponseSuccessType ={
-    data:any;
-    meta: IMeta
+    data:IProduct[];
+    meta?: IMeta;
+    // success:boolean;
+
 }
 
 

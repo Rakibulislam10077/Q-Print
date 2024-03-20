@@ -17,13 +17,15 @@ import { useNavigation } from '@react-navigation/native';
 import Animated, { ZoomInUp } from 'react-native-reanimated';
 import CustomAnimatedLogo from '../../components/customLogo/CustomAnimatedLogo';
 import { SingUpFormState } from '../../types/interfaces/signUpAndLogin.interface';
-import { useUserSignUpMutation } from '../../redux/api/authApi';
+import { useUserRegistrationMutation } from '../../redux/api/authApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { STORAGE_KEY } from '../../constants/storageKey';
 
 const SignUp = () => {
   const [eye, setEye] = useState(true);
   const navigation: any = useNavigation();
 
-  const [userSignUp] = useUserSignUpMutation();
+  const [userRegistration] = useUserRegistrationMutation();
 
   const [fullName, setFullName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -32,17 +34,28 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     const formData = new FormData();
+
+    const userData = {
+      fullName,
+      email,
+      password,
+      confirmPassword,
+    };
+
+    console.log(userData);
+
     formData.append('fullName', fullName);
     formData.append('email', email);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
+    console.log(formData);
+
     try {
-      await userSignUp(formData);
-      // Handle successful signup, navigate to next screen, etc.
-    } catch (error) {
-      console.error('Signup failed:', error);
-    }
+      const result = await userRegistration(formData);
+      //@ts-ignore
+      await AsyncStorage.setItem(STORAGE_KEY, result?.data?.data);
+    } catch (error) {}
   };
 
   return (

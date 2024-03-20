@@ -4,18 +4,21 @@ import Animated from 'react-native-reanimated';
 import Cart from '../../card/allCart/Cart';
 import AllProductSkeleton from '../../skeleton/allProduct.skeleton';
 import { IProduct } from '../../../types/interfaces/product.interface';
-import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import { Color } from '../../../constants/GlobalStyle';
+import { useGetQueryProductQuery } from '../../../redux/api/prductSlice';
 
 const ProductAll = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
   const { data, isLoading } = useGetQueryProductQuery(
     `${searchText ? 'searchTerm=' + searchText : ''}&${itemId ? 'brand.brandId=' + itemId : ''}`
   );
+
+  console.log(data);
+
   return (
     <>
       <ScrollView style={styles.container}>
         <Animated.View style={styles.cartContainer}>
-          {data?.data?.map((item: IProduct, index: number) => {
+          {data?.map((item: IProduct, index: number) => {
             return <Cart key={index?.toString()} item={item} />;
           })}
         </Animated.View>
