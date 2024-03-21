@@ -13,8 +13,9 @@ const instance = axios.create();
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
     const accessToken = getFromAsyncStorage(STORAGE_KEY)
+    
     if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`
+         config.headers.Authorization = `Bearer ${accessToken}`
     }
     return config;
   }, function (error) {

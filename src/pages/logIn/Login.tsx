@@ -43,37 +43,17 @@ const Login = () => {
 
   const [userLogin, { data, isError, isLoading, isSuccess }] = useUserLoginMutation();
 
-  // console.log(data)
-  // const test = async () => {
-  //   console.log(await getuserInfo());
-  // };
-  // test();
-  // console.log('http://192.168.0.182:5000/api/v1/user/login');
-
-  // useEffect(() => {
-  //   const storeToken = async () => {
-  //     try {
-  //       // Make sure data?.data?.accessToken exists and is not empty before storing
-  //       if (data?.data?.accessToken) {
-  //         await AsyncStorage.setItem('token', data.data.accessToken);
-  //       } else {
-  //       }
-  //     } catch (error) {}
-  //   };
-  //   storeToken();
-  // }, [data?.data?.accessToken]);
-
   const handleSubmit = async () => {
     try {
       const res = await userLogin({ email, password }).unwrap();
-      console.log(res);
+      console.log('login', res);
 
       if (res?.accessToken) {
         navigation.navigate('BottomTab');
       }
       storeUserInfo({ accessToken: res?.accessToken });
     } catch (error) {
-      // console.log('the error', error);
+      console.log('the error', error);
     }
     setEmail('');
     setPassword('');

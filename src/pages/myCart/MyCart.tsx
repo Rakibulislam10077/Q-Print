@@ -41,16 +41,16 @@ const MyCart = () => {
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
   // const [subTatal, setsubTatal] = useState(30000);
 
-  const { products } = useAppSelector((state) => state.cart);
-  const subTotal = products?.reduce((total: number, product: any) => {
-    return total + product?.defaultVariant?.discountedPrice * product?.quantity;
-  }, 0);
-
+  // const { products } = useAppSelector((state) => state.cart);
+  // const subTotal = products?.reduce((total: number, product: any) => {
+  //   return total + product?.defaultVariant?.discountedPrice * product?.quantity;
+  // }, 0);
+  const subTotal = 500;
   const animation = useRef<any>(null);
   // State variables to track current and target amounts
   const targetAmount = 1000;
   // Calculate the percentage progress towards the target amount
-  const percentageProgress = subTotal === 0 ? 0 : Math.round((subTotal / targetAmount) * 100);
+  // const percentageProgress = subTotal === 0 ? 0 : Math.round((subTotal / targetAmount) * 100);
   // Shared value for animated progress
   const animatedProgress = useSharedValue(0);
   // Effect to initialize progress animation when subTatal changes
@@ -104,12 +104,12 @@ const MyCart = () => {
       </View>
 
       {/* FlatList to render cart items */}
-      <Animated.FlatList
+      {/* <Animated.FlatList
         data={products}
         renderItem={({ item }: any) => {
           return <AddToCart item={item} />;
         }}
-      />
+      /> */}
 
       {/* Total price, progress bar, free shipping information, and proceed to checkout button */}
       <View style={myCartStyle.totalPriceAndProgressCon}>
@@ -129,7 +129,8 @@ const MyCart = () => {
                 {subTotal >= targetAmount ? (
                   <Text style={{ fontSize: 12 }}>100</Text>
                 ) : (
-                  <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
+                  // <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
+                  <></>
                 )}
               </View>
             </Animated.View>

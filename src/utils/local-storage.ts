@@ -13,5 +13,6 @@ export const getFromAsyncStorage = async (key: string, ) => {
         if (!key || typeof AsyncStorage === 'undefined') {
             return ''
         }
+        
        return await AsyncStorage.getItem(key);
 };

@@ -8,11 +8,12 @@ export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
 
     userLogin: build.mutation({
-      query: (data) => ({
+      query: (data) => {
+        return({
         url: `/user/login`,
         method: 'POST',
         data: data,
-      }),
+      })},
       invalidatesTags:[tagType.userLogin]
     }),
 
@@ -30,23 +31,7 @@ export const authApi = baseApi.injectEndpoints({
     }),
 
     
-    // userRegistration: build.mutation({
-    //   //@ts-ignore
-    //   query: async (formData) => {
-    //     try {
-    //       const response = await axios.post(`${AUTH_URL}/signup`, formData, {
-    //         headers: {
-    //           'Content-Type': 'multipart/form-data',
-    //         },
-    //       });
-    //       return { data: response.data };
-    //     } catch (error) {
-    //       //@ts-ignore
-    //       throw new Error(`Signup failed: ${error.message}`);
-    //     }
-    //   },
-    //   invalidatesTags: [tagType.user],
-    // }),
+    
     
       
     }),

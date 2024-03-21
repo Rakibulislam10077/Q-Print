@@ -253,7 +253,6 @@ const Index = () => {
 
     checkAccessToken();
   }, [initialRoute]);
-  console.log(initialRoute);
 
   return (
     // <Stack.Navigator initialRouteName="SignUp">

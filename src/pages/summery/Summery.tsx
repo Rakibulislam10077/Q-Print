@@ -46,8 +46,8 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { usePostAddressMutation } from '../../redux/api/apiSlice';
 import { AddressFormState } from '../../types/interfaces/signUpAndLogin.interface';
+import { useAddAddressMutation } from '../../redux/api/addressSlice';
 
 const Summery: React.FC = () => {
   const navigation: any = useNavigation();
@@ -63,8 +63,9 @@ const Summery: React.FC = () => {
     phoneNumber: '',
     zipCode: 0,
     country: 'Qatar',
+    isDefault: true,
   });
-  const [postAddress, { data, isSuccess, isError }] = usePostAddressMutation();
+  const [addAddress, { data, isSuccess, isError }] = useAddAddressMutation();
   const height = useSharedValue(100);
 
   const handleInputChange = (fieldName: any, value: string) => {
@@ -73,6 +74,8 @@ const Summery: React.FC = () => {
       [fieldName]: value,
     });
   };
+
+  console.log(data);
 
   const handleSubmit = async () => {
     try {
@@ -84,9 +87,10 @@ const Summery: React.FC = () => {
         // formData.companyName &&
         formData.phoneNumber &&
         formData.zipCode &&
-        formData.country
+        formData.country &&
+        formData.isDefault
       ) {
-        const postData = await postAddress({
+        const postData = await addAddress({
           firstName: formData.firstName,
           lastName: formData.lastName,
           streetAddress: formData.streetAddress,
@@ -95,8 +99,9 @@ const Summery: React.FC = () => {
           phoneNumber: formData.phoneNumber,
           zipCode: formData.zipCode,
           country: formData.country,
+          isDefault: formData.isDefault,
         });
-        // console.log(postData, 'postData');
+        console.log(postData, 'postData');
       } else if (isError) {
         return Alert.alert('sorry!');
       }
@@ -239,7 +244,9 @@ const Summery: React.FC = () => {
                     activeOpacity={0.7}
                     style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}
                   >
-                    <Text style={summeryStyle.inputText}>state</Text>
+                    <Text style={summeryStyle.inputText}>
+                      {formData?.state ? formData?.state : 'state'}
+                    </Text>
                     {isDropdown ? <UpArrow /> : <Dropdown />}
                   </TouchableOpacity>
                   {isDropdown && (

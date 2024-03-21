@@ -1,7 +1,8 @@
 export enum tagType {
     userLogin= 'userLogin',
     userRegistration= 'userRegistration',
-    product = 'product'
+    product = 'product',
+    address = 'auserAddress'
 }
 
-export const tagTypesList = [tagType.userLogin, tagType.userRegistration, tagType.product]
+export const tagTypesList = [tagType.userLogin, tagType.userRegistration, tagType.product, tagType.address]

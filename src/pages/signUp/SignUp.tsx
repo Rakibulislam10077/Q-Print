@@ -42,20 +42,20 @@ const SignUp = () => {
       confirmPassword,
     };
 
-    console.log(userData);
-
     formData.append('fullName', fullName);
     formData.append('email', email);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
-    console.log(formData);
-
     try {
       const result = await userRegistration(formData);
+      console.log(await result);
+
       //@ts-ignore
-      await AsyncStorage.setItem(STORAGE_KEY, result?.data?.data);
-    } catch (error) {}
+      // await AsyncStorage.setItem(STORAGE_KEY, result?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

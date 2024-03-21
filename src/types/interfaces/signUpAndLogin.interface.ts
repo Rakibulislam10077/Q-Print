@@ -8,6 +8,7 @@ export interface AddressFormState {
     phoneNumber: string;
     zipCode: number;
     country: string;
+    isDefault: boolean;
   }
 
 export interface SingUpFormState {
