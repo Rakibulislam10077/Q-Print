@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
 import { Color } from '../../../constants/GlobalStyle';
-import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import Animated from 'react-native-reanimated';
 import Cart from '../../card/allCart/Cart';
+import { useGetQueryProductQuery } from '../../../redux/api/prductSlice';
+import { IProduct } from '../../../types/interfaces/product.interface';
+import EmptyData from '../../common/EmptyData';
 
 const Cartridge = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
   // const { data, isLoading } = useGetQueryProductQuery(
@@ -14,13 +16,19 @@ const Cartridge = ({ itemId, searchText }: { itemId: string; searchText: string 
   );
 
   return (
-    <ScrollView style={styles.container}>
-      <Animated.View style={styles.cartContainer}>
-        {data?.data?.map((item, index: number) => {
-          return <Cart key={index?.toString()} item={item} />;
-        })}
-      </Animated.View>
-    </ScrollView>
+    <>
+      {data?.data?.length === 0 ? (
+        <EmptyData children="No cartridge available" />
+      ) : (
+        <ScrollView style={styles.container}>
+          <Animated.View style={styles.cartContainer}>
+            {data?.data?.map((item: IProduct, index: number) => {
+              return <Cart key={index?.toString()} item={item} />;
+            })}
+          </Animated.View>
+        </ScrollView>
+      )}
+    </>
   );
 };
 

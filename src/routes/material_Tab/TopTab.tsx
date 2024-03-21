@@ -25,7 +25,7 @@ import ProductAll from '../../components/productsCategory/All/Product.all';
 
 const Tab = createMaterialTopTabNavigator();
 
-export const TopTab = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
+export const TopTab = ({ itemId, searchText }: { itemId: any; searchText: string }) => {
   return (
     <Animated.View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* =============================== */}

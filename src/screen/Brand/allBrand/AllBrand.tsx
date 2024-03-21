@@ -6,8 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { IBrand } from '../../../types/interfaces/brand.interface';
 
-const AllBrand = ({ item }: { item: IBrand }) => {
-  const navigation: any = useNavigation();
+interface brandProps {
+  brand: IBrand[];
+}
+
+const AllBrand = ({ item }: any) => {
+  const navigation = useNavigation<any>();
 
   return (
     <Animated.View

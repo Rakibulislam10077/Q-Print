@@ -58,6 +58,7 @@ const BrandDetails: React.FC<IBrand> = (props) => {
 
       {/* Tab Section */}
       <View style={{ flex: 1 }}>
+        {/* @ts-ignore */}
         <TopTab itemId={item?._id || item?.brand?.brandId} />
       </View>
 

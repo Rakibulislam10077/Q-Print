@@ -4,10 +4,10 @@ import { Color } from '../../../constants/GlobalStyle';
 import Cart from '../../card/allCart/Cart';
 import { printerStyle } from './PrinterStyle';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { useGetQueryProductQuery } from '../../../redux/api/apiSlice';
 import { IProduct } from '../../../types/interfaces/product.interface';
 import AllProductSkeleton from '../../skeleton/allProduct.skeleton';
 import EmptyData from '../../common/EmptyData';
+import { useGetQueryProductQuery } from '../../../redux/api/prductSlice';
 const Printer = ({ itemId, searchText }: { itemId: string; searchText: string }) => {
   const { data, isLoading } = useGetQueryProductQuery(
     `category.categoryName=Computer Laptop&${searchText ? 'searchTerm=' + searchText : ''}&${itemId ? 'brand.brandId=' + itemId : ''}`

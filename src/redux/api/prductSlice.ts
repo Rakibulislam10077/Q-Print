@@ -11,8 +11,8 @@ export const productApiSlice = baseApi.injectEndpoints({
     }),
 
     getQueryProduct: build.query({
-        query: (q) => ({
-            url: `/product?${q}`
+        query: (query) => ({
+            url: `/product?${query}`
         })
     })
 

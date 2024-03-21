@@ -21,10 +21,11 @@ import TopBrand from './topBrand/TopBrand';
 import AllBrand from './allBrand/AllBrand';
 import Animated, { FadeInRight } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
-import { useGetBrandQuery } from '../../redux/api/apiSlice';
 import BrandCircleSkeleton from '../../components/skeleton/Brand.circle.skeleton';
 import Cart_Skeleton from '../../components/skeleton/Cart_SkeletonInHome';
 import BrandCartSkeleton from '../../components/skeleton/Brand.cart.skeleton';
+import { useGetBrandQuery } from '../../redux/api/brandSlice';
+import { IBrand } from '../../types/interfaces/product.interface';
 
 const Brand = () => {
   const { data, isLoading } = useGetBrandQuery(undefined);
@@ -62,8 +63,8 @@ const Brand = () => {
             ) : (
               <Animated.View style={brandStyle.allCartContainer}>
                 {/* Render All Brands */}
-                {data?.data?.map((item, index) => {
-                  return <AllBrand key={index.toString()} item={item} />; // all brand cart
+                {data?.data?.map((item: IBrand, index: number) => {
+                  return <AllBrand key={item?._id} item={item} />; // all brand cart
                 })}
               </Animated.View>
             )}

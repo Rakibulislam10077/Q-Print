@@ -18,7 +18,7 @@ const ProductAll = ({ itemId, searchText }: { itemId: string; searchText: string
     <>
       <ScrollView style={styles.container}>
         <Animated.View style={styles.cartContainer}>
-          {data?.map((item: IProduct, index: number) => {
+          {data?.data?.map((item: IProduct, index: number) => {
             return <Cart key={index?.toString()} item={item} />;
           })}
         </Animated.View>

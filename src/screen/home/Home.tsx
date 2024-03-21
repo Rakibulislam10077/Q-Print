@@ -33,6 +33,8 @@ const Home = () => {
   // };
   // test();
 
+  console.log(productData);
+
   return (
     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <View style={{ flex: 1, backgroundColor: Color.C_white }}>
@@ -62,7 +64,7 @@ const Home = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingRight: 20 }}
-            data={brandData}
+            data={brandData?.data}
             renderItem={({ item }) => {
               return <Brand item={item} />;
             }}
@@ -80,7 +82,7 @@ const Home = () => {
             {/* Renders the title and subtitle */}
             <HomePageProductCateTitle title="Printers, Cartridge, Ink" subTitle="see all" />
             {/* Maps over the data and renders individual Cart components */}
-            {productData?.map((item: IProduct, index: number) => {
+            {productData?.data?.map((item: IProduct, index: number) => {
               return <Cart key={item?._id} item={item} />;
             })}
           </View>

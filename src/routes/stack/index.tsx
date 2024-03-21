@@ -246,9 +246,9 @@ const Index = () => {
       console.log(accessToken);
 
       setInitialRoute(accessToken ? 'BottomTab' : 'login');
-      // if (accessToken) {
-      //   navigation.navigate('BottomTab');
-      // }
+      if (accessToken) {
+        navigation.navigate('BottomTab');
+      }
     };
 
     checkAccessToken();

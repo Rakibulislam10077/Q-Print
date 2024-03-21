@@ -43,8 +43,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [addFavorite, setAddFavorite] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState({
-    variantId: data.defaultVariant._id,
-    variantName: data.defaultVariant.variantName,
+    variantId: data?.defaultVariant?._id,
+    variantName: data?.defaultVariant?.variantName,
   });
 
   const { height } = Dimensions.get('screen');
@@ -55,8 +55,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const scale2 = useSharedValue(0);
 
   const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.cart.products);
-  const { favorites } = useAppSelector((state) => state.favorite);
+  // const products = useAppSelector((state) => state.cart.products);
+  // const { favorites } = useAppSelector((state) => state.favorite);
 
   const addCart = (product: IProduct) => {
     dispatch(addToCart({ ...product, variant: selectedVariant }));
@@ -141,13 +141,13 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                   {/* <Badge style={{ position: 'absolute', top: -1, right: -5 }}>
                     {products?.length}
                   </Badge> */}
-                  <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
+                  {/* <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
                     {products?.length ? (
                       <Text style={productDetailsStyle.badgeText}>{products?.length}</Text>
                     ) : (
                       <Text>0</Text>
                     )}
-                  </Animated.View>
+                  </Animated.View> */}
                 </TouchableOpacity>
               </Animated.View>
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
@@ -173,12 +173,13 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                 horizontal={true}
                 contentContainerStyle={productDetailsStyle.contentContainerStyle}
                 pagingEnabled={true}
+                //@ts-ignore
                 data={data?.productPhotos}
                 // keyExtractor={(index) => {}}
                 renderItem={({ item: img }) => {
                   return (
                     <Animated.Image
-                      source={{ uri: `http://192.168.0.103:5000/${img}` }}
+                      source={{ uri: `http://192.168.0.183:5000/${img}` }}
                       style={{
                         width: '100%',
                         height: 280,

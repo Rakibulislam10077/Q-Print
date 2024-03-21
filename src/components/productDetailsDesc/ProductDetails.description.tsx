@@ -20,18 +20,19 @@ const ProductDetailsDesc = ({
     setSelectedVariant(variant);
   };
 
+  console.log(JSON.stringify(data, null, 2));
+
   return (
     <View style={styles.description}>
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.ratingContainer}>
         {data?.defaultVariant?.inStock > 0 ? (
           <View style={styles.inStockContainer}>
-            <InActiveIndicator />
-            <Text style={styles.inStockText}>In stock</Text>
+            <Text style={[styles.inStockText, { color: Color.C_red }]}>stoke out</Text>
           </View>
         ) : (
           <View style={styles.inStockContainer}>
             <InActiveIndicator />
-            <Text style={[styles.inStockText, { color: Color.C_red }]}>In stock</Text>
+            <Text style={[styles.inStockText]}>In stock</Text>
           </View>
         )}
         <Text style={styles.verticalDivider}>|</Text>
@@ -45,10 +46,8 @@ const ProductDetailsDesc = ({
           colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
           style={styles.discountTextCon}
         >
-          {data?.defaultVariant?.discountPercentage && (
-            <Text style={styles.discountPercent}>
-              {data?.defaultVariant.discountPercentage}% off
-            </Text>
+          {data?.variants[0]?.discountPercentage && (
+            <Text style={styles.discountPercent}>{data?.variants[0]?.discountPercentage}% off</Text>
           )}
         </LinearGradient>
       </Animated.View>
@@ -92,7 +91,7 @@ const ProductDetailsDesc = ({
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.priceContainer}>
         <Text style={styles.currentPrice}>
           <Text style={styles.productPrice}>
-            {data?.defaultVariant?.discountedPrice} <Text style={styles.currency}>QAR</Text>
+            {data?.variants[0]?.sellingPrice} <Text style={styles.currency}>QAR</Text>
           </Text>
         </Text>
         {/* offer QAR */}
