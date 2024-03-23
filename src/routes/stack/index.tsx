@@ -15,7 +15,7 @@ import PaymentMethod from '../../pages/paymentMethod/PaymentMethod';
 import ConfirmOrder from '../../pages/confirmOrder/ConfirmOrder';
 import BrandDetails from '../../pages/brandDetails/BrandDetails';
 import EditProfile from '../../pages/editProfile/EditProfile';
-import Favorite from '../../pages/favorite/Favorite';
+import Favorite from '../../pages/favorite/Favourite';
 import TermsAndCondition from '../../pages/termsAndCondition/TermsAndCondition';
 import FAQ from '../../pages/FAQ/FAQ';
 import Review from '../../pages/review/Review';
@@ -243,7 +243,6 @@ const Index = () => {
   useEffect(() => {
     const checkAccessToken = async () => {
       const accessToken = await isLoggedIn();
-      console.log(accessToken);
 
       setInitialRoute(accessToken ? 'BottomTab' : 'login');
       if (accessToken) {

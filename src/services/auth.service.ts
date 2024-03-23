@@ -12,7 +12,6 @@ export const getuserInfo  = async () =>{
     
     if(authAsyncToken){
         const decodedData = decodedToken(authAsyncToken);
-        console.log(decodedData, '======hello');
         
         return decodedData;
     }

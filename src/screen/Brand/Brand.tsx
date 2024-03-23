@@ -29,7 +29,6 @@ import { IBrand } from '../../types/interfaces/product.interface';
 
 const Brand = () => {
   const { data, isLoading } = useGetBrandQuery(undefined);
-  // console.log(JSON.stringify(data?.data, null, 2));
 
   return (
     <View style={brandStyle.container}>

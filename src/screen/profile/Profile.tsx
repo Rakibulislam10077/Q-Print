@@ -61,11 +61,6 @@ const Profile: React.FC = () => {
   const { data, isLoading, isError, error } = useGetUserQuery(undefined);
   const info = data?.data;
 
-  // console.log(info);
-  // console.log(error);
-
-  // console.log(JSON.stringify(data, null, 2));
-
   // Toggles the visibility of the modal
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);

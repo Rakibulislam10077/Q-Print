@@ -13,7 +13,7 @@ export const axiosBaseQuery =
       method?: AxiosRequestConfig['method']
       data?: AxiosRequestConfig['data']
       params?: AxiosRequestConfig['params']
-      // headers?: AxiosRequestConfig['headers']
+      headers?: AxiosRequestConfig['headers']
       meta?: IMeta
       contentType?: string
     },
@@ -22,7 +22,6 @@ export const axiosBaseQuery =
   > =>
   async ({ url, method, data, params, contentType}) => {
     try {
-      console.log(data);
       
       const result = await axiosInstane({
         url: baseUrl + url,

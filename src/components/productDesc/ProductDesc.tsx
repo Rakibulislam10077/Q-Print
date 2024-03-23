@@ -6,8 +6,6 @@ import { Video, ResizeMode } from 'expo-av';
 import { IDescription } from '../../types/interfaces/product.interface';
 
 const ProductDesc = ({ item }: { item: IDescription[] }) => {
-  // console.log(item, '))))))))))))))))))))))))');
-
   const [textShown, setTextShown] = useState<boolean>(true);
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});

@@ -76,7 +76,6 @@ const PaperTypeComponent = () => {
     try {
       // update displayed image
       setImage(image);
-      // console.log(image);
     } catch (error) {
       throw error;
     }

@@ -20,6 +20,7 @@ import { SingUpFormState } from '../../types/interfaces/signUpAndLogin.interface
 import { useUserRegistrationMutation } from '../../redux/api/authApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEY } from '../../constants/storageKey';
+import { storeUserInfo } from '../../services/auth.service';
 
 const SignUp = () => {
   const [eye, setEye] = useState(true);
@@ -35,13 +36,6 @@ const SignUp = () => {
   const handleSignUp = async () => {
     const formData = new FormData();
 
-    const userData = {
-      fullName,
-      email,
-      password,
-      confirmPassword,
-    };
-
     formData.append('fullName', fullName);
     formData.append('email', email);
     formData.append('password', password);
@@ -49,13 +43,13 @@ const SignUp = () => {
 
     try {
       const result = await userRegistration(formData);
-      console.log(await result);
-
       //@ts-ignore
-      // await AsyncStorage.setItem(STORAGE_KEY, result?.data?.data);
-    } catch (error) {
-      console.log(error);
-    }
+      if (result?.data?.data?.accessToken) {
+        navigation.navigate('BottomTab');
+      }
+      //@ts-ignore
+      await storeUserInfo({ accessToken: result?.data?.data?.accessToken });
+    } catch (error) {}
   };
 
   return (

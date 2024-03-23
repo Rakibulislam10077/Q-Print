@@ -33,8 +33,6 @@ const Home = () => {
   // };
   // test();
 
-  console.log(productData);
-
   return (
     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <View style={{ flex: 1, backgroundColor: Color.C_white }}>

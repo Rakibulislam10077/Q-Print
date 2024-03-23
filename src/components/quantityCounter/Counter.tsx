@@ -4,9 +4,7 @@ import { Color } from '../../constants/GlobalStyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
-const Counter = () => {
-  const [quantity, setQuantity] = useState<number>(0);
-
+const Counter = ({ setQuantity, quantity }: { setQuantity: Function; quantity: number }) => {
   const animatedY = useSharedValue(0);
   const animatedX = useSharedValue(0);
   const scale = useSharedValue(0);

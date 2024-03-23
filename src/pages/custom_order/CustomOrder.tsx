@@ -98,8 +98,6 @@ const OrderAndPrinterDesignPage = () => {
   const handleSubmit = () => {
     formData.append('printingRequestFile', image);
     // formData.append('paperSize', customWidth);
-    // console.log(fdata);
-    // console.log(image);
   };
 
   const originalHeight = 10;

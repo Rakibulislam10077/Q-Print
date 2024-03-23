@@ -11,16 +11,18 @@ const ProductDetailsDesc = ({
   data,
   selectedVariant,
   setSelectedVariant,
+  setQuantity,
+  quantity,
 }: {
   data: any;
   selectedVariant: { variantId?: string; variantName: string };
+  quantity: number;
   setSelectedVariant: Function;
+  setQuantity: Function;
 }) => {
   const handleColor = (variant: string) => {
     setSelectedVariant(variant);
   };
-
-  console.log(JSON.stringify(data, null, 2));
 
   return (
     <View style={styles.description}>
@@ -39,17 +41,21 @@ const ProductDetailsDesc = ({
         <Text style={styles.ratingText}>
           ⭐<Text style={styles.ratingNumber}>(4.5)</Text>
         </Text>
-        <Text style={styles.verticalDivider}>|</Text>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
-          style={styles.discountTextCon}
-        >
-          {data?.variants[0]?.discountPercentage && (
-            <Text style={styles.discountPercent}>{data?.variants[0]?.discountPercentage}% off</Text>
-          )}
-        </LinearGradient>
+        {data?.variants[0]?.discountPercentage && (
+          <>
+            <Text style={styles.verticalDivider}>|</Text>
+            <LinearGradient
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
+              style={styles.discountTextCon}
+            >
+              <Text style={styles.discountPercent}>
+                {data?.variants[0]?.discountPercentage}% off
+              </Text>
+            </LinearGradient>
+          </>
+        )}
       </Animated.View>
       <Animated.Text
         entering={FadeInDown.delay(50).duration(500)}
@@ -89,20 +95,23 @@ const ProductDetailsDesc = ({
       </View>
 
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.priceContainer}>
+        {/* Display the selling price */}
         <Text style={styles.currentPrice}>
-          <Text style={styles.productPrice}>
-            {data?.variants[0]?.sellingPrice} <Text style={styles.currency}>QAR</Text>
-          </Text>
+          {data?.variants?.find((variant: any) => variant.isDefault)?.discountedPrice}{' '}
+          <Text style={styles.currency}>QAR</Text>
         </Text>
-        {/* offer QAR */}
-        <Text style={styles.discountedPrice}>
-          {data?.defaultVariant?.sellingPrice} <Text style={styles.discountedCurrency}>QAR</Text>
-        </Text>
-        {/* quantity Container */}
 
+        {/* Display the discounted price */}
+        <Text style={styles.discountedPrice}>
+          {data?.variants?.find((variant: any) => variant.isDefault)?.sellingPrice}{' '}
+          <Text style={styles.discountedCurrency}>QAR</Text>
+        </Text>
+
+        {/* quantity Container */}
         {/* =============================================================================================== */}
-        <Counter />
+        <Counter setQuantity={setQuantity} quantity={quantity} />
       </Animated.View>
+
       {/* progress bar  */}
       <ProgressBar />
     </View>

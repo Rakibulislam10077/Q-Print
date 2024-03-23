@@ -99,9 +99,6 @@ const Products: React.FC<ProductsProps> = ({ itemId }) => {
                     style={productsStyle.input}
                     placeholder="Search products"
                     value={searchText}
-                    onSubmitEditing={() => {
-                      // console.log(searchText);
-                    }}
                   />
                 )}
 

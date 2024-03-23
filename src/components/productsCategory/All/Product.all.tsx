@@ -12,8 +12,6 @@ const ProductAll = ({ itemId, searchText }: { itemId: string; searchText: string
     `${searchText ? 'searchTerm=' + searchText : ''}&${itemId ? 'brand.brandId=' + itemId : ''}`
   );
 
-  console.log(data);
-
   return (
     <>
       <ScrollView style={styles.container}>

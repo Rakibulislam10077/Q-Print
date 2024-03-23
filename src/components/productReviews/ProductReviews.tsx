@@ -6,8 +6,6 @@ import Animated, { FadeInRight, SlideInRight } from 'react-native-reanimated';
 import { IReviews } from '../../types/interfaces/product.interface';
 
 const ProductReviews = ({ item }: { item: IReviews[] }) => {
-  // console.log(item, '*****************************');
-
   return (
     <Animated.View entering={FadeInRight.delay(50).duration(300)}>
       <View style={productReviewsStyle.ratingViewBox}>

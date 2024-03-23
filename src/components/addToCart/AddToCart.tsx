@@ -48,7 +48,7 @@ const AddToCart = ({ item }: { item: any }) => {
           <View
             style={[
               addToCartStyle.colorIndicator,
-              { backgroundColor: item?.variant?.variantName.toLowerCase() },
+              // { backgroundColor: item?.variant?.variantName.toLowerCase() },
             ]}
           />
         </View>

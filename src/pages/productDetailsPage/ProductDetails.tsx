@@ -42,6 +42,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [addFavorite, setAddFavorite] = useState(false);
+  const [quantity, setQuantity] = useState<number>(0);
   const [selectedVariant, setSelectedVariant] = useState({
     variantId: data?.defaultVariant?._id,
     variantName: data?.defaultVariant?.variantName,
@@ -55,7 +56,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const scale2 = useSharedValue(0);
 
   const dispatch = useAppDispatch();
-  // const products = useAppSelector((state) => state.cart.products);
+  const products = useAppSelector((state) => state.cart.products);
   // const { favorites } = useAppSelector((state) => state.favorite);
 
   const addCart = (product: IProduct) => {
@@ -110,8 +111,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     }
   };
   const decrease = () => {
-    // const value = products?.length - 1;
-    // setQuantity(value);
+    const value = products?.length - 1;
+    setQuantity(value);
   };
 
   // useEffect(() => {
@@ -138,16 +139,16 @@ const ProductDetails: React.FC<IProduct> = (props) => {
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
                 <TouchableOpacity onPress={() => navigation.navigate('MyCart')} activeOpacity={0.7}>
                   <CartBag />
-                  {/* <Badge style={{ position: 'absolute', top: -1, right: -5 }}>
+                  <Badge style={{ position: 'absolute', top: -12, right: -5 }}>
                     {products?.length}
-                  </Badge> */}
-                  {/* <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
+                  </Badge>
+                  <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
                     {products?.length ? (
                       <Text style={productDetailsStyle.badgeText}>{products?.length}</Text>
                     ) : (
                       <Text>0</Text>
                     )}
-                  </Animated.View> */}
+                  </Animated.View>
                 </TouchableOpacity>
               </Animated.View>
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
@@ -199,6 +200,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           data={data}
           selectedVariant={selectedVariant}
           setSelectedVariant={setSelectedVariant}
+          setQuantity={setQuantity}
+          quantity={quantity}
         />
         {/* view more information container */}
         <View style={{ height: height - 100 }}>
@@ -220,7 +223,10 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             colors={['rgba(200, 59, 98, 0.90)', 'rgba(127, 53, 205, 0.80)']}
             style={productDetailsStyle.linearButton}
           >
-            <TouchableOpacity style={productDetailsStyle.buyButton}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Summery', { ...data })}
+              style={productDetailsStyle.buyButton}
+            >
               <Text style={productDetailsStyle.buttonText}>Buy Now</Text>
             </TouchableOpacity>
           </LinearGradient>

@@ -46,15 +46,12 @@ const Login = () => {
   const handleSubmit = async () => {
     try {
       const res = await userLogin({ email, password }).unwrap();
-      console.log('login', res);
 
-      if (res?.accessToken) {
+      if (res?.data?.accessToken) {
         navigation.navigate('BottomTab');
       }
-      storeUserInfo({ accessToken: res?.accessToken });
-    } catch (error) {
-      console.log('the error', error);
-    }
+      storeUserInfo({ accessToken: res?.data?.accessToken });
+    } catch (error) {}
     setEmail('');
     setPassword('');
   };

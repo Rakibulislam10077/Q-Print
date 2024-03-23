@@ -4,18 +4,21 @@ import { STORAGE_KEY } from "../../constants/storageKey";
 import { ResponseSuccessType } from "../../types";
 
 const instance = axios.create();
-    instance.defaults.headers.post["Content-Type"] = "";
-    instance.defaults.headers["Accept"] = "";
+if (instance.defaults.headers.post["Content-Type"] === "application/json"){
+  instance.defaults.headers.post["Content-Type"] = "application/json"
+}else{
+  instance.defaults.headers["Accept"] = "";
+}
     instance.defaults.timeout = 60000;
     
 
     // Add a request interceptor
-instance.interceptors.request.use(function (config) {
+instance.interceptors.request.use(async function (config) {
     // Do something before request is sent
-    const accessToken = getFromAsyncStorage(STORAGE_KEY)
+    const accessToken = await getFromAsyncStorage(STORAGE_KEY)
     
     if (accessToken) {
-         config.headers.Authorization = `Bearer ${accessToken}`
+        config.headers.Authorization = `Bearer ${accessToken}`
     }
     return config;
   }, function (error) {

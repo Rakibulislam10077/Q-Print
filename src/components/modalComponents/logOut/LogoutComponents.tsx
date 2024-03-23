@@ -20,7 +20,6 @@ const LogoutComponents = ({ setIsModalVisible }: any) => {
   useEffect(() => {
     const checkAccessToken = async () => {
       const accessToken = await isLoggedIn();
-      console.log(accessToken);
       if (!accessToken) {
         navigation.navigate('login');
       }

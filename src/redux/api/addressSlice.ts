@@ -8,9 +8,6 @@ export const addressSlice = baseApi.injectEndpoints({
       query: () => ({
         url: '/user-address/add',
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
       }),
       invalidatesTags: [tagType.address],
     }),

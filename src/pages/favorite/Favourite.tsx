@@ -55,7 +55,7 @@ const logodata = [
 const Favorite = () => {
   const viewableItems = useSharedValue<ViewToken[]>([]);
 
-  const { favorites } = useAppSelector((state) => state.favorite);
+  const { favorites } = useAppSelector((state) => state.favourite);
 
   return (
     <View style={favoriteStyle.container}>

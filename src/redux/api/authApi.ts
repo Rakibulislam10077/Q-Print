@@ -9,6 +9,7 @@ export const authApi = baseApi.injectEndpoints({
 
     userLogin: build.mutation({
       query: (data) => {
+        
         return({
         url: `/user/login`,
         method: 'POST',
@@ -23,9 +24,9 @@ export const authApi = baseApi.injectEndpoints({
         url: `/user/signup`,
         method: 'POST',
         data: data,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // },
       }),
       invalidatesTags:[tagType.userRegistration]
     }),

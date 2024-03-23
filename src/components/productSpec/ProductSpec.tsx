@@ -6,7 +6,6 @@ import { useGetProductQuery } from '../../redux/api/apiSlice';
 import { Color } from '../../constants/GlobalStyle';
 import { ISpecification } from '../../types/interfaces/product.interface';
 const ProductSpec = ({ items }: { items: ISpecification[] }) => {
-  console.log(JSON.stringify(items, null, 2), '+++++++++++++++++++++++++++++++++');
   // const item = items?.specifications?.map((i) => i.sectionName);
 
   return (

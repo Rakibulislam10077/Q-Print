@@ -49,7 +49,9 @@ import Animated, {
 import { AddressFormState } from '../../types/interfaces/signUpAndLogin.interface';
 import { useAddAddressMutation } from '../../redux/api/addressSlice';
 
-const Summery: React.FC = () => {
+const Summery: React.FC = (props) => {
+  const item = props?.route?.params;
+
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
   const [defaultLocation, setDefaultLocation] = useState<boolean>(false);
@@ -75,39 +77,12 @@ const Summery: React.FC = () => {
     });
   };
 
-  console.log(data);
-
   const handleSubmit = async () => {
     try {
-      if (
-        formData.firstName &&
-        formData.lastName &&
-        formData.streetAddress &&
-        formData.state &&
-        // formData.companyName &&
-        formData.phoneNumber &&
-        formData.zipCode &&
-        formData.country &&
-        formData.isDefault
-      ) {
-        const postData = await addAddress({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          streetAddress: formData.streetAddress,
-          state: formData.state,
-          // companyName: formData.companyName,
-          phoneNumber: formData.phoneNumber,
-          zipCode: formData.zipCode,
-          country: formData.country,
-          isDefault: formData.isDefault,
-        });
-        console.log(postData, 'postData');
-      } else if (isError) {
-        return Alert.alert('sorry!');
-      }
-    } catch (error) {
-      // console.log(formData, 'formData')
-    }
+      await addAddress({
+        formData,
+      });
+    } catch (error) {}
   };
 
   const openBox = () => {
