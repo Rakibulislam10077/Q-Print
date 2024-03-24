@@ -41,9 +41,9 @@ const MyCart = () => {
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
 
   const { products } = useAppSelector((state) => state.cart);
-  const subTotal = products?.reduce((total: number, product: any) => {
-    console.log(product[0]?.variants);
+  console.log(JSON.stringify(products, null, 2));
 
+  const subTotal = products?.reduce((total: number, product: any) => {
     return total + product?.variants[0]?.sellingPrice * product?.quantity;
   }, 0);
 

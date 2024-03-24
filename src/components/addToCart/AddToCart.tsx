@@ -7,9 +7,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { addToCart, removeFromCart, removeOneFromCart } from '../../redux/features/cartSlice';
 import { useAppDispatch } from '../../redux/hook';
 
-let dynamicColor = 'red';
 const AddToCart = ({ item }: { item: any }) => {
-  const totalPrice = item?.defaultVariant?.discountedPrice * item?.quantity;
+  const totalPrice = item?.variant?.sellingPrice * item?.quantity;
 
   const dispatch = useAppDispatch();
   return (
@@ -48,7 +47,7 @@ const AddToCart = ({ item }: { item: any }) => {
           <View
             style={[
               addToCartStyle.colorIndicator,
-              // { backgroundColor: item?.variant?.variantName.toLowerCase() },
+              { backgroundColor: item?.variant?.variantName.toLowerCase() },
             ]}
           />
         </View>

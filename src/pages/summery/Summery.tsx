@@ -313,6 +313,7 @@ const Summery: React.FC = (props) => {
           activeOpacity={0.7}
           onPress={() => {
             handleSubmit();
+            navigation.navigate('confirmorder');
           }}
           style={{
             width: '100%',

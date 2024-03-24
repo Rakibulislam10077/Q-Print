@@ -200,8 +200,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           data={data}
           selectedVariant={selectedVariant}
           setSelectedVariant={setSelectedVariant}
-          setQuantity={setQuantity}
-          quantity={quantity}
         />
         {/* view more information container */}
         <View style={{ height: height - 100 }}>

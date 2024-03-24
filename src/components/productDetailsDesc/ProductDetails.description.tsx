@@ -11,14 +11,10 @@ const ProductDetailsDesc = ({
   data,
   selectedVariant,
   setSelectedVariant,
-  setQuantity,
-  quantity,
 }: {
   data: any;
   selectedVariant: { variantId?: string; variantName: string };
-  quantity: number;
   setSelectedVariant: Function;
-  setQuantity: Function;
 }) => {
   const handleColor = (variant: string) => {
     setSelectedVariant(variant);
@@ -109,7 +105,11 @@ const ProductDetailsDesc = ({
 
         {/* quantity Container */}
         {/* =============================================================================================== */}
-        <Counter setQuantity={setQuantity} quantity={quantity} />
+        <Counter
+          data={data}
+          selectedVariant={selectedVariant}
+          setSelectedVariant={setSelectedVariant}
+        />
       </Animated.View>
 
       {/* progress bar  */}
