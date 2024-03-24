@@ -48,9 +48,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { AddressFormState } from '../../types/interfaces/signUpAndLogin.interface';
 import { useAddAddressMutation } from '../../redux/api/addressSlice';
+import { useAppSelector } from '../../redux/hook';
 
 const Summery: React.FC = (props) => {
   const item = props?.route?.params;
+  console.log('props data', JSON.stringify(item, null, 2));
 
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -67,9 +69,9 @@ const Summery: React.FC = (props) => {
     country: 'Qatar',
     isDefault: true,
   });
-  const [addAddress, { data, isSuccess, isError }] = useAddAddressMutation();
+  const [addAddress] = useAddAddressMutation();
+  const { products } = useAppSelector((state) => state.cart);
   const height = useSharedValue(100);
-
   const handleInputChange = (fieldName: any, value: string) => {
     setFormData({
       ...formData,
@@ -98,6 +100,19 @@ const Summery: React.FC = (props) => {
     };
   });
 
+  console.log(
+    products?.map((i: any) => {
+      return i?._id;
+    })
+  );
+
+  const totalPrice = products?.reduce((total: number, product: any) => {
+    // Calculate the total price for each product (quality * sellingPrice) and add it to the running total
+    return total + product?.quantity * item?.variant?.sellingPrice;
+  }, 0);
+
+  console.log(item?.variant?.sellingPrice);
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* CommonHeader Component: Renders a common header with the title "Checkout" */}
@@ -119,9 +134,11 @@ const Summery: React.FC = (props) => {
             <View style={summeryStyle.summeryItemBox}>
               <Text style={summeryStyle.summeryItemNormalText}>
                 Subtotal
-                <Text style={summeryStyle.summeryItemSmallText}>(3 item)</Text>
+                <Text style={summeryStyle.summeryItemSmallText}>
+                  ({products?.map((i: any) => (i?._id === item?._id ? i?.quantity : '1'))})
+                </Text>
               </Text>
-              <Text style={summeryStyle.summeryItemCurrency}>QR 3530.00</Text>
+              <Text style={summeryStyle.summeryItemCurrency}>QR {totalPrice}.00</Text>
             </View>
 
             {/* Delivery Fee Item */}

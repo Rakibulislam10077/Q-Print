@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import React from 'react';
-import { useGetHistoryQuery } from '../../../redux/api/onlineOrder';
-import { FlatList } from 'react-native-gesture-handler';
 import { orderPlacedStyle } from '../order_placed/Order_placedStyle';
 import OrderPlaceCart from '../order_placed/orderPlaceCart/OrderPlaceCart';
+import { useGetHistoryQuery } from '../../../redux/api/onlineOrder';
 
-const Shipping = () => {
-  const { data, isLoading } = useGetHistoryQuery('orderStatus.status=Shipping');
+const OrderRecieve = () => {
+  const { data, isLoading } = useGetHistoryQuery('orderStatus.status=Delivered');
   return (
     <View style={orderPlacedStyle.container}>
       <FlatList
@@ -20,4 +19,4 @@ const Shipping = () => {
   );
 };
 
-export default Shipping;
+export default OrderRecieve;

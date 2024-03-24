@@ -17,8 +17,6 @@ const Counter = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  console.log(JSON.stringify(data, null, 2), 'hello dear');
-
   return (
     <View style={styles.quantityCon}>
       <LinearGradient

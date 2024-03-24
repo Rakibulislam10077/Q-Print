@@ -3,8 +3,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Order_placed from '../../components/orderHistoryComponents/order_placed/Order_placed';
 import Packaging from '../../components/orderHistoryComponents/Packeaging/Packaging';
 import Shipping from '../../components/orderHistoryComponents/shipping/Shipping';
-import OrderReview from '../../components/orderHistoryComponents/ordeReview/OrderReview';
 import { Color } from '../../constants/GlobalStyle';
+import OrderRecieve from '../../components/orderHistoryComponents/ordeReview/OrderRecieve';
 
 const Tab = createMaterialTopTabNavigator();
 const OrderHistoryTopTab = () => {
@@ -28,7 +28,7 @@ const OrderHistoryTopTab = () => {
       <Tab.Screen name="Order Placed" component={Order_placed} />
       <Tab.Screen name="Packaging" component={Packaging} />
       <Tab.Screen name="Shipping" component={Shipping} />
-      <Tab.Screen name="OrderReview" component={OrderReview} />
+      <Tab.Screen name="Receive" component={OrderRecieve} />
     </Tab.Navigator>
   );
 };

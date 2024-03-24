@@ -222,7 +222,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             style={productDetailsStyle.linearButton}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate('Summery', { ...data })}
+              onPress={() => navigation.navigate('Summery', { ...data, variant: selectedVariant })}
               style={productDetailsStyle.buyButton}
             >
               <Text style={productDetailsStyle.buttonText}>Buy Now</Text>

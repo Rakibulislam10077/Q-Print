@@ -41,25 +41,19 @@ const MyCart = () => {
   const [shouldPlayLottie, setShouldPlayLottie] = useState<boolean>(true);
 
   const { products } = useAppSelector((state) => state.cart);
-  console.log(JSON.stringify(products, null, 2));
 
   const subTotal = products?.reduce((total: number, product: any) => {
     return total + product?.variants[0]?.sellingPrice * product?.quantity;
   }, 0);
 
   const animation = useRef<any>(null);
-  // State variables to track current and target amounts
   const targetAmount = 1000;
-  // Calculate the percentage progress towards the target amount
   const percentageProgress = subTotal === 0 ? 0 : Math.round((subTotal / targetAmount) * 100);
-  // Shared value for animated progress
   const animatedProgress = useSharedValue(0);
-  // Effect to initialize progress animation when subTatal changes
   useEffect(() => {
     const percentage = Math.min(100, Math.round((subTotal / targetAmount) * 100));
     animatedProgress.value = withTiming(percentage / 100, { duration: 1000 });
   }, [subTotal, targetAmount]);
-  // Animated style for the progress bar
   const progressStyle = useAnimatedStyle(() => {
     return {
       width: `${animatedProgress.value * 100}%`,
@@ -72,8 +66,6 @@ const MyCart = () => {
   });
 
   useEffect(() => {
-    // This effect runs when the component mounts.
-    // It plays the Lottie animation once after a delay of 500 milliseconds.
     if (shouldPlayLottie) {
       setTimeout(() => {
         animation.current?.play();
