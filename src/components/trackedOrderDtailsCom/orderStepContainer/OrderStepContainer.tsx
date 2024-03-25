@@ -3,34 +3,117 @@ import React from 'react';
 import { orderStepContainerStyle } from './OrderStepStyle';
 import { Calender, Clock, PackageIcon, Track } from '../../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { IOrder, IOrderStatus } from '../../../types/interfaces/orderHistory.interface';
 
-const OrderStepContainer = () => {
+const OrderStepContainer = ({ data }: { data: IOrder }) => {
+  console.log(JSON.stringify(data, null, 2));
+
   return (
     <Animated.View
       entering={FadeInDown.delay(50).duration(500)}
       style={orderStepContainerStyle.container}
     >
       {/* step indicator container */}
+      {/* order placed */}
       <View style={orderStepContainerStyle.indicatorCon}>
         {/* indicator */}
-        <View style={orderStepContainerStyle.indicatorBox}></View>
+        {/* order placed  */}
+        <View
+          style={[
+            orderStepContainerStyle.indicatorBox,
+            {
+              backgroundColor:
+                data?.orderStatus?.status === 'Order placed' ||
+                data?.orderStatus?.status === 'Packaging' ||
+                data?.orderStatus?.status === 'Shipping' ||
+                data?.orderStatus?.status === 'Delivered'
+                  ? 'red'
+                  : 'gray',
+            },
+          ]}
+        />
         {/* related vertical divider */}
-        <View style={orderStepContainerStyle.relatedDivider} />
+        <View
+          style={[
+            orderStepContainerStyle.relatedDivider,
+            {
+              backgroundColor:
+                data?.orderStatus?.status === 'Order placed' ||
+                data?.orderStatus?.status === 'Packaging' ||
+                data?.orderStatus?.status === 'Shipping' ||
+                data?.orderStatus?.status === 'Delivered'
+                  ? 'red'
+                  : 'gray',
+            },
+          ]}
+        />
         {/* indicator */}
-        <View style={orderStepContainerStyle.indicatorBox}>
+        {/* packaging */}
+        <View
+          style={[
+            orderStepContainerStyle.indicatorBox,
+            {
+              backgroundColor:
+                data?.orderStatus?.status === 'Packaging' ||
+                data?.orderStatus?.status === 'Shipping' ||
+                data?.orderStatus?.status === 'Delivered'
+                  ? 'red'
+                  : 'gray',
+            },
+          ]}
+        >
           <PackageIcon />
         </View>
         {/* related vertical divider */}
-        <View style={orderStepContainerStyle.relatedDivider} />
+        <View
+          style={[
+            orderStepContainerStyle.relatedDivider,
+            {
+              backgroundColor:
+                data?.orderStatus?.status === 'Packaging' ||
+                data?.orderStatus?.status === 'Shipping' ||
+                data?.orderStatus?.status === 'Delivered'
+                  ? 'red'
+                  : 'gray',
+            },
+          ]}
+        />
         {/* indicator */}
-        <View style={orderStepContainerStyle.indicatorBox}>
+        {/* shipping */}
+        <View
+          style={[
+            orderStepContainerStyle.indicatorBox,
+            {
+              backgroundColor:
+                data?.orderStatus?.status === 'Shipping' ||
+                data?.orderStatus?.status === 'Delivered'
+                  ? 'red'
+                  : 'gray',
+            },
+          ]}
+        >
           <Track />
         </View>
         {/* related vertical divider */}
-        <View style={orderStepContainerStyle.relatedDivider} />
+        <View
+          style={[
+            orderStepContainerStyle.relatedDivider,
+            {
+              backgroundColor:
+                data?.orderStatus?.status === 'Shipping' ||
+                data?.orderStatus?.status === 'Delivered'
+                  ? 'red'
+                  : 'gray',
+            },
+          ]}
+        />
         {/* indicator */}
-        <View style={orderStepContainerStyle.indicatorBox}></View>
-        {/* related vertical divider */}
+        <View
+          style={[
+            orderStepContainerStyle.indicatorBox,
+            { backgroundColor: data?.orderStatus?.status === 'Delivered' ? 'red' : 'gray' },
+          ]}
+        ></View>
       </View>
       {/* step details container */}
       <View style={orderStepContainerStyle.stepDetailsCon}>

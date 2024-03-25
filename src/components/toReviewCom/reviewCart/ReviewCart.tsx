@@ -6,13 +6,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Modal from 'react-native-modal';
 import { RatingStar } from '../../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { IReview } from '../../../types/interfaces/review.interface';
 
-const ReviewCart = () => {
+const ReviewCart = ({ item }: { item: IReview }) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>();
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+
+  console.log(item);
+
   return (
     <Animated.View entering={FadeInDown.delay(50).duration(500)} style={reviewCartStyle.container}>
       <Text style={reviewCartStyle.processDate}>Purchased on 12 Jul 2023</Text>
@@ -22,15 +26,13 @@ const ReviewCart = () => {
           <Image source={{}} />
         </View>
         <View style={reviewCartStyle.titleAndStoreCon}>
-          <Text style={reviewCartStyle.title}>
-            HP DeskJet Ink Advantage 4175 All-in-One Printer
-          </Text>
+          <Text style={reviewCartStyle.title}>{item?.product?.productName}</Text>
           <View style={reviewCartStyle.brandAndReviewCon}>
             <View style={reviewCartStyle.brandAndBrandNameCon}>
               <View style={reviewCartStyle.brandCon}>
                 <Image source={{}} />
               </View>
-              <Text>Brother</Text>
+              <Text>{item?.product?.brandName}</Text>
             </View>
             <LinearGradient
               start={{ x: 0, y: 0 }}

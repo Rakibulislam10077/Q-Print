@@ -1,8 +1,9 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
-import { productCartStyle } from "./ProductCartStyle";
+import { View, Text, Image } from 'react-native';
+import React from 'react';
+import { productCartStyle } from './ProductCartStyle';
+import { IOrder, IOrderHistory } from '../../../../types/interfaces/orderHistory.interface';
 
-const ProductCart = () => {
+const ProductCart = ({ item }: { item: IOrderHistory }) => {
   return (
     <View style={productCartStyle.container}>
       <View style={productCartStyle.subContainer}>
@@ -10,15 +11,16 @@ const ProductCart = () => {
           <Image source={{}} />
         </View>
         <View style={productCartStyle.textContainer}>
-          <Text style={productCartStyle.productNameAndSpec}>
-            HP DeskJet Ink Advantage 4175 All-in-One Printer
-          </Text>
+          <Text style={productCartStyle.productNameAndSpec}>{item?.productName}</Text>
           <View style={productCartStyle.currencyAndPriceCon}>
             <Text style={productCartStyle.price}>
-              250 <Text style={productCartStyle.currency}>QAR</Text>
+              {item?.variant?.discountedPrice
+                ? item?.variant?.discountedPrice
+                : item?.variant?.sellingPrice}{' '}
+              <Text style={productCartStyle.currency}>QAR</Text>
             </Text>
             <Text style={productCartStyle.verticalDivider}>|</Text>
-            <Text>X 1</Text>
+            <Text>X {item?.orderQuantity}</Text>
           </View>
         </View>
       </View>

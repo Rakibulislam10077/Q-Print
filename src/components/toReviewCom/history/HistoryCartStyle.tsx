@@ -101,6 +101,7 @@ export const historyStyle = StyleSheet.create({
   },
   ratingCon: {
     alignSelf: 'center',
+    flexDirection: 'row',
   },
   dummyText: {
     textAlign: 'center',

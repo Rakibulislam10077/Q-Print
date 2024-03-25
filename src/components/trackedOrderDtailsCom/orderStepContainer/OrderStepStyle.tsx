@@ -25,7 +25,6 @@ export const orderStepContainerStyle = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 50,
-    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },

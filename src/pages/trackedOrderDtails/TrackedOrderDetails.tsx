@@ -30,9 +30,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { orderStepContainerStyle } from '../../components/trackedOrderDtailsCom/orderStepContainer/OrderStepStyle';
 import Animated, { FadeInDown, FadeInRight } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
+import { IOrder } from '../../types/interfaces/orderHistory.interface';
 
-const TrackedOrderDetails = () => {
+const TrackedOrderDetails = (props: IOrder) => {
+  //@ts-ignore
+  const item = props?.route?.params;
   const [isStepChange, setIsStepChange] = useState<number>(0);
+
+  console.log(JSON.stringify(item, null, 2), 'tracked');
 
   const handleButton = () => {
     setIsStepChange(1);
@@ -52,15 +57,15 @@ const TrackedOrderDetails = () => {
           {/* ======================== */}
           {/* customer details */}
           {/* ======================== */}
-          <CustomerDetailsContainer />
+          <CustomerDetailsContainer data={item} />
           {/* ======================== */}
           {/* order step container */}
           {/* ======================== */}
-          <OrderStepContainer />
+          <OrderStepContainer data={item} />
           {/* ======================== */}
           {/* product container */}
           {/* ======================== */}
-          <ProductContainer />
+          <ProductContainer data={item} />
           {/* ======================== */}
           {/* summary container */}
           {/* ======================== */}

@@ -1,4 +1,4 @@
-export interface OrderHistory {
+export interface IOrderHistory {
   productName: string;
   productPhotos: string[];
   productId: string;
@@ -71,7 +71,7 @@ export interface IOrderStatus {
 
 export interface IOrder {
   _id: string;
-  orderItems: OrderHistory[];
+  orderItems: IOrderHistory[];
   buyer: Buyer;
   totalQuantity: number;
   totalDiscount: number;

@@ -6,12 +6,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { RatingStar } from '../../../../assets/allSvg/AllSvg';
 import Modal from 'react-native-modal';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-const HistoryCart = () => {
+import { IReview } from '../../../types/interfaces/review.interface';
+import { AntDesign } from '@expo/vector-icons';
+const HistoryCart = ({ item }: { item: IReview }) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>();
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+
+  const maxRating = 5;
+  const filledStars = Math.round(item?.rating);
+  const emptyStars = maxRating - filledStars;
 
   return (
     <Animated.View entering={FadeInDown.delay(50).duration(500)} style={historyStyle.container}>
@@ -22,13 +28,13 @@ const HistoryCart = () => {
           <Image source={{}} />
         </View>
         <View style={historyStyle.titleAndStoreCon}>
-          <Text style={historyStyle.title}>HP DeskJet Ink Advantage 4175 All-in-One Printer</Text>
+          <Text style={historyStyle.title}>{item?.product?.productName}</Text>
           <View style={historyStyle.brandAndReviewCon}>
             <View style={historyStyle.brandAndBrandNameCon}>
               <View style={historyStyle.brandCon}>
                 <Image source={{}} />
               </View>
-              <Text>Brother</Text>
+              <Text>{item?.product?.brandName}</Text>
             </View>
           </View>
         </View>
@@ -36,8 +42,25 @@ const HistoryCart = () => {
       <Divider style={historyStyle.dividerStyle} />
       <View>
         <View style={historyStyle.ratingAndEditButtonCon}>
-          <View>
-            <RatingStar />
+          <View style={historyStyle.ratingCon}>
+            {[...Array(filledStars)].map((_, index) => (
+              <AntDesign
+                key={index?.toString()}
+                style={{ marginRight: 5 }}
+                name="star"
+                size={24}
+                color="#F16A26"
+              />
+            ))}
+            {[...Array(emptyStars)].map((_, index) => (
+              <AntDesign
+                key={index?.toString()}
+                style={{ marginRight: 5 }}
+                name="star"
+                size={24}
+                color="#e9e9e9"
+              />
+            ))}
           </View>
           <TouchableOpacity
             onPress={() => setIsModalVisible(true)}
@@ -47,9 +70,7 @@ const HistoryCart = () => {
             <Text>Edit</Text>
           </TouchableOpacity>
         </View>
-        <Text style={historyStyle.PevComment}>
-          This Product Is awesome Shahin Development Sundor Kori Korbi
-        </Text>
+        <Text style={historyStyle.PevComment}>{item?.comment}</Text>
       </View>
       <Modal
         onBackdropPress={() => setIsModalVisible(false)}

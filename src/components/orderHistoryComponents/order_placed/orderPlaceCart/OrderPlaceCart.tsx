@@ -77,7 +77,7 @@ const OrderPlaceCart: React.FC<orderPlaceProps> = ({ orderPlace }) => {
           style={orderPlaceCartStyle.trackButtonLinear}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate('TrackedOrderDetails')}
+            onPress={() => navigation.navigate('TrackedOrderDetails', { ...orderPlace })}
             activeOpacity={0.7}
             style={orderPlaceCartStyle.trackButtonActionLayer}
           >

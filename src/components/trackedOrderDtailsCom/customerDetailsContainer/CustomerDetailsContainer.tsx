@@ -4,8 +4,9 @@ import { customerContainerStyle } from './CustomerDetailsContainerStyle';
 import { CallIcon, LocationIcon, MessageBox, ShiftCar } from '../../../../assets/allSvg/AllSvg';
 import { Divider } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { IOrder } from '../../../types/interfaces/orderHistory.interface';
 
-const CustomerDetailsContainer = () => {
+const CustomerDetailsContainer = ({ data }: { data: IOrder }) => {
   return (
     <Animated.View
       entering={FadeInDown.delay(50).duration(500)}
@@ -13,7 +14,7 @@ const CustomerDetailsContainer = () => {
     >
       <View>
         <Text style={customerContainerStyle.orderID}>
-          Order ID: <Text style={customerContainerStyle.ID}>3354654654526</Text>
+          Order ID: <Text style={customerContainerStyle.ID}>{data?._id}</Text>
         </Text>
         <View style={customerContainerStyle.deliveryDateAndCarCon}>
           <ShiftCar />
@@ -28,12 +29,12 @@ const CustomerDetailsContainer = () => {
           <View style={customerContainerStyle.imgCon}>
             <Image source={{}} />
           </View>
-          <Text style={customerContainerStyle.name}>Rakibul islam</Text>
+          <Text style={customerContainerStyle.name}>{data?.buyer?.fullName}</Text>
         </View>
         {/* ========= */}
         <View style={customerContainerStyle.infoCon}>
           <MessageBox />
-          <Text style={customerContainerStyle.infoText}>hello@expertSquad.net</Text>
+          <Text style={customerContainerStyle.infoText}>{data?.buyer?.email}</Text>
         </View>
         {/* ========= */}
         <View style={customerContainerStyle.infoCon}>
