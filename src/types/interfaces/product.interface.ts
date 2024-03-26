@@ -1,88 +1,46 @@
-export interface IProduct {
-  _id: string;
-  productName: string;
-  productPhotos: IProductPhotos[];
-  brand: Partial<IBrand> & { brandId: string };
-  series?: string;
-  model?: string;
-  specifications: ISpecification[];
-  description: IDescription[];
-  isQuickOrderActive?: boolean;
-  defaultVariant: IDefaultVariant;
-  variants: IVariants[];
-  bulk?: {
-    minOrder: number;
-    discount: number;
-  };
-  seo?: {
-    metaTitle: string;
-    metaDescription: string;
-    metaPhoto: string;
-  };
-  reviews: IReviews[]; // Assuming reviews are of any type for simplicity
-  __v?: number;
-  route: {
-    params: any; // You can refine the type of params if you know its structure
-  };
-  item:any;
-  key: string;
+export interface IBrand {
+  brandName: string;
+  brandPhoto: string;
+  brandId: string;
+}
+
+export interface ISubcategory {
+  subcategoryName: string;
+  subcategoryId: string;
 }
 
 export interface ICategory {
   categoryName: string;
   categoryPhoto: string;
   categoryId: string;
+  subcategory: ISubcategory;
 }
 
-export interface IDefaultVariant {
-  _id: string;
+export interface IVariants {
+  isDefault: boolean;
   variantName: string;
   variantPhotos: string[];
   inStock: number;
   stockAlert: number;
-  buyingPrice: number;
   sellingPrice: number;
-  discountPercentage: number;
+  _id: string;
   createdAt: string;
   updatedAt: string;
-  discountedPrice: number;
-  __v: number;
+  discountedPrice:string
 }
-export interface IBrand {
+
+export interface IProduct {
   _id: string;
-  brandName: string;
-  brandPhoto: string;
-}
-
-export type IVariants = {
-  variantName: string;
-  variantId: string;
-  _id: string;
-};
-
-export interface ISpecification {
-  sectionName: string;
-  blocks: {
-    title: string;
-    description: string;
-    _id?: string;
-  }[];
-  _id?: string;
-}
-
-export interface IDescription {
-  type: string;
-  data: {
-    title: string;
-  };
-  _id: string;
-  route:any
-}
-
-export interface IReviews{
-  
-};
-
-export interface IProductPhotos{
+  productName: string;
+  brand: IBrand;
+  category: ICategory;
   productPhotos: string[];
+  variants: IVariants[];
+  series: string;
+  productModel: string;
+  isQuickOrderActive: boolean;
+  __v: number;
+  totalReview: number;
+  averageRating: number | null;
+  totalSoldQuantity: number;
 }

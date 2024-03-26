@@ -19,20 +19,10 @@
  */
 
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  ScrollView,
-  Platform,
-  Alert,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import { Dropdown, UpArrow } from '../../../assets/allSvg/AllSvg';
 import { useNavigation } from '@react-navigation/native';
 import { summeryStyle } from './SummeryStyle';
-import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import { Color } from '../../constants/GlobalStyle';
@@ -43,7 +33,6 @@ import Animated, {
   FadeInUp,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import { AddressFormState } from '../../types/interfaces/signUpAndLogin.interface';
@@ -51,8 +40,8 @@ import { useAddAddressMutation } from '../../redux/api/addressSlice';
 import { useAppSelector } from '../../redux/hook';
 
 const Summery: React.FC = (props) => {
+  //@ts-ignore
   const item = props?.route?.params;
-  console.log('props data', JSON.stringify(item, null, 2));
 
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -72,6 +61,7 @@ const Summery: React.FC = (props) => {
   const [addAddress] = useAddAddressMutation();
   const { products } = useAppSelector((state) => state.cart);
   const height = useSharedValue(100);
+
   const handleInputChange = (fieldName: any, value: string) => {
     setFormData({
       ...formData,
@@ -100,18 +90,14 @@ const Summery: React.FC = (props) => {
     };
   });
 
-  console.log(
-    products?.map((i: any) => {
-      return i?._id;
-    })
-  );
+  let totalPrice;
+  if (item?.variant?.discountedPrice) {
+    totalPrice = item?.quantity * item?.variant?.discountedPrice;
+  } else {
+    totalPrice = item?.quantity * item?.variant?.sellingPrice;
+  }
 
-  const totalPrice = products?.reduce((total: number, product: any) => {
-    // Calculate the total price for each product (quality * sellingPrice) and add it to the running total
-    return total + product?.quantity * item?.variant?.sellingPrice;
-  }, 0);
-
-  console.log(item?.variant?.sellingPrice);
+  console.log('props data', JSON.stringify(item, null, 2));
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -134,9 +120,7 @@ const Summery: React.FC = (props) => {
             <View style={summeryStyle.summeryItemBox}>
               <Text style={summeryStyle.summeryItemNormalText}>
                 Subtotal
-                <Text style={summeryStyle.summeryItemSmallText}>
-                  ({products?.map((i: any) => (i?._id === item?._id ? i?.quantity : '1'))})
-                </Text>
+                <Text style={summeryStyle.summeryItemSmallText}> ({item?.quantity})</Text>
               </Text>
               <Text style={summeryStyle.summeryItemCurrency}>QR {totalPrice}.00</Text>
             </View>

@@ -24,7 +24,7 @@ import { productDetailsStyle } from './ProductDetailsStyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color } from '../../constants/GlobalStyle';
 import ProductDetailsTopTab from '../../routes/material_Tab/ProductDetailsTopTab'; // Import connect from react-redux
-import { IProduct } from '../../types/interfaces/product.interface';
+
 import { FlatList } from 'react-native-gesture-handler';
 import ProductDetailSkeleton from '../../components/skeleton/ProductDetails.skeleton';
 import { useGetProductQuery } from '../../redux/api/apiSlice';
@@ -35,17 +35,19 @@ import ProgressBar from '../../components/progressbar/ProgressBar';
 import Counter from '../../components/quantityCounter/Counter';
 import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
 import { Badge } from 'react-native-paper';
+import { IProduct } from '../../types/interfaces/product.interface';
 
 const ProductDetails: React.FC<IProduct> = (props) => {
+  //@ts-ignore
   const data: IProduct = props?.route?.params;
 
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [addFavorite, setAddFavorite] = useState(false);
-  const [quantity, setQuantity] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(1);
   const [selectedVariant, setSelectedVariant] = useState({
-    variantId: data?.defaultVariant?._id,
-    variantName: data?.defaultVariant?.variantName,
+    variantId: data?.variants[0]?._id,
+    variantName: data?.variants[0]?.variantName,
   });
 
   const { height } = Dimensions.get('screen');
@@ -120,6 +122,10 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   //   console.log(element?._id);
   // });
   // }, []);
+
+  let totalPrice: number | undefined;
+
+  console.log(JSON.stringify(data, null, 2));
 
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
@@ -200,6 +206,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           data={data}
           selectedVariant={selectedVariant}
           setSelectedVariant={setSelectedVariant}
+          quantity={quantity}
+          setQuantity={setQuantity}
         />
         {/* view more information container */}
         <View style={{ height: height - 100 }}>
@@ -211,7 +219,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
         <View style={productDetailsStyle.totalPriceConInfixedButtonBox}>
           <Text style={productDetailsStyle.totalPrice}>Total price</Text>
           <Text style={productDetailsStyle.productPrice}>
-            <Text style={{}}>QAR</Text> 95748
+            <Text style={{}}>{totalPrice}</Text> QAR
           </Text>
         </View>
         <View style={productDetailsStyle.buyButtonAndCartCon}>
@@ -222,7 +230,9 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             style={productDetailsStyle.linearButton}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate('Summery', { ...data, variant: selectedVariant })}
+              onPress={() =>
+                navigation.navigate('Summery', { ...data, variant: selectedVariant, quantity })
+              }
               style={productDetailsStyle.buyButton}
             >
               <Text style={productDetailsStyle.buttonText}>Buy Now</Text>

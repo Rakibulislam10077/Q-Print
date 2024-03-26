@@ -6,16 +6,24 @@ import { useSharedValue, withSpring, withTiming } from 'react-native-reanimated'
 import { AntDesign } from '@expo/vector-icons';
 import { useAppDispatch } from '../../redux/hook';
 import { addToCart, removeOneFromCart } from '../../redux/features/cartSlice';
-const Counter = ({
-  data,
-  setSelectedVariant,
-  selectedVariant,
-}: {
-  data: any;
-  setSelectedVariant: any;
-  selectedVariant: any;
-}) => {
-  const dispatch = useAppDispatch();
+const Counter = ({ quantity, setQuantity }: { quantity: number; setQuantity: Function }) => {
+  // const [counter, setCounter] = useState(quantity);
+
+  // Function to increment the counter
+  const incrementCounter = () => {
+    // setCounter(counter + 1);
+    // If needed, you can also update the quantity prop here
+    setQuantity(quantity + 1);
+  };
+
+  // Function to decrement the counter
+  const decrementCounter = () => {
+    if (quantity > 0) {
+      // setCounter(counter - 1);
+      // If needed, you can also update the quantity prop here
+      setQuantity(quantity - 1);
+    }
+  };
 
   return (
     <View style={styles.quantityCon}>
@@ -25,15 +33,12 @@ const Counter = ({
         colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
         style={styles.increaseDecreaseButton}
       >
-        <TouchableOpacity
-          onPress={() => dispatch(removeOneFromCart(data))}
-          style={styles.inDecActionLayer}
-        >
+        <TouchableOpacity onPress={() => decrementCounter()} style={styles.inDecActionLayer}>
           <AntDesign name="minus" size={20} color="black" />
         </TouchableOpacity>
       </LinearGradient>
       <View style={styles.quantityBox}>
-        <Text>{data?.quality}</Text>
+        <Text>{quantity}</Text>
       </View>
       <LinearGradient
         start={{ x: 0, y: 0 }}
@@ -41,10 +46,7 @@ const Counter = ({
         colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
         style={styles.increaseDecreaseButton}
       >
-        <TouchableOpacity
-          onPress={() => dispatch(addToCart({ ...data, variant: selectedVariant }))}
-          style={styles.inDecActionLayer}
-        >
+        <TouchableOpacity onPress={() => incrementCounter()} style={styles.inDecActionLayer}>
           <AntDesign name="plus" size={20} color="black" />
         </TouchableOpacity>
       </LinearGradient>
