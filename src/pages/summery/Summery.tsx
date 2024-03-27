@@ -97,7 +97,6 @@ const Summery: React.FC = (props) => {
     totalPrice = item?.quantity * item?.variant?.sellingPrice;
   }
 
-  console.log('props data', JSON.stringify(item, null, 2));
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>

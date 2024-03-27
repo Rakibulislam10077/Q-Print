@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { productDescStyle } from './ProductDescStyle';
 import Animated, { FadeInRight, SlideInRight } from 'react-native-reanimated';
 import { Video, ResizeMode } from 'expo-av';
-import { IDescription } from '../../types/interfaces/product.interface';
+import { IDescription, IProduct } from '../../types/interfaces/product.interface';
 
 const ProductDesc = ({ item }: { item: IDescription[] }) => {
   const [textShown, setTextShown] = useState<boolean>(true);

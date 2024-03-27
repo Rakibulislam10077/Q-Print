@@ -7,7 +7,6 @@ import { IBrand } from '../../types/interfaces/brand.interface';
 const Brand = ({ item }: { item: IBrand }) => {
   const navigation: any = useNavigation();
 
-
   return (
     <TouchableOpacity
       activeOpacity={0.7}

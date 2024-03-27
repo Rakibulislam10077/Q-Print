@@ -28,7 +28,7 @@ const Cart: React.FC<CartProps> = ({ item }) => {
     <Animated.View style={styles.container} entering={FadeInDown.delay(50).duration(500)}>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('ProductDeatils', { ...item })}
+        onPress={() => navigation.navigate('ProductDeatils', { productId: item?._id })}
         // style={[AllCartStyle.container]}
       >
         <View style={styles.imgCon}>
@@ -74,7 +74,9 @@ const Cart: React.FC<CartProps> = ({ item }) => {
           </View>
         </View>
         <View style={styles.discountCon}>
-          <Text style={styles.discountText}>{item?.defaultVariant?.discountPercentage}%</Text>
+          <Text style={styles.discountText}>
+            {item?.variants?.map((i) => i.discountPercentage)}%
+          </Text>
         </View>
         <View style={styles.descCon}>
           <Text style={styles.title} numberOfLines={2}>

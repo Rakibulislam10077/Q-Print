@@ -7,8 +7,6 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { IOrder } from '../../../types/interfaces/orderHistory.interface';
 
 const ProductContainer = ({ data }: { data: IOrder }) => {
-  console.log(JSON.stringify(data, null, 2));
-
   return (
     <Animated.View
       entering={FadeInDown.delay(50).duration(500)}

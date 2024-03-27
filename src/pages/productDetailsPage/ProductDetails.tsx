@@ -36,18 +36,21 @@ import Counter from '../../components/quantityCounter/Counter';
 import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
 import { Badge } from 'react-native-paper';
 import { IProduct } from '../../types/interfaces/product.interface';
+import { useGetProductByIdQuery } from '../../redux/api/productSlice';
 
 const ProductDetails: React.FC<IProduct> = (props) => {
   //@ts-ignore
-  const data: IProduct = props?.route?.params;
+  const productId = props?.route?.params;
+  const { data } = useGetProductByIdQuery(productId?.productId);
 
+  const productData = data?.data;
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [addFavorite, setAddFavorite] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedVariant, setSelectedVariant] = useState({
-    variantId: data?.variants[0]?._id,
-    variantName: data?.variants[0]?.variantName,
+    variantId: productData?.variants?._id,
+    variantName: productData?.variants?.variantName,
   });
 
   const { height } = Dimensions.get('screen');
@@ -112,6 +115,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
       }, 500);
     }
   };
+
   const decrease = () => {
     const value = products?.length - 1;
     setQuantity(value);
@@ -123,9 +127,12 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   // });
   // }, []);
 
-  let totalPrice: number | undefined;
-
-  console.log(JSON.stringify(data, null, 2));
+  let totalPrice: any;
+  const defaultVariant = productData?.variants?.find((variant: any) => variant?.isDefault);
+  if (defaultVariant) {
+    const price: any = defaultVariant.discountedPrice || defaultVariant.sellingPrice;
+    totalPrice = price * quantity;
+  }
 
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
@@ -160,7 +167,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
               <Animated.View entering={FadeInRight.duration(500).delay(50)}>
                 <TouchableOpacity
                   onPress={() => {
-                    addRemoveFavorite(data);
+                    addRemoveFavorite(productData);
                   }}
                   activeOpacity={0.7}
                   style={productDetailsStyle.navAndFav}
@@ -181,7 +188,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                 contentContainerStyle={productDetailsStyle.contentContainerStyle}
                 pagingEnabled={true}
                 //@ts-ignore
-                data={data?.productPhotos}
+                data={productData?.productPhotos}
                 // keyExtractor={(index) => {}}
                 renderItem={({ item: img }) => {
                   return (
@@ -203,7 +210,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
         {/* price and quantity container */}
         {/* product details container here*/}
         <ProductDetailsDesc
-          data={data}
+          data={productData}
           selectedVariant={selectedVariant}
           setSelectedVariant={setSelectedVariant}
           quantity={quantity}
@@ -211,7 +218,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
         />
         {/* view more information container */}
         <View style={{ height: height - 100 }}>
-          <ProductDetailsTopTab item={data} />
+          <ProductDetailsTopTab item={productData} />
         </View>
       </Animated.ScrollView>
       {/* fixed buy now button and price */}
@@ -230,9 +237,21 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             style={productDetailsStyle.linearButton}
           >
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('Summery', { ...data, variant: selectedVariant, quantity })
-              }
+              onPress={() => {
+                let selectedVariant = productData.variants.find(
+                  (variant: any) => variant.isDefault === true
+                );
+                if (!selectedVariant && productData.variants.length > 0) {
+                  // If no variant is marked as default, choose the first one
+                  selectedVariant = productData.variants[0];
+                }
+
+                navigation.navigate('Summery', {
+                  ...productData,
+                  variant: selectedVariant,
+                  quantity,
+                });
+              }}
               style={productDetailsStyle.buyButton}
             >
               <Text style={productDetailsStyle.buttonText}>Buy Now</Text>
@@ -241,7 +260,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => {
-              addCart(data);
+              addCart(productData);
               increase();
             }}
             style={productDetailsStyle.cartButton}

@@ -24,8 +24,6 @@ const ProductDetailsDesc = ({
     setSelectedVariant(variant);
   };
 
-  console.log(JSON.stringify(data, null, 2));
-
   return (
     <View style={styles.description}>
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.ratingContainer}>
@@ -43,7 +41,7 @@ const ProductDetailsDesc = ({
         <Text style={styles.ratingText}>
           ⭐<Text style={styles.ratingNumber}>(4.5)</Text>
         </Text>
-        {data?.variants[0]?.discountPercentage && (
+        {data?.variants?.discountPercentage && (
           <>
             <Text style={styles.verticalDivider}>|</Text>
             <LinearGradient

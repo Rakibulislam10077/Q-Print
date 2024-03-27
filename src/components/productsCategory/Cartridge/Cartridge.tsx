@@ -3,7 +3,7 @@ import React from 'react';
 import { Color } from '../../../constants/GlobalStyle';
 import Animated from 'react-native-reanimated';
 import Cart from '../../card/allCart/Cart';
-import { useGetQueryProductQuery } from '../../../redux/api/prductSlice';
+import { useGetQueryProductQuery } from '../../../redux/api/productSlice';
 import { IProduct } from '../../../types/interfaces/product.interface';
 import EmptyData from '../../common/EmptyData';
 

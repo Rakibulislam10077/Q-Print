@@ -37,8 +37,6 @@ const TrackedOrderDetails = (props: IOrder) => {
   const item = props?.route?.params;
   const [isStepChange, setIsStepChange] = useState<number>(0);
 
-  console.log(JSON.stringify(item, null, 2), 'tracked');
-
   const handleButton = () => {
     setIsStepChange(1);
   };

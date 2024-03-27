@@ -14,8 +14,6 @@ interface orderPlaceProps {
 const OrderPlaceCart: React.FC<orderPlaceProps> = ({ orderPlace }) => {
   const navigation: any = useNavigation();
 
-  console.log(JSON.stringify(orderPlace, null, 2));
-
   return (
     <Animated.View
       entering={FadeInDown.delay(50).duration(500)}

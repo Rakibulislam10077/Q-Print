@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import { Divider } from 'react-native-paper';
 import { historyStyle } from './HistoryCartStyle';
@@ -6,18 +6,26 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { RatingStar } from '../../../../assets/allSvg/AllSvg';
 import Modal from 'react-native-modal';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { IReview } from '../../../types/interfaces/review.interface';
 import { AntDesign } from '@expo/vector-icons';
-const HistoryCart = ({ item }: { item: IReview }) => {
+import { IReviewHistory } from '../../../types/interfaces/review.interface';
+const HistoryCart = ({ item }: { item: IReviewHistory }) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>();
+  const [commnets, setComments] = useState<string>('');
+  const [star, setStar] = useState();
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
 
-  const maxRating = 5;
+  let maxRating = 5;
   const filledStars = Math.round(item?.rating);
   const emptyStars = maxRating - filledStars;
+
+  const handleStar = () => {
+    maxRating = 0;
+  };
+
+  console.log(commnets);
 
   return (
     <Animated.View entering={FadeInDown.delay(50).duration(500)} style={historyStyle.container}>
@@ -84,16 +92,37 @@ const HistoryCart = ({ item }: { item: IReview }) => {
           <View style={historyStyle.modalIndicator}></View>
           <View>
             <Text style={historyStyle.questionText}>What is your Rate?</Text>
-            <View style={historyStyle.ratingCon}>
-              <RatingStar />
-            </View>
+            <Pressable onPress={() => handleStar()} style={historyStyle.ratingCon}>
+              {[...Array(filledStars)].map((_, index) => (
+                <AntDesign
+                  key={index?.toString()}
+                  style={{ marginRight: 5 }}
+                  name="star"
+                  size={24}
+                  color="#F16A26"
+                />
+              ))}
+              {[...Array(emptyStars)].map((_, index) => (
+                <AntDesign
+                  key={index?.toString()}
+                  style={{ marginRight: 5 }}
+                  name="star"
+                  size={24}
+                  color="#e9e9e9"
+                />
+              ))}
+            </Pressable>
             <Text style={historyStyle.dummyText}>
               Please share your opinion about {'\n'} the product
             </Text>
+            <TextInput
+              multiline
+              placeholder={item?.comment ? item?.comment : 'Write your review here...'}
+              style={historyStyle.textInputCon}
+              placeholderTextColor={'#000'}
+              onChangeText={(text) => setComments(text)}
+            />
 
-            <View style={historyStyle.textInputCon}>
-              <TextInput multiline placeholder="Write your review here..." />
-            </View>
             <Text style={historyStyle.textQuantity}>0/200</Text>
           </View>
           <LinearGradient

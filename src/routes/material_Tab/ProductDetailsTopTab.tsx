@@ -8,7 +8,7 @@ import ProductSpec from '../../components/productSpec/ProductSpec';
 import ProductDesc from '../../components/productDesc/ProductDesc';
 import ProductReviews from '../../components/productReviews/ProductReviews';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
-import { IDescription, IProduct, ISpecification } from '../../types/interfaces/product.interface';
+import { IProduct, IDescription } from '../../types/interfaces/product.interface';
 
 const Tab = createMaterialTopTabNavigator();
 const ProductDetailsTopTab = ({ item }: { item: IProduct }) => {
@@ -45,7 +45,7 @@ const ProductDetailsTopTab = ({ item }: { item: IProduct }) => {
             navigation,
           }: {
             route: RouteProp<ParamListBase, 'Description'>;
-            navigation: IDescription;
+            navigation: IDescription[];
           }) => <ProductDesc route={route} navigation={navigation} item={item?.description} />}
         </Tab.Screen>
         <Tab.Screen name="Reviews">
@@ -54,7 +54,7 @@ const ProductDetailsTopTab = ({ item }: { item: IProduct }) => {
             navigation,
           }: {
             route: RouteProp<ParamListBase, 'Reviews'>;
-            navigation: IProduct;
+            navigation: any;
           }) => <ProductReviews route={route} navigation={navigation} item={item?.reviews} />}
         </Tab.Screen>
       </Tab.Navigator>

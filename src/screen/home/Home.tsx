@@ -16,7 +16,7 @@ import Cart from '../../components/card/allCart/Cart';
 import Brand_Skeleton from '../../components/skeleton/Home.Brand_Skeleton';
 import Carousel_Skeleton from '../../components/skeleton/Carousel_Skeleton';
 import { getuserInfo } from '../../services/auth.service';
-import { useGetProductsQuery } from '../../redux/api/prductSlice';
+import { useGetProductsQuery } from '../../redux/api/productSlice';
 import { useGetBrandQuery } from '../../redux/api/brandSlice';
 
 type HomeProps = {
