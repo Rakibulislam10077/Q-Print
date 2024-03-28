@@ -17,6 +17,7 @@ import { View, Animated } from 'react-native';
 import React, { useRef, useState } from 'react';
 import SliderItem from './SliderItem';
 import Pagination from './Pagination';
+import { useGetCarouselQuery } from '../../redux/api/carouselSlider';
 
 // Sample logo data
 const logodata = [
@@ -62,7 +63,9 @@ const Carousel = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [index, setIndex] = useState<number>(0);
 
-  // Handles scroll event
+  const { data } = useGetCarouselQuery('');
+  const sliderArray = Object.values(data?.data?.slider || {});
+
   const handleOnScroll = (event: any) => {
     Animated.event(
       [
@@ -80,7 +83,6 @@ const Carousel = () => {
     )(event);
   };
 
-  // Handles viewable items change event
   const handleOnViewableItemsChanged = useRef(({ viewableItems }: any) => {
     setIndex(viewableItems[0].index);
   }).current;
@@ -89,17 +91,18 @@ const Carousel = () => {
     <View style={{ width: '100%', marginTop: 10 }}>
       {/* FlatList to render logos */}
       <Animated.FlatList
-        data={logodata}
+        data={sliderArray}
         horizontal
         pagingEnabled
         snapToAlignment="center"
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => <SliderItem item={item} />}
+        // keyExtractor={item => item?._id}
         onScroll={handleOnScroll}
         onViewableItemsChanged={handleOnViewableItemsChanged}
       />
       {/* Pagination dots */}
-      <Pagination data={logodata} scrollX={scrollX} index={index} />
+      <Pagination data={sliderArray} scrollX={scrollX} index={index} />
     </View>
   );
 };
