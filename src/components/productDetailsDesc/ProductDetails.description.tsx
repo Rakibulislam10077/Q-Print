@@ -1,11 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Color, Font, shadows } from '../../constants/GlobalStyle';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { InActiveIndicator } from '../../../assets/allSvg/AllSvg';
 import { LinearGradient } from 'expo-linear-gradient';
 import Counter from '../quantityCounter/Counter';
 import ProgressBar from '../progressbar/ProgressBar';
+import { IProduct } from '../../types/interfaces/product.interface';
 
 const ProductDetailsDesc = ({
   data,
@@ -14,34 +15,79 @@ const ProductDetailsDesc = ({
   quantity,
   setQuantity,
 }: {
-  data: any;
-  selectedVariant: { variantId?: string; variantName: string };
+  data: IProduct;
+  selectedVariant: any;
   setSelectedVariant: Function;
   quantity: number;
   setQuantity: Function;
 }) => {
-  const handleColor = (variant: string) => {
+  const [selectedVariantId, setSelectedVariantId] = useState<string>('');
+  const [selectedVariantPrice, setSelectedVariantPrice] = useState<number | undefined>(undefined);
+  const handleColor = (variant: any) => {
     setSelectedVariant(variant);
+    setSelectedVariantId(variant?._id);
   };
+
+  useEffect(() => {
+    if (selectedVariant) {
+      setSelectedVariantPrice(
+        selectedVariant.discountedPrice !== undefined
+          ? selectedVariant.discountedPrice
+          : selectedVariant.sellingPrice
+      );
+    } else {
+      const defaultVariant = data?.variants?.find((variant) => variant.isDefault);
+      if (defaultVariant) {
+        setSelectedVariantPrice(
+          defaultVariant.discountedPrice !== undefined
+            ? defaultVariant.discountedPrice
+            : defaultVariant.sellingPrice
+        );
+      }
+    }
+  }, [selectedVariant, data]);
+
+  let selectedSellingPrice;
+  if (selectedVariant) {
+    selectedSellingPrice = selectedVariant?.sellingPrice;
+  } else {
+    selectedSellingPrice = data?.variants?.find((variant: any) => variant.isDefault)?.sellingPrice;
+  }
+
+  let disCountePercentage;
+  if (selectedVariant) {
+    disCountePercentage = selectedVariant?.discountPercentage;
+  } else {
+    disCountePercentage = data?.variants?.find(
+      (variant: any) => variant.isDefault
+    )?.discountPercentage;
+  }
+
+  let stokeAlert;
+  if (selectedVariant) {
+    stokeAlert = selectedVariant?.inStock;
+  } else {
+    stokeAlert = data?.variants?.find((variant: any) => variant.isDefault)?.inStock;
+  }
 
   return (
     <View style={styles.description}>
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.ratingContainer}>
-        {data?.defaultVariant?.inStock > 0 ? (
-          <View style={styles.inStockContainer}>
-            <Text style={[styles.inStockText, { color: Color.C_red }]}>stoke out</Text>
-          </View>
-        ) : (
+        {stokeAlert > 0 ? (
           <View style={styles.inStockContainer}>
             <InActiveIndicator />
             <Text style={[styles.inStockText]}>In stock</Text>
+          </View>
+        ) : (
+          <View style={styles.inStockContainer}>
+            <Text style={[styles.inStockText, { color: Color.C_red }]}>stoke out</Text>
           </View>
         )}
         <Text style={styles.verticalDivider}>|</Text>
         <Text style={styles.ratingText}>
           ⭐<Text style={styles.ratingNumber}>(4.5)</Text>
         </Text>
-        {data?.variants?.discountPercentage && (
+        {data?.variants[0]?.discountPercentage && (
           <>
             <Text style={styles.verticalDivider}>|</Text>
             <LinearGradient
@@ -50,9 +96,7 @@ const ProductDetailsDesc = ({
               colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
               style={styles.discountTextCon}
             >
-              <Text style={styles.discountPercent}>
-                {data?.variants[0]?.discountPercentage}% off
-              </Text>
+              <Text style={styles.discountPercent}>{disCountePercentage}% off</Text>
             </LinearGradient>
           </>
         )}
@@ -85,7 +129,7 @@ const ProductDetailsDesc = ({
                 {
                   backgroundColor: variant?.variantName?.toLowerCase(),
 
-                  borderColor: variant?.isDefault ? 'lightgray' : 'white',
+                  borderColor: variant?._id === selectedVariantId ? 'lightgray' : '#ececec',
                 },
               ]}
             />
@@ -95,15 +139,18 @@ const ProductDetailsDesc = ({
 
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.priceContainer}>
         {/* Display the selling price */}
+        {/* ========================================= */}
+        {/* ========================================= */}
+        {/* ========================================= */}
+        {/* ========================================= */}
+        {/* ========================================= */}
         <Text style={styles.currentPrice}>
-          {data?.variants?.find((variant: any) => variant.isDefault)?.discountedPrice}{' '}
-          <Text style={styles.currency}>QAR</Text>
+          {selectedVariantPrice} <Text style={styles.discountedCurrency}>QAR</Text>
         </Text>
 
         {/* Display the discounted price */}
         <Text style={styles.discountedPrice}>
-          {data?.variants?.find((variant: any) => variant.isDefault)?.sellingPrice}{' '}
-          <Text style={styles.discountedCurrency}>QAR</Text>
+          {selectedSellingPrice} <Text style={styles.currency}>QAR</Text>
         </Text>
 
         {/* quantity Container */}

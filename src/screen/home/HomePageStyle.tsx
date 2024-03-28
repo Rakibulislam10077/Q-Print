@@ -41,6 +41,6 @@ export const homePageStyle = StyleSheet.create({
     width: '100%',
     backgroundColor: Color.C_white,
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingRight: 20,
   },
 });

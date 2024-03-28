@@ -7,20 +7,13 @@ import { AntDesign } from '@expo/vector-icons';
 import { useAppDispatch } from '../../redux/hook';
 import { addToCart, removeOneFromCart } from '../../redux/features/cartSlice';
 const Counter = ({ quantity, setQuantity }: { quantity: number; setQuantity: Function }) => {
-  // const [counter, setCounter] = useState(quantity);
-
   // Function to increment the counter
   const incrementCounter = () => {
-    // setCounter(counter + 1);
-    // If needed, you can also update the quantity prop here
     setQuantity(quantity + 1);
   };
-
   // Function to decrement the counter
   const decrementCounter = () => {
-    if (quantity > 0) {
-      // setCounter(counter - 1);
-      // If needed, you can also update the quantity prop here
+    if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };

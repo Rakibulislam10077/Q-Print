@@ -43,6 +43,8 @@ const Summery: React.FC = (props) => {
   //@ts-ignore
   const item = props?.route?.params;
 
+  console.log(JSON.stringify(item, null, 2));
+
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
   const [defaultLocation, setDefaultLocation] = useState<boolean>(false);
@@ -96,7 +98,6 @@ const Summery: React.FC = (props) => {
   } else {
     totalPrice = item?.quantity * item?.variant?.sellingPrice;
   }
-
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>

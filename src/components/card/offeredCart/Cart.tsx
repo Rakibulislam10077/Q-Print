@@ -1,22 +1,11 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import { cartStyle } from "./CartStyle";
-import { useNavigation } from "@react-navigation/native";
-import Animated from "react-native-reanimated";
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { cartStyle } from './CartStyle';
+import { useNavigation } from '@react-navigation/native';
+import Animated from 'react-native-reanimated';
 
-interface CartProps {
-  item: {
-    item: {
-      id: string; // Replace with the actual type of your id
-      img: any; // Replace with the actual type of your img
-      // ... other properties
-    };
-    // ... other properties
-  };
-}
-
-const Cart = ( item:any ) => {
-  const navigation:any = useNavigation();
+const Cart = (item: any) => {
+  const navigation: any = useNavigation();
 
   return (
     <TouchableOpacity
@@ -25,13 +14,11 @@ const Cart = ( item:any ) => {
       style={cartStyle.container}
     >
       <View style={cartStyle.imgCon}>
-
-       <Animated.Image
-       sharedTransitionTag="image"
+        <Animated.Image
+          sharedTransitionTag="image"
           style={cartStyle.img}
           source={item?.item?.img}
         />
-        
       </View>
       <View style={cartStyle.discountCon}>
         <Text style={cartStyle.discountText}>20%</Text>

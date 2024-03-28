@@ -10,17 +10,14 @@ import {
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { IProduct, IProductPhotos } from '../../../types/interfaces/product.interface';
+import { IProduct } from '../../../types/interfaces/product.interface';
 import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 
 // cart props
-interface CartProps {
-  item: IProduct;
-}
 
 const IMAGE_URL = 'http://192.168.0.103:5000/';
 
-const Cart: React.FC<CartProps> = ({ item }) => {
+const Cart = ({ item }: { item: IProduct }) => {
   const navigation: any = useNavigation();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
@@ -57,7 +54,7 @@ const Cart: React.FC<CartProps> = ({ item }) => {
           />
 
           <View style={styles.paginationCon}>
-            {item?.productPhotos?.map((i: IProductPhotos, index: number) => {
+            {item?.productPhotos?.map((i, index: number) => {
               return (
                 <View
                   key={index.toString()}
@@ -102,7 +99,7 @@ export default Cart;
 const DimensionsWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
-    // width: '48%',
+    // width: '40.5%',
     width: DimensionsWidth / 2.3,
     paddingBottom: 10,
     backgroundColor: Color.C_white,
@@ -115,6 +112,7 @@ const styles = StyleSheet.create({
     },
     shadowRadius: shadows.radius_1,
     shadowOpacity: shadows.opacity_1,
+    marginLeft: 18,
     marginVertical: 10,
   },
   discountCon: {

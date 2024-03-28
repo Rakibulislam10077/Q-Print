@@ -36,22 +36,24 @@ import Counter from '../../components/quantityCounter/Counter';
 import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
 import { Badge } from 'react-native-paper';
 import { IProduct } from '../../types/interfaces/product.interface';
-import { useGetProductByIdQuery } from '../../redux/api/productSlice';
+import { useGetProductByIdQuery, useGetQueryProductQuery } from '../../redux/api/productSlice';
+import Cart from '../../components/card/allCart/Cart';
 
 const ProductDetails: React.FC<IProduct> = (props) => {
   //@ts-ignore
   const productId = props?.route?.params;
   const { data } = useGetProductByIdQuery(productId?.productId);
-
   const productData = data?.data;
+  console.log('product data get by id', JSON.stringify(productData?.brand?.brandName, null, 2));
+
+  const { data: relatedProduct } = useGetQueryProductQuery(
+    `brand.brandName=${productData?.brand?.brandName}`
+  );
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   const [addFavorite, setAddFavorite] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
-  const [selectedVariant, setSelectedVariant] = useState({
-    variantId: productData?.variants?._id,
-    variantName: productData?.variants?.variantName,
-  });
+  const [selectedVariant, setSelectedVariant] = useState<any>(null);
 
   const { height } = Dimensions.get('screen');
   const { isLoading } = useGetProductQuery(undefined);
@@ -73,7 +75,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     setAddFavorite(false);
   };
 
-  // the animation for add to cart button
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -89,9 +90,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
       transform: [{ scale: scale2.value }],
     };
   });
-  //  end here
 
-  // skeleton timing
   useEffect(() => {
     setTimeout(() => {
       setIsSkeleton(false);
@@ -121,18 +120,22 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     setQuantity(value);
   };
 
-  // useEffect(() => {
-  // favorites.forEach((element: any) => {
-  //   console.log(element?._id);
-  // });
-  // }, []);
+  let totalPrice: number | undefined;
 
-  let totalPrice: any;
-  const defaultVariant = productData?.variants?.find((variant: any) => variant?.isDefault);
-  if (defaultVariant) {
-    const price: any = defaultVariant.discountedPrice || defaultVariant.sellingPrice;
-    totalPrice = price * quantity;
+  if (selectedVariant && selectedVariant.discountedPrice !== undefined) {
+    totalPrice = selectedVariant.discountedPrice * quantity;
+  } else {
+    const defaultVariant = productData?.variants?.find((variant: any) => variant.isDefault);
+    if (defaultVariant && defaultVariant.discountedPrice !== undefined) {
+      totalPrice = defaultVariant.discountedPrice * quantity;
+    } else {
+      totalPrice = undefined;
+    }
   }
+
+  const filterRelatedData = relatedProduct?.data?.filter(
+    (product: any) => product?._id !== productData?._id
+  );
 
   return (
     <View style={{ height: height, backgroundColor: Color.C_white }}>
@@ -209,6 +212,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
         </Animated.View>
         {/* price and quantity container */}
         {/* product details container here*/}
+        {/* ================================================ */}
+        {/* ================================================ */}
         <ProductDetailsDesc
           data={productData}
           selectedVariant={selectedVariant}
@@ -217,10 +222,30 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           setQuantity={setQuantity}
         />
         {/* view more information container */}
-        <View style={{ height: height - 100 }}>
+        <View style={{ height: height - 200 }}>
           <ProductDetailsTopTab item={productData} />
         </View>
+
+        <View style={{ marginBottom: 100 }}>
+          <FlatList
+            data={filterRelatedData}
+            horizontal
+            contentContainerStyle={{ paddingRight: 20 }}
+            renderItem={({ item }) => {
+              return <Cart item={item} />;
+            }}
+          />
+        </View>
       </Animated.ScrollView>
+      {/*
+      related products
+      ==================
+      */}
+
+      {/* 
+related product ends here
+========================
+*/}
       {/* fixed buy now button and price */}
       <View style={productDetailsStyle.BuyNowButtonAndPriceContainer}>
         <View style={productDetailsStyle.totalPriceConInfixedButtonBox}>
@@ -238,17 +263,18 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           >
             <TouchableOpacity
               onPress={() => {
-                let selectedVariant = productData.variants.find(
-                  (variant: any) => variant.isDefault === true
-                );
-                if (!selectedVariant && productData.variants.length > 0) {
-                  // If no variant is marked as default, choose the first one
-                  selectedVariant = productData.variants[0];
+                let selectedVar;
+                if (selectedVariant) {
+                  selectedVar = selectedVariant;
+                } else {
+                  selectedVar = productData?.variants?.find(
+                    (variant: any) => variant?.isDefault === true
+                  );
                 }
 
                 navigation.navigate('Summery', {
                   ...productData,
-                  variant: selectedVariant,
+                  variant: selectedVar,
                   quantity,
                 });
               }}

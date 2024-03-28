@@ -25,8 +25,6 @@ const HistoryCart = ({ item }: { item: IReviewHistory }) => {
     maxRating = 0;
   };
 
-  console.log(commnets);
-
   return (
     <Animated.View entering={FadeInDown.delay(50).duration(500)} style={historyStyle.container}>
       <Text style={historyStyle.processDate}>Purchased on 12 Jul 2023</Text>
